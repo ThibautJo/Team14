@@ -1,3 +1,82 @@
 html,body {
-  height: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+h1 {
+    
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: normal;
+    color: #636363;
+}
+
+.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #20344D;
+}
+
+.sidebar .nav {
+    margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+    width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+    margin-left: 0;
+}
+
+.sidebar .nav-link {
+    border-radius: 0;
+    color: #97A4AD;
+    font-weight: lighter;
+}
+
+.sidebar .nav-link:hover {
+    border-radius: 0;
+    color: #fff;
+    background-color: #18293D;
+    font-weight: lighter;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: #18293D;
+    color: #fff;
+    font-weight: normal;
+}
+
+#logo {
+    height: 70px;
+    background-color: #18293D;
+    color: #fff;
+}
+
+#top-bar {
+    height: 70px;
+    color: #636363;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+#logo-titel {
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: -5px;
+}
+
+#account-foto {
+    height: 225px;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.shadow {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
 }

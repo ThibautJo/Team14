@@ -4,7 +4,7 @@ function toonAfbeelding($afbeelding, $attributen = '') {
     $CI = & get_instance();
     $CI->load->helper('url');
 
-    return "<img src=\"" . base_url("assets/afbeeldingen/" . $afbeelding) .
+    return "<img src=\"" . base_url("assets/images/" . $afbeelding) .
             "\"" . _stringify_attributes($attributen) . " />";
 }
 

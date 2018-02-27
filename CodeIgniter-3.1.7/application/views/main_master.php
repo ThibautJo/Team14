@@ -11,14 +11,11 @@
 
         <title><?php echo $titel ?></title>
 
-
-
-
-        <?php echo pasStylesheetAan("eigenStijl.css"); ?>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <?php echo pasStylesheetAan("eigenStijl.css"); ?>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" />
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" />
-
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
             var site_url = '<?php echo site_url(); ?>';
@@ -30,92 +27,79 @@
     <body>
         <div class="container-fluid h-100">
             <div class="row h-100">
-                <!-- Navigation -->
-                <div class="col-2 collapse d-md-flex bg-light h-100" id="sidebar">
-                    <ul class="nav flex-column flex-nowrap">
-                        <li class="nav-item"><a class="nav-link" href="#">Profiel</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Agenda</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link collapsed" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Wedstrijden</a>
-                            <div class="collapse" id="submenu1" aria-expanded="false">
-                                <ul class="flex-column pl-2 nav">
-                                    <li class="nav-item"><a class="nav-link py-0" href="">Orders</a></li>
-                                    <li class="nav-item">
-                                        <a class="nav-link collapsed py-1" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1">Customers</a>
-                                        <div class="collapse" id="submenu1sub1" aria-expanded="false">
-                                            <ul class="flex-column nav pl-4">
-                                                <li class="nav-item">
-                                                    <a class="nav-link p-1" href="">
-                                                        <i class="fa fa-fw fa-clock-o"></i> Daily
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link p-1" href="">
-                                                        <i class="fa fa-fw fa-dashboard"></i> Dashboard
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link p-1" href="">
-                                                        <i class="fa fa-fw fa-bar-chart"></i> Charts
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link p-1" href="">
-                                                        <i class="fa fa-fw fa-compass"></i> Areas
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
+                
+                <!-- Sidenav -->
+                
+                <div class="col-2 pl-0 pr-0">
+                    <nav class="hidden-xs-down sidebar h-100">
+                        <div id="logo" class="d-flex align-items-center flex-column justify-content-center">
+                            <div>Trainingscentrum</div>
+                            <div id="logo-titel">WEZENBERG</div>
+                        </div>
+                        
+                        <div id="account-foto" class="d-flex align-items-center flex-column justify-content-center">
+                            <div class="">
+                                <?php
+                                echo toonAfbeelding('Profiel/Avatar_Pieter Timmers.png', 'width="125px" class="shadow img-circle"');
+                                ?>
                             </div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Meldingen</a></li>
-                    </ul>
+                            <p class="text-white pt-2 mb-0">Pieter Timmers</p>
+                        </div>
+                        
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Profiel <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Agenda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Wedstrijden</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Team</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Meldingen</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
+                
+                <!-- Scrollable -->
 
-                <!-- Page Content -->
-                <div class="col">
-
-                    <div class="row">
-                        <div class="col-lg-12 text-info">
-                            <?php echo $hoofding ?>
+                <div class="col-10">
+                    <div id="top-bar" class="row">
+                        <div class="col d-flex align-items-center justify-content-between">
+                            <h2><?php echo $titel ?></h2>
+                            <div>
+                                <?php 
+                                    echo date("d F Y"); 
+                                ?>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <!-- Page Features -->
-                    <?php if (isset($geenRand)) { ?>
-                        <div class="row">
-                            <?php echo $inhoud; ?>
-                        </div>
-                    <?php } else { ?>
-                        <div class="row">
-                            <div class="col-lg-12 hero-feature">
-                                <div class="thumbnail" style="padding: 20px">
-                                    <div class="caption">
-                                        <p>
-                                            <?php echo $inhoud; ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>        
-                    <?php } ?>
-                    <!-- /.row -->
+                    
+                    <!-- Content -->
+                    
+                    <main class="pt-2">
+                        
+                    </main>
 
                     <!-- Footer -->
+                    
                     <footer>
-                        <div class="row navbar-fixed-bottom text-center">
-                            <div class="col-lg-12">
+                        <div class="navbar-fixed-bottom text-center">
+                            <div class="">
                                 <?php echo $voetnoot ?>                       
                             </div>
                         </div>
                     </footer>
-
                 </div>
             </div>
         </div>
+
+
         <!-- /.container -->
 
     </body>
