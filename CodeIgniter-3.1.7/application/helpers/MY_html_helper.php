@@ -23,3 +23,12 @@ function pasStylesheetAan($css) {
             base_url("assets/css/" . $css) .
             "\" />";
 }
+
+function haalFontOp($font) {
+    $CI = & get_instance();
+    $CI->load->helper('url');
+
+    return "<link rel=\"stylesheet\" href=\"" .
+            base_url("assets/font/" . $font) .
+            "\" />";
+}
