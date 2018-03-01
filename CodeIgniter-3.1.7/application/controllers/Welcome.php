@@ -29,13 +29,10 @@ class Welcome extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Home';
-        $data['geenRand'] = true;
-        $data['keuze'] = "Welkom";
-
-        $data['mijnGegevens'] = "Tom Nuyts - 2IT3 - r0661550";
 
         $partials = array('hoofding' => 'main_header',
-            'inhoud' => 'main_home',
+            'menu' => 'main_menu',
+            'inhoud' => 'home',
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);

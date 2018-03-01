@@ -1,1 +1,1 @@
- <p>footer test</p>
+<span><b>Oefening voor:</b> Thomas More Geel &nbsp;&nbsp;|&nbsp;&nbsp; <b>Opdrachtgever:</b> Kristine Mangelschots</span><span>Team 14: Klied Daems, <b>Thibaut Joukes</b>, Jolien Lauwers, Tom Nuyts, Lise Van Eyck</span>

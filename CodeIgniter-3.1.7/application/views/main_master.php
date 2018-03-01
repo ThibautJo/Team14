@@ -29,7 +29,7 @@
         <div class="container-fluid h-100">
             <div class="row h-100">
 
-                <!-- Sidenav -->
+                <!-- Menu -->
 
                 <div class="col-2 pl-0 pr-0">
                     <nav class="hidden-xs-down sidebar h-100">
@@ -44,56 +44,25 @@
                                 echo toonAfbeelding('Profiel/Avatar_Pieter Timmers.png', 'width="125px" class="shadow img-circle"');
                                 ?>
                             </div>
-                            <p class="text-white pt-2 mb-0">PieterTimmers</p>
+                            <p class="text-white pt-2 mb-0">Pieter Timmers</p>
                         </div>
 
-                        <ul class="nav nav-pills flex-column" id="sidenav">
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="#profielSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="profielSubMenu"><i class="material-icons md-18 mr-3">person</i> Profiel</a>
-                                <div id="submenu" class="kleur">
-                                    <ul class="collapse list-unstyled pl-4" id="profielSubMenu" data-parent="#sidenav">
-                                        <li class="pt-2">
-                                            <a class="nav-link1" href="#">Profiel</a>
-                                        </li>
-                                        <li class="pb-2">
-                                            <a class="nav-link1" href="#">Aanpassen</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="#"><i class="material-icons md-18 mr-3">event_note</i>Agenda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="#wedstrijdSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="wedstrijdSubMenu"><i class="material-icons md-18 mr-3">flag</i>Wedstrijden</a>  
-                                <div id="submenu" class="kleur">
-                                    <ul class="collapse list-unstyled pl-4" id="wedstrijdSubMenu" data-parent="#sidenav">
-                                        <li class="pt-2">
-                                            <a class="nav-link1" href="#">Wedstrijden</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link1" href="#">Wedstrijdresultaten</a>
-                                        </li>
-                                        <li class="pb-2">
-                                            <a class="nav-link1" href="#">Inschrijven</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center" href="#"><i class="material-icons md-18 mr-3">group</i>Team</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex justify-content-between align-items-center" href="#"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i>Meldingen</span> <div id="melding-menu" class="img-circle d-flex align-items-center justify-content-center">2</div></a>
-                            </li>
-                        </ul>
+                        <?php echo $menu; ?>
+                        
+                        <!-- Voetnoot menu -->
+                            <div id="menu-footer" class="d-flex align-items-end position-absolute col-12">
+                                <p class="col-12 text-center">&copy; Trainingscentrum Wezenberg</p>
+                            </div>
                     </nav>
                 </div>
+              
+                <!-- Inhoud -->
 
-                <!-- Scrollable -->
-
-                <div class="col-10">
-                    <div id="top-bar" class="row">
+                <div id="content" class="col-10">
+                    
+                    <!-- Hoofding -->
+                    
+                    <div id="top-bar" class="row pl-2 pr-2">
                         <div class="col d-flex align-items-center justify-content-between">
                             <h2><?php echo $titel ?></h2>
                             <div>
@@ -104,16 +73,17 @@
                         </div>
                     </div>
 
-                    <!-- Content -->
+                    <!-- Inhoud -->
 
-                    <main class="pt-2">
+                    <main class="pt-4 pl-2 pr-2">
+                        <?php echo $inhoud ?>
                     </main>
 
-                    <!-- Footer -->
+                    <!-- Voetnoot -->
 
-                    <footer>
+                    <footer class="pl-2 pr-2">
                         <div class="navbar-fixed-bottom text-center">
-                            <div class="">
+                            <div class="d-flex justify-content-between">
                                 <?php echo $voetnoot ?>                       
                             </div>
                         </div>
