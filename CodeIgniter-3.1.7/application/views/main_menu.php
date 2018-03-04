@@ -1,3 +1,4 @@
+<?php  ?>
 <ul class="nav nav-pills flex-column" id="sidenav">
     <li class="nav-item">
         <a class="nav-link d-flex align-items-center" href="#profielSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="profielSubMenu"><i class="material-icons md-18 mr-3">person</i> Profiel</a>
