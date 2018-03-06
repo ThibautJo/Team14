@@ -17,7 +17,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <?php echo pasStylesheetAan("bezoeker_eigenStijl.css"); ?>
-
+        <?php echo pasStylesheetAan("scroll.css"); ?>
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <script type="text/javascript">
             var site_url = '<?php echo site_url(); ?>';
@@ -50,7 +51,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#">
-                                <button type="button" class="btn btn-outline-light">
+                                <button type="button" class="btn btn-outline-light" id="login-button">
                                     Login
                                 </button>
                             </a>
@@ -60,26 +61,39 @@
             </div>
         </nav>
 
-        <div class="jumbotron jumbotron-fluid">
-            <div id="background" class="container">
-<!--                <h1 class="display-4">Fluid jumbotron</h1>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>-->
-                
+        <!-- Inhoud -->
+
+        <!-- Achtergrond -->
+
+        <div class="jumbotron jumbotron-fluid d-flex align-items-center position-relative">
+            <div id="background" class="container text-white">
+                <div id="background-text">
+                    <p class="lead mb-0 font-weight-light">Welkom bij</p>
+                    <h2 class="font-weight-bold">Trainingscentrum Wezenberg</h2>
+                </div>
+                <div id="parallelogram"></div>
+                <div class="center-do-not-use position-absolute">
+                    <div class="mouse">
+                        <div class="wheel"></div>
+                    </div>
+                    <div>
+                        <span class="arrow"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- Voetnoot -->
+
         <footer>
-            <div class="container pb-3">
+            <div class="container pb-3 font-weight-light">
                 <div class="text-center">
                     <p>Trainingscentrum WEZENBERG</p>
                     <p id="footer-follow">Volg ons op <a href="https://www.facebook.com/Trainingscentrum-Wezenberg-TCW-514839802012875/"><i class="fa fa-facebook-square"></i></a> facebook</p>
-                    <span class="col-1 d-flex justify-content-between">
-
-                    </span>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-center">
-                    <div class="col-6 d-flex justify-content-between">
+                    <div id="footer-links" class="col-6 d-flex justify-content-between">
                         <a href="#">Startpagina</a>
                         <a href="#">Wedstrijden</a>
                         <a href="#">Team</a>
@@ -98,8 +112,18 @@
                     var scroll = $(window).scrollTop();
                     if (scroll > 54) {
                         $('nav').addClass("navbar-scrolling");
+                        $('.nav-link').addClass('text-darkblue');
+                        $('#login-button').addClass('login-button-darkblue');
+                        $('#login-button').removeClass('btn-outline-light');
+                        $('.navbar-brand').addClass('text-darkblue');
+                        $('.active').addClass('active-darkblue');
                     } else {
                         $('nav').removeClass("navbar-scrolling");
+                        $('.nav-link').removeClass('text-darkblue');
+                        $('#login-button').removeClass('login-button-darkblue');
+                        $('#login-button').addClass('btn-outline-light');
+                        $('.navbar-brand').removeClass('text-darkblue');
+                        $('.active').removeClass('active-darkblue');
                     }
                 });
             });

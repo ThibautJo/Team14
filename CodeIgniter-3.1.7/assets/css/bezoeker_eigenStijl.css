@@ -2,14 +2,35 @@ html,body {
     height: 100%;
     background-color: #fff;
     color: #636363;
+    font-family: Poppins;
 }
 
 .jumbotron {
     height: 100%;
 }
 
+footer {
+    background-color: #18293D;
+    color: #fff;
+    font-size: 14px;
+    padding-top: 20px;
+}
+
+footer hr {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
 #footer-follow {
     font-size: 14px;
+}
+
+footer a {
+    color: rgba(116,160,171, 0.6);
+}
+
+footer a:hover {
+    color: rgba(116,160,171, 1);
+    text-decoration: none;
 }
 
 .navbar {
@@ -20,11 +41,7 @@ html,body {
     transition: all 0.5s ease;
 }
 
-.navbar-light {
-    color: #fff;
-}
-
-.navbar-dark .navbar-nav .nav-link {
+.navbar-dark .navbar-nav .nav-link, .navbar-light {
     color: #fff;   
 }
 
@@ -32,12 +49,14 @@ html,body {
     margin-left: 40px;
 }
 
-.navbar-dark .navbar-nav .show > .nav-link,
-.navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark .navbar-nav .nav-link.show,
-.navbar-dark .navbar-nav .nav-link.active {
+.active {
     color: #fff;
-    box-shadow: 0px 0.5px 0px #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.active-darkblue {
+    border-bottom: 1px solid #18293D;
+    transition: all 1s ease;
 }
 
 .navbar-scrolling{
@@ -54,4 +73,49 @@ html,body {
     background-image: url("../images/background_bezoeker_normal.png");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.text-darkblue {
+    color: #18293D !important;
+    transition: all 1s ease;
+}
+
+a.text-darkblue:hover, a.text-darkblue:focus {
+    color: rgb(53, 86, 126) !important;
+    transition: all 0s ease-in-out;
+}
+
+.login-button-darkblue {
+    background-color: transparent;
+    color: #18293D;
+    border-color: #18293D;
+    transition: all 1s ease;
+}
+
+.login-button-darkblue:hover {
+    border-color: #18293D;
+    background-color: rgba(75, 122, 180, 0.2);
+    transition: all 0.5s ease;
+}
+
+.btn-outline-light {
+    border-color: #03CC80;
+    color: #03CC80;
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #03CC80;
+    border-color: #03CC80;
+    transition: all 0.5s ease;
+}
+
+#parallelogram {
+    width: 200px;
+    height: 5px;
+    background-color: #03CC80;
+}
+
+#background-text {
+    z-index: 999 !important;
 }
