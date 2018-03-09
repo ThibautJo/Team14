@@ -33,11 +33,16 @@
 
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container">
+                
+                <!-- logo in navigatie -->
+                
                 <a class="navbar-brand font-weight-bold" href="#">TCW</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!-- links in navigatie -->
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
@@ -49,6 +54,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Team</a>
                         </li>
+                        
+                        <!-- login knop -->
                         <li class="nav-item">
                             <a href="#">
                                 <button type="button" class="btn btn-outline-light" id="login-button">
@@ -67,11 +74,17 @@
 
         <div class="jumbotron jumbotron-fluid d-flex align-items-center position-relative">
             <div id="background" class="container text-white">
+                
+                <!-- Tekst die getoond wordt op de achtergrondafbeelding -->
+                
                 <div id="background-text">
                     <p class="lead mb-0 font-weight-light">Welkom bij</p>
                     <h2 class="font-weight-bold">Trainingscentrum Wezenberg</h2>
                 </div>
                 <div id="parallelogram"></div>
+                
+                <!-- symbool dat aanduidt dat je kan scrollen -->
+                
                 <div class="center-do-not-use position-absolute">
                     <div class="mouse">
                         <div class="wheel"></div>
@@ -92,6 +105,9 @@
                     <p id="footer-follow">Volg ons op <a href="https://www.facebook.com/Trainingscentrum-Wezenberg-TCW-514839802012875/"><i class="fa fa-facebook-square"></i></a> facebook</p>
                 </div>
                 <hr>
+                
+                <!-- Navigatie-links in de voetnoot -->
+                
                 <div class="d-flex justify-content-center">
                     <div id="footer-links" class="col-6 d-flex justify-content-between">
                         <a href="#">Startpagina</a>
@@ -102,11 +118,14 @@
                 </div>
             </div>
         </footer>
+        
+        <!-- Javascript scriptjes -->
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
+            //Script om de navigatie te veranderen bij het scrollen
             $(document).ready(function () {
                 $(window).scroll(function () {
                     var scroll = $(window).scrollTop();
