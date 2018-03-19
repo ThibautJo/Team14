@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="nl">
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +13,17 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <?php echo pasStylesheetAan("eigenStijl.css"); ?>
+        <?php
+        echo pasStylesheetAan("eigenStijl.css");
+        echo pasStylesheetAan("eigenStijl-tablet.css");
+        echo pasStylesheetAan("eigenStijl-mobile.css");
+        ?>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
-        
+
         <script type="text/javascript">
             var site_url = '<?php echo site_url(); ?>';
             var base_url = '<?php echo base_url(); ?>';
@@ -31,43 +37,34 @@
 
                 <!-- Menu -->
 
-                <div class="col-2 pl-0 pr-0">
+                <div class="pl-0 pr-0">
                     <nav class="hidden-xs-down sidebar h-100">
                         <div id="logo" class="d-flex align-items-center flex-column justify-content-center">
-                            <div>Trainingscentrum</div>
+                            <div id="logo-wezenberg">Trainingscentrum</div>
                             <div id="logo-titel">WEZENBERG</div>
-                        </div>
-
-                        <div id="account-foto" class="d-flex align-items-center flex-column justify-content-center">
-                            <div>
-                                <?php
-                                echo toonAfbeelding('Profiel/Avatar_Pieter Timmers.png', 'width="125px" class="shadow img-circle"');
-                                ?>
-                            </div>
-                            <p class="text-white pt-2 mb-0">Pieter Timmers</p>
+                            <div id="logo-titel-mobile">TCW</div>
                         </div>
 
                         <?php echo $menu; ?>
-                        
-                        <!-- Voetnoot menu -->
-                            <div id="menu-footer" class="d-flex align-items-end position-absolute col-12">
-                                <p class="col-12 text-center">&copy; Trainingscentrum Wezenberg</p>
-                            </div>
                     </nav>
                 </div>
-              
+
                 <!-- Inhoud -->
 
-                <div id="content" class="col-10">
-                    
+                <div id="content" class="">
+
                     <!-- Hoofding -->
-                    
-                    <div id="top-bar" class="row pl-2 pr-2">
-                        <div class="col d-flex align-items-center justify-content-between">
-                            <h2><?php echo $titel ?></h2>
-                            <div>
+
+                    <div id="top-bar" class="row pl-2 pr-2 sticky-top">
+                        <div id="top-bar-center" class="col d-flex align-items-center justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <i class="material-icons mr-4" id="sidenav-toggler">menu</i>
+                                <h2 class="hide-mobile-nav-open"><?php echo $titel ?></h2>
+                            </div>
+                            <div class="hide-mobile-nav-open">
                                 <?php
-                                echo date("d F Y");
+                                setlocale(LC_TIME, 'nld_NLD');
+                                echo strftime('%A, %d %B %Y');
                                 ?>
                             </div>
                         </div>
@@ -75,15 +72,15 @@
 
                     <!-- Inhoud -->
 
-                    <main class="pt-4 pl-2 pr-2">
+                    <main class="pt-4 pl-2 pr-2 hide-mobile-nav-open">
                         <?php echo $inhoud ?>
                     </main>
 
                     <!-- Voetnoot -->
 
-                    <footer class="pl-2 pr-2">
-                        <div class="navbar-fixed-bottom text-center">
-                            <div class="d-flex justify-content-between">
+                    <footer class="pl-2 pr-2 mt-5 hide-mobile-nav-open">
+                        <div class="navbar-fixed-bottom text-center-sm text-left">
+                            <div class="d-flex justify-content-md-between flex-lg-row flex-column">
                                 <?php echo $voetnoot ?>                       
                             </div>
                         </div>
@@ -94,15 +91,39 @@
 
         <!-- Scripts -->
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function () {
+
+                // Uitklapbare submenu voor de verticale menu
 
                 $('.nav-link').on('click', function () {
                     $('.nav-link').removeClass('active');
                     $(this).toggleClass('active');
+                });
+
+                $('#sidenav-toggler').on('click', function () {
+                    var breedte = $(window).width();
+                    if (breedte > 768) {
+                        if ($('#sidenav-toggler').text() === "menu") {
+                            $('#sidenav-toggler').text('arrow_back');
+                            $('link[rel=stylesheet][href*="eigenStijl-tablet.css"]').remove();
+                        } else {
+                            $('#sidenav-toggler').text('menu');
+                            $('head').append('<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/eigenStijl-tablet.css">');
+                        }
+                    } else {
+                        if ($('#sidenav-toggler').text() === "menu") {
+                            $('#sidenav-toggler').text('arrow_back');
+                            $('link[rel=stylesheet][href*="eigenStijl-mobile.css"]').remove();
+                            $('link[rel=stylesheet][href*="eigenStijl-tablet.css"]').remove();
+                            $('.hide-mobile-nav-open').css('display', 'none');
+                        } else {
+                            $('#sidenav-toggler').text('menu');
+                            $('head').append('<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/eigenStijl-tablet.css">');
+                            $('head').append('<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/eigenStijl-mobile.css">');
+                            $('.hide-mobile-nav-open').css('display', 'block');
+                        }
+                    }
                 });
             });
         </script>

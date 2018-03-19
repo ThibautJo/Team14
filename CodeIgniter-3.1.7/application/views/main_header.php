@@ -1,1 +1,1 @@
-<h3><?php echo $titel ?></h3>
+<h3><?php echo $titel?></h3>

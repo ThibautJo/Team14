@@ -34,15 +34,23 @@ footer a:hover {
 }
 
 .navbar {
-    height: 100px;
+    min-height: 100px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
+.navbar-toggler {
+    color: red;
+}
+
 .navbar-dark .navbar-nav .nav-link, .navbar-light {
     color: #fff;   
+}
+
+.navbar-collapse {
+    
 }
 
 .nav-item {
@@ -61,7 +69,7 @@ footer a:hover {
 
 .navbar-scrolling{
     background-color: #fff;
-    height: 56px;
+    min-height: 56px;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

@@ -1,0 +1,20 @@
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        transition: all 0.2s ease;
+        margin-left: -80px;
+    }
+    
+    #content {
+        width: 100%;
+        transition: all 0.2s ease;
+    }
+
+    .sidebar + #content {
+        min-width: 100%;
+    }
+    
+    #menu-footer {
+        display: none;
+        transition: all 0.2s ease;
+    }
+}

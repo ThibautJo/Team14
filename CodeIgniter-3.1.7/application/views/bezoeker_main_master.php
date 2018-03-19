@@ -33,16 +33,16 @@
 
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container">
-                
+
                 <!-- logo in navigatie -->
-                
+
                 <a class="navbar-brand font-weight-bold" href="#">TCW</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- links in navigatie -->
-                
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
@@ -54,7 +54,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Team</a>
                         </li>
-                        
+
                         <!-- login knop -->
                         <li class="nav-item">
                             <a href="#">
@@ -68,33 +68,38 @@
             </div>
         </nav>
 
-        <!-- Inhoud -->
-
         <!-- Achtergrond -->
 
         <div class="jumbotron jumbotron-fluid d-flex align-items-center position-relative">
             <div id="background" class="container text-white">
-                
+
                 <!-- Tekst die getoond wordt op de achtergrondafbeelding -->
-                
+
                 <div id="background-text">
                     <p class="lead mb-0 font-weight-light">Welkom bij</p>
                     <h2 class="font-weight-bold">Trainingscentrum Wezenberg</h2>
                 </div>
                 <div id="parallelogram"></div>
-                
-                <!-- symbool dat aanduidt dat je kan scrollen -->
-                
-                <div class="center-do-not-use position-absolute">
-                    <div class="mouse">
-                        <div class="wheel"></div>
+
+                <!-- Symbool dat aanduidt dat je kan scrollen -->
+
+                <a href="#inhoud" id="scroll-symbol">
+                    <div class="center-do-not-use position-absolute">
+                        <div class="mouse">
+                            <div class="wheel"></div>
+                        </div>
+                        <div>
+                            <span class="arrow"></span>
+                        </div>
                     </div>
-                    <div>
-                        <span class="arrow"></span>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
+
+        <!-- Inhoud -->
+
+        <main id="inhoud">
+        </main>
 
         <!-- Voetnoot -->
 
@@ -105,11 +110,11 @@
                     <p id="footer-follow">Volg ons op <a href="https://www.facebook.com/Trainingscentrum-Wezenberg-TCW-514839802012875/"><i class="fa fa-facebook-square"></i></a> facebook</p>
                 </div>
                 <hr>
-                
+
                 <!-- Navigatie-links in de voetnoot -->
-                
-                <div class="d-flex justify-content-center">
-                    <div id="footer-links" class="col-6 d-flex justify-content-between">
+
+                <div class="d-flex justify-content-center col-12">
+                    <div id="footer-links" class="col-lg-6 col-md-9 col-sm-12 col-12 d-flex justify-content-sm-between text-center flex-sm-row flex-column">
                         <a href="#">Startpagina</a>
                         <a href="#">Wedstrijden</a>
                         <a href="#">Team</a>
@@ -118,26 +123,31 @@
                 </div>
             </div>
         </footer>
-        
+
         <!-- Javascript scriptjes -->
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
-            //Script om de navigatie te veranderen bij het scrollen
+
             $(document).ready(function () {
+                
+                //Script om de navigatie te veranderen bij het scrollen
+                
                 $(window).scroll(function () {
                     var scroll = $(window).scrollTop();
                     if (scroll > 54) {
-                        $('nav').addClass("navbar-scrolling");
+                        $('nav').removeClass("navbar-dark");
+                        $('nav').addClass("navbar-scrolling navbar-light");
                         $('.nav-link').addClass('text-darkblue');
                         $('#login-button').addClass('login-button-darkblue');
                         $('#login-button').removeClass('btn-outline-light');
                         $('.navbar-brand').addClass('text-darkblue');
                         $('.active').addClass('active-darkblue');
                     } else {
-                        $('nav').removeClass("navbar-scrolling");
+                        $('nav').removeClass("navbar-scrolling navbar-light");
+                        $('nav').addClass("navbar-dark");
                         $('.nav-link').removeClass('text-darkblue');
                         $('#login-button').removeClass('login-button-darkblue');
                         $('#login-button').addClass('btn-outline-light');
@@ -145,6 +155,14 @@
                         $('.active').removeClass('active-darkblue');
                     }
                 });
+                
+                //Script om te scrollen naar een id
+                
+                $('a[href*=\\#]').on('click', function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
+                });
+
             });
 
         </script>

@@ -5,24 +5,33 @@ html,body {
 }
 
 main {
-    height: calc(100% - 70px - 25px);
+    min-height: calc(100% - 70px - 73px);
 }
 
 footer {
     font-size: 11px;
     font-weight: normal;
+    margin-bottom: 9px;
 }
 
 #menu-footer {
     font-size: 11px;
     font-weight: normal;
     color: #97A4AD;
-    height: 200px;
     bottom: 9px;
+    width: 250px;
 }
 
 #menu-footer p {
     margin: 0;
+}
+
+#content {
+    overflow-y: scroll;
+    width: calc(100% - 250px);
+    padding-right: 15px;
+    padding-left: 15px;
+    transition: all 0.2s ease-in-out;
 }
 
 h1 {
@@ -39,6 +48,8 @@ h2 {
     padding-left: 0;
     padding-right: 0;
     background-color: #20344D;
+    width: 250px;
+    transition: all 0.2s ease-in-out;
 }
 
 .sidebar .nav {
@@ -103,6 +114,7 @@ h2 {
 #top-bar {
     height: 70px;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
 }
 
 #logo-titel {
@@ -117,6 +129,10 @@ h2 {
 
 .img-circle {
     border-radius: 50%;
+}
+
+#avatar {
+    width: 125px;
 }
 
 .shadow {
@@ -139,10 +155,78 @@ h2 {
     height: 20px;
     width: 20px;
     font-size: 12px;
-    font-weight: normal;
+    font-weight: 600;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+#melding-menu-2 {
+    visibility: hidden;
 }
 
 .material-icons.md-18 {
     font-size: 18px;
+}
+
+#top-bar .material-icons {
+    display: none;
+}
+
+#sidenav-toggler {
+    cursor: pointer;
+}
+
+#logo-titel-mobile {
+    display: none !important;
+}
+
+.button-blue {
+    background-color: #20344D;
+    color: #fff;
+}
+
+.button-blue:hover {
+    background-color: #18293D;
+    color: #fff;
+}
+
+.button-blue:focus, .button-blue.focus {
+  box-shadow: 0 0 0 0.2rem rgba(32, 52, 77, 0.5);
+}
+
+.fc-unthemed td.fc-today {
+    background: rgba(0, 100, 255, 0.05) !important;
+    border: none !important;
+    border-top: 1px solid #ddd !important;
+    font-weight: bold;
+}
+
+.fc-state-default {
+  background-color: #fff !important;
+  background-image: none !important;
+  border-color: #ddd !important;
+  color: #636363 !important;
+  text-shadow: none !important;
+  box-shadow: none !important; 
+}
+
+.fc-state-hover {
+  color: #636363 !important;
+  background-color: #E9ECEF !important;
+}
+
+.fc table {
+  width: 100%;
+  box-sizing: border-box;
+  /* fix scrollbar issue in firefox */
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 0.5rem !important;
+  font-size: 1em;
+  /* normalize cross-browser */ }
+
+@media only screen and (max-width: 1200px) {
+    #top-bar .material-icons {
+        display: block;
+    }
 }

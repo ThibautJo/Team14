@@ -24,22 +24,23 @@ class Welcome extends CI_Controller {
         parent::__construct();
         
         $this->load->helper("MY_html_helper");
+        $this->load->helper("MY_url_helper");
         $this->load->helper('url');
     }
 
     public function index() {
         $data['titel'] = 'Home';
 
-        $partials = array('hoofding' => 'bezoeker_main_header',
-            'inhoud' => 'bezoeker/home',
-            'voetnoot' => 'bezoeker_main_footer');
+//        $partials = array('hoofding' => 'bezoeker_main_header',
+//            'inhoud' => 'bezoeker/home',
+//            'voetnoot' => 'bezoeker_main_footer');
         
-//        $partials = array('hoofding' => 'main_header',
-//            'menu' => 'main_menu',
-//            'inhoud' => 'zwemmer/home',
-//            'voetnoot' => 'main_footer');
+        $partials = array('hoofding' => 'main_header',
+            'menu' => 'main_menu',
+            'inhoud' => 'zwemmer/home',
+            'voetnoot' => 'main_footer');
 
-        $this->template->load('bezoeker_main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
 
 }

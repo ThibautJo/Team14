@@ -1,0 +1,87 @@
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        width: 80px;
+        transition: all 0.2s ease;
+    }
+
+    #content {
+        width: calc(100% - 80px);
+        transition: all 0.2s ease;
+    }
+
+    .menu-text {
+        visibility: hidden;
+    }
+
+    .md-18 {
+        font-size: 28px !important;
+    }
+
+    .nav-link {
+        padding-left: 25.5px;
+    }
+
+    .kleur {
+        box-shadow: none;
+        position: absolute;
+        left: 80px;
+        margin-top: -44px;
+        background-color: #18293D;
+        z-index: 999;
+        width: 250px;
+    }
+
+    .submenu-links li:first-child {
+        margin-top: 15px;
+    }
+
+    .submenu-links li:last-child {
+        margin-bottom: 15px;
+    }
+
+    #menu-footer .text-center {
+        display: none;
+        transition: all 1s ease-in-out;
+    }
+    
+    #logo-wezenberg {
+        display: none;
+    }
+    
+    #logo-titel {
+        display: none;
+    }
+    
+    #logo-titel-mobile {
+        font-weight: bold;
+        font-size: 20px;
+        display: block !important;
+    }
+    
+    #melding-menu-2 {
+        background-color: #E5343D;
+        color: #fff;
+        height: 13px;
+        width: 13px;
+        font-size: 10px;
+        font-weight: 600;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+        box-shadow: 0px 0px 0px 3px #20344D;
+        position: absolute;
+        margin-top: -37px;
+        margin-left: 43px;
+        visibility: visible;
+    }
+    
+    #account-foto {
+        height: 100px;
+    }
+    
+    #avatar {
+        width: 50px;
+    }
+    
+    #account-foto p {
+        display: none;
+    }
+}
