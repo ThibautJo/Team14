@@ -115,8 +115,4 @@ class Agenda_model extends CI_Model {
         
         return $supplementen;
     }
-
-    public function get_event($id) {
-        return $this->db->where("ID", $id)->get("calendar_events");
-    }
 }
