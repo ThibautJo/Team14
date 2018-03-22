@@ -47,33 +47,28 @@ class Agenda extends CI_Controller {
     
     public function ladenZwemmers(){
         $this->load->model("trainer/zwemmers_model");
-        $zwemmers = $this->zwemmers_model->getZwemmers(1);
+        $zwemmers = $this->zwemmers_model->getZwemmers();
         
-        $data_zwemmers = array();
+//        $data_zwemmers = array();
+//        
+//        foreach ($zwemmers as $zwemmer) {                    
+//            $data_zwemmers[] = array(
+//                "voornaam" => $zwemmer->Naam,
+//                "achternaam" => $zwemmer->Familienaam,
+//                "straat" => $zwemmer->Straat,
+//                "huisnummer" => $zwemmer->Huisnummer,
+//                "postcode" => $zwemmer->Postcode,
+//                "gemeente" => $zwemmer->Gemeente,
+//                "telefoonnummer" => $zwemmer->Telefoonnummer,
+//                "email" => $zwemmer->Email,
+//                "wachtwoord" => $zwemmer->Wachtwoord,
+//                "omschrijving" => $zwemmer->Omschrijving,
+//                "foto" => $zwemmer->Foto,
+//                "color" => '#FF7534',
+//                "textColor" => '#000'
+//            );
+//        }
         
-        foreach ($zwemmers as $zwemmer) {                    
-            $data_zwemmers[] = array(
-                "voornaam" => $zwemmer->persoon->Naam,
-                "achternaam" => $zwemmer->persoon->Familienaam,
-                "straat" => $zwemmer->persoon->Straat,
-                "huisnummer" => $zwemmer->persoon->Huisnummer,
-                "postcode" => $zwemmer->persoon->Postcode,
-                "gemeente" => $zwemmer->persoon->Gemeente,
-                "telefoonnummer" => $zwemmer->persoon->Telefoonnummer,
-                "email" => $zwemmer->persoon->Email,
-                "wachtwoord" => $zwemmer->persoon->Wachtwoord,
-                "omschrijving" => $zwemmer->persoon->Omschrijving,
-                "foto" => $zwemmer->persoon->Foto,
-                "color" => '#FF7534',
-                "textColor" => '#000'
-            );
-        }
-        
-        $partials = array('hoofding' => 'main_header',
-            'menu' => 'main_menu',
-            'inhoud' => 'trainer/team',
-            'voetnoot' => 'main_footer');
-
-        $this->template->load('main_master', $partials, $data);
+        return $zwemmers;
     }
 }

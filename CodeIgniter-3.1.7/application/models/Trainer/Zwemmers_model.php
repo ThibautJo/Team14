@@ -21,10 +21,9 @@ class Zwemmers_model extends CI_Model {
         $this->load->helper('url');
     }
 
-    public function getZwemmer($persoonId) {
-        $this->db->where('id', $persoonId);
+    public function getZwemmers() {
         $query = $this->db->get('persoon');
-        return $query->row();
+        return $query->result();
     }
 
 }
