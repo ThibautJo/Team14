@@ -35,10 +35,16 @@ class Welcome extends CI_Controller {
 //            'inhoud' => 'bezoeker/home',
 //            'voetnoot' => 'bezoeker_main_footer');
         
+        //$partials = array('hoofding' => 'main_header',
+          //  'menu' => 'main_menu',
+          //  'inhoud' => 'zwemmer/home',
+          //  'voetnoot' => 'main_footer');
+        
         $partials = array('hoofding' => 'main_header',
-            'menu' => 'main_menu',
-            'inhoud' => 'zwemmer/home',
+            'menu' => 'trainer_main_menu',
+            'inhoud' => 'trainer/home',
             'voetnoot' => 'main_footer');
+        
 
         $this->template->load('main_master', $partials, $data);
     }
