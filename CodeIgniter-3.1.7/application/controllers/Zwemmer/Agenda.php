@@ -7,6 +7,8 @@ class Agenda extends CI_Controller {
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
+    // |    Auteur: Tom Nuyts       |       Helper:
+    // +----------------------------------------------------------
     // |
     // |    Agenda controller
     // |
@@ -18,11 +20,10 @@ class Agenda extends CI_Controller {
 
         parent::__construct();
 
+        // Helpers inladen
         $this->load->helper('url');
     }
 
-    // +----------------------------------------------------------
-    // |    Auteur: Tom Nuyts       |       Helper: /
     // +----------------------------------------------------------
     // |
     // |    Persoonlijke agenda raadplegen
@@ -31,14 +32,18 @@ class Agenda extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Agenda';
-        $data['magNiet'] = 'ja';
-
-        $data_wedstrijden = $this->ladenWedstrijden();
-        $data_onderzoeken = $this->ladenOnderzoeken();
-        $data_supplementen = $this->ladenSupplementen();
-        $data_activiteiten = $this->ladenActiviteiten();
+        
+        $persoonId = 1;
+        
+        // Inladen van alle agenda punten (wedstrijden, medische onderzoeken, supplementen, trainingen en stages
+        $data_wedstrijden = $this->ladenWedstrijden($persoonId);
+        $data_onderzoeken = $this->ladenOnderzoeken($persoonId);
+        $data_supplementen = $this->ladenSupplementen($persoonId);
+        $data_activiteiten = $this->ladenActiviteiten($persoonId);
+        // Eén grote array maken van alle arrays om deze om te kunnen zetten in JSON code
         $data_agenda = array_merge($data_supplementen, $data_onderzoeken, $data_wedstrijden, $data_activiteiten);
         
+        // $data_agenda omzetten in JSON code -> Deze wordt in de variabele $activiteiten gestopt
         $activiteiten = json_encode($data_agenda);
         
         $data['activiteiten'] = $activiteiten;
@@ -51,37 +56,41 @@ class Agenda extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function ladenWedstrijden() {
+    public function ladenWedstrijden($persoonId) {
+        // Wedstrijden worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
-        $wedstrijden = $this->agenda_model->getWedstrijdenByPersoon(1);
+        $wedstrijden = $this->agenda_model->getWedstrijdenByPersoon($persoonId);
         
         $data_wedstrijden = array();
         
+        // Wedstrijden worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($wedstrijden as $wedstrijd) {                    
             $data_wedstrijden[] = array(
-                "title" => $wedstrijd->wedstrijd->Naam,
-                "start" => $wedstrijd->wedstrijd->DatumStart,
-                "end" => $wedstrijd->wedstrijd->DatumStop,
-                "color" => '#FF7534',
-                "textColor" => '#000'
+                "title" => $wedstrijd->wedstrijd->Naam, // Titel van het event in de agenda
+                "start" => $wedstrijd->wedstrijd->DatumStart, // Beginuur/begindatum van het event in de agenda
+                "end" => $wedstrijd->wedstrijd->DatumStop, // Einduur/einddatum van het event in de agenda
+                "color" => $this->agenda_model->getKleurActiviteit(1)->Kleur, // Kleur van het event in de agenda
+                "textColor" => '#000' // Tekstkleur van het event in de agenda
             );
         }
         
         return $data_wedstrijden;
     }
     
-    public function ladenOnderzoeken() {
+    public function ladenOnderzoeken($persoonId) {
+        // Medische onderzoeken worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
-        $onderzoeken = $this->agenda_model->getOnderzoekenByPersoon(1);
+        $onderzoeken = $this->agenda_model->getOnderzoekenByPersoon($persoonId);
         
         $data_onderzoeken = array();
         
+        // Medische onderzoeken worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($onderzoeken as $onderzoek) {                    
             $data_onderzoeken[] = array(
                 "title" => $onderzoek->Omschrijving,
                 "start" => $onderzoek->TijdstipStart,
                 "end" => $onderzoek->TijdstipStop,
-                "color" => '#BB9BFF',
+                "color" => $this->agenda_model->getKleurActiviteit(2)->Kleur,
                 "textColor" => '#000'
             );
         }
@@ -93,25 +102,26 @@ class Agenda extends CI_Controller {
         $this->load->model("zwemmer/agenda_model");
         $activiteit = $this->agenda_model->getActiviteit($id);
         
+        // Verschillende typen trainingen krijgen allemaal een andere achtergrondkleur
         switch ($activiteit->TypeTrainingId) {
             case 1:
-                $color = '#B5DD6C';
+                $color = $this->agenda_model->getKleurActiviteit(3)->Kleur; // Kleur krachttraining
                 break;
 
             case 2:
-                $color = '#7CD246';
+                $color = $this->agenda_model->getKleurActiviteit(4)->Kleur; // Kleur houdingstraining
                 break;
 
             case 3:
-                $color = '#0FA865';
+                $color = $this->agenda_model->getKleurActiviteit(5)->Kleur; // Kleur zwemtraining
                 break;
 
             case 4:
-                $color = '#93E2C1';
+                $color = $this->agenda_model->getKleurActiviteit(6)->Kleur; // Kleur conditietraining
                 break;
 
             case NULL:
-                $color = '#A0C7E8';
+                $color = $this->agenda_model->getKleurActiviteit(7)->Kleur; // Kleur stage
                 break;
         }
         
@@ -122,13 +132,14 @@ class Agenda extends CI_Controller {
         $this->load->model("zwemmer/agenda_model");
         $activiteit = $this->agenda_model->getActiviteit($id);
         
+        // Stage en training krijgen beiden een andere achtergrondkleur
         switch ($activiteit->TypeActiviteitId) {
             case 1:
-                $color = $this->kiesKleurTraining($id);
+                $color = $this->kiesKleurTraining($id); // Meerdere typen trainingen -> Kleur wordt bepaald in nieuwe functie
                 break;
 
             case 2:
-                $color = '#A0C7E8';
+                $color = $this->agenda_model->getKleurActiviteit(7)->Kleur; // Kleur stage
                 break;
 
             default:
@@ -138,13 +149,14 @@ class Agenda extends CI_Controller {
         return $color;
     }  
     
-    public function ladenActiviteiten() {
+    public function ladenActiviteiten($persoonId) {
+        // Trainingen en stages worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
-        $activiteiten = $this->agenda_model->getActiviteitenByPersoon(1);
+        $activiteiten = $this->agenda_model->getActiviteitenByPersoon($persoonId);
         
         $data_activiteiten = array();
-        $teller = 0;
         
+        // Trainingen en stages worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($activiteiten as $activiteit) {            
             $color = $this->kiesKleurActiviteiten($activiteit->activiteit->ID);
                                
@@ -155,31 +167,38 @@ class Agenda extends CI_Controller {
                 "color" => $color,
                 "textColor" => '#000'
             );
-            
-            $teller++;
         }
         
         return $data_activiteiten;
     }
     
-    public function ladenSupplementen() {
+    public function ladenSupplementen($persoonId) {
+        // Supplementen worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
-        $supplementen = $this->agenda_model->getSupplementenByPersoon(1);
+        $supplementen = $this->agenda_model->getSupplementenByPersoon($persoonId);
         
         $data_supplementen = array();
         
+        // Supplementen worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($supplementen as $supplement) {                    
             $data_supplementen[] = array(
                 "id" => $supplement->ID,
                 "description" => $supplement->functie->Functie,
                 "title" => $supplement->supplement->Naam,
                 "start" => $supplement->Datum,
-                "color" => '#E5343D',
+                "color" => $this->agenda_model->getKleurActiviteit(8)->Kleur,
                 "textColor" => '#fff'
             );
         }
         
         return $data_supplementen;
+    }
+    
+    public function ladenKleuren() {
+        // Kleuren worden opgehaald uit het model en in een lijst gestoken
+        $this->load->model("zwemmer/agenda_model");
+        $kleuren = $this->agenda_model->getKleuren();
+        return $kleuren;
     }
 
 }

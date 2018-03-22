@@ -27,12 +27,6 @@
 
 </div>
 
-<!-- Legende onder tabel -->
-
-<div id='legende'>
-    
-</div>
-
 <!-- Modal voor supplementen -->
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -79,12 +73,13 @@
                     titleFormat: 'D MMMM YYYY', // Titel van agenda [1 - 7 januari 0000]
                     height: 'parent', // Hoogte zelfde als zijn parent
                     minTime: "06:00:00", // Begintijd kalender
-                    eventClick: function(calEvent) {
-                        $('#exampleModalCenter').modal('show');
-                        $('.modal-body').html(calEvent.title);
-                        switch (calEvent.color) {
+                    // EventClick functie zorgt ervoor dat je het event kan aanklikken en meer informatie kan bekijken in het modal dat opent
+                    eventClick: function(calEvent) { 
+                        $('#exampleModalCenter').modal('show'); // Modal openen
+                        $('.modal-body').html(calEvent.title); // Modal inhoud opvullen
+                        switch (calEvent.color) { // Filteren op kleur van het event
                             case '#FF7534':
-                                $('.modal-title').html('Wedstrijd');
+                                $('.modal-title').html('Wedstrijd'); // Modal titel opvullen
                                 break;
                             case '#BB9BFF':
                                 $('.modal-title').html('Medisch onderzoek');
@@ -122,6 +117,32 @@
                     titleFormat: 'D MMMM YYYY',
                     height: 'parent',
                     minTime: "06:00:00",
+                    eventClick: function(calEvent) {
+                        $('#exampleModalCenter').modal('show');
+                        $('.modal-body').html(calEvent.title);
+                        switch (calEvent.color) {
+                            case '#FF7534':
+                                $('.modal-title').html('Wedstrijd');
+                                break;
+                            case '#BB9BFF':
+                                $('.modal-title').html('Medisch onderzoek');
+                                break;
+                            case '#B5DD6C':
+                            case '#7CD246':
+                            case '#0FA865':
+                            case '#93E2C1':
+                                $('.modal-title').html('Training');
+                                break;
+                            case '#A0C7E8':
+                                $('.modal-title').html('Stage');
+                                break;
+                            case '#E5343D':
+                                $('.modal-title').html('Supplement');
+                                $('.modal-body').html('<b>' + calEvent.title + '</b>');
+                                $('.modal-body').append(', ' + calEvent.description);
+                                break;
+                        }
+                    },
                     events: <?php echo $activiteiten?>
                 });
                 break;
@@ -132,6 +153,33 @@
                     defaultView: 'agendaDay', // Dag agenda
                     titleFormat: 'D MMMM YYYY',
                     height: 'auto', // Geen scrollbar bij hoogte
+                    minTime: "06:00:00",
+                    eventClick: function(calEvent) {
+                        $('#exampleModalCenter').modal('show');
+                        $('.modal-body').html(calEvent.title);
+                        switch (calEvent.color) {
+                            case '#FF7534':
+                                $('.modal-title').html('Wedstrijd');
+                                break;
+                            case '#BB9BFF':
+                                $('.modal-title').html('Medisch onderzoek');
+                                break;
+                            case '#B5DD6C':
+                            case '#7CD246':
+                            case '#0FA865':
+                            case '#93E2C1':
+                                $('.modal-title').html('Training');
+                                break;
+                            case '#A0C7E8':
+                                $('.modal-title').html('Stage');
+                                break;
+                            case '#E5343D':
+                                $('.modal-title').html('Supplement');
+                                $('.modal-body').html('<b>' + calEvent.title + '</b>');
+                                $('.modal-body').append(', ' + calEvent.description);
+                                break;
+                        }
+                    },
                     events: <?php echo $activiteiten?>
                 });
                 break;

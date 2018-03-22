@@ -7,6 +7,8 @@ class Agenda extends CI_Controller {
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
+    // |    Auteur: Klaus Daems     |       Helper: /
+    // +----------------------------------------------------------
     // |
     // |    Team controller
     // |
@@ -22,8 +24,6 @@ class Agenda extends CI_Controller {
     }
 
     // +----------------------------------------------------------
-    // |    Auteur: Klaus Daems       |       Helper: /
-    // +----------------------------------------------------------
     // |
     // |    Zwemmers beheren
     // |
@@ -31,7 +31,6 @@ class Agenda extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Team';
-        $data['magNiet'] = 'ja';
      
         $zwemmers = $this->ladenZwemmers();
         
