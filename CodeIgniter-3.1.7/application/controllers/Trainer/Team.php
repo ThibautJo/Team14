@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Agenda extends CI_Controller {
+class Team extends CI_Controller {
 
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
@@ -37,7 +37,7 @@ class Agenda extends CI_Controller {
         $data['zwemmers'] = $zwemmers;
 
         $partials = array('hoofding' => 'main_header',
-            'menu' => 'main_menu',
+            'menu' => 'trainer_main_menu',
             'inhoud' => 'trainer/team',
             'voetnoot' => 'main_footer');
 
