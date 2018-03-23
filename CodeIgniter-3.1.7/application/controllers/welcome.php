@@ -26,6 +26,7 @@ class Welcome extends CI_Controller {
         $this->load->helper("MY_html_helper");
         $this->load->helper("MY_url_helper");
         $this->load->helper('url');
+        $this->load->helper('form');
     }
 
     public function index() {
@@ -33,18 +34,67 @@ class Welcome extends CI_Controller {
         
         $data['persoonId'] = 1;
 
-//        $partials = array('hoofding' => 'bezoeker_main_header',
-//            'inhoud' => 'bezoeker/home',
-//            'voetnoot' => 'bezoeker_main_footer');
+        $partials = array('hoofding' => 'bezoeker_main_header',
+            'inhoud' => 'bezoeker/home',
+            'voetnoot' => 'bezoeker_main_footer');
+//        
+//
+//        $partials = array('hoofding' => 'main_header',
+//            'menu' => 'main_menu',
+//            'inhoud' => 'zwemmer/home',
+//            'voetnoot' => 'main_footer');
         
+        
+//        $partials = array('hoofding' => 'main_header',
+//            'menu' => 'trainer_main_menu',
+//            'inhoud' => 'trainer/home',
+//            'voetnoot' => 'main_footer');
+
+
+
+        $this->template->load('bezoeker_main_master', $partials, $data);
+    }
+    
+    public function meldAan()
+    {
+        $data['titel'] = 'Aanmelden';
+        $data['persoon']  = $this->authex->getPersoonInfo();
+
+        $partials = array('hoofding' => 'bezoeker_main_header',
+            'inhoud' => 'bezoeker/home_sessies', 
+            'voetnoot' => 'bezoeker_main_footer');
+
+        $this->template->load('bezoeker_main_master', $partials, $data);
+    }
+
+    public function toonFout()
+    {
+        $data['titel'] = 'Fout';
+        $data['gebruiker']  = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'main_header',
-            'menu' => 'main_menu',
-            'inhoud' => 'zwemmer/home',
+            'inhoud' => 'home_fout',
             'voetnoot' => 'main_footer');
-
 
         $this->template->load('main_master', $partials, $data);
     }
+
+    public function controleerAanmelden()
+    {
+        $email = $this->input->post('email');
+        $wachtwoord = $this->input->post('wachtwoord');
+
+        if ($this->authex->meldAan($email, $wachtwoord)) {
+            redirect('home/index');
+        } else {
+            redirect('home/toonFout');
+        }
+    } 
+
+    public function meldAf()
+    {
+        $this->authex->meldAf();
+        redirect('home/index');
+    }       
 
 }
