@@ -61,10 +61,11 @@ class Welcome extends CI_Controller {
         $data['persoon']  = $this->authex->getPersoonInfo();
 
         $partials = array('hoofding' => 'bezoeker_main_header',
+            'menu' => 'bezoeker_main_menu',
             'inhoud' => 'bezoeker/home_sessies', 
             'voetnoot' => 'bezoeker_main_footer');
 
-        $this->template->load('bezoeker_main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
 
     public function toonFout()
@@ -81,20 +82,20 @@ class Welcome extends CI_Controller {
 
     public function controleerAanmelden()
     {
-        $email = $this->input->post('email');
-        $wachtwoord = $this->input->post('wachtwoord');
+        $email = $this->input->post('Email');
+        $wachtwoord = $this->input->post('Wachtwoord');
 
         if ($this->authex->meldAan($email, $wachtwoord)) {
-            redirect('home/index');
+            redirect('Welcome');
         } else {
-            redirect('home/toonFout');
+            redirect('Trainer/Supplement');
         }
     } 
 
     public function meldAf()
     {
         $this->authex->meldAf();
-        redirect('home/index');
+        redirect('Welcome');
     }       
 
 }
