@@ -240,7 +240,7 @@ h2 {
   left: 0;
   top: 0;
   z-index: 9999;
-  /* display: none; */
+  display: none;
 }
 .popup-dialog{
   position: absolute;

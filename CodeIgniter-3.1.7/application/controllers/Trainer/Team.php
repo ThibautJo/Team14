@@ -84,10 +84,10 @@ class Team extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function wijzig($id) {
-        $this->load->model('trainer/zwemmers_model');
-        $data['zwemmers'] = $this->zwemmers_model->get($id);
-        $data['titel'] = 'Zwemmer wijzigen';
+    public function wijzig() {
+        $data['titel'] = 'Team wijzigen';
+        $zwemmers = $this->ladenZwemmers();
+        $data['zwemmers'] = $zwemmers;
         
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',

@@ -18,3 +18,15 @@ function wedstrijdToevoegen(){
   $(".popup-background").css({"display":"block"});
   $(".popup-dialog").css({"display":"block"});
 }
+
+function popupZwemmerToevoegen(){
+  $(".popup-dialog").css({"display":"none"});
+  $(".popup-background").css({"display":"block"});
+  $("#toevoegen").css({"display":"block"});
+}
+
+function popupZwemmerWijzigen(){
+  $(".popup-dialog").css({"display":"none"});
+  $(".popup-background").css({"display":"block"});
+  $("#wijzigen").css({"display":"block"});
+}
