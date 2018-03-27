@@ -59,7 +59,13 @@
                         <li class="nav-item">
                             <a href="#">
                                 <button type="button" class="btn btn-outline-light" id="login-button">
-                                    Login
+                                    <?php if ($persoon == null) {
+                                      
+                                    // niet aangemeld                                    
+                                    echo divAnchor('Welcome/meldAan', 'Aanmelden'); 
+                                    // aangemeld
+                                    } else {
+                                        echo divAnchor('Welcome/meldAf', 'Afmelden');} ?>
                                 </button>
                             </a>
                         </li>

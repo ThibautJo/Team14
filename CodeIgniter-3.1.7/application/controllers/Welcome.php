@@ -3,22 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     
     public function __construct() {
         parent::__construct();
@@ -30,10 +14,9 @@ class Welcome extends CI_Controller {
     }
 
     public function index() {
-        $data['titel'] = 'Home';
+        $data['titel'] = 'Home';        
+        $data['persoon'] = $this->authex->getPersoonInfo();
         
-        $data['persoonId'] = 1;
-
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
             'voetnoot' => 'bezoeker_main_footer');
@@ -50,8 +33,6 @@ class Welcome extends CI_Controller {
 //            'inhoud' => 'trainer/home',
 //            'voetnoot' => 'main_footer');
 
-
-
         $this->template->load('bezoeker_main_master', $partials, $data);
     }
     
@@ -61,18 +42,19 @@ class Welcome extends CI_Controller {
         $data['persoon']  = $this->authex->getPersoonInfo();
 
         $partials = array('hoofding' => 'bezoeker_main_header',
+            'menu' => 'bezoeker_main_menu',
             'inhoud' => 'bezoeker/home_sessies', 
             'voetnoot' => 'bezoeker_main_footer');
 
-        $this->template->load('bezoeker_main_master', $partials, $data);
+        $this->template->load('main_master', $partials, $data);
     }
 
     public function toonFout()
     {
         $data['titel'] = 'Fout';
-        $data['gebruiker']  = $this->authex->getGebruikerInfo();
+        $data['persoon']  = $this->authex->getPersoonInfo();
 
-        $partials = array('hoofding' => 'main_header',
+        $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'home_fout',
             'voetnoot' => 'main_footer');
 
@@ -81,20 +63,20 @@ class Welcome extends CI_Controller {
 
     public function controleerAanmelden()
     {
-        $email = $this->input->post('email');
-        $wachtwoord = $this->input->post('wachtwoord');
+        $email = $this->input->post('Email');
+        $wachtwoord = $this->input->post('Wachtwoord');
 
         if ($this->authex->meldAan($email, $wachtwoord)) {
-            redirect('home/index');
+            redirect('Welcome');
         } else {
-            redirect('home/toonFout');
+            redirect('Trainer/Supplement');
         }
     } 
 
     public function meldAf()
     {
         $this->authex->meldAf();
-        redirect('home/index');
+        redirect('Welcome');
     }       
 
 }

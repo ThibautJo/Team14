@@ -46,7 +46,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
+        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/Supplement') ?>"><i class="fas fa-pills md-18 mr-3"></i><span class="menu-text">Supplementen</span></a>
@@ -57,6 +57,9 @@
 
         </a>
         <div id="melding-menu-2" class="img-circle d-flex align-items-center justify-content-center">2</div>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Welcome/meldAf') ?>"><i class="material-icons md-18 mr-3">exit_to_app</i><span class="menu-text">Afmelden</span></a>
     </li>
 </ul>
 
