@@ -68,7 +68,6 @@ class Team extends CI_Controller {
                 "textColor" => '#000'
             );
         }
-        
         return $zwemmers;
     }
     
@@ -80,6 +79,41 @@ class Team extends CI_Controller {
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
             'inhoud' => 'trainer/team_aanpassen',
+            'voetnoot' => 'main_footer');
+        
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function wijzig() {
+        $data['titel'] = 'Team wijzigen';
+        $zwemmers = $this->ladenZwemmers();
+        $data['zwemmers'] = $zwemmers;
+        
+        $partials = array('hoofding' => 'main_header',
+            'menu' => 'trainer_main_menu',
+            'inhoud' => 'trainer/team_aanpassen',
+            'voetnoot' => 'main_footer');
+        
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function schrap($id) {
+        $this->load->model('trainer/zwemmers_model');
+        $data['zwemmers'] = $this->zwemmers_model->delete($id);
+        
+        redirect('/trainer/team_lijst');
+    }
+    
+    public function maakNieuwe() {
+        $data['zwemmers'] = $this->getEmptySupplement();
+        $data['titel'] = 'Supplement toevoegen';
+        
+        $this->load->model('trainer/supplementfunctie_model');
+        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
+        
+        $partials = array('hoofding' => 'main_header',
+            'menu' => 'trainer_main_menu',
+            'inhoud' => 'trainer/supplement_form',
             'voetnoot' => 'main_footer');
         
         $this->template->load('main_master', $partials, $data);

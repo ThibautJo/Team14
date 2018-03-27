@@ -206,7 +206,7 @@ h2 {
   border-color: #ddd !important;
   color: #636363 !important;
   text-shadow: none !important;
-  box-shadow: none !important; 
+  box-shadow: none !important;
 }
 
 .fc-state-hover {
@@ -230,3 +230,86 @@ h2 {
         display: block;
     }
 }
+
+/*popup venster (wedstrijden)*/
+.popup-background{
+  position: absolute;
+  background-color: rgba(173,184,191, 0.5);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  display: none;
+}
+.popup-dialog{
+  position: absolute;
+  background-color: white;
+  min-width: 900px;
+  width: auto;
+  height: 60%;
+  left: 50%;
+  top: 50%;
+  -ms-transform: translate(-50%,-50%); /* IE 9 */
+  -webkit-transform: translate(-50%,-50%); /* Safari */
+  transform: translate(-50%,-50%); /* Standard syntax */
+  z-index: 99999;
+  /* display: none; */
+}
+.popup-header{
+  height: 10%;
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(173,184,191, 0.5);;
+}
+.popup-header .popup-title{
+  text-align: center;
+  padding: 10px 0;
+}
+.popup-header .close{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+.popup-content{
+  width: 100%;
+  height: 75%;
+  padding: 30px;
+}
+.popup-footer{
+  width: 100%;
+  height: 15%;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(173,184,191, 0.5);
+  padding: 30px;
+}
+
+/* PAGINA wedstrijden_aannpassen*/
+#form-wedstrijd table tr td{
+  padding: 0 10px;
+}
+#form-wedstrijd table tr td[rowspan] {
+    vertical-align: top;
+}
+#form-wedstrijd input{
+  display: inline;
+  margin: 10px 0 20px 0;
+  /* border: 1px solid black; */
+}
+#form-wedstrijd label{
+  display: block;
+  margin: 0;
+}
+#form-wedstrijd .form-left{
+  height: 100%;
+  width: 50%;
+  display: inline;
+}
+#form-wedstrijd .form-right{
+  height: 100%;
+  width: 50%;
+  display: inline;
+}
+/* EIND PAGINA wedstrijden_aannpassen*/

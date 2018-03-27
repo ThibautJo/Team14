@@ -30,11 +30,11 @@
         <a class="nav-link d-flex align-items-center" href="#"><i class="material-icons md-18 mr-3">event_note</i><span class="menu-text">Agenda</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#wedstrijdSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="wedstrijdSubMenu"><i class="material-icons md-18 mr-3">flag</i><span class="menu-text">Wedstrijden</span></a>  
+        <a class="nav-link d-flex align-items-center" href="#wedstrijdSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="wedstrijdSubMenu"><i class="material-icons md-18 mr-3">flag</i><span class="menu-text">Wedstrijden</span></a>
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="wedstrijdSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="#">Wedstrijden</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/wedstrijden/index/weergaven') ?>">Wedstrijden</a>
                 </li>
                 <li>
                     <a class="nav-link1" href="#">Wedstrijdresultaten</a>
@@ -46,15 +46,15 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
+        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/Supplement') ?>"><i class="fas fa-pills md-18 mr-3"></i><span class="menu-text">Supplementen</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex justify-content-between align-items-center" href="#"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span> 
+        <a class="nav-link d-flex justify-content-between align-items-center" href="#"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span>
             <span class="menu-text"><div id="melding-menu" class="img-circle d-flex align-items-center justify-content-center">2</div></span>
-            
+
         </a>
         <div id="melding-menu-2" class="img-circle d-flex align-items-center justify-content-center">2</div>
     </li>

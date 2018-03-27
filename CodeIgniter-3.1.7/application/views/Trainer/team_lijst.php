@@ -13,21 +13,19 @@
 // +----------------------------------------------------------
 ?>
 <?php
-$aanpassen = array('class' => 'btn btn-warning btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Team aanpassen');
+$aanpassen = array('class' => 'btn btn-warning btn-lg btn-round', 'data-toggle' => 'tooltip', 'title' => 'Team aanpassen');
 ?>
+
+
 <div id="team">
-    <div class="container">
-        <div>
-            <div>
-                <?php
-                echo "<th>" . anchor('Trainer/Team/aanpassen', form_button("knopaanpassen", "<i class='fas fa-plus'></i>", $aanpassen)) . "</th>";
-                ?>
-                <br>
-            </div>
-        </div>
+    <div style="float:right">
         <?php
-        foreach ($zwemmers as $zwemmer)
-            echo "<div><h2>" . toonAfbeelding('Zwemmers/' . $zwemmer->Foto . '.png', 'id="avatar" class="shadow img-circle"') . " " . $zwemmer->Voornaam . " " . $zwemmer->Achternaam . "</h2></div>"
-            ?>
+        echo "<p>" . anchor('Trainer/Team/aanpassen', form_button("knopaanpassen", "<i class='fas fa-bars'></i>", $aanpassen)) . "</p>";
+        ?>
+        <br>
     </div>
+    <?php
+    foreach ($zwemmers as $zwemmer)
+        echo "<div><h2>" . toonAfbeelding('Zwemmers/' . $zwemmer->Foto . '.png', 'id="avatar" class="shadow img-circle"') . " " . $zwemmer->Voornaam . " " . $zwemmer->Achternaam . "</h2></div>"
+        ?>
 </div>
