@@ -9,6 +9,7 @@ $( ".popup-header > button, .popup-background" ).click(function() {
 });
 
 
+// wedstrijden start
 function wedstrijdToevoegen(){
   $(".popup-dialog").css({"display":"none"});
   $(".popup-background").css({"display":"block"});
@@ -66,7 +67,9 @@ function wedstrijdVerwijder(elementID){
     });
   }
 }
+//wedstrijden end
 
+// zwemmer start
 function popupZwemmerToevoegen(){
   $(".popup-dialog").css({"display":"none"});
   $(".popup-background").css({"display":"block"});
@@ -78,3 +81,5 @@ function popupZwemmerWijzigen(){
   $(".popup-background").css({"display":"block"});
   $("#wijzigen").css({"display":"block"});
 }
+
+//zwemmer end
