@@ -27,7 +27,26 @@ class Zwemmers_model extends CI_Model {
         $query = $this->db->get('persoon');
         return $query->result();
     }
-
+    function get($id) {
+        $this->db->where('ID', $id);
+        $query = $this->db->get('persoon');
+        return $query->row();
+    }
+    
+    function delete($id){
+        $this->db->where('ID', $id);
+        $this->db->delete('persoon');
+    }
+    
+    function insert($persoon) {
+        $this->db->insert('persoon', $persoon);
+        return $this->db->insert_id();
+    }
+    
+    function update($persoon) {
+        $this->db->where('id', $persoon->ID);
+        $this->db->update('persoon', $persoon);
+    }
 }
 
 ?>

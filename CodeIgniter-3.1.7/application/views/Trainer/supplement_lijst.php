@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * @file supplement_lijst.php
+ * 
+ * View waarin een lijst van supplement gegevens worden weergegeven
+ * - krijgt $supplementen binnen
+ */
+
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -33,7 +42,7 @@ $toevoegen = array('class' => 'btn btn-warning btn-xs btn-round', 'data-toggle' 
     <tbody>
 <?php
     foreach ($supplementen as $supplement) {        
-        echo "<tr><td>" . $supplement->Naam . "</td><td>" . ucfirst($supplement->functie->Functie) ."</td><td>" . ucfirst($supplement->Omschrijving) . "</td><td>"
+        echo "<tr><td>" . ucfirst($supplement->Naam) . "</td><td>" . ucfirst($supplement->functie->Functie) ."</td><td>" . ucfirst($supplement->Omschrijving) . "</td><td>"
                . anchor('Trainer/Supplement/wijzig/' . $supplement->ID, form_button("knopWijzig", "<i class='fas fa-pencil-alt'></i>", $wijzigen)) . "</td><td>"
                . anchor('Trainer/Supplement/schrap/' . $supplement->ID, form_button("knopSchrap", "<i class='fas fa-trash-alt'></i>", $schrappen)) . "</td></tr>\n";
 ;}

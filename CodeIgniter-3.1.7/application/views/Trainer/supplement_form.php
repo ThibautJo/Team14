@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * @file supplement_form.php
+ * 
+ * View waarin de gegevens van een supplement worden weergegeven
+ * - krijgt een $supplement-object binnen
+ */
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -49,7 +57,11 @@ foreach ($functies as $functie) {
 <div class="form-group">
     <?php
     echo form_labelpro('Functie', 'functie');
+<<<<<<< HEAD
     echo form_dropdown('functie', $functieOpties, '0', 'class="form-control"');
+=======
+    echo form_dropdown('FunctieId', $functieOpties, $supplement->FunctieId);
+>>>>>>> 5edc2346c193e60b14ae39fc373e98fbaed643c1
     ?>
     <div class="help-block with-errors"></div>
 </div>
@@ -68,7 +80,7 @@ foreach ($functies as $functie) {
 </div>
 
 <div class="form-group">
-    <?php echo form_submit('knop', 'Verzenden', "class='btn btn-primary'") ?>
+    <?php echo form_submit('knop', 'Opslaan', "class='btn btn-primary'") ?>
 </div>
 
 <?php echo form_close(); ?>
