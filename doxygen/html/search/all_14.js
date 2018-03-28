@@ -27,6 +27,7 @@ var searchData=
   ['server',['server',['../class_c_i___input.html#aab98211ca0db00061e8eb8b928f4fd90',1,'CI_Input\server()'],['../class_c_i___xmlrpc.html#a9969815a7195f6915eb73afcab3f9e9e',1,'CI_Xmlrpc\server()']]],
   ['sess_5fdestroy',['sess_destroy',['../class_c_i___session.html#a9451d1625c402b8d712aedaa5ebc752d',1,'CI_Session']]],
   ['sess_5fregenerate',['sess_regenerate',['../class_c_i___session.html#afec342ef8722ac0ce4a672e6cfad60c0',1,'CI_Session']]],
+  ['sessies_5fmodel',['Sessies_model',['../class_sessies__model.html',1,'']]],
   ['sessionhandlerinterface',['SessionHandlerInterface',['../interface_session_handler_interface.html',1,'']]],
   ['set',['set',['../class_c_i___d_b__query__builder.html#a1589c46344f3a216a129cf65659b117c',1,'CI_DB_query_builder']]],
   ['set_5fallowed_5ftypes',['set_allowed_types',['../class_c_i___upload.html#a7c7ddfefedddc3fd625dd816d67c21bf',1,'CI_Upload']]],

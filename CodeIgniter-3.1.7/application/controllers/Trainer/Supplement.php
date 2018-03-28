@@ -2,6 +2,13 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * @class Supplement
+ * @brief Controller-klasse voor supplement
+ * 
+ * Controller-klasse met alle methodes die gebruikt worden om supplementen te beheren
+ */
+
 class Supplement extends CI_Controller {
 
     // +----------------------------------------------------------
@@ -14,6 +21,10 @@ class Supplement extends CI_Controller {
     // |    Team 14
     // +----------------------------------------------------------
 
+    /**
+     * Constructor
+     */
+    
     public function __construct() {
 
         parent::__construct();
@@ -31,6 +42,12 @@ class Supplement extends CI_Controller {
     // |
     // +----------------------------------------------------------
 
+    /**
+     * Haalt alle supplementen namen op via Supplement_model en toont de resulterende objecten in de view supplementen_lijst.php
+     * 
+     * @see Supplement_model::getAllByNaamSupplementWithFunctie()
+     * @see supplement_lijst.php
+     */
     public function index() {
         $data['titel'] = 'Supplementen beheren';
 
@@ -46,11 +63,22 @@ class Supplement extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
   
-    
+    /**
+     * Haalt de id=$id op van het te wijzigen supplement-record via Supplement_model 
+     * en alle supplementfuncties via Supplementfunctie_model en toont de objecten in de view supplement_form.php
+     * 
+     * @param $id De id van het te wijzigen supplement
+     * @see Supplement_model::get();
+     * @see Supplementfunctie_model::getAllByFunctie();
+     * @see supplement_form.php
+     */
     public function wijzig($id) {
         $this->load->model('trainer/supplement_model');
         $data['supplement'] = $this->supplement_model->get($id);
         $data['titel'] = 'Supplement wijzigen';
+        
+        $this->load->model('trainer/supplementfunctie_model');
+        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
         
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
@@ -60,6 +88,12 @@ class Supplement extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
+    /**
+     * Verwijdert het supplement-record met id=$id via Supplement_model en toont de aangepaste lijst in de view supplement_lijst.php
+     * 
+     * @param $id De id van het supplement-record dat verwijdert wordt
+     * @see Supplement_model::delete()
+     */
     public function schrap($id) {
         $this->load->model('trainer/supplement_model');
         $data['supplement'] = $this->supplement_model->delete($id);
@@ -67,6 +101,13 @@ class Supplement extends CI_Controller {
         redirect('/trainer/supplement/index');
     }
     
+    /**
+     * Haalt een leeg supplement op uit deze controller en haalt alle supplementfuncties op via Supplementfunctie_model en toont de objecten in de view supplement_form.php
+     * 
+     * @see ::getEmptySupplement();
+     * @see Supplementfunctie_model::getAllByFunctie();
+     * @see supplement_form.php
+     */
     public function maakNieuwe() {
         $data['supplement'] = $this->getEmptySupplement();
         $data['titel'] = 'Supplement toevoegen';
@@ -82,16 +123,28 @@ class Supplement extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
+    /**
+     * Maakt een leeg supplement
+     * @return $supplement;
+     */
     function getEmptySupplement() {
         $supplement = new stdClass();
         
         $supplement->ID = 0;
         $supplement->Naam = '';
         $supplement->Omschrijving = '';
+        $supplement->FunctieId = 0;
         
         return $supplement;
     }
     
+    /**
+     * Slaagt het nieuw/aangepaste supplement op via Supplement_model en toont de aangepaste lijst in de view supplement_lijst.php
+     * 
+     * @see Supplementfunctie_model::get();
+     * @see Supplement_model::insert();
+     * @see Supplement_model::update();
+     */
     public function registreer() {
         $supplement = new stdClass();
         
@@ -99,10 +152,10 @@ class Supplement extends CI_Controller {
         $supplement->Naam = $this->input->post('naam');
         $supplement->Omschrijving = $this->input->post('omschrijving');
         
-        $functieId = $this->input->post('functie');
+        $functieId = $this->input->post('FunctieId');
         $this->load->model('trainer/supplementfunctie_model');
         $functie = $this->supplementfunctie_model->get($functieId);
-        $supplement->functie = $functie->Functie;
+        $supplement->FunctieId = $functie->ID;
         
         $this->load->model('trainer/supplement_model');
         

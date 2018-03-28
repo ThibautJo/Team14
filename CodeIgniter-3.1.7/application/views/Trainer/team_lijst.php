@@ -13,14 +13,14 @@
 // +----------------------------------------------------------
 ?>
 <?php
-$aanpassen = array('class' => 'btn btn-warning btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Team aanpassen');
+$aanpassen = array('class' => 'btn btn-warning btn-lg btn-round', 'data-toggle' => 'tooltip', 'title' => 'Team aanpassen');
 ?>
 
 
 <div id="team">
-    <div>
+    <div style="float:right">
         <?php
-        echo "<th>" . anchor('Trainer/Team/aanpassen', form_button("knopaanpassen", "<i class='fas fa-plus'></i>", $aanpassen)) . "</th>";
+        echo "<p>" . anchor('Trainer/Team/aanpassen', form_button("knopaanpassen", "<i class='fas fa-bars'></i>", $aanpassen)) . "</p>";
         ?>
         <br>
     </div>
