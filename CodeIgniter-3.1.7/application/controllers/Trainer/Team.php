@@ -97,25 +97,31 @@ class Team extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function schrap($id) {
+    public function archiveer($id) {
         $this->load->model('trainer/zwemmers_model');
         $data['zwemmers'] = $this->zwemmers_model->delete($id);
         
         redirect('/trainer/team_lijst');
     }
     
-    public function maakNieuwe() {
-        $data['zwemmers'] = $this->getEmptySupplement();
-        $data['titel'] = 'Supplement toevoegen';
+    public function registreer()
+    {       
+        $persoon = new stdClass();
         
-        $this->load->model('trainer/supplementfunctie_model');
-        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
+        $persoon->id=$this->input->post('id');
+        $persoon->voornaam=$this->input->post('voornaam');
+        $persoon->achternaam=$this->input->post('achternaam');
+        $persoon->email=$this->input->post('email');
+        $persoon->wachtwoord=$this->input->post('wachtwoord');
+        $persoon->omschrijving=$this->input->post('omschrijving');
         
-        $partials = array('hoofding' => 'main_header',
-            'menu' => 'trainer_main_menu',
-            'inhoud' => 'trainer/supplement_form',
-            'voetnoot' => 'main_footer');
+        $this->load->model('zwemmers_model');
+        if ($persoon->id == 0) {
+            $this->zwemmers_model->insert($persoon);
+        } else {
+            $this->zwemmers_model->update($persoon);
+        }
+        redirect('trainer/team');
         
-        $this->template->load('main_master', $partials, $data);
     }
 }
