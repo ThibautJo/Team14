@@ -27,52 +27,11 @@
 
     </head>
 
-    <body>
+    <body id="top">
 
         <!-- Navigatie -->
 
-        <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-            <div class="container">
-
-                <!-- logo in navigatie -->
-
-                <a class="navbar-brand font-weight-bold" href="#">TCW</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- links in navigatie -->
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Startpagina</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Wedstrijden</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Team</a>
-                        </li>
-
-                        <!-- login knop -->
-                        <li class="nav-item">
-                            <a href="#">
-                                <button type="button" class="btn btn-outline-light" id="login-button">
-                                    <?php if ($persoon == null) {
-                                      
-                                    // niet aangemeld                                    
-                                    echo divAnchor('Welcome/meldAan', 'Aanmelden'); 
-                                    // aangemeld
-                                    } else {
-                                        echo divAnchor('Welcome/meldAf', 'Afmelden');} ?>
-                                </button>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php echo $hoofding; ?>
 
         <!-- Achtergrond -->
 
@@ -105,30 +64,29 @@
         <!-- Inhoud -->
 
         <main id="inhoud">
+            
+            <!-- Team sectie -->
+            
+            <div id="Team">
+                
+            </div>
+            
+            <!-- Wedstrijden sectie -->
+            
+            <div id="Wedstrijden">
+                
+            </div>
+            
+            <!-- Nieuws sectie -->
+            
+            <div id="Nieuws">
+                
+            </div>
         </main>
 
         <!-- Voetnoot -->
-
-        <footer>
-            <div class="container pb-3 font-weight-light">
-                <div class="text-center">
-                    <p>Trainingscentrum WEZENBERG</p>
-                    <p id="footer-follow">Volg ons op <a href="https://www.facebook.com/Trainingscentrum-Wezenberg-TCW-514839802012875/"><i class="fa fa-facebook-square"></i></a> facebook</p>
-                </div>
-                <hr>
-
-                <!-- Navigatie-links in de voetnoot -->
-
-                <div class="d-flex justify-content-center col-12">
-                    <div id="footer-links" class="col-lg-6 col-md-9 col-sm-12 col-12 d-flex justify-content-sm-between text-center flex-sm-row flex-column">
-                        <a href="#">Startpagina</a>
-                        <a href="#">Wedstrijden</a>
-                        <a href="#">Team</a>
-                        <a href="#">Login</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        
+        <?php echo $voetnoot ?>
 
         <!-- Javascript scriptjes -->
 

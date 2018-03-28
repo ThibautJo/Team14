@@ -1,8 +1,43 @@
-<?php
+<!-- navigatie -->
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+    <div class="container">
 
+        <!-- logo in navigatie -->
+
+        <a class="navbar-brand font-weight-bold" href="#top">TCW</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- links in navigatie -->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#top">Startpagina</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#Wedstrijden">Wedstrijden</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#Team">Team</a>
+                </li>
+
+                <!-- login knop -->
+                <li class="nav-item">
+                        <?php
+                        if ($persoon == null) {
+
+                            // niet aangemeld                                    
+                            echo divAnchor('Welcome/meldAan', 'Aanmelden', 'class="btn btn-outline-light" id="login-button"');
+                            // aangemeld
+                        } else {
+                            echo divAnchor('Welcome/meldAf', 'Afmelden', 'class="btn btn-outline-light" id="login-button"');
+                        }
+                        ?>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
