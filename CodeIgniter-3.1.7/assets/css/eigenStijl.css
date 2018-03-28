@@ -240,7 +240,7 @@ h2 {
   left: 0;
   top: 0;
   z-index: 9999;
-  /* display: none; */
+  display: none;
 }
 .popup-dialog{
   position: absolute;
@@ -254,7 +254,7 @@ h2 {
   -webkit-transform: translate(-50%,-50%); /* Safari */
   transform: translate(-50%,-50%); /* Standard syntax */
   z-index: 99999;
-  /* display: none; */
+  display: none;
 }
 .popup-header{
   height: 10%;
@@ -287,13 +287,16 @@ h2 {
 }
 
 /* PAGINA wedstrijden_aannpassen*/
+#form-wedstrijd table{
+  width: 100%;
+}
 #form-wedstrijd table tr td{
   padding: 0 10px;
 }
 #form-wedstrijd table tr td[rowspan] {
     vertical-align: top;
 }
-#form-wedstrijd input{
+#form-wedstrijd input, #form-wedstrijd select{
   display: inline;
   margin: 10px 0 20px 0;
   /* border: 1px solid black; */

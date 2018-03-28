@@ -45,6 +45,6 @@
     </tbody>
   </table>
 
-  <button type="button" class="btn btn-primary" onclick="window.location.replace('../../../Trainer/wedstrijden/index/aanpassen') ">Aanpassen</button>
+  <button type="button" class="btn btn-primary" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=aanpassen'">Aanpassen</button>
 
 </div>

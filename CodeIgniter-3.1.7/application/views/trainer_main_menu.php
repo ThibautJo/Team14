@@ -34,7 +34,7 @@
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="wedstrijdSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/wedstrijden/index/weergaven') ?>">Wedstrijden</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/wedstrijden/index?pagina=weergaven') ?>">Wedstrijden</a>
                 </li>
                 <li>
                     <a class="nav-link1" href="#">Wedstrijdresultaten</a>
