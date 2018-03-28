@@ -40,8 +40,8 @@
         echo "<td>" . $wedstrijd->Naam . "</td>";
         echo "<td>" . $wedstrijd->Naam . "</td>";
         echo "<td>" . $wedstrijd->Naam . "</td>";
-        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->ID."' onclick='wedstrijdUpdate(this.id)' value='".$wedstrijd->ID."'>aanpassen</button></td>";
-        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->ID."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->ID."'>verwijder</button></td>";
+        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->ID."' onclick='wedstrijdUpdate(this.id)' value='".$wedstrijd->ID."'><i class='fas fa-pencil-alt' onclick='pupZwemmerWijzigen'></i></button></td>";
+        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->ID."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->ID."'><i class='fas fa-trash-alt' onclick='pupZwemmerWijzigen'></i></button></td>";
         echo "</tr>";
       }
 
