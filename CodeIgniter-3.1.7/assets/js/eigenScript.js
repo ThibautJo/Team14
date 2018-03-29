@@ -83,3 +83,52 @@ function popupZwemmerWijzigen(){
 }
 
 //zwemmer end
+
+
+// supplement start
+
+function supplementUpdate(elementID) {
+    var id = $("#"+elementID).val();
+    
+    alert(id);
+}
+
+function supplementVerwijder(elementID){
+  if (!confirm("Zeker dat je dit wilt verwijderen?")) {
+    return false;
+  }
+  else{
+    //id van supplement
+    var id = $("#"+elementID).val();
+    // alert(id);
+    //verwijderen
+    $.post(site_url+'/Trainer/supplement/schrap/'+id, function(data){
+      alert("Voedingssupplement is verwijderd!");
+      $("tr#"+id).remove();
+    }).fail(function() {
+      alert( "Er is iets misgelopen, neem contact op met de administrator." );
+    });
+  }
+}
+
+function supplementOpslaan(){
+
+  var ok = true;
+  //form valideren
+  $('#form-supplement *').filter('input').each(function(){
+    if($(this).val() == "" && $(this).attr("required")){
+      alert("niet alle velden zijn ingevuld");
+      ok = false;
+      return false;
+    }
+  });
+
+  //word uitgevoerd als alles ingevuld is
+  if (ok) {
+    $('#form-supplement').attr('action', site_url+'/Trainer/supplement/registreer');
+    $('#form-supplement').submit();
+  }
+
+}
+
+// supplement end

@@ -55,6 +55,9 @@ class Supplement extends CI_Controller {
        //$data['supplementen'] = $this->supplement_model->getAllByNaamSupplement();
        $data['supplementen'] = $this->supplement_model->getAllByNaamSupplementWithFunctie();
        
+       $this->load->model('trainer/supplementfunctie_model');
+        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
+       
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
             'inhoud' => 'trainer/supplement_lijst',
@@ -96,9 +99,8 @@ class Supplement extends CI_Controller {
      */
     public function schrap($id) {
         $this->load->model('trainer/supplement_model');
-        $data['supplement'] = $this->supplement_model->delete($id);
-        
-        redirect('/trainer/supplement/index');
+        $this->supplement_model->delete($id);
+
     }
     
     /**
