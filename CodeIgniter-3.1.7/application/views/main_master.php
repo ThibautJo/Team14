@@ -39,15 +39,17 @@
 
                 <!-- Menu -->
 
-                <div class="pl-0 pr-0">
-                    <nav class="hidden-xs-down sidebar h-100">
-                        <div id="logo" class="d-flex align-items-center flex-column justify-content-center">
-                            <div id="logo-wezenberg">Trainingscentrum</div>
-                            <div id="logo-titel">WEZENBERG</div>
-                            <div id="logo-titel-mobile">TCW</div>
-                        </div>
+                <div class="pl-0 pr-0 navdiv">
+                    <nav class="hidden-xs-down sidebar h-100 scroll-menu">
+                        <div class="nav-height">
+                            <div id="logo" class="d-flex align-items-center flex-column justify-content-center">
+                                <div id="logo-wezenberg">Trainingscentrum</div>
+                                <div id="logo-titel">WEZENBERG</div>
+                                <div id="logo-titel-mobile">TCW</div>
+                            </div>
 
-                        <?php echo $menu; ?>
+                            <?php echo $menu; ?>
+                        </div>
                     </nav>
                 </div>
 
@@ -96,11 +98,24 @@
         <script>
             $(document).ready(function () {
 
+                // Bij het resizen van je scherm de functie menuFooter() uitvoeren
+                
+                window.onresize = resize;
+                function resize()
+                {
+                    menuFooter();
+                }
+
                 // Uitklapbare submenu voor de verticale menu
 
                 $('.nav-link').on('click', function () {
                     $('.nav-link').removeClass('active');
                     $(this).toggleClass('active');
+                    setTimeout(
+                            function ()
+                            {
+                                menuFooter();
+                            }, 250);
                 });
 
                 $('#sidenav-toggler').on('click', function () {
@@ -127,6 +142,22 @@
                         }
                     }
                 });
+
+                menuFooter();
+
+                // Wissel tussen position absolute en position relative bij menu-footer
+                
+                function menuFooter() {
+                    if ($(".scroll-menu")[0].scrollHeight > $(".scroll-menu").height()) {
+                        $('#menu-footer').removeClass('position-absolute');
+                        $('#menu-footer').addClass('position-relative');
+                        $('#menu-footer').css('bottom', '-10px');
+                    } else {
+                        $('#menu-footer').addClass('position-absolute');
+                        $('#menu-footer').removeClass('position-relative');
+                        $('#menu-footer').css('bottom', '10px');
+                    }
+                }
             });
         </script>
     </body>

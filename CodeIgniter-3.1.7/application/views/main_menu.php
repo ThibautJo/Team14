@@ -18,10 +18,10 @@
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="profielSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="#">Profiel</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Profiel') ?>">Profiel</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="#">Aanpassen</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Profiel/Aanpassen') ?>">Profiel aanpassen</a>
                 </li>
             </ul>
         </div>
@@ -34,24 +34,23 @@
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="wedstrijdSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="#">Wedstrijden</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Wedstrijden') ?>">Wedstrijden</a>
                 </li>
                 <li>
-                    <a class="nav-link1" href="#">Wedstrijdresultaten</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Wedstrijdresultaten') ?>">Wedstrijdresultaten</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="#">Inschrijven</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Inschrijven') ?>">Inschrijven</a>
                 </li>
             </ul>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
+        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Zwemmer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex justify-content-between align-items-center" href="#"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span>
+        <a class="nav-link d-flex justify-content-between align-items-center" href="<?php echo site_url('/Zwemmer/Meldingen') ?>"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span>
             <span class="menu-text"><div id="melding-menu" class="img-circle d-flex align-items-center justify-content-center">2</div></span>
-
         </a>
         <div id="melding-menu-2" class="img-circle d-flex align-items-center justify-content-center">2</div>
     </li>

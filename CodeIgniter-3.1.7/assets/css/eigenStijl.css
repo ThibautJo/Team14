@@ -5,7 +5,7 @@ html,body {
 }
 
 main {
-    min-height: calc(100% - 70px - 73px);
+    min-height: calc(100% - 70px - 74px);
 }
 
 footer {
@@ -18,8 +18,9 @@ footer {
     font-size: 11px;
     font-weight: normal;
     color: #97A4AD;
-    bottom: 9px;
+    bottom: 10px;
     width: 250px;
+    margin-top: 30px;    
 }
 
 #menu-footer p {
@@ -27,15 +28,11 @@ footer {
 }
 
 #content {
-    overflow-y: scroll;
+    overflow-y: auto;
     width: calc(100% - 250px);
     padding-right: 15px;
     padding-left: 15px;
     transition: all 0.2s ease-in-out;
-}
-
-h1 {
-
 }
 
 h2 {
@@ -50,6 +47,10 @@ h2 {
     background-color: #20344D;
     width: 250px;
     transition: all 0.2s ease-in-out;
+}
+
+.scroll-menu {
+    overflow-y: auto !important;
 }
 
 .sidebar .nav {
@@ -230,7 +231,6 @@ h2 {
         display: block;
     }
 }
-
 
 /* PAGINA wedstrijden_aannpassen*/
 #form-wedstrijd table{
