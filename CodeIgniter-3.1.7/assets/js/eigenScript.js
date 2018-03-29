@@ -2,50 +2,39 @@ $(function(){
 
 });
 
-/*popup-dialog*/
-$( ".popup-header > button, .popup-background" ).click(function() {
-  $(".popup-background").css({"display":"none"});
-  $(".popup-dialog").css({"display":"none"});
-});
-
-
-// wedstrijden start
-function wedstrijdToevoegen(){
-  $(".popup-dialog").css({"display":"none"});
-  $(".popup-background").css({"display":"block"});
-  $("#toevoegen").css({"display":"block"});
-}
-
-function wedstrijdUpdate(){
-
-
-}
-//global variabel voor reeksen
-var wedstrijdAfstanden = [];
-var wedstrijdSlagen = [];
-function addReeks(){
-  wedstrijdAfstanden.push($('#afstand-wedstrijd').val());
-  wedstrijdSlagen.push($('#slag-wedstrijd').val());
-  console.log(wedstrijdAfstanden);
-  console.log(wedstrijdSlagen);
-}
-function wedstrijdOpslaan(){
+// wedstrijden starts
+function wedstrijdOpslaan(actie){
 
   var ok = true;
+  var formToSubmit = '';
   //form valideren
-  $('#form-wedstrijd *').filter('input').each(function(){
-    if($(this).val() == "" && $(this).attr("required")){
-      alert("niet alle velden zijn ingevuld");
-      ok = false;
-      return false;
-    }
-  });
+  if (actie == "toevoegen") {
+    $('#wedstrijdToevoegen #form-wedstrijd *').filter('input').each(function(){
+      if($(this).attr("required") && $(this).val() == ""){
+        alert("niet alle velden zijn ingevuld");
+        ok = false;
+        return false;
+      }
+    });
+    formToSubmit = "#wedstrijdToevoegen #form-wedstrijd";
+  }
+  else {
+    $('#wedstrijdAanpassen #form-wedstrijd *').filter('input').each(function(){
+      if($(this).attr("required") && $(this).val() == ""){
+        alert("niet alle velden zijn ingevuld");
+        ok = false;
+        return false;
+      }
+    });
+    formToSubmit = "#wedstrijdAanpassen #form-wedstrijd";
+  }
 
   //word uitgevoerd als alles ingevuld is
   if (ok) {
-    $('#form-wedstrijd').attr('action', site_url+'/Trainer/wedstrijden/opslaanWedstrijd?pagina=aanpassen&afstanden='+wedstrijdAfstanden+'&slagen='+wedstrijdSlagen);
-    wedstrijdReeksen = [];
-    $('#form-wedstrijd').submit();
+    $(formToSubmit).attr('action', site_url+'/Trainer/wedstrijden/opslaanWedstrijd/'+ actie +'?pagina=aanpassen&afstanden='+wedstrijdAfstanden+'&slagen='+wedstrijdSlagen);
+    wedstrijdAfstanden = [];
+    wedstrijdSlagen = [];
+    $(formToSubmit).submit();
   }
 
 }
@@ -67,6 +56,50 @@ function wedstrijdVerwijder(elementID){
     });
   }
 }
+
+function wedstrijdOpvragen(wedstrijdID){
+
+  var id = $("#"+wedstrijdID).val();
+
+  $.post(site_url+'/Trainer/wedstrijden/wedstrijdOpvragen/'+id, function(data){
+    //data = object van wedstrijd
+    data = JSON.parse(data);
+    // console.log(data[0]["Naam"]);
+
+    //modal opvullen met object wedstrijd
+    opvullenModalAanpassen(data);
+
+  }).fail(function() {
+    alert( "Er is iets misgelopen, neem contact op met de administrator." );
+  });
+
+
+  // modal openen met ingevulde gegevans van dit object
+  $("#wedstrijdAanpassen").modal()
+
+}
+function opvullenModalAanpassen(dataWedstrijd){
+  console.log(dataWedstrijd);
+  // console.log(dataWedstrijd[0]["Naam"]);
+  $('#wedstrijdAanpassen #wedstrijdID').attr("value", dataWedstrijd["ID"]);
+  $('#wedstrijdAanpassen #titel-wedstrijd').val(dataWedstrijd["Naam"]);
+  $('#wedstrijdAanpassen #datum-wedstrijdStart').attr("value", dataWedstrijd["DatumStart"]);
+  $('#wedstrijdAanpassen #datum-wedstrijdStop').attr("value", dataWedstrijd["DatumStop"]);
+  $('#wedstrijdAanpassen #locatie-wedstrijd').val(dataWedstrijd["Plaats"]);
+  $('#wedstrijdAanpassen #programma-wedstrijd').val(dataWedstrijd["Programma"]);
+
+}
+
+//global variabel voor reeksen
+var wedstrijdAfstanden = [];
+var wedstrijdSlagen = [];
+function addReeks(){
+  wedstrijdAfstanden.push($('#afstand-wedstrijd').val());
+  wedstrijdSlagen.push($('#slag-wedstrijd').val());
+  console.log(wedstrijdAfstanden);
+  console.log(wedstrijdSlagen);
+}
+
 //wedstrijden end
 
 // zwemmer start
