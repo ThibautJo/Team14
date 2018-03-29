@@ -57,6 +57,9 @@ foreach ($functies as $functie) {
 <div class="form-group">
     <?php
     echo form_labelpro('Functie', 'functie');
+
+    echo form_dropdown('functie', $functieOpties, '0', 'class="form-control"');
+
     echo form_dropdown('FunctieId', $functieOpties, $supplement->FunctieId);
     ?>
     <div class="help-block with-errors"></div>

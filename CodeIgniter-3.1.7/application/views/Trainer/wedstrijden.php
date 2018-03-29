@@ -3,7 +3,7 @@
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
-// |    Auteur: Klaus Daems       |       Helper:
+// |    Auteur: Thibaut Joukes       |       Helper:
 // +----------------------------------------------------------
 // |
 // |    Training home
@@ -33,11 +33,21 @@
 
       foreach ($wedstrijden as $wedstrijd) {
       echo "<tr scope='row'>";
+      echo "<tr scope='row' id='". $wedstrijd->ID ."'>";
       echo "<td>" . date("d-m-Y", strtotime($wedstrijd->DatumStart)) . "</td>";
       echo "<td>" . $wedstrijd->Naam . "</td>";
-      echo "<td>" . $wedstrijd->Naam . "</td>";
-      echo "<td>" . $wedstrijd->Naam . "</td>";
-      echo "<td>" . $wedstrijd->Naam . "</td>";
+      echo "<td>" . $wedstrijd->Plaats . "</td>";
+      echo "<td><a href='http://".$wedstrijd->Programma."'>Open Programma</a></td>";
+      echo "<td>";
+      if ($wedstrijd->personen->namen) {
+        foreach ($wedstrijd->personen->namen as $persoon) {
+          echo $persoon;
+        }
+      }
+      else {
+        echo "...";
+      }
+      echo "</td>";
       echo "</tr>";
       }
 

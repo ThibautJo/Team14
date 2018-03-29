@@ -11,179 +11,196 @@
 // |    Team 14
 // +----------------------------------------------------------
 
-$wijzigen = array('class' => 'btn btn-success btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Zwemmer wijzigen' , 'id' => '$zwemmer->ID');
-$schrappen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Zwemmer schrappen');
-$toevoegen = array('class' => 'btn btn-warning btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Zwemmer toevoegen');
+
+$archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Zwemmer archiveren');
 ?>
 <div id="Team">
-<div>
-    <button type="button" class="btn btn-primary" onclick="popupZwemmerToevoegen()" style="float:right;">Toevoegen</button>
-</div>
-<table class="table">
-    <tbody>
+    <div style="float:right">
         <?php
-        foreach ($zwemmers as $zwemmer) {
-            echo "<tr><td>" . toonAfbeelding('Zwemmers/' . $zwemmer->Foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td><td>" . $zwemmer->Voornaam . " " . $zwemmer->Achternaam . "</td><td>" . $zwemmer->Email . "</td><td>"
-            . anchor('Trainer/Team/wijzig/' . $zwemmer->ID, form_button("knopWijzig", "<i class='fas fa-pencil-alt' onclick='pupZwemmerWijzigen'></i>", $wijzigen))
-            . anchor('Trainer/Team/schrap/' . $zwemmer->ID, form_button("knopSchrap", "<i class='fas fa-trash-alt'></i>", $schrappen)) . "</td></tr>\n";
-            ;
-        }
+        echo "<button type='button' class='btn btn-warning btn-xs btn-round' onclick='' data-toggle='modal' data-target='#toevoegen'><i class='fas fa-plus'></i></button>";
         ?>
-    </tbody>
-</table>
+        <br>
+    </div>
+    <table class="table">
+        <tbody>
+            <?php
+            foreach ($zwemmers as $zwemmer) {
+                echo "<tr>"
+                . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->Foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
+                . "<td>" . $zwemmer->Voornaam . " " . $zwemmer->Achternaam . "</td><td>" . $zwemmer->Email . "</td>
+                <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->ID . "' onclick='' data-toggle='modal' data-target='#wijzigen' value='" . $zwemmer->ID . "'>". "<i class='fas fa-pencil-alt'></i></button>"
+                . anchor('Trainer/Team/archiveer/' . $zwemmer->ID, form_button("knopSchrap", "<i class='fas fa-trash-alt'></i>", $archiveren)) . "</td></tr>\n";
+                ;
+            }
+            ?>
+        </tbody>
+    </table>
 </div>
 
 
-<!-- toegoegen -->
-<div class="popup-background"></div>
-<div class="popup-dialog" id="toevoegen">
-    <div class="popup-header">
-        <h3 class="popup-title">Zwemmer toevoegen</h3>
-        <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="popup-content">
-        <form id="form-zwemmer" action="#" method="post">
-            <div class="container">
-            <table style="float:right; padding-right:20px">
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Naam: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="naam-zwemmer" id="naam-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Voornaam: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="voornaam-zwemmer" id="voornaam-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">E-mail: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="email-zwemmer" id="email-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Wachtwoord: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="wachtwoord-zwemmer" id="wachtwoord-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Woonplaats: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="woonplaats-zwemmer" id="woonplaats-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Telefoonnummer: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="telefoonnummer-zwemmer" id="telefoonnummer-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Over jezelf: </label> 
-                    </td>
-                    <td>
-                        <textarea rows="5" cols="17" name="omschrijving-zwemmer" id="omschrijving-zwemmer"></textarea>
-                    </td>
-                </tr>
-            </table>
+<!-- Modal Toevoegen -->
+<div class="modal fade" id="toevoegen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer toevoegen</h5> <!-- Modal titel -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- Modal sluit knop ( X ) -->
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </form>
-    </div>
-    <div class="popup-footer">
-        <button type="button" class="btn btn-primary" onclick="$toevoegen" style="float:right;">Toevoegen</button>
+            <div class="modal-body d-flex justify-content-center"> <!-- Modal inhoud -->
+                <form id="form-zwemmerToevoegen" action="#" method="post">
+                    <table style="float:right; padding-right:20px">
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">Naam: </label> 
+                            </td>
+                            <td>
+                                <input type="text" name="naam-zwemmer" id="naam-zwemmer" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">Voornaam: </label> 
+                            </td>
+                            <td>
+                                <input type="text" name="voornaam-zwemmer" id="voornaam-zwemmer" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">E-mail: </label> 
+                            </td>
+                            <td>
+                                <input type="text" name="email-zwemmer" id="email-zwemmer" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">Wachtwoord: </label> 
+                            </td>
+                            <td>
+                                <input type="text" name="wachtwoord-zwemmer" id="wachtwoord-zwemmer" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">Woonplaats: </label> 
+                            </td>
+                            <td>
+                                <input type="text" name="woonplaats-zwemmer" id="woonplaats-zwemmer" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">Telefoonnummer: </label> 
+                            </td>
+                            <td>
+                                <input type="text" name="telefoonnummer-zwemmer" id="telefoonnummer-zwemmer" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="titel-wedstrijd">Over jezelf: </label> 
+                            </td>
+                            <td>
+                                <textarea rows="5" cols="17" name="omschrijving-zwemmer" id="omschrijving-zwemmer"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+            </div>
+        </div>
     </div>
 </div>
-<!-- Wijzigen -->
-<div class="popup-dialog" id="wijzigen">
-    <div class="popup-header">
-        <h3 class="popup-title">Zwemmer Aanpassen</h3>
-        <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="popup-content">
-        <form id="form-zwemmer" action="#" method="post">
-            <div class="container">
-            <table style="float:right; padding-right:20px">
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Familienaam: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="naam-zwemmer" id="naam-zwemmer" value="$zwemmers->Achternaam" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Voornaam: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="voornaam-zwemmer" id="voornaam-zwemmer" value='$zwemmers->Naam'>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">E-mail: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="email-zwemmer" id="email-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Wachtwoord: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="wachtwoord-zwemmer" id="wachtwoord-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Woonplaats: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="woonplaats-zwemmer" id="woonplaats-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Telefoonnummer: </label> 
-                    </td>
-                    <td>
-                        <input type="text" name="telefoonnummer-zwemmer" id="telefoonnummer-zwemmer" >
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="titel-wedstrijd">Over jezelf: </label> 
-                    </td>
-                    <td>
-                        <textarea rows="5" cols="17" name="omschrijving-zwemmer" id="omschrijving-zwemmer"></textarea>
-                    </td>
-                </tr>
-            </table>
+
+<?php echo haalJavascriptOp("validator.js"); ?>
+
+<?php
+$attributenFormulier = array('id' => '$zwemmer->ID',
+    'data-toggle' => 'validator',
+    'role' => 'form');
+echo form_open('trainer/team/registreer', $attributenFormulier);
+?>
+<!-- Modal Wijzigen -->
+<div class="modal fade" id="wijzigen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer toevoegen</h5> <!-- Modal titel -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- Modal sluit knop ( X ) -->
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </form>
-    </div>
-    <div class="popup-footer">
-        <button type="button" class="btn btn-primary" onclick="$toevoegen" style="float:right;">Toevoegen</button>
+            <div class="modal-body"> <!-- Modal inhoud -->
+                <div class="form-group">
+                    <?php
+                    echo form_labelpro('Voornaam', 'voornaam');
+                    echo form_input(array('name' => 'naam',
+                        'id' => 'voornaam',
+                        'value' => $zwemmer->Voornaam,
+                        'class' => 'form-control',
+                        'placeholder' => 'Voornaam',
+                        'required' => 'required'));
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_labelpro('Achternaam', 'achternaam');
+                    echo form_input(array('name' => 'achternaam',
+                        'id' => 'achternaam',
+                        'value' => $zwemmer->Achternaam,
+                        'class' => 'form-control',
+                        'placeholder' => 'Achternaam',
+                        'required' => 'required'));
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_labelpro('Email', 'email');
+                    echo form_input(array('name' => 'email',
+                        'id' => 'email',
+                        'value' => $zwemmer->Email,
+                        'class' => 'form-control',
+                        'placeholder' => 'Email',
+                        'required' => 'required'));
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_labelpro('Wachtwoord', 'wachtwoord');
+                    echo form_input(array('name' => 'wachtwoord',
+                        'id' => 'wachtwoord',
+                        'value' => $zwemmer->Wachtwoord,
+                        'class' => 'form-control',
+                        'placeholder' => 'Wachtwoord',
+                        'required' => 'required'));
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_labelpro('Over jezelf', 'over jezelf');
+                    echo form_input(array('name' => 'omschrijving',
+                        'id' => 'omschrijving',
+                        'value' => $zwemmer->Omschrijving,
+                        'class' => 'form-control',
+                        'placeholder' => 'Omschrijving',
+                        'required' => 'required'));
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="modal-footer form-group">
+                <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                <?php echo form_submit('knop', 'Wijzigen', "class='btn button-blue'") ?>
+            </div>
+        </div>
     </div>
 </div>
