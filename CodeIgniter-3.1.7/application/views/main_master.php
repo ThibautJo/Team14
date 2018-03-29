@@ -151,11 +151,11 @@
                     if ($(".scroll-menu")[0].scrollHeight > $(".scroll-menu").height()) {
                         $('#menu-footer').removeClass('position-absolute');
                         $('#menu-footer').addClass('position-relative');
-                        $('#menu-footer').css('bottom', '-11px');
+                        $('#menu-footer').css('bottom', '-10px');
                     } else {
                         $('#menu-footer').addClass('position-absolute');
                         $('#menu-footer').removeClass('position-relative');
-                        $('#menu-footer').css('bottom', '9px');
+                        $('#menu-footer').css('bottom', '10px');
                     }
                 }
             });

@@ -71,6 +71,7 @@
                 $('#agenda').fullCalendar({
                     defaultView: 'agendaWeek', // Week agenda
                     titleFormat: 'D MMMM YYYY', // Titel van agenda [1 - 7 januari 0000]
+                    allDayText: 'Suppl.',
                     height: 'parent', // Hoogte zelfde als zijn parent
                     minTime: "06:00:00", // Begintijd kalender
                     // EventClick functie zorgt ervoor dat je het event kan aanklikken en meer informatie kan bekijken in het modal dat opent
