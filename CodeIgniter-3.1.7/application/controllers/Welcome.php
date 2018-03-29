@@ -15,10 +15,11 @@ class Welcome extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Home';        
-        $data['persoon'] = $this->authex->getPersoonInfo();
+        $data['persoon'] = $this->authex->getGebruikerInfo();
         
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
+            'aanmeldFormulier' => 'bezoeker/aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
 //        
 //
@@ -39,37 +40,40 @@ class Welcome extends CI_Controller {
     public function meldAan()
     {
         $data['titel'] = 'Aanmelden';
-        $data['persoon']  = $this->authex->getPersoonInfo();
+        $data['persoon']  = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'bezoeker_main_header',
-            'menu' => 'bezoeker_main_menu',
-            'inhoud' => 'bezoeker/home_sessies', 
+            'inhoud' => 'bezoeker/home',
+            'aanmeldFormulier' => 'bezoeker/aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('bezoeker_main_master', $partials, $data);
     }
 
     public function toonFout()
     {
         $data['titel'] = 'Fout';
-        $data['persoon']  = $this->authex->getPersoonInfo();
+        $data['persoon']  = $this->authex->getGebruikerInfo();
+        
+        $data['foutBoodschap'] = "De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.";
 
         $partials = array('hoofding' => 'bezoeker_main_header',
-            'inhoud' => 'home_fout',
-            'voetnoot' => 'main_footer');
+            'inhoud' => 'bezoeker/home',
+            'aanmeldFormulier' => 'bezoeker/aanmelden',
+            'voetnoot' => 'bezoeker_main_footer');
 
-        $this->template->load('main_master', $partials, $data);
+        $this->template->load('bezoeker_main_master', $partials, $data);
     }
 
     public function controleerAanmelden()
     {
-        $email = $this->input->post('Email');
-        $wachtwoord = $this->input->post('Wachtwoord');
+        $email = $this->input->post('email');
+        $wachtwoord = $this->input->post('wachtwoord');
 
         if ($this->authex->meldAan($email, $wachtwoord)) {
-            redirect('Welcome');
-        } else {
             redirect('Trainer/Supplement');
+        } else {
+            redirect('Welcome/toonFout');
         }
     } 
 

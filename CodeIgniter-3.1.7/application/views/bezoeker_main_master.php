@@ -61,31 +61,35 @@
             </div>
         </div>
 
+        <!-- Aanmeld formulier -->
+        
+        <?php echo $aanmeldFormulier; ?>
+
         <!-- Inhoud -->
 
         <main id="inhoud">
-            
+
             <!-- Team sectie -->
-            
+
             <div id="Team">
-                
+
             </div>
-            
+
             <!-- Wedstrijden sectie -->
-            
+
             <div id="Wedstrijden">
-                
+
             </div>
-            
+
             <!-- Nieuws sectie -->
-            
+
             <div id="Nieuws">
-                
+
             </div>
         </main>
 
         <!-- Voetnoot -->
-        
+
         <?php echo $voetnoot ?>
 
         <!-- Javascript scriptjes -->
@@ -96,9 +100,9 @@
         <script>
 
             $(document).ready(function () {
-                
+
                 //Script om de navigatie te veranderen bij het scrollen
-                
+
                 $(window).scroll(function () {
                     var scroll = $(window).scrollTop();
                     if (scroll > 54) {
@@ -119,9 +123,9 @@
                         $('.active').removeClass('active-darkblue');
                     }
                 });
-                
+
                 //Script om te scrollen naar een id
-                
+
                 $('a[href*=\\#]').on('click', function (event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
