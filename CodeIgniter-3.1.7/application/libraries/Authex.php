@@ -21,18 +21,10 @@ class Authex {
     public function __construct() {
         
         $CI = & get_instance();
-        $CI->load->model('sessies_model');
+        $CI->load->model('gebruiker_model');
     }
 
-//    function activeer($id) {
-//        
-//        // nieuwe gebruiker activeren
-//        $CI = & get_instance();
-//
-//        $CI->zwemmer_model->activeer($id);
-//    }
-
-    function getPersoonInfo() {
+    function getGebruikerInfo() {
         
         // geef gebruiker-object als zwemmer aangemeld is        
         $CI = & get_instance();
@@ -40,8 +32,8 @@ class Authex {
         if (!$this->isAangemeld()) {
             return null;
         } else {
-            $id = $CI->session->userdata('ID');
-            return $CI->sessies_model->get($id);
+            $id = $CI->session->userdata('Id');
+            return $CI->gebruiker_model->get($id);
         }
     }
 
@@ -50,7 +42,7 @@ class Authex {
         // gebruiker is aangemeld als sessievariabele gebruiker_id bestaat
         $CI = & get_instance();
 
-        if ($CI->session->has_userdata('ID')) {
+        if ($CI->session->has_userdata('Id')) {
             return true;
         } else {
             return false;
@@ -61,14 +53,12 @@ class Authex {
         
         // gebruiker aanmelden met opgegeven email en wachtwoord
         $CI = & get_instance();
-        $persoon = $CI->sessies_model->getPersoon($email, $wachtwoord);
+        $gebruiker = $CI->gebruiker_model->getGebruiker($email, $wachtwoord);
 
-        if ($persoon == null) {
+        if ($gebruiker == null) {
             return false;
         } else {
-            
-            // $CI->sessies_model->updateLaatstAangemeld($persoon->id);            
-            $CI->session->set_userdata('ID', $persoon->ID);
+            $CI->session->set_userdata('Id', $gebruiker->id);
             return true;
         }
     }
@@ -77,7 +67,19 @@ class Authex {
         
         // afmelden, dus sessievariabele wegdoen
         $CI = & get_instance();
-        $CI->session->unset_userdata('ID');
+        $CI->session->unset_userdata('Id');
+    }
+    
+    function registreer($naam, $email, $wachtwoord) {
+        // nieuwe gebruiker registreren als email nog niet bestaat
+        $CI = & get_instance();
+
+        if ($CI->gebruiker_model->controleerEmailVrij($email)) {
+            $id = $CI->gebruiker_model->voegToe($naam, $email, $wachtwoord);
+            return $id;
+        } else {
+            return 0;
+        }
     }
 
 }

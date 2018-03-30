@@ -127,3 +127,42 @@ a.text-darkblue:hover, a.text-darkblue:focus {
 #background-text {
     z-index: 999 !important;
 }
+
+.button-blue {
+    background-color: #20344D;
+    color: #fff;
+}
+
+.button-blue:hover {
+    background-color: #18293D;
+    color: #fff;
+}
+
+.button-blue:focus, .button-blue.focus {
+    box-shadow: 0 0 0 0.2rem rgba(32, 52, 77, 0.5);
+}
+
+#backgroundAanmeldFormulier {
+    background-image: url("../images/backgroundAanmeldFormulier.png");
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 50%;
+    border-bottom-left-radius: 0.2rem;
+    border-top-left-radius: 0.2rem;
+}
+
+#modal-form {
+    margin-left: 50% !important;
+    
+}
+
+#aanmeldFormulier .modal-body {
+    margin-top: 74px;
+    margin-bottom: 74px;
+}
+
+#aanmeldFormulier .modal-body, #aanmeldFormulier .modal-header, #aanmeldFormulier .modal-footer {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+

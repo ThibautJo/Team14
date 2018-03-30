@@ -28,11 +28,10 @@
                 <li class="nav-item">
                         <?php
                         if ($persoon == null) {
-
-                            // niet aangemeld                                    
-                            echo divAnchor('Welcome/meldAan', 'Aanmelden', 'class="btn btn-outline-light" id="login-button"');
-                            // aangemeld
+                            // niet aangemeld
+                            echo "<button type='button' class='btn btn-outline-light' id='login-button' data-toggle='modal' data-target='#aanmeldFormulier'>Aanmelden</button>";
                         } else {
+                            // aangemeld
                             echo divAnchor('Welcome/meldAf', 'Afmelden', 'class="btn btn-outline-light" id="login-button"');
                         }
                         ?>
