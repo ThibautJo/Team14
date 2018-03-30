@@ -53,11 +53,11 @@ class Agenda_model extends CI_Model {
         
         foreach ($activiteiten as $activiteit) {
             // Tabel activiteitperpersoon joinen met de tabel activiteit, typeactiviteit en typetraining
-            $activiteit->activiteit = $this->getActiviteit($activiteit->ID);
+            $activiteit->activiteit = $this->getActiviteit($activiteit->id);
             
-            $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->activiteit->TypeActiviteitId);
+            $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->activiteit->typeActiviteitId);
             
-            $activiteit->typeTraining = $this->getTypeTraining($activiteit->activiteit->TypeTrainingId);
+            $activiteit->typeTraining = $this->getTypeTraining($activiteit->activiteit->typeTrainingId);
         }
         
         return $activiteiten;
@@ -86,9 +86,9 @@ class Agenda_model extends CI_Model {
         
         foreach ($wedstrijden as $wedstrijd) {
             // Tabel inschrijving joinen met de tabel reeksperwedstrijd en wedstrijd
-            $wedstrijd->reeksPerWedstrijd = $this->getReeksPerWedstrijd($wedstrijd->ReeksPerWedstrijdId);
+            $wedstrijd->reeksPerWedstrijd = $this->getReeksPerWedstrijd($wedstrijd->reeksPerWedstrijdId);
             
-            $wedstrijd->wedstrijd = $this->getWedstrijd($wedstrijd->reeksPerWedstrijd->WedstrijdId);
+            $wedstrijd->wedstrijd = $this->getWedstrijd($wedstrijd->reeksPerWedstrijd->wedstrijdId);
         }
 
         return $wedstrijden;
@@ -124,9 +124,9 @@ class Agenda_model extends CI_Model {
         
         foreach ($supplementen as $supplement) {
             // Tabel supplementperpersoon joinen met de tabel supplementfunctie
-            $supplement->supplement = $this->getSupplement($supplement->SupplementId);
+            $supplement->supplement = $this->getSupplement($supplement->supplementId);
 
-            $supplement->functie = $this->getSupplementFunctie($supplement->supplement->FunctieId);
+            $supplement->functie = $this->getSupplementFunctie($supplement->supplement->functieId);
         }
         
         return $supplementen;

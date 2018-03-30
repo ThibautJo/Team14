@@ -11,28 +11,21 @@ class Welcome extends CI_Controller {
         $this->load->helper("MY_url_helper");
         $this->load->helper('url');
         $this->load->helper('form');
+        
+        // Auteur inladen in footer
+        $this->data = new stdClass();
+        $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "true", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
 
     public function index() {
-        $data['titel'] = 'Home';        
+        $data['titel'] = 'Home';
+        $data['team'] = $this->data->team;
         $data['persoon'] = $this->authex->getGebruikerInfo();
         
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
             'aanmeldFormulier' => 'bezoeker/aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
-//        
-//
-//        $partials = array('hoofding' => 'main_header',
-//            'menu' => 'main_menu',
-//            'inhoud' => 'zwemmer/home',
-//            'voetnoot' => 'main_footer');
-        
-        
-//        $partials = array('hoofding' => 'main_header',
-//            'menu' => 'trainer_main_menu',
-//            'inhoud' => 'trainer/home',
-//            'voetnoot' => 'main_footer');
 
         $this->template->load('bezoeker_main_master', $partials, $data);
     }
@@ -40,6 +33,7 @@ class Welcome extends CI_Controller {
     public function meldAan()
     {
         $data['titel'] = 'Aanmelden';
+        $data['team'] = $this->data->team;
         $data['persoon']  = $this->authex->getGebruikerInfo();
 
         $partials = array('hoofding' => 'bezoeker_main_header',
@@ -53,6 +47,7 @@ class Welcome extends CI_Controller {
     public function toonFout()
     {
         $data['titel'] = 'Fout';
+        $data['team'] = $this->data->team;
         $data['persoon']  = $this->authex->getGebruikerInfo();
         
         $data['foutBoodschap'] = "De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.";

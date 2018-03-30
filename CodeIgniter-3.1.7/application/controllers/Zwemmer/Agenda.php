@@ -22,6 +22,10 @@ class Agenda extends CI_Controller {
 
         // Helpers inladen
         $this->load->helper('url');
+        
+        // Auteur inladen in footer
+        $this->data = new stdClass();
+        $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "true", "Lise Van Eyck" => "false");
     }
 
     // +----------------------------------------------------------
@@ -32,6 +36,7 @@ class Agenda extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Agenda';
+        $data['team'] = $this->data->team;
         
         $persoonId = 1;
         
@@ -66,10 +71,10 @@ class Agenda extends CI_Controller {
         // Wedstrijden worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($wedstrijden as $wedstrijd) {                    
             $data_wedstrijden[] = array(
-                "title" => $wedstrijd->wedstrijd->Naam, // Titel van het event in de agenda
-                "start" => $wedstrijd->wedstrijd->DatumStart, // Beginuur/begindatum van het event in de agenda
-                "end" => $wedstrijd->wedstrijd->DatumStop, // Einduur/einddatum van het event in de agenda
-                "color" => $this->agenda_model->getKleurActiviteit(1)->Kleur, // Kleur van het event in de agenda
+                "title" => $wedstrijd->wedstrijd->naam, // Titel van het event in de agenda
+                "start" => $wedstrijd->wedstrijd->datumStart, // Beginuur/begindatum van het event in de agenda
+                "end" => $wedstrijd->wedstrijd->datumStop, // Einduur/einddatum van het event in de agenda
+                "color" => $this->agenda_model->getKleurActiviteit(1)->kleur, // Kleur van het event in de agenda
                 "textColor" => '#000' // Tekstkleur van het event in de agenda
             );
         }
@@ -87,10 +92,10 @@ class Agenda extends CI_Controller {
         // Medische onderzoeken worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($onderzoeken as $onderzoek) {                    
             $data_onderzoeken[] = array(
-                "title" => $onderzoek->Omschrijving,
-                "start" => $onderzoek->TijdstipStart,
-                "end" => $onderzoek->TijdstipStop,
-                "color" => $this->agenda_model->getKleurActiviteit(2)->Kleur,
+                "title" => $onderzoek->omschrijving,
+                "start" => $onderzoek->tijdstipStart,
+                "end" => $onderzoek->tijdstipStop,
+                "color" => $this->agenda_model->getKleurActiviteit(2)->kleur,
                 "textColor" => '#000'
             );
         }
@@ -103,25 +108,25 @@ class Agenda extends CI_Controller {
         $activiteit = $this->agenda_model->getActiviteit($id);
         
         // Verschillende typen trainingen krijgen allemaal een andere achtergrondkleur
-        switch ($activiteit->TypeTrainingId) {
+        switch ($activiteit->typeTrainingId) {
             case 1:
-                $color = $this->agenda_model->getKleurActiviteit(3)->Kleur; // Kleur krachttraining
+                $color = $this->agenda_model->getKleurActiviteit(3)->kleur; // Kleur krachttraining
                 break;
 
             case 2:
-                $color = $this->agenda_model->getKleurActiviteit(4)->Kleur; // Kleur houdingstraining
+                $color = $this->agenda_model->getKleurActiviteit(4)->kleur; // Kleur houdingstraining
                 break;
 
             case 3:
-                $color = $this->agenda_model->getKleurActiviteit(5)->Kleur; // Kleur zwemtraining
+                $color = $this->agenda_model->getKleurActiviteit(5)->kleur; // Kleur zwemtraining
                 break;
 
             case 4:
-                $color = $this->agenda_model->getKleurActiviteit(6)->Kleur; // Kleur conditietraining
+                $color = $this->agenda_model->getKleurActiviteit(6)->kleur; // Kleur conditietraining
                 break;
 
             case NULL:
-                $color = $this->agenda_model->getKleurActiviteit(7)->Kleur; // Kleur stage
+                $color = $this->agenda_model->getKleurActiviteit(7)->kleur; // Kleur stage
                 break;
         }
         
@@ -133,13 +138,13 @@ class Agenda extends CI_Controller {
         $activiteit = $this->agenda_model->getActiviteit($id);
         
         // Stage en training krijgen beiden een andere achtergrondkleur
-        switch ($activiteit->TypeActiviteitId) {
+        switch ($activiteit->typeActiviteitId) {
             case 1:
                 $color = $this->kiesKleurTraining($id); // Meerdere typen trainingen -> Kleur wordt bepaald in nieuwe functie
                 break;
 
             case 2:
-                $color = $this->agenda_model->getKleurActiviteit(7)->Kleur; // Kleur stage
+                $color = $this->agenda_model->getKleurActiviteit(7)->kleur; // Kleur stage
                 break;
 
             default:
@@ -158,12 +163,12 @@ class Agenda extends CI_Controller {
         
         // Trainingen en stages worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($activiteiten as $activiteit) {            
-            $color = $this->kiesKleurActiviteiten($activiteit->activiteit->ID);
+            $color = $this->kiesKleurActiviteiten($activiteit->activiteit->id);
                                
             $data_activiteiten[] = array(
-                "title" => $activiteit->activiteit->StageTitel,
-                "start" => $activiteit->activiteit->TijdstipStart,
-                "end" => $activiteit->activiteit->TijdStipStop,
+                "title" => $activiteit->activiteit->stageTitel,
+                "start" => $activiteit->activiteit->tijdstipStart,
+                "end" => $activiteit->activiteit->tijdStipStop,
                 "color" => $color,
                 "textColor" => '#000'
             );
@@ -182,11 +187,11 @@ class Agenda extends CI_Controller {
         // Supplementen worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($supplementen as $supplement) {                    
             $data_supplementen[] = array(
-                "id" => $supplement->ID,
-                "description" => $supplement->functie->Functie,
-                "title" => $supplement->supplement->Naam,
-                "start" => $supplement->Datum,
-                "color" => $this->agenda_model->getKleurActiviteit(8)->Kleur,
+                "id" => $supplement->id,
+                "description" => $supplement->functie->functie,
+                "title" => $supplement->supplement->naam,
+                "start" => $supplement->datum,
+                "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
                 "textColor" => '#fff'
             );
         }

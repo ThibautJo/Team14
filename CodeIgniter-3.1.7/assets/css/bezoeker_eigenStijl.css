@@ -24,8 +24,12 @@ footer hr {
     font-size: 14px;
 }
 
-footer a {
+footer a, footer #footer-info {
     color: rgba(116,160,171, 0.6);
+}
+
+footer #footer-info {
+    font-size: 11px;
 }
 
 footer a:hover {
