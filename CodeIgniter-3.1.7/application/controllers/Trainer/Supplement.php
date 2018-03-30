@@ -43,17 +43,22 @@ class Supplement extends CI_Controller {
     // +----------------------------------------------------------
 
     /**
-     * Haalt alle supplementen namen op via Supplement_model en toont de resulterende objecten in de view supplementen_lijst.php
+     * Haalt alle supplementen namen op via Supplement_model en 
+     * haalt alle functies op via Supplementfunctie_model en
+     * toont de resulterende objecten in de view supplementen_lijst.php
      * 
      * @see Supplement_model::getAllByNaamSupplementWithFunctie()
+     * @see Supplement_model::getAllByFunctie()
      * @see supplement_lijst.php
      */
     public function index() {
         $data['titel'] = 'Supplementen beheren';
 
        $this->load->model('trainer/supplement_model');
-       //$data['supplementen'] = $this->supplement_model->getAllByNaamSupplement();
        $data['supplementen'] = $this->supplement_model->getAllByNaamSupplementWithFunctie();
+       
+       $this->load->model('trainer/supplementfunctie_model');
+        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
        
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
@@ -73,19 +78,15 @@ class Supplement extends CI_Controller {
      * @see supplement_form.php
      */
     public function wijzig($id) {
+        $data = new stdClass();
+        
         $this->load->model('trainer/supplement_model');
-        $data['supplement'] = $this->supplement_model->get($id);
-        $data['titel'] = 'Supplement wijzigen';
+        $data = $this->supplement_model->get($id);
+                
+//        $this->load->model('trainer/supplementfunctie_model');
+//        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
         
-        $this->load->model('trainer/supplementfunctie_model');
-        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
-        
-        $partials = array('hoofding' => 'main_header',
-            'menu' => 'trainer_main_menu',
-            'inhoud' => 'trainer/supplement_form',
-            'voetnoot' => 'main_footer');
-        
-        $this->template->load('main_master', $partials, $data);
+        print json_encode($data);
     }
     
     /**
@@ -96,46 +97,8 @@ class Supplement extends CI_Controller {
      */
     public function schrap($id) {
         $this->load->model('trainer/supplement_model');
-        $data['supplement'] = $this->supplement_model->delete($id);
-        
-        redirect('/trainer/supplement/index');
-    }
-    
-    /**
-     * Haalt een leeg supplement op uit deze controller en haalt alle supplementfuncties op via Supplementfunctie_model en toont de objecten in de view supplement_form.php
-     * 
-     * @see ::getEmptySupplement();
-     * @see Supplementfunctie_model::getAllByFunctie();
-     * @see supplement_form.php
-     */
-    public function maakNieuwe() {
-        $data['supplement'] = $this->getEmptySupplement();
-        $data['titel'] = 'Supplement toevoegen';
-        
-        $this->load->model('trainer/supplementfunctie_model');
-        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
-        
-        $partials = array('hoofding' => 'main_header',
-            'menu' => 'trainer_main_menu',
-            'inhoud' => 'trainer/supplement_form',
-            'voetnoot' => 'main_footer');
-        
-        $this->template->load('main_master', $partials, $data);
-    }
-    
-    /**
-     * Maakt een leeg supplement
-     * @return $supplement;
-     */
-    function getEmptySupplement() {
-        $supplement = new stdClass();
-        
-        $supplement->ID = 0;
-        $supplement->Naam = '';
-        $supplement->Omschrijving = '';
-        $supplement->FunctieId = 0;
-        
-        return $supplement;
+        $this->supplement_model->delete($id);
+
     }
     
     /**
@@ -145,27 +108,31 @@ class Supplement extends CI_Controller {
      * @see Supplement_model::insert();
      * @see Supplement_model::update();
      */
-    public function registreer() {
+    public function registreer($actie = "toevoegen") {
         $supplement = new stdClass();
         
-        $supplement->ID = $this->input->post('id');
-        $supplement->Naam = $this->input->post('naam');
-        $supplement->Omschrijving = $this->input->post('omschrijving');
+       // $supplement->ID = $this->input->post('id');
+        $supplement->naam = $this->input->post('naam');
+        $supplement->omschrijving = $this->input->post('omschrijving');
         
-        $functieId = $this->input->post('FunctieId');
+        $functieId = $this->input->post('functie');
         $this->load->model('trainer/supplementfunctie_model');
         $functie = $this->supplementfunctie_model->get($functieId);
-        $supplement->FunctieId = $functie->ID;
+        $supplement->functieId = $functie->id;
         
         $this->load->model('trainer/supplement_model');
         
-        if($supplement->ID == 0) {
+//        if($supplement->ID == 0) {
+        if($actie == "toevoegen") {
             $this->supplement_model->insert($supplement);
         } else {
+            $supplement->id = $this->input->post('id');
             $this->supplement_model->update($supplement);
         }
         
-        redirect('/trainer/supplement/index');
+       // redirect('/trainer/supplement/index');
+        header('Location: ' . site_url() .'/Trainer/supplement/index?pagina=aanpassen');
+
     }
       
 }
