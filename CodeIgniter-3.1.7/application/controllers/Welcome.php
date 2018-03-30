@@ -20,7 +20,7 @@ class Welcome extends CI_Controller {
     public function index() {
         $data['titel'] = 'Home';
         $data['team'] = $this->data->team;
-        $data['persoon'] = $this->authex->getGebruikerInfo();
+        $data['persoon'] = $this->authex->getPersoonInfo();
         
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
@@ -34,7 +34,7 @@ class Welcome extends CI_Controller {
     {
         $data['titel'] = 'Aanmelden';
         $data['team'] = $this->data->team;
-        $data['persoon']  = $this->authex->getGebruikerInfo();
+        $data['persoon']  = $this->authex->getPersoonInfo();
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
@@ -48,7 +48,7 @@ class Welcome extends CI_Controller {
     {
         $data['titel'] = 'Fout';
         $data['team'] = $this->data->team;
-        $data['persoon']  = $this->authex->getGebruikerInfo();
+        $data['persoon']  = $this->authex->getPersoonInfo();
         
         $data['foutBoodschap'] = "De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.";
 

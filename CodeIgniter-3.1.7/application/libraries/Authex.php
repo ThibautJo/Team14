@@ -21,25 +21,25 @@ class Authex {
     public function __construct() {
         
         $CI = & get_instance();
-        $CI->load->model('gebruiker_model');
+        $CI->load->model('persoon_model');
     }
 
-    function getGebruikerInfo() {
+    function getPersoonInfo() {
         
-        // geef gebruiker-object als zwemmer aangemeld is        
+        // geef persoon-object als zwemmer aangemeld is        
         $CI = & get_instance();
 
         if (!$this->isAangemeld()) {
             return null;
         } else {
             $id = $CI->session->userdata('Id');
-            return $CI->gebruiker_model->get($id);
+            return $CI->persoon_model->get($id);
         }
     }
 
     function isAangemeld() {
         
-        // gebruiker is aangemeld als sessievariabele gebruiker_id bestaat
+        // persoon is aangemeld als sessievariabele gebruiker_id bestaat
         $CI = & get_instance();
 
         if ($CI->session->has_userdata('Id')) {
@@ -51,14 +51,14 @@ class Authex {
 
     function meldAan($email, $wachtwoord) {
         
-        // gebruiker aanmelden met opgegeven email en wachtwoord
+        // persoon aanmelden met opgegeven email en wachtwoord
         $CI = & get_instance();
-        $gebruiker = $CI->gebruiker_model->getGebruiker($email, $wachtwoord);
+        $persoon = $CI->persoon_model->getPersoon($email, $wachtwoord);
 
-        if ($gebruiker == null) {
+        if ($persoon == null) {
             return false;
         } else {
-            $CI->session->set_userdata('Id', $gebruiker->id);
+            $CI->session->set_userdata('Id', $persoon->id);
             return true;
         }
     }
@@ -70,16 +70,16 @@ class Authex {
         $CI->session->unset_userdata('Id');
     }
     
-    function registreer($naam, $email, $wachtwoord) {
-        // nieuwe gebruiker registreren als email nog niet bestaat
-        $CI = & get_instance();
-
-        if ($CI->gebruiker_model->controleerEmailVrij($email)) {
-            $id = $CI->gebruiker_model->voegToe($naam, $email, $wachtwoord);
-            return $id;
-        } else {
-            return 0;
-        }
-    }
+//    function registreer($naam, $email, $wachtwoord) {
+//        // nieuwe persoon registreren als email nog niet bestaat
+//        $CI = & get_instance();
+//
+//        if ($CI->persoon_model->controleerEmailVrij($email)) {
+//            $id = $CI->persoon_model->voegToe($naam, $email, $wachtwoord);
+//            return $id;
+//        } else {
+//            return 0;
+//        }
+//    }
 
 }
