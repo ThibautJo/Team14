@@ -120,10 +120,40 @@ function popupZwemmerWijzigen(){
 
 // supplement start
 
-function supplementUpdate(elementID) {
-    var id = $("#"+elementID).val();
-    
-    alert(id);
+function supplementUpdate(supplementID){
+
+console.log("id =" + supplementID);
+  var id = $("#"+supplementID).val();
+
+  $.post(site_url+'/Trainer/supplement/wijzig/'+id, function(data){
+    //data = object van supplement
+    data = JSON.parse(data);
+    // console.log(data[0]["Naam"]);
+
+    //modal opvullen met object wedstrijd
+    opvullenModalSupplementAanpassen(data);
+
+  }).fail(function() {
+    alert( "Er is iets misgelopen, neem contact op met de administrator." );
+  });
+
+
+  // modal openen met ingevulde gegevans van dit object
+  $("#supplementAanpassen").modal()
+
+}
+function opvullenModalSupplementAanpassen(dataSupplement){
+  console.log(dataSupplement);
+  console.log(dataSupplement["id"]);
+  // console.log(dataSupplement[0]["Naam"]);
+  $('#supplementAanpassen #id').attr("value", dataSupplement["id"]);
+  $('#supplementAanpassen #naam').val(dataSupplement["naam"]);
+  $('#supplementAanpassen #functie').attr("value", dataSupplement["functieId"]);
+  if (('option').value === dataSupplement["functieId"]) {
+     
+  }
+  $('#supplementAanpassen #omschrijving').attr("value", dataSupplement["omschrijving"]);
+
 }
 
 function supplementVerwijder(elementID){
@@ -144,22 +174,37 @@ function supplementVerwijder(elementID){
   }
 }
 
-function supplementOpslaan(){
+function supplementOpslaan(actie){
 
   var ok = true;
+  var formToSubmit = '';
   //form valideren
-  $('#form-supplement *').filter('input').each(function(){
-    if($(this).val() == "" && $(this).attr("required")){
-      alert("niet alle velden zijn ingevuld");
-      ok = false;
-      return false;
-    }
-  });
+  if (actie == "toevoegen") {
+    $('#supplementToevoegen #form-supplement *').filter('input').each(function(){
+      if($(this).attr("required") && $(this).val() == ""){
+        alert("Niet alle velden zijn ingevuld");
+        ok = false;
+        return false;
+      }
+    });
+    formToSubmit = "#supplementToevoegen #form-supplement";
+  }
+  else {
+    $('#supplementAanpassen #form-supplement *').filter('input').each(function(){
+      if($(this).attr("required") && $(this).val() == ""){
+        alert("Niet alle velden zijn ingevuld");
+        ok = false;
+        return false;
+      }
+    });
+    formToSubmit = "#supplementAanpassen #form-supplement";
+  }
 
   //word uitgevoerd als alles ingevuld is
   if (ok) {
-    $('#form-supplement').attr('action', site_url+'/Trainer/supplement/registreer');
-    $('#form-supplement').submit();
+    $(formToSubmit).attr('action', site_url+'/Trainer/supplement/registreer/'+ actie +'?pagina=aanpassen');
+    
+    $(formToSubmit).submit();
   }
 
 }
