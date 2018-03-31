@@ -28,34 +28,34 @@ class Wedstrijd_model extends CI_Model {
     return $query->result();
   }
   public function getWedstrijdenWithId($id) {
-    $this->db->where('ID', $id);
+    $this->db->where('id', $id);
     $query = $this->db->get('wedstrijd');
     return $query->row();
   }
   public function getIngeschrevenen($wedstrijdID) {
     // eerst reeksenperwedstrijd ophalen
-    $this->db->where('WedstrijdId', $wedstrijdID);
+    $this->db->where('wedstrijdId', $wedstrijdID);
     $query = $this->db->get('reeksperwedstrijd');
     $reeksPerWestrijd = $query->result();
     //inschrijvingen ophalen
     $persoonIDs = array();
     foreach ($reeksPerWestrijd as $reeks) {
-      $this->db->where('ReeksPerWedstrijdId', $reeks->ID);
+      $this->db->where('reeksPerWedstrijdId', $reeks->id);
       $query = $this->db->get('inschrijving');
       $inschrijvingen = $query->result();
       foreach ($inschrijvingen as $inschrijving) {
         // $this->db->where('ID', $inschrijving->PersoonId);
-        array_push($persoonIDs, $inschrijving->PersoonId);
+        array_push($persoonIDs, $inschrijving->persoonId);
       }
 
     }
     //personen ophalen
     $namen = array();
     foreach ($persoonIDs as $value) {
-      $this->db->where('ID', $inschrijving->PersoonId);
+      $this->db->where('id', $inschrijving->persoonId);
       $query = $this->db->get('persoon');
       $result = $query->row();
-      array_push($namen, $result->Voornaam. ' ' . $result->Achternaam);
+      array_push($namen, $result->voornaam. ' ' . $result->achternaam);
     }
     $personen = new stdClass();
     $personen->ID = $persoonIDs;
@@ -74,7 +74,7 @@ class Wedstrijd_model extends CI_Model {
     return $query->result();
   }
   public function deleteWedstrijd($id) {
-    $this->db->where('ID', $id);
+    $this->db->where('id', $id);
     $this->db->delete('wedstrijd');
   }
   public function insertWedstrijd($data) {
@@ -82,7 +82,7 @@ class Wedstrijd_model extends CI_Model {
     return $this->db->insert_id();
   }
   public function updateWedstrijd($data) {
-    $this->db->where('ID', $data->ID);
+    $this->db->where('id', $data->id);
     $this->db->replace('wedstrijd', $data);
   }
   public function insertReeksen($wedID, $reeksen) {
@@ -102,25 +102,25 @@ class Wedstrijd_model extends CI_Model {
 
   }
   public function getReeksenWithWedstrijdID($id) {
-    $this->db->where('WedstrijdId', $id);
+    $this->db->where('wedstrijdId', $id);
     $query = $this->db->get('reeksperwedstrijd');
 
     return $query->result();
   }
   public function getSlagWithID($id) {
-    $this->db->where('ID', $id);
+    $this->db->where('id', $id);
     $query = $this->db->get('slag');
     return $query->row();
   }
   public function getAfstandWithID($id) {
-    $this->db->where('ID', $id);
+    $this->db->where('id', $id);
     $query = $this->db->get('afstand');
     return $query->row();
   }
 
   public function updateReeksen($wedID,$reeksen) {
     //delete alle reekesen
-    $this->db->where('WedstrijdId', $wedID);
+    $this->db->where('wedstrijdId', $wedID);
     $this->db->delete('reeksperwedstrijd');
 
     //toevoegen van degene die er gekozen waren

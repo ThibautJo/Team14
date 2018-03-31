@@ -42,7 +42,7 @@ class Wedstrijden extends CI_Controller {
 
     $i = 0;
     foreach ($data['wedstrijden'] as $wedstrijd) {
-      $data['wedstrijden'][$i]->personen = $this->wedstrijd_model->getIngeschrevenen($wedstrijd->ID);
+      $data['wedstrijden'][$i]->personen = $this->wedstrijd_model->getIngeschrevenen($wedstrijd->id);
       $i++;
     }
 
@@ -70,10 +70,10 @@ class Wedstrijden extends CI_Controller {
     $this->load->model('trainer/wedstrijd_model');
     $data = new stdClass();
     $data = $this->wedstrijd_model->getWedstrijdenWithId($wedstrijdId);
-    $d = new DateTime($data->DatumStart);
-    $data->DatumStart = $d->format('Y-m-d');
-    $d = new DateTime($data->DatumStop);
-    $data->DatumStop = $d->format('Y-m-d');
+    $d = new DateTime($data->datumStart);
+    $data->datumStart = $d->format('Y-m-d');
+    $d = new DateTime($data->datumStop);
+    $data->datumStop = $d->format('Y-m-d');
 
     //gegevens in object steken
     print json_encode($data);
@@ -89,10 +89,10 @@ class Wedstrijden extends CI_Controller {
     $afstandenIDs = array();
 
     foreach ($reeksen as $reeks) {
-      $slag = $this->wedstrijd_model->getSlagWithID($reeks->SlagId);
-      $afstand = $this->wedstrijd_model->getAfstandWithID($reeks->AfstandId);
-      array_push($slagenIDs, array($slag->ID => $slag->Slag));
-      array_push($afstandenIDs, array($afstand->ID => $afstand->Afstand));
+      $slag = $this->wedstrijd_model->getSlagWithID($reeks->slagId);
+      $afstand = $this->wedstrijd_model->getAfstandWithID($reeks->afstandId);
+      array_push($slagenIDs, array($slag->id => $slag->slag));
+      array_push($afstandenIDs, array($afstand->id => $afstand->afstand));
     }
 
     $data = new stdClass();
@@ -105,11 +105,11 @@ class Wedstrijden extends CI_Controller {
   public function opslaanWedstrijd($actie = "toevoegen"){
 
     $data = new stdClass();
-    $data->Naam = $this->input->post('titel-wedstrijd');
+    $data->naam = $this->input->post('titel-wedstrijd');
     $data->datumStart = $this->input->post('datum-wedstrijdStart');
     $data->datumStop = $this->input->post('datum-wedstrijdStop');
-    $data->Plaats = $this->input->post('locatie-wedstrijd');
-    $data->Programma = $this->input->post('programma-wedstrijd');
+    $data->plaats = $this->input->post('locatie-wedstrijd');
+    $data->programma = $this->input->post('programma-wedstrijd');
     $this->load->model('trainer/wedstrijd_model');
 
     $reeksen = new stdClass();
@@ -124,10 +124,10 @@ class Wedstrijden extends CI_Controller {
     }
     else{
       //update query
-      $data->ID = $this->input->post('wedstrijdID');
+      $data->id = $this->input->post('wedstrijdID');
       $this->wedstrijd_model->updateWedstrijd($data);
       //reeks(en) per wedstrijd updaten
-      $this->wedstrijd_model->updateReeksen($data->ID, $reeksen);
+      $this->wedstrijd_model->updateReeksen($data->id, $reeksen);
     }
 
     //pagina opnieuw laden en niet de index functie (anders word er telkens bij reload opnieuw data geïnsert)

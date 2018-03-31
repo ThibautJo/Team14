@@ -34,11 +34,11 @@
       // var_dump($wedstrijden[0]);
 
       foreach ($wedstrijden as $wedstrijd) {
-        echo "<tr scope='row' id='". $wedstrijd->ID ."'>";
-        echo "<td>" . date("d-m-Y", strtotime($wedstrijd->DatumStart)) . "</td>";
-        echo "<td>" . $wedstrijd->Naam . "</td>";
-        echo "<td>" . $wedstrijd->Plaats . "</td>";
-        echo "<td><a href='http://".$wedstrijd->Programma."'>Open Programma</a></td>";
+        echo "<tr scope='row' id='". $wedstrijd->id ."'>";
+        echo "<td>" . date("d-m-Y", strtotime($wedstrijd->datumStart)) . "</td>";
+        echo "<td>" . $wedstrijd->naam . "</td>";
+        echo "<td>" . $wedstrijd->plaats . "</td>";
+        echo "<td><a href='http://".$wedstrijd->programma."'>Open Programma</a></td>";
         echo "<td>";
         if ($wedstrijd->personen->namen) {
           foreach ($wedstrijd->personen->namen as $persoon) {
@@ -49,8 +49,8 @@
           echo "...";
         }
         echo "</td>";
-        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->ID."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->ID."'><i class='fas fa-pencil-alt'></i></button></td>";
-        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->ID."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->ID."'><i class='fas fa-trash-alt'></i></button></td>";
+        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button></td>";
+        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button></td>";
         echo "</tr>";
       }
 
@@ -85,7 +85,7 @@
                   <?php
                   //adding slag en afstand
                   foreach ($afstanden as $afstand) {
-                    echo "<option value='".$afstand->ID."'>".$afstand->Afstand."</option>";
+                    echo "<option value='".$afstand->id."'>".$afstand->afstand."</option>";
                   }
                   ?>
                 </select>
@@ -93,7 +93,7 @@
                   <?php
                   //adding slag en afstand
                   foreach ($slagen as $slag) {
-                    echo "<option value='".$slag->ID."'>".$slag->Slag."</option>";
+                    echo "<option value='".$slag->id."'>".$slag->slag."</option>";
                   }
                   ?>
                 </select>
@@ -135,7 +135,7 @@
 
   <!-- Modal aanpassen -->
 <div class="modal fade" id="wedstrijdAanpassen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="popup-title">Wedstrijd Aanpassen</h3>
@@ -157,7 +157,7 @@
                   <?php
                   //adding slag en afstand
                   foreach ($afstanden as $afstand) {
-                    echo "<option value='".$afstand->ID."'>".$afstand->Afstand."</option>";
+                    echo "<option value='".$afstand->id."'>".$afstand->afstand."</option>";
                   }
                   ?>
                 </select>
@@ -165,7 +165,7 @@
                   <?php
                   //adding slag en afstand
                   foreach ($slagen as $slag) {
-                    echo "<option value='".$slag->ID."'>".$slag->Slag."</option>";
+                    echo "<option value='".$slag->id."'>".$slag->slag."</option>";
                   }
                   ?>
                 </select>

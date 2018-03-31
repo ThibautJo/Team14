@@ -81,12 +81,12 @@ function wedstrijdOpvragen(wedstrijdID){
 function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
   console.log(dataWedstrijd);
   // console.log(dataWedstrijd[0]["Naam"]);
-  $('#wedstrijdAanpassen #wedstrijdID').attr("value", dataWedstrijd["ID"]);
-  $('#wedstrijdAanpassen #titel-wedstrijd').val(dataWedstrijd["Naam"]);
-  $('#wedstrijdAanpassen #datum-wedstrijdStart').attr("value", dataWedstrijd["DatumStart"]);
-  $('#wedstrijdAanpassen #datum-wedstrijdStop').attr("value", dataWedstrijd["DatumStop"]);
-  $('#wedstrijdAanpassen #locatie-wedstrijd').val(dataWedstrijd["Plaats"]);
-  $('#wedstrijdAanpassen #programma-wedstrijd').val(dataWedstrijd["Programma"]);
+  $('#wedstrijdAanpassen #wedstrijdID').attr("value", dataWedstrijd["id"]);
+  $('#wedstrijdAanpassen #titel-wedstrijd').val(dataWedstrijd["naam"]);
+  $('#wedstrijdAanpassen #datum-wedstrijdStart').attr("value", dataWedstrijd["datumStart"]);
+  $('#wedstrijdAanpassen #datum-wedstrijdStop').attr("value", dataWedstrijd["datumStop"]);
+  $('#wedstrijdAanpassen #locatie-wedstrijd').val(dataWedstrijd["plaats"]);
+  $('#wedstrijdAanpassen #programma-wedstrijd').val(dataWedstrijd["programma"]);
 
   //reeksen toevoegen
   wedstrijdAfstanden = [];
