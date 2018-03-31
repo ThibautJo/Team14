@@ -79,7 +79,7 @@
                 <label for="titel-wedstrijd">Titel</label>
                 <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
               </td>
-              <td rowspan="4" id="reeksen">
+              <td rowspan="4">
                 <label for="programma-wedstrijd">Voeg een reeks toe:</label>
                 <select id="afstand-wedstrijd">
                   <?php
@@ -97,7 +97,7 @@
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" id="addReeks" onclick="reeksToevoegen()" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" id="addReeks" onclick="addReeks()" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>
@@ -151,7 +151,7 @@
                 <label for="titel-wedstrijd">Titel</label>
                 <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
               </td>
-              <td rowspan="4" id="reeksen">
+              <td rowspan="4">
                 <label for="programma-wedstrijd">Voeg een reeks toe:</label>
                 <select id="afstand-wedstrijd">
                   <?php
@@ -169,7 +169,7 @@
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" onclick="reeksToevoegen()" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" onclick="addReeks()" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>

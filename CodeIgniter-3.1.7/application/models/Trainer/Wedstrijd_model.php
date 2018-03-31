@@ -60,6 +60,8 @@ class Wedstrijd_model extends CI_Model {
     $personen = new stdClass();
     $personen->ID = $persoonIDs;
     $personen->namen = $namen;
+    // $personen->namen = mysqli_fetch_object($this->db->query('SELECT CONCAT(persoon.Voornaam, persoon.Achternaam) As naam FROM `persoon` INNER JOIN inschrijving ON inschrijving.PersoonId = persoon.ID INNER JOIN reeksperwedstrijd ON reeksperwedstrijd.ID = inschrijving.ReeksPerWedstrijdId INNER JOIN wedstrijd ON wedstrijd.ID = reeksperwedstrijd.WedstrijdId WHERE wedstrijd.ID = 1'))->naam;
+    // $personen->ID = mysqli_fetch_object($this->db->query('SELECT persoon.ID FROM `persoon` INNER JOIN inschrijving ON inschrijving.PersoonId = persoon.ID INNER JOIN reeksperwedstrijd ON reeksperwedstrijd.ID = inschrijving.ReeksPerWedstrijdId INNER JOIN wedstrijd ON wedstrijd.ID = reeksperwedstrijd.WedstrijdId WHERE wedstrijd.ID = 1'))->ID;
 
     return $personen;
   }
@@ -77,10 +79,52 @@ class Wedstrijd_model extends CI_Model {
   }
   public function insertWedstrijd($data) {
     $this->db->insert('wedstrijd', $data);
+    return $this->db->insert_id();
   }
   public function updateWedstrijd($data) {
     $this->db->where('ID', $data->ID);
     $this->db->replace('wedstrijd', $data);
+  }
+  public function insertReeksen($wedID, $reeksen) {
+    $data = array();
+    $i = 0;
+    foreach ($reeksen->slagen as $slag) {
+      $data = array(
+        'WedstrijdId' => $wedID,
+        'SlagId' => $slag,
+        'AfstandId' => $reeksen->afstanden[$i]
+      );
+
+      $this->db->insert('reeksperwedstrijd', $data);
+      $i++;
+    }
+
+
+  }
+  public function getReeksenWithWedstrijdID($id) {
+    $this->db->where('WedstrijdId', $id);
+    $query = $this->db->get('reeksperwedstrijd');
+
+    return $query->result();
+  }
+  public function getSlagWithID($id) {
+    $this->db->where('ID', $id);
+    $query = $this->db->get('slag');
+    return $query->row();
+  }
+  public function getAfstandWithID($id) {
+    $this->db->where('ID', $id);
+    $query = $this->db->get('afstand');
+    return $query->row();
+  }
+
+  public function updateReeksen($wedID,$reeksen) {
+    //delete alle reekesen
+    $this->db->where('WedstrijdId', $wedID);
+    $this->db->delete('reeksperwedstrijd');
+
+    //toevoegen van degene die er gekozen waren
+    $this->insertReeksen($wedID,$reeksen);
   }
 
 }

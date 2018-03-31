@@ -79,6 +79,29 @@ class Wedstrijden extends CI_Controller {
     print json_encode($data);
   }
 
+  public function reeksenOpvragen($wedstrijdId){
+
+    //opvragen van gegevens
+    $this->load->model('trainer/wedstrijd_model');
+    $reeksen = $this->wedstrijd_model->getReeksenWithWedstrijdID($wedstrijdId);
+
+    $slagenIDs = array();
+    $afstandenIDs = array();
+
+    foreach ($reeksen as $reeks) {
+      $slag = $this->wedstrijd_model->getSlagWithID($reeks->SlagId);
+      $afstand = $this->wedstrijd_model->getAfstandWithID($reeks->AfstandId);
+      array_push($slagenIDs, array($slag->ID => $slag->Slag));
+      array_push($afstandenIDs, array($afstand->ID => $afstand->Afstand));
+    }
+
+    $data = new stdClass();
+    $data->slagIDs = $slagenIDs;
+    $data->afstandIDs = $afstandenIDs;
+
+    print json_encode($data);
+  }
+
   public function opslaanWedstrijd($actie = "toevoegen"){
 
     $data = new stdClass();
@@ -89,22 +112,24 @@ class Wedstrijden extends CI_Controller {
     $data->Programma = $this->input->post('programma-wedstrijd');
     $this->load->model('trainer/wedstrijd_model');
 
+    $reeksen = new stdClass();
+    $reeksen->afstanden = explode(",", $this->input->get('afstanden'));
+    $reeksen->slagen = explode(",", $this->input->get('slagen'));
+
     if ($actie == "toevoegen") {
       //insert query
-      $afstanden = $this->input->get('afstanden');
-      $slagen = $this->input->get('slagen');
-
-      //wedstrijd toevoegen
-      $this->wedstrijd_model->insertWedstrijd($data);
+      $newWedstrijdID = $this->wedstrijd_model->insertWedstrijd($data);
       //reeks(en) per wedstrijd toevoegen
-
+      $this->wedstrijd_model->insertReeksen($newWedstrijdID, $reeksen);
     }
     else{
       //update query
       $data->ID = $this->input->post('wedstrijdID');
       $this->wedstrijd_model->updateWedstrijd($data);
+      //reeks(en) per wedstrijd updaten
+      $this->wedstrijd_model->updateReeksen($data->ID, $reeksen);
     }
-  
+
     //pagina opnieuw laden en niet de index functie (anders word er telkens bij reload opnieuw data geïnsert)
     header('Location: ' . site_url() .'/Trainer/wedstrijden/index?pagina=aanpassen');
   }
