@@ -97,11 +97,13 @@ function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
     console.log(data);
     // 2des invullen
     $("#wedstrijdAanpassen #reeksen tr").html("");
-    data["afstandIDs"].forEach((a,index) => {
-      data["slagIDs"].forEach((s,index2) => {
+    data["afstandIDs"].forEach((a,index, array) => {
+      data["slagIDs"].forEach((s,index2, array2) => {
         if (index == index2) {
-          wedstrijdAfstanden.push(Object.keys(a));
-          wedstrijdSlagen.push(Object.keys(s));
+          wedstrijdAfstanden.push(Object.keys(data["afstandIDs"][index]).toString());
+          wedstrijdSlagen.push(Object.keys(data["slagIDs"][index]).toString());
+          tijdelijk1.push(Object.keys(data["afstandIDs"][index]).toString());
+          tijdelijk2.push(Object.keys(data["slagIDs"][index]).toString());
           $("#wedstrijdAanpassen #reeksen").append("<tr id='rowUpdate"+index+"'><td style='padding:10px 0;'>" + a[Object.keys(a)] + " " + s[Object.keys(s)] + "</td><td style='padding:10px 0;'>" +
           "<button type='button' class='btn-xs btn-danger btn-circle' id='verwijder"+a[Object.keys(a)]+s[Object.keys(s)]+"' onclick='verwijderReeksArrays("+"rowUpdate"+index+","+Object.keys(s)+","+Object.keys(a)+")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
         }
@@ -155,11 +157,12 @@ var tijdelijk2 = [];
 
 function reeksToevoegen(){
   var ok = true;
-
+  console.log(wedstrijdAfstanden);
+  console.log(wedstrijdSlagen);
   //checken of de combinatie al bestaat ( zodat we geen dezelfde reeksen hebben)
   tijdelijk1.forEach((s,index) => {
     [$('#afstand-wedstrijd').val(), $('#slag-wedstrijd').val()].forEach((m,index2,array) => {
-
+      console.log($('#afstand-wedstrijd').val());
       if (tijdelijk1[index] == m && tijdelijk2[index] == array[index2+1] ) {
           //zit de combinatie al in de reeks?
           ok = false;

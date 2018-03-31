@@ -25,7 +25,7 @@
         <th scope="col">Programma</th>
         <th scope="col">INgeschrevenen</th>
         <th scope="col"></th>
-        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick='' value=''><i class='fas fa-plus'></button></th>
+        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick="" value=''><i class='fas fa-plus'></button></th>
       </tr>
     </thead>
     <tbody>

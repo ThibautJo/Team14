@@ -76,6 +76,9 @@ class Wedstrijd_model extends CI_Model {
   public function deleteWedstrijd($id) {
     $this->db->where('id', $id);
     $this->db->delete('wedstrijd');
+    //ook bijhorende reeksen verwijderen
+    $this->db->where('wedstrijdId', $id);
+    $this->db->delete('reeksperwedstrijd');
   }
   public function insertWedstrijd($data) {
     $this->db->insert('wedstrijd', $data);
