@@ -34,7 +34,7 @@ class Supplement_model extends CI_Model {
      */
     
     function get($id) {
-        $this->db->where('ID', $id);
+        $this->db->where('id', $id);
         $query = $this->db->get('supplement');
         return $query->row();
     }
@@ -45,7 +45,7 @@ class Supplement_model extends CI_Model {
      */
     
     function getAllByNaamSupplementWithFunctie() {
-        $this->db->order_by('Naam', 'asc');
+        $this->db->order_by('naam', 'asc');
         
         $query = $this->db->get('supplement');
         $supplementen = $query->result();
@@ -53,7 +53,7 @@ class Supplement_model extends CI_Model {
         $this->load->model('trainer/supplementfunctie_model');
         
         foreach ($supplementen as $supplement) {
-            $supplement->functie = $this->supplementfunctie_model->get($supplement->functieId);
+            $supplement->supplementFunctie = $this->supplementfunctie_model->get($supplement->supplementFunctieId);
         }
         return $supplementen;
     }
@@ -64,7 +64,7 @@ class Supplement_model extends CI_Model {
      */
     
     function delete($id){
-        $this->db->where('ID', $id);
+        $this->db->where('id', $id);
         $this->db->delete('supplement');
     }
     

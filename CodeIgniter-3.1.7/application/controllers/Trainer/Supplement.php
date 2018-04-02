@@ -32,6 +32,11 @@ class Supplement extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->helper('MY_html_helper');
+        
+        // Auteur inladen in footer
+        $this->data = new stdClass();
+        $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
+
     }
 
     // +----------------------------------------------------------
@@ -53,11 +58,12 @@ class Supplement extends CI_Controller {
      */
     public function index() {
         $data['titel'] = 'Supplementen beheren';
+        $data['team'] = $this->data->team;
 
-       $this->load->model('trainer/supplement_model');
-       $data['supplementen'] = $this->supplement_model->getAllByNaamSupplementWithFunctie();
+        $this->load->model('trainer/supplement_model');
+        $data['supplementen'] = $this->supplement_model->getAllByNaamSupplementWithFunctie();
        
-       $this->load->model('trainer/supplementfunctie_model');
+        $this->load->model('trainer/supplementfunctie_model');
         $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
        
         $partials = array('hoofding' => 'main_header',
@@ -77,7 +83,7 @@ class Supplement extends CI_Controller {
      * @see Supplementfunctie_model::getAllByFunctie();
      * @see supplement_form.php
      */
-    public function wijzig($id) {
+    public function wijzigSupplement($id) {
         $data = new stdClass();
         
         $this->load->model('trainer/supplement_model');
@@ -95,10 +101,11 @@ class Supplement extends CI_Controller {
      * @param $id De id van het supplement-record dat verwijdert wordt
      * @see Supplement_model::delete()
      */
-    public function schrap($id) {
+    public function verwijderSupplement($id) {
         $this->load->model('trainer/supplement_model');
         $this->supplement_model->delete($id);
 
+        redirect('/trainer/supplement/index');
     }
     
     /**
@@ -108,17 +115,17 @@ class Supplement extends CI_Controller {
      * @see Supplement_model::insert();
      * @see Supplement_model::update();
      */
-    public function registreer($actie = "toevoegen") {
+    public function opslaanSupplement($actie = "toevoegen") {
         $supplement = new stdClass();
         
        // $supplement->ID = $this->input->post('id');
-        $supplement->naam = $this->input->post('naam');
-        $supplement->omschrijving = $this->input->post('omschrijving');
+        $supplement->naam = ucfirst($this->input->post('naam'));
+        $supplement->omschrijving = lcfirst($this->input->post('omschrijving'));
         
         $functieId = $this->input->post('functie');
         $this->load->model('trainer/supplementfunctie_model');
         $functie = $this->supplementfunctie_model->get($functieId);
-        $supplement->functieId = $functie->id;
+        $supplement->supplementFunctieId = $functie->id;
         
         $this->load->model('trainer/supplement_model');
         
@@ -130,8 +137,7 @@ class Supplement extends CI_Controller {
             $this->supplement_model->update($supplement);
         }
         
-       // redirect('/trainer/supplement/index');
-        header('Location: ' . site_url() .'/Trainer/supplement/index?pagina=aanpassen');
+       redirect('/trainer/supplement/index');
 
     }
       

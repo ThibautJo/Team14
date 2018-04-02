@@ -33,7 +33,7 @@ class Supplementfunctie_model extends CI_Model {
      * @return Het opgevraagde record
      */
     function get($id) {
-        $this->db->where('ID', $id);
+        $this->db->where('id', $id);
         $query = $this->db->get('supplementfunctie');
         return $query->row();
     }
@@ -43,7 +43,7 @@ class Supplementfunctie_model extends CI_Model {
      * @return Een lijst van alle functies
      */
     function getAllByFunctie() {
-        $this->db->order_by('Functie', 'asc');
+        $this->db->order_by('supplementFunctie', 'asc');
         $query = $this->db->get('supplementfunctie');
         return $query->result();
     }

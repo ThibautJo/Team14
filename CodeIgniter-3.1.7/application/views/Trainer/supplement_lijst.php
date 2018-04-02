@@ -23,7 +23,7 @@
 $functieOpties="";
 
 foreach ($functies as $functie) {
-    $functieOpties[$functie->id] = ucfirst($functie->functie);
+    $functieOpties[$functie->id] = ucfirst($functie->supplementFunctie);
 }
 
 $attributenFormulier = array('id' => 'form-supplement',
@@ -44,8 +44,9 @@ $attributenFormulier = array('id' => 'form-supplement',
     </thead>
     <tbody>
 <?php
+
     foreach ($supplementen as $supplement) {        
-        echo "<tr><td>" . ucfirst($supplement->naam) . "</td><td>" . ucfirst($supplement->functie->functie) ."</td><td>" . ucfirst($supplement->omschrijving) . "</td><td>"
+        echo "<tr id='" . $supplement->id . "'><td>" . ucfirst($supplement->naam) . "</td><td>" . ucfirst($supplement->supplementFunctie->supplementFunctie) ."</td><td>" . ucfirst($supplement->omschrijving) . "</td><td>"
                 . "<button type='button' class='btn btn-success' id='aanpassen" . $supplement->id . "' onclick='supplementUpdate(this.id)' value='" . $supplement->id . "'data-toggle='modal' data-toggle='tooltip' title='Supplement wijzigen' data-target='#supplementAanpassen'><i class='fas fa-pencil-alt'></i></button></td><td>"
                 . "<button type='button' class='btn btn-danger' id='verwijder" . $supplement->id . "' onclick='supplementVerwijder(this.id)' value='" . $supplement->id . "' data-toggle='tooltip' title='Supplement verwijderen' ><i class='fas fa-trash-alt'></i></button></td></tr>\n";
 
