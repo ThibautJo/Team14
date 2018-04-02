@@ -25,7 +25,7 @@
         <th scope="col">Programma</th>
         <th scope="col">INgeschrevenen</th>
         <th scope="col"></th>
-        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick="" value=''><i class='fas fa-plus'></button></th>
+        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick="reeksenLeegmaken()" value=''><i class='fas fa-plus'></button></th>
       </tr>
     </thead>
     <tbody>
@@ -79,9 +79,9 @@
                 <label for="titel-wedstrijd">Titel</label>
                 <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
               </td>
-              <td rowspan="4" id="reeksen">
+              <td rowspan="4" class="reeksen">
                 <label for="programma-wedstrijd">Voeg een reeks toe:</label>
-                <select id="afstand-wedstrijd">
+                <select class="afstand-wedstrijd">
                   <?php
                   //adding slag en afstand
                   foreach ($afstanden as $afstand) {
@@ -89,7 +89,7 @@
                   }
                   ?>
                 </select>
-                <select id="slag-wedstrijd">
+                <select class="slag-wedstrijd">
                   <?php
                   //adding slag en afstand
                   foreach ($slagen as $slag) {
@@ -97,7 +97,7 @@
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" id="addReeks" onclick="reeksToevoegen()" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" onclick="reeksToevoegen('toevoegen')" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>
@@ -151,9 +151,9 @@
                 <label for="titel-wedstrijd">Titel</label>
                 <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
               </td>
-              <td rowspan="4" id="reeksen">
+              <td rowspan="4" class="reeksen">
                 <label for="programma-wedstrijd">Voeg een reeks toe:</label>
-                <select id="afstand-wedstrijd">
+                <select class="afstand-wedstrijd">
                   <?php
                   //adding slag en afstand
                   foreach ($afstanden as $afstand) {
@@ -161,7 +161,7 @@
                   }
                   ?>
                 </select>
-                <select id="slag-wedstrijd">
+                <select class="slag-wedstrijd">
                   <?php
                   //adding slag en afstand
                   foreach ($slagen as $slag) {
@@ -169,7 +169,7 @@
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" onclick="reeksToevoegen()" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" onclick="reeksToevoegen('aanpassen')" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>

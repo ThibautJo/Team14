@@ -86,14 +86,13 @@ function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
   $('#wedstrijdAanpassen #programma-wedstrijd').val(dataWedstrijd["programma"]);
 
   //reeksen toevoegen
-  wedstrijdAfstanden = [];
-  wedstrijdSlagen = [];
+  reeksenLeegmaken();
   // 1st opvragen
   $.post(site_url+'/Trainer/wedstrijden/reeksenOpvragen/'+wedstrijdID, function(data){
     data = JSON.parse(data);
     console.log(data);
     // 2des invullen
-    $("#wedstrijdAanpassen #reeksen tr").html("");
+    $("#wedstrijdAanpassen .reeksen tr").html("");
     data["afstandIDs"].forEach((a,index, array) => {
       data["slagIDs"].forEach((s,index2, array2) => {
         if (index == index2) {
@@ -101,7 +100,7 @@ function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
           wedstrijdSlagen.push(Object.keys(data["slagIDs"][index]).toString());
           tijdelijk1.push(Object.keys(data["afstandIDs"][index]).toString());
           tijdelijk2.push(Object.keys(data["slagIDs"][index]).toString());
-          $("#wedstrijdAanpassen #reeksen").append("<tr id='rowUpdate"+index+"'><td style='padding:10px 0;'>" + a[Object.keys(a)] + " " + s[Object.keys(s)] + "</td><td style='padding:10px 0;'>" +
+          $("#wedstrijdAanpassen .reeksen").append("<tr id='rowUpdate"+index+"'><td style='padding:10px 0;'>" + a[Object.keys(a)] + " " + s[Object.keys(s)] + "</td><td style='padding:10px 0;'>" +
           "<button type='button' class='btn-xs btn-danger btn-circle' id='verwijder"+a[Object.keys(a)]+s[Object.keys(s)]+"' onclick='verwijderReeksArrays("+"rowUpdate"+index+","+Object.keys(s)+","+Object.keys(a)+")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
         }
       });
@@ -142,7 +141,14 @@ function verwijderReeksArrays(trID,slag, afstand){
 
  });
 }
+function reeksenLeegmaken(){
+  wedstrijdAfstanden = [];
+  wedstrijdSlagen = [];
 
+  tijdelijk1 = [];
+  tijdelijk2 = [];
+  $(".reeksen tr").html("");
+}
 //global variabel voor reeksen
 var wedstrijdAfstanden = [];
 var wedstrijdSlagen = [];
@@ -150,14 +156,22 @@ var wedstrijdSlagen = [];
 var tijdelijk1 = [];
 var tijdelijk2 = [];
 
-function reeksToevoegen(){
+function reeksToevoegen(actie){
+  var modalToUse = '';
+  if (actie == "toevoegen") {
+    modalToUse = "#wedstrijdToevoegen";
+  }
+  else {
+    modalToUse = "#wedstrijdAanpassen";
+  }
+
   var ok = true;
   console.log(wedstrijdAfstanden);
   console.log(wedstrijdSlagen);
   //checken of de combinatie al bestaat ( zodat we geen dezelfde reeksen hebben)
   tijdelijk1.forEach((s,index) => {
-    [$('#afstand-wedstrijd').val(), $('#slag-wedstrijd').val()].forEach((m,index2,array) => {
-      console.log($('#afstand-wedstrijd').val());
+    [$(modalToUse+' .afstand-wedstrijd').val(), $(modalToUse+' .slag-wedstrijd').val()].forEach((m,index2,array) => {
+      console.log($(modalToUse+' .afstand-wedstrijd').val() + "" + $(modalToUse+' .slag-wedstrijd').val());
       if (tijdelijk1[index] == m && tijdelijk2[index] == array[index2+1] ) {
           //zit de combinatie al in de reeks?
           ok = false;
@@ -168,13 +182,13 @@ function reeksToevoegen(){
 
 
   if (ok) {
-    tijdelijk1.push($('#afstand-wedstrijd').val());
-    tijdelijk2.push($('#slag-wedstrijd').val());
-    // $("#wedstrijdToevoegen #reeksen").append("<p>"+$('#afstand-wedstrijd option:selected').text()+" "+$('#slag-wedstrijd option:selected').text()+"</p>");
-    $("#wedstrijdToevoegen #reeksen").append("<tr id='rowAdd"+$('#afstand-wedstrijd option:selected').val()+$('#slag-wedstrijd option:selected').val()+"'><td style='padding:10px 0;'>" + $('#afstand-wedstrijd option:selected').text() + " " + $('#slag-wedstrijd option:selected').text() + "</td><td style='padding:10px 0;'>" +
-    "<button type='button' class='btn-xs btn-danger btn-circle' id='' onclick='verwijderReeksArrays("+"rowAdd"+$('#afstand-wedstrijd option:selected').val()+$('#slag-wedstrijd option:selected').val()+","+$('#slag-wedstrijd option:selected').val()+","+$('#afstand-wedstrijd option:selected').val()+")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
-    wedstrijdAfstanden.push($('#afstand-wedstrijd').val());
-    wedstrijdSlagen.push($('#slag-wedstrijd').val());
+    tijdelijk1.push($(modalToUse+' .afstand-wedstrijd').val());
+    tijdelijk2.push($(modalToUse+' .slag-wedstrijd').val());
+    // $("#wedstrijdToevoegen .reeksen").append("<p>"+$('.afstand-wedstrijd option:selected').text()+" "+$('#slag-wedstrijd option:selected').text()+"</p>");
+    $(modalToUse+" .reeksen").append("<tr id='rowAdd"+$(modalToUse+' .afstand-wedstrijd option:selected').val()+$(modalToUse+' .slag-wedstrijd option:selected').val()+"'><td style='padding:10px 0;'>" + $(modalToUse+' .afstand-wedstrijd option:selected').text() + " " + $(modalToUse+' .slag-wedstrijd option:selected').text() + "</td><td style='padding:10px 0;'>" +
+    "<button type='button' class='btn-xs btn-danger btn-circle' id='' onclick='verwijderReeksArrays("+"rowAdd"+$(modalToUse+' .afstand-wedstrijd option:selected').val()+$(modalToUse+' .slag-wedstrijd option:selected').val()+","+$(modalToUse+' .slag-wedstrijd option:selected').val()+","+$(modalToUse+' .afstand-wedstrijd option:selected').val()+")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
+    wedstrijdAfstanden.push($(modalToUse+' .afstand-wedstrijd').val());
+    wedstrijdSlagen.push($(modalToUse+' .slag-wedstrijd').val());
     console.log("-------------------------");
     console.log(tijdelijk1);
     console.log(tijdelijk2);
