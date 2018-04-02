@@ -25,7 +25,7 @@
         <th scope="col">Programma</th>
         <th scope="col">INgeschrevenen</th>
         <th scope="col"></th>
-        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick="" value=''><i class='fas fa-plus'></button></th>
+        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick='' value=''><i class='fas fa-plus'></button></th>
       </tr>
     </thead>
     <tbody>
@@ -34,11 +34,11 @@
       // var_dump($wedstrijden[0]);
 
       foreach ($wedstrijden as $wedstrijd) {
-        echo "<tr scope='row' id='". $wedstrijd->id ."'>";
-        echo "<td>" . date("d-m-Y", strtotime($wedstrijd->datumStart)) . "</td>";
-        echo "<td>" . $wedstrijd->naam . "</td>";
-        echo "<td>" . $wedstrijd->plaats . "</td>";
-        echo "<td><a href='http://".$wedstrijd->programma."'>Open Programma</a></td>";
+        echo "<tr scope='row' id='". $wedstrijd->ID ."'>";
+        echo "<td>" . date("d-m-Y", strtotime($wedstrijd->DatumStart)) . "</td>";
+        echo "<td>" . $wedstrijd->Naam . "</td>";
+        echo "<td>" . $wedstrijd->Plaats . "</td>";
+        echo "<td><a href='http://".$wedstrijd->Programma."'>Open Programma</a></td>";
         echo "<td>";
         if ($wedstrijd->personen->namen) {
           foreach ($wedstrijd->personen->namen as $persoon) {
@@ -49,8 +49,8 @@
           echo "...";
         }
         echo "</td>";
-        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button></td>";
-        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button></td>";
+        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->ID."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->ID."'><i class='fas fa-pencil-alt'></i></button></td>";
+        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->ID."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->ID."'><i class='fas fa-trash-alt'></i></button></td>";
         echo "</tr>";
       }
 
@@ -79,13 +79,13 @@
                 <label for="titel-wedstrijd">Titel</label>
                 <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
               </td>
-              <td rowspan="4" id="reeksen">
+              <td rowspan="4">
                 <label for="programma-wedstrijd">Voeg een reeks toe:</label>
                 <select id="afstand-wedstrijd">
                   <?php
                   //adding slag en afstand
                   foreach ($afstanden as $afstand) {
-                    echo "<option value='".$afstand->id."'>".$afstand->afstand."</option>";
+                    echo "<option value='".$afstand->ID."'>".$afstand->Afstand."</option>";
                   }
                   ?>
                 </select>
@@ -93,11 +93,11 @@
                   <?php
                   //adding slag en afstand
                   foreach ($slagen as $slag) {
-                    echo "<option value='".$slag->id."'>".$slag->slag."</option>";
+                    echo "<option value='".$slag->ID."'>".$slag->Slag."</option>";
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" id="addReeks" onclick="reeksToevoegen()" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" id="addReeks" onclick="addReeks()" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>
@@ -135,7 +135,7 @@
 
   <!-- Modal aanpassen -->
 <div class="modal fade" id="wedstrijdAanpassen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="popup-title">Wedstrijd Aanpassen</h3>
@@ -151,13 +151,13 @@
                 <label for="titel-wedstrijd">Titel</label>
                 <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
               </td>
-              <td rowspan="4" id="reeksen">
+              <td rowspan="4">
                 <label for="programma-wedstrijd">Voeg een reeks toe:</label>
                 <select id="afstand-wedstrijd">
                   <?php
                   //adding slag en afstand
                   foreach ($afstanden as $afstand) {
-                    echo "<option value='".$afstand->id."'>".$afstand->afstand."</option>";
+                    echo "<option value='".$afstand->ID."'>".$afstand->Afstand."</option>";
                   }
                   ?>
                 </select>
@@ -165,11 +165,11 @@
                   <?php
                   //adding slag en afstand
                   foreach ($slagen as $slag) {
-                    echo "<option value='".$slag->id."'>".$slag->slag."</option>";
+                    echo "<option value='".$slag->ID."'>".$slag->Slag."</option>";
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" onclick="reeksToevoegen()" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" onclick="addReeks()" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>

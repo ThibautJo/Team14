@@ -33,11 +33,11 @@
 
       foreach ($wedstrijden as $wedstrijd) {
       echo "<tr scope='row'>";
-      echo "<tr scope='row' id='". $wedstrijd->ID ."'>";
-      echo "<td>" . date("d-m-Y", strtotime($wedstrijd->DatumStart)) . "</td>";
-      echo "<td>" . $wedstrijd->Naam . "</td>";
-      echo "<td>" . $wedstrijd->Plaats . "</td>";
-      echo "<td><a href='http://".$wedstrijd->Programma."'>Open Programma</a></td>";
+      echo "<tr scope='row' id='". $wedstrijd->id ."'>";
+      echo "<td>" . date("d-m-Y", strtotime($wedstrijd->datumStart)) . "</td>";
+      echo "<td>" . $wedstrijd->naam . "</td>";
+      echo "<td>" . $wedstrijd->plaats . "</td>";
+      echo "<td><a href='http://".$wedstrijd->programma."'>Open Programma</a></td>";
       echo "<td>";
       if ($wedstrijd->personen->namen) {
         foreach ($wedstrijd->personen->namen as $persoon) {

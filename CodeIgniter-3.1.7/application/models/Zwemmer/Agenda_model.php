@@ -126,7 +126,7 @@ class Agenda_model extends CI_Model {
             // Tabel supplementperpersoon joinen met de tabel supplementfunctie
             $supplement->supplement = $this->getSupplement($supplement->supplementId);
 
-            $supplement->functie = $this->getSupplementFunctie($supplement->supplement->functieId);
+            $supplement->functie = $this->getSupplementFunctie($supplement->supplement->supplementFunctieId);
         }
         
         return $supplementen;
