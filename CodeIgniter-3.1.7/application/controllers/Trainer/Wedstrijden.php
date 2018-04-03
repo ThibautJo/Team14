@@ -23,6 +23,11 @@ class Wedstrijden extends CI_Controller {
     $this->load->helper('url');
     $this->load->helper('MY_html');
     $this->load->helper('notation');
+
+    // Auteur inladen in footer
+    $this->data = new stdClass();
+    $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
+
   }
 
   // +----------------------------------------------------------
@@ -33,6 +38,7 @@ class Wedstrijden extends CI_Controller {
 
   public function index() {
     $data['titel'] = 'Wedstrijden';
+    $data['team'] = $this->data->team;
 
     //wedstrijden ophalen van de huidige maand
     $data['maand'] = date("F");
