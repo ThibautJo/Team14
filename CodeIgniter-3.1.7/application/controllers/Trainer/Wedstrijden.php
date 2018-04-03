@@ -26,7 +26,7 @@ class Wedstrijden extends CI_Controller {
 
     // Auteur inladen in footer
     $this->data = new stdClass();
-    $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
+    $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "true", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
 
   }
 
