@@ -90,7 +90,7 @@ function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
   // 1st opvragen
   $.post(site_url+'/Trainer/wedstrijden/reeksenOpvragen/'+wedstrijdID, function(data){
     data = JSON.parse(data);
-    console.log(data);
+    // console.log(data);
     // 2des invullen
     $("#wedstrijdAanpassen .reeksen tr").html("");
     data["afstandIDs"].forEach((a,index, array) => {
@@ -105,8 +105,7 @@ function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
         }
       });
     });
-    console.log(wedstrijdAfstanden);
-    console.log(wedstrijdSlagen);
+
   }).fail(function() {
     alert( "Er is iets misgelopen, neem contact op met de administrator." );
   });
@@ -128,12 +127,7 @@ function verwijderReeksArrays(trID,slag, afstand){
          wedstrijdSlagen.splice(index2, 1);
          tijdelijk1.splice(index2, 1);
          tijdelijk2.splice(index2, 1);
-         console.log("-------------------------");
-         console.log(wedstrijdAfstanden);
-         console.log(wedstrijdSlagen);
-         console.log("-------------------------");
          $(trID).html("");
-         console.log("kom ik");
        }
      }
 
@@ -166,8 +160,7 @@ function reeksToevoegen(actie){
   }
 
   var ok = true;
-  console.log(wedstrijdAfstanden);
-  console.log(wedstrijdSlagen);
+
   //checken of de combinatie al bestaat ( zodat we geen dezelfde reeksen hebben)
   tijdelijk1.forEach((s,index) => {
     [$(modalToUse+' .afstand-wedstrijd').val(), $(modalToUse+' .slag-wedstrijd').val()].forEach((m,index2,array) => {
@@ -189,12 +182,6 @@ function reeksToevoegen(actie){
     "<button type='button' class='btn-xs btn-danger btn-circle' id='' onclick='verwijderReeksArrays("+"rowAdd"+$(modalToUse+' .afstand-wedstrijd option:selected').val()+$(modalToUse+' .slag-wedstrijd option:selected').val()+","+$(modalToUse+' .slag-wedstrijd option:selected').val()+","+$(modalToUse+' .afstand-wedstrijd option:selected').val()+")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
     wedstrijdAfstanden.push($(modalToUse+' .afstand-wedstrijd').val());
     wedstrijdSlagen.push($(modalToUse+' .slag-wedstrijd').val());
-    console.log("-------------------------");
-    console.log(tijdelijk1);
-    console.log(tijdelijk2);
-    console.log(wedstrijdAfstanden);
-    console.log(wedstrijdSlagen);
-    console.log("-------------------------");
   }
 }
 

@@ -86,7 +86,7 @@ class Wedstrijd_model extends CI_Model {
   }
   public function updateWedstrijd($data) {
     $this->db->where('id', $data->id);
-    $this->db->replace('wedstrijd', $data);
+    $this->db->update('wedstrijd', $data);
   }
   public function insertReeksen($wedID, $reeksen) {
     $data = array();
