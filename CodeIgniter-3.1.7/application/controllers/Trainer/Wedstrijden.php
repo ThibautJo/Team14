@@ -21,7 +21,7 @@ class Wedstrijden extends CI_Controller {
     parent::__construct();
 
     $this->load->helper('url');
-    $this->load->helper('MY_html');
+    $this->load->helper('my_html');
     $this->load->helper('notation');
 
     // Auteur inladen in footer
