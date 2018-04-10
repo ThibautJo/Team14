@@ -31,7 +31,7 @@
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="agendaSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda') ?>">Agenda</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/index/1') ?>">Agenda</a>
                 </li>
                 <li class="pb-2">
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/Aanpassen') ?>">Agenda beheren</a>

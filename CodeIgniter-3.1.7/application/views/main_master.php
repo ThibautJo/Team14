@@ -60,16 +60,18 @@
                     <!-- Hoofding -->
 
                     <div id="top-bar" class="row pl-2 pr-2 sticky-top">
-                        <div id="top-bar-center" class="col d-flex align-items-center justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <i class="material-icons mr-4" id="sidenav-toggler">menu</i>
-                                <h2 class="hide-mobile-nav-open"><?php echo $titel ?></h2>
-                            </div>
-                            <div class="hide-mobile-nav-open">
-                                <?php
-                                setlocale(LC_TIME, 'nld_NLD');
-                                echo strftime('%A, %d %B %Y');
-                                ?>
+                        <div id="top-bar-center" class="col d-flex align-items-center">
+                            <i class="material-icons mr-4" id="sidenav-toggler">menu</i>
+                            <div class="d-flex justify-content-sm-between text-right flex-column flex-sm-row w-100 align-items-sm-center">
+                                <div class="">
+                                    <h2 class="hide-mobile-nav-open"><?php echo $titel ?></h2>
+                                </div>
+                                <div class="hide-mobile-nav-open">
+                                    <?php
+                                    setlocale(LC_TIME, 'nld_NLD');
+                                    echo strftime('%A, %d %B %Y');
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>

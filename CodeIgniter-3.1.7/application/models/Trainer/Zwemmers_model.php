@@ -24,9 +24,11 @@ class Zwemmers_model extends CI_Model {
     }
 
     public function getZwemmers() {
+        $this->db->where('soort', 'Zwemmer');
         $query = $this->db->get('persoon');
         return $query->result();
     }
+    
     function get($id) {
         $this->db->where('ID', $id);
         $query = $this->db->get('persoon');
