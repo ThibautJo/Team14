@@ -16,9 +16,18 @@ class Team extends CI_Controller {
     // |    Team 14
     // +----------------------------------------------------------
 
-    public function __construct() {
-
+    public function __construct() {      
         parent::__construct();
+        
+        // controleren of bevoegde persoon is aangemeld        
+        if (!$this->authex->isAangemeld()) {
+            redirect('welcome/meldAan');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->soort != "Trainer") {
+                redirect('welcome/meldAan');
+            }
+        }
 
         $this->load->helper('url');
         $this->load->helper('form');

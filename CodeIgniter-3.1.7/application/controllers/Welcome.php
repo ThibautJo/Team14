@@ -24,7 +24,7 @@ class Welcome extends CI_Controller {
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
-            'aanmeldFormulier' => 'bezoeker/aanmelden',
+            'aanmeldFormulier' => 'bezoeker/home_aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
 
         $this->template->load('bezoeker_main_master', $partials, $data);
@@ -38,7 +38,7 @@ class Welcome extends CI_Controller {
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
-            'aanmeldFormulier' => 'bezoeker/aanmelden',
+            'aanmeldFormulier' => 'bezoeker/home_aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
 
         $this->template->load('bezoeker_main_master', $partials, $data);
@@ -54,7 +54,7 @@ class Welcome extends CI_Controller {
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
-            'aanmeldFormulier' => 'bezoeker/aanmelden',
+            'foutMelding' => 'bezoeker/home_fout',
             'voetnoot' => 'bezoeker_main_footer');
 
         $this->template->load('bezoeker_main_master', $partials, $data);
@@ -66,9 +66,21 @@ class Welcome extends CI_Controller {
         $wachtwoord = $this->input->post('wachtwoord');
 
         if ($this->authex->meldAan($email, $wachtwoord)) {
-            redirect('Trainer/Supplement');
+            
+            $persoon = $this->authex->getPersoonInfo();
+            
+            // controleren welk soort gebruiker zich aanmeldt            
+            switch ($persoon->soort) {
+                case "Trainer":
+                    redirect('trainer/supplement');
+                    break;
+                case "Zwemmer":
+                    redirect('zwemmer/agenda');
+                    break;
+            }   
+            
         } else {
-            redirect('Welcome/toonFout');
+            redirect('welcome/toonFout');
         }
     }
 
