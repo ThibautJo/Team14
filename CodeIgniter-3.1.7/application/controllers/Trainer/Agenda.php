@@ -19,15 +19,9 @@ class Agenda extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-        
-        // controleren of persoon is aangemeld
-        if (!$this->authex->isAangemeld()) {
-        redirect('welcome/meldAan');}
 
         // Helpers inladen
         $this->load->helper('url');
-//        $this->load->helper("my_html_helper");
-//        $this->load->helper("my_url_helper");
         
         // Auteur inladen in footer
         $this->data = new stdClass();
@@ -36,16 +30,14 @@ class Agenda extends CI_Controller {
 
     // +----------------------------------------------------------
     // |
-    // |    Persoonlijke agenda raadplegen
+    // |    Agenda beheren
     // |
     // +----------------------------------------------------------
 
-    public function index() {
-        $data['titel'] = 'Agenda';
+    public function index($persoonId) {
+        $data['titel'] = 'Agenda\'s zwemmers';
         $data['team'] = $this->data->team;
-        
-        $persoonId = 1;
-        
+                
         // Inladen van alle agenda punten (wedstrijden, medische onderzoeken, supplementen, trainingen en stages
         $data_wedstrijden = $this->ladenWedstrijden($persoonId);
         $data_onderzoeken = $this->ladenOnderzoeken($persoonId);
@@ -58,13 +50,32 @@ class Agenda extends CI_Controller {
         $activiteiten = json_encode($data_agenda);
         
         $data['activiteiten'] = $activiteiten;
+        $data['listGroupItems'] = $this->ladenListGroup($persoonId);
 
         $partials = array('hoofding' => 'main_header',
-            'menu' => 'main_menu',
-            'inhoud' => 'zwemmer/agenda',
+            'menu' => 'trainer_main_menu',
+            'inhoud' => 'trainer/agenda',
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function ladenListGroup($persoonId) {
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmers = $this->zwemmers_model->getZwemmers();
+        sort($zwemmers);
+        $zwemmersListGroup = [];
+        
+        foreach ($zwemmers as $zwemmer) {
+            if ($zwemmer->id == $persoonId) {
+                $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/index/$zwemmer->id") . '" class="list-group-item list-group-item-action active">' . $zwemmer->voornaam . ' ' . $zwemmer->achternaam . '</a>';
+            }
+            else {
+                $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/index/$zwemmer->id") . '" class="list-group-item list-group-item-action">' . $zwemmer->voornaam . ' ' . $zwemmer->achternaam . '</a>';
+            }
+        }
+        
+        return $zwemmersListGroup;
     }
     
     public function ladenWedstrijden($persoonId) {
@@ -211,5 +222,8 @@ class Agenda extends CI_Controller {
         $kleuren = $this->agenda_model->getKleuren();
         return $kleuren;
     }
-
+    
+    public function aanpassen() {
+        
+    }
 }

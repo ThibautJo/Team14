@@ -23,8 +23,24 @@
 
 <!-- Laat de agenda zien -->
 
-<div id="agenda">
+<div class="d-flex row">
+    <div id="agenda" class="col-12 col-sm-8 col-md-9 col-xl-10 order-1 order-sm-0">
 
+    </div>
+
+    <div class="col-12 col-sm-4 col-md-3 col-xl-2 order-0 order-sm-1 mb-4">
+        <p class="font-weight-bold header-list-group pt-1">Agenda van:</p>
+        <div class="list-group">
+            <?php
+            foreach ($listGroupItems as $listGroupItem) {
+                echo $listGroupItem;
+            }
+            ?>
+        </div>
+        <p class="mt-4">
+            <?php echo divAnchor('/Trainer/Agenda/aanpassen', 'Aanpassen', 'class="btn button-blue d-flex justify-content-center"') ?>
+        </p>
+    </div>
 </div>
 
 <!-- Modal voor event waar men op klikt -->

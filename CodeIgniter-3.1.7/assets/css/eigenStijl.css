@@ -6,6 +6,7 @@ html,body {
 
 main {
     min-height: calc(100% - 70px - 74px);
+    display: flex;
 }
 
 footer {
@@ -202,6 +203,7 @@ h2 {
   box-shadow: 0 0 0 0.2rem rgba(32, 52, 77, 0.5);
 }
 
+/* PAGINA agenda */
 .fc-unthemed td.fc-today {
     background: rgba(0, 100, 255, 0.05) !important;
     border: none !important;
@@ -240,6 +242,17 @@ h2 {
     }
 }
 
+.list-group {
+    margin-top: 22px;
+}
+
+.list-group .active {
+    background-color: #20344D;
+    border-color: #18293D;
+}
+
+/* EIND PAGINA agenda*/
+
 /* PAGINA wedstrijden_aannpassen*/
 #form-wedstrijd table{
   width: 100%;
@@ -270,3 +283,5 @@ h2 {
   display: inline;
 }
 /* EIND PAGINA wedstrijden_aannpassen*/
+
+
