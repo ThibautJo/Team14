@@ -22,6 +22,9 @@ class Team extends CI_Controller {
 
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->helper("my_html_helper");
+        $this->load->helper("my_url_helper");
+
     }
 
     // +----------------------------------------------------------
@@ -50,7 +53,6 @@ class Team extends CI_Controller {
         $zwemmers = $this->zwemmers_model->getZwemmers();
         
         $data_zwemmers = array();
-        
         foreach ($zwemmers as $zwemmer) {                    
             $data_zwemmers[] = array(
                 "voornaam" => $zwemmer->voornaam,
@@ -64,8 +66,7 @@ class Team extends CI_Controller {
                 "wachtwoord" => $zwemmer->wachtwoord,
                 "omschrijving" => $zwemmer->omschrijving,
                 "foto" => $zwemmer->foto,
-                "color" => '#FF7534',
-                "textColor" => '#000'
+                "color" => '#FF7534',"textColor" => '#000'
             );
         }
         return $zwemmers;
