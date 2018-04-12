@@ -216,8 +216,6 @@ function zwemmerUpdate(persoonID) {
     }).fail(function () {
         alert("Er is iets misgelopen, neem contact op met de administrator.");
     });
-
-
     // modal openen met ingevulde gegevans van dit object
     $("#zwemmerAanpassen").modal()
 

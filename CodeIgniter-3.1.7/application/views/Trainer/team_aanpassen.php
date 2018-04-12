@@ -32,8 +32,8 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 echo "<tr>"
                 . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
-                <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->id . "' onclick='zwemmerUpdate(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer wijzigen' data-target='#zwemmerAanpassen'>". "<i class='fas fa-pencil-alt'></i></button>"
-                . anchor('Trainer/Team/archiveer/' . $zwemmer->id, form_button("knopSchrap", "<i class='fas fa-trash-alt'></i>", $archiveren)) . "</td></tr>\n";
+                <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->id . "' onclick='zwemmerUpdate(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer wijzigen' data-target='#zwemmerAanpassen'>" . "<i class='fas fa-pencil-alt'></i></button>"
+                . anchor('Trainer/Team/archiveer/' . $zwemmer->id, form_button("knopSchrap", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
             }
             ?>
         </tbody>
@@ -52,14 +52,10 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 </button>
             </div>
             <div class="modal-body"> <!-- Modal inhoud -->
-                <div class="form-group">
-                    <?php
-                    echo form_open('', $attributenFormulier);
-                    ?>
-                    <?php
-                    echo form_input(array('type' => 'hidden', 'name' => 'id', 'id' => 'id', 'value' => ''));
-                    ?>
-                </div>
+                <?php
+                echo form_open('', $attributenFormulier);
+                ?>
+
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Voornaam', 'voornaam');
@@ -72,6 +68,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Achternaam', 'achternaam');
@@ -84,6 +81,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Email', 'email');
@@ -96,6 +94,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Wachtwoord', 'wachtwoord');
@@ -108,6 +107,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Over jezelf', 'over jezelf');
@@ -115,7 +115,8 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                         'id' => 'omschrijving',
                         'value' => '',
                         'class' => 'form-control',
-                        'placeholder' => 'Omschrijving',));
+                        'placeholder' => 'Omschrijving',
+                        'required' => 'required'));
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
@@ -139,14 +140,15 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 </button>
             </div>
             <div class="modal-body"> <!-- Modal inhoud -->
+                <?php
+                echo form_open('', $attributenFormulier);
+                ?>
                 <div class="form-group">
-                    <?php
-                    echo form_open('', $attributenFormulier);
-                    ?>
                     <?php
                     echo form_input(array('type' => 'hidden', 'name' => 'id', 'id' => 'id', 'value' => ''));
                     ?>
                 </div>
+
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Voornaam', 'voornaam');
@@ -159,6 +161,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Achternaam', 'achternaam');
@@ -171,6 +174,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Email', 'email');
@@ -183,6 +187,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Wachtwoord', 'wachtwoord');
@@ -195,6 +200,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+
                 <div class="form-group">
                     <?php
                     echo form_labelpro('Over jezelf', 'over jezelf');

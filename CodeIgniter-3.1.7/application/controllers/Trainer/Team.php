@@ -25,7 +25,10 @@ class Team extends CI_Controller {
         $this->load->helper("my_form_helper");
         $this->load->helper("my_html_helper");
         $this->load->helper("my_url_helper");
-
+        
+        // Auteur inladen in footer
+        $this->data = new stdClass();
+        $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
 
     // +----------------------------------------------------------
@@ -36,7 +39,8 @@ class Team extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Team beheren';
-     
+        $data['team'] = $this->data->team;
+        
         $zwemmers = $this->ladenZwemmers();
         
         $data['zwemmers'] = $zwemmers;
@@ -75,6 +79,7 @@ class Team extends CI_Controller {
     
     public function aanpassen() {
         $data['titel'] = 'Team beheren';
+        $data['team'] = $this->data->team;
         $zwemmers = $this->ladenZwemmers();
         $data['zwemmers'] = $zwemmers;
         
@@ -117,7 +122,7 @@ class Team extends CI_Controller {
         $persoon->wachtwoord=$this->input->post('wachtwoord');
         $persoon->omschrijving=$this->input->post('omschrijving');
         
-        $this->load->model('zwemmers_model');
+        $this->load->model('trainer/zwemmers_model');
         //        if($persoon->ID == 0) {
         if($actie == "toevoegen") {
             $this->zwemmers_model->insert($persoon);

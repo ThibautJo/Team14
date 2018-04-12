@@ -38,7 +38,6 @@ class Zwemmers_model extends CI_Model {
     
     function insert($persoon) {
         $this->db->insert('persoon', $persoon);
-        return $this->db->insert_id();
     }
     
     function update($persoon) {
