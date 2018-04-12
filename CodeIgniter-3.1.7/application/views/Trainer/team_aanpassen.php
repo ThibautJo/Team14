@@ -26,10 +26,10 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
             <?php
             foreach ($zwemmers as $zwemmer) {
                 echo "<tr>"
-                . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->Foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
-                . "<td>" . $zwemmer->Voornaam . " " . $zwemmer->Achternaam . "</td><td>" . $zwemmer->Email . "</td>
-                <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->ID . "' onclick='' data-toggle='modal' data-target='#wijzigen' value='" . $zwemmer->ID . "'>". "<i class='fas fa-pencil-alt'></i></button>"
-                . anchor('Trainer/Team/archiveer/' . $zwemmer->ID, form_button("knopSchrap", "<i class='fas fa-trash-alt'></i>", $archiveren)) . "</td></tr>\n";
+                . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
+                . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
+                <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->id . "' onclick='' data-toggle='modal' data-target='#wijzigen' value='" . $zwemmer->id . "'>". "<i class='fas fa-pencil-alt'></i></button>"
+                . anchor('Trainer/Team/archiveer/' . $zwemmer->id, form_button("knopSchrap", "<i class='fas fa-trash-alt'></i>", $archiveren)) . "</td></tr>\n";
                 ;
             }
             ?>
@@ -130,7 +130,7 @@ echo form_open('trainer/team/registreer', $attributenFormulier);
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer toevoegen</h5> <!-- Modal titel -->
+                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer wijzigen</h5> <!-- Modal titel -->
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- Modal sluit knop ( X ) -->
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -141,10 +141,10 @@ echo form_open('trainer/team/registreer', $attributenFormulier);
                     echo form_labelpro('Voornaam', 'voornaam');
                     echo form_input(array('name' => 'naam',
                         'id' => 'voornaam',
-                        'value' => $zwemmer->Voornaam,
+                        'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Voornaam',
-                        'required' => 'required'));
+                        'required' => 'required'));l
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
@@ -153,7 +153,7 @@ echo form_open('trainer/team/registreer', $attributenFormulier);
                     echo form_labelpro('Achternaam', 'achternaam');
                     echo form_input(array('name' => 'achternaam',
                         'id' => 'achternaam',
-                        'value' => $zwemmer->Achternaam,
+                        'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Achternaam',
                         'required' => 'required'));
@@ -165,7 +165,7 @@ echo form_open('trainer/team/registreer', $attributenFormulier);
                     echo form_labelpro('Email', 'email');
                     echo form_input(array('name' => 'email',
                         'id' => 'email',
-                        'value' => $zwemmer->Email,
+                        'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Email',
                         'required' => 'required'));
@@ -177,7 +177,7 @@ echo form_open('trainer/team/registreer', $attributenFormulier);
                     echo form_labelpro('Wachtwoord', 'wachtwoord');
                     echo form_input(array('name' => 'wachtwoord',
                         'id' => 'wachtwoord',
-                        'value' => $zwemmer->Wachtwoord,
+                        'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Wachtwoord',
                         'required' => 'required'));
@@ -189,7 +189,7 @@ echo form_open('trainer/team/registreer', $attributenFormulier);
                     echo form_labelpro('Over jezelf', 'over jezelf');
                     echo form_input(array('name' => 'omschrijving',
                         'id' => 'omschrijving',
-                        'value' => $zwemmer->Omschrijving,
+                        'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Omschrijving',
                         'required' => 'required'));
