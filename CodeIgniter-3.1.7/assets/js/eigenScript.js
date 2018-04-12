@@ -242,7 +242,7 @@ function zwemmerOpslaan(actie) {
     var formToSubmit = '';
     //form valideren
     if (actie == "toevoegen") {
-        $('#zwemmerToevoegen #form-supplement *').filter('input').each(function () {
+        $('#zwemmerToevoegen #form-zwemmer *').filter('input').each(function () {
             if ($(this).attr("required") && $(this).val() == "") {
                 alert("Niet alle velden zijn ingevuld");
                 ok = false;
@@ -251,7 +251,7 @@ function zwemmerOpslaan(actie) {
         });
         formToSubmit = "#zwemmerToevoegen #form-zwemmer";
     } else {
-        $('#zwemmerAanpassen #form-supplement *').filter('input').each(function () {
+        $('#zwemmerAanpassen #form-zwemmer *').filter('input').each(function () {
             if ($(this).attr("required") && $(this).val() == "") {
                 alert("Niet alle velden zijn ingevuld");
                 ok = false;
@@ -263,7 +263,7 @@ function zwemmerOpslaan(actie) {
 
     //word uitgevoerd als alles ingevuld is
     if (ok) {
-        $(formToSubmit).attr('action', site_url + '/Trainer/supplement/opslaanZwemmer/' + actie);
+        $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanZwemmer/' + actie);
 
         $(formToSubmit).submit();
     }
