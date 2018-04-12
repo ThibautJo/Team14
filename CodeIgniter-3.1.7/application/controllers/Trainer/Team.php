@@ -16,18 +16,9 @@ class Team extends CI_Controller {
     // |    Team 14
     // +----------------------------------------------------------
 
-    public function __construct() {      
+    public function __construct() {
+
         parent::__construct();
-        
-        // controleren of bevoegde persoon is aangemeld        
-        if (!$this->authex->isAangemeld()) {
-            redirect('welcome/meldAan');
-        } else {
-            $persoon = $this->authex->getPersoonInfo();
-            if ($persoon->soort != "Trainer") {
-                redirect('welcome/meldAan');
-            }
-        }
 
         $this->load->helper('url');
         $this->load->helper('form');
@@ -62,17 +53,17 @@ class Team extends CI_Controller {
         
         foreach ($zwemmers as $zwemmer) {                    
             $data_zwemmers[] = array(
-                "voornaam" => $zwemmer->Voornaam,
-                "achternaam" => $zwemmer->Achternaam,
-                "straat" => $zwemmer->Straat,
-                "huisnummer" => $zwemmer->Huisnummer,
-                "postcode" => $zwemmer->Postcode,
-                "gemeente" => $zwemmer->Gemeente,
-                "telefoonnummer" => $zwemmer->Telefoonnummer,
-                "email" => $zwemmer->Email,
-                "wachtwoord" => $zwemmer->Wachtwoord,
-                "omschrijving" => $zwemmer->Omschrijving,
-                "foto" => $zwemmer->Foto,
+                "voornaam" => $zwemmer->voornaam,
+                "achternaam" => $zwemmer->achternaam,
+                "straat" => $zwemmer->straat,
+                "huisnummer" => $zwemmer->huisnummer,
+                "postcode" => $zwemmer->postcode,
+                "gemeente" => $zwemmer->gemeente,
+                "telefoonnummer" => $zwemmer->telefoonnummer,
+                "email" => $zwemmer->email,
+                "wachtwoord" => $zwemmer->wachtwoord,
+                "omschrijving" => $zwemmer->omschrijving,
+                "foto" => $zwemmer->foto,
                 "color" => '#FF7534',
                 "textColor" => '#000'
             );
