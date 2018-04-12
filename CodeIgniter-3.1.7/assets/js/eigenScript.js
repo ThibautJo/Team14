@@ -200,6 +200,74 @@ function popupZwemmerWijzigen() {
     $("#wijzigen").css({"display": "block"});
 }
 
+function zwemmerUpdate(persoonID) {
+
+    console.log("id =" + persoonID);
+    var id = $("#" + persoonID).val();
+
+    $.post(site_url + '/Trainer/team/wijzigZwemmer/' + id, function (data) {
+        //data = object van supplement
+        data = JSON.parse(data);
+        // console.log(data[0]["Naam"]);
+
+        //modal opvullen met object wedstrijd
+        opvullenModalZwemmerAanpassen(data);
+
+    }).fail(function () {
+        alert("Er is iets misgelopen, neem contact op met de administrator.");
+    });
+
+
+    // modal openen met ingevulde gegevans van dit object
+    $("#zwemmerAanpassen").modal()
+
+}
+
+function opvullenModalZwemmerAanpassen(dataZwemmer) {
+    console.log(dataZwemmer);
+    console.log(dataZwemmer["id"]);
+    // console.log(dataZwemmer[0]["Voornaam"]);
+    $('#zwemmerAanpassen #id').attr("value", dataZwemmer["id"]);
+    $('#zwemmerAanpassen #voornaam').val(dataZwemmer["voornaam"]);
+    $('#zwemmerAanpassen #achternaam').val(dataZwemmer["achternaam"]);
+    $('#zwemmerAanpassen #email').val(dataZwemmer["email"]);
+    $('#zwemmerAanpassen #wachtwoord').val(dataZwemmer["wachtwoord"]);
+    $('#zwemmerAanpassen #omschrijving').val(dataZwemmer["omschrijving"]);
+
+}
+
+function zwemmerOpslaan(actie) {
+
+    var ok = true;
+    var formToSubmit = '';
+    //form valideren
+    if (actie == "toevoegen") {
+        $('#zwemmerToevoegen #form-supplement *').filter('input').each(function () {
+            if ($(this).attr("required") && $(this).val() == "") {
+                alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
+        });
+        formToSubmit = "#zwemmerToevoegen #form-zwemmer";
+    } else {
+        $('#zwemmerAanpassen #form-supplement *').filter('input').each(function () {
+            if ($(this).attr("required") && $(this).val() == "") {
+                alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
+        });
+        formToSubmit = "#zwemmerAanpassen #form-zwemmer";
+    }
+
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Trainer/supplement/opslaanZwemmer/' + actie);
+
+        $(formToSubmit).submit();
+    }
+}
 //zwemmer end
 
 

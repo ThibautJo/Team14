@@ -22,6 +22,7 @@ class Team extends CI_Controller {
 
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->helper("my_form_helper");
         $this->load->helper("my_html_helper");
         $this->load->helper("my_url_helper");
 
@@ -105,11 +106,11 @@ class Team extends CI_Controller {
         redirect('/trainer/team_lijst');
     }
     
-    public function registreer()
+    public function opslaanZwemmer($actie = "toevoegen")
     {       
         $persoon = new stdClass();
         
-        $persoon->id=$this->input->post('id');
+        // $persoon->id=$this->input->post('id');
         $persoon->voornaam=$this->input->post('voornaam');
         $persoon->achternaam=$this->input->post('achternaam');
         $persoon->email=$this->input->post('email');
@@ -117,12 +118,22 @@ class Team extends CI_Controller {
         $persoon->omschrijving=$this->input->post('omschrijving');
         
         $this->load->model('zwemmers_model');
-        if ($persoon->id == 0) {
+        //        if($persoon->ID == 0) {
+        if($actie == "toevoegen") {
             $this->zwemmers_model->insert($persoon);
         } else {
+            $persoon->id = $this->input->post('id');
             $this->zwemmers_model->update($persoon);
         }
         redirect('trainer/team');
-        
+    }
+    
+    public function wijzigZwemmer($id) {
+        $data = new stdClass();
+
+        $this->load->model('trainer/zwemmers_model');
+        $data = $this->zwemmers_model->get($id);
+
+        print json_encode($data);
     }
 }
