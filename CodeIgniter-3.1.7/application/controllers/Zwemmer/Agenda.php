@@ -22,8 +22,8 @@ class Agenda extends CI_Controller {
 
         // Helpers inladen
         $this->load->helper('url');
-//        $this->load->helper("my_html_helper");
-//        $this->load->helper("my_url_helper");
+        $this->load->helper("my_html_helper");
+        $this->load->helper("my_url_helper");
         
         // Auteur inladen in footer
         $this->data = new stdClass();
@@ -54,6 +54,9 @@ class Agenda extends CI_Controller {
         $activiteiten = json_encode($data_agenda);
         
         $data['activiteiten'] = $activiteiten;
+        
+        $this->load->model("zwemmer/agenda_model");
+        $data['kleuren'] = json_encode($this->agenda_model->getKleurenActiviteiten());        
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'main_menu',
@@ -74,6 +77,7 @@ class Agenda extends CI_Controller {
         foreach ($wedstrijden as $wedstrijd) {                    
             $data_wedstrijden[] = array(
                 "title" => $wedstrijd->wedstrijd->naam, // Titel van het event in de agenda
+                "description" => '',
                 "start" => $wedstrijd->wedstrijd->datumStart, // Beginuur/begindatum van het event in de agenda
                 "end" => $wedstrijd->wedstrijd->datumStop, // Einduur/einddatum van het event in de agenda
                 "color" => $this->agenda_model->getKleurActiviteit(1)->kleur, // Kleur van het event in de agenda
@@ -95,6 +99,7 @@ class Agenda extends CI_Controller {
         foreach ($onderzoeken as $onderzoek) {                    
             $data_onderzoeken[] = array(
                 "title" => $onderzoek->omschrijving,
+                "description" => '',
                 "start" => $onderzoek->tijdstipStart,
                 "end" => $onderzoek->tijdstipStop,
                 "color" => $this->agenda_model->getKleurActiviteit(2)->kleur,
@@ -169,6 +174,7 @@ class Agenda extends CI_Controller {
                                
             $data_activiteiten[] = array(
                 "title" => $activiteit->activiteit->stageTitel,
+                "description" => '',
                 "start" => $activiteit->activiteit->tijdstipStart,
                 "end" => $activiteit->activiteit->tijdstipStop,
                 "color" => $color,
@@ -190,7 +196,7 @@ class Agenda extends CI_Controller {
         foreach ($supplementen as $supplement) {                    
             $data_supplementen[] = array(
                 "id" => $supplement->id,
-                "description" => $supplement->functie->supplementFunctie,
+                "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
                 "title" => $supplement->supplement->naam,
                 "start" => $supplement->datum,
                 "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,

@@ -295,3 +295,74 @@ function supplementOpslaan(actie) {
 }
 
 // supplement end
+
+
+// agenda start
+
+function aanpassenActiviteit(activiteit, id) {
+    linkActiviteit = '';
+    switch (true) {
+        case activiteit === "Wedstrijd":
+            linkActiviteit = 'wijzigWedstrijd';
+            break;
+        case activiteit === "Medische afspraak":
+            linkActiviteit = 'wijzigOnderzoek';
+            break;
+        case activiteit === "Supplement":
+            linkActiviteit = 'wijzigSupplement';
+            break;
+        default:
+            linkActiviteit = 'wijzigActiviteit';
+            break;
+    }
+    console.log('ok1');
+    $.post(site_url + '/Trainer/Agenda/' + linkActiviteit + '/' + id,
+    function (data) {
+        console.log('ok2');
+        //data = object van activiteit
+        data = JSON.parse(data);
+
+        //modal opvullen met object activiteit
+        opvullenModalActiviteitAanpassen(data, activiteit);
+        console.log('ok3');
+
+    }).fail(function () {
+        alert("Er is iets misgelopen, neem contact op met de administrator.");
+    });
+
+
+    // modal openen met ingevulde gegevans van dit object
+    $("#aanpassenActiviteit").modal();
+    console.log('ok4');
+}
+
+function opvullenModalActiviteitAanpassen(data, activiteit) {
+    $('#aanpassenActiviteit #titel-form').addClass('d-none');
+    $('#aanpassenActiviteit #training-form').addClass('d-none');
+    $('#aanpassenActiviteit #wedstrijd-form').addClass('d-none');
+    $('#aanpassenActiviteit #tijdstip-form').addClass('d-none');
+    $('#aanpassenActiviteit #supplement-form').addClass('d-none');
+    
+    switch (true) {
+        case activiteit === "Wedstrijd":
+            break;
+        case activiteit === "Medische afspraak":
+            break;
+        case activiteit === "Supplement":
+            break;
+        case activiteit === "Stage":
+            break;
+        default:
+            var typeTraininId = data["typeTrainingId"] - 1;
+            $('#aanpassenActiviteit #titel-form').removeClass('d-none');
+            $('#aanpassenActiviteit #training-form').removeClass('d-none');
+            $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
+            $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['stageTitel']);
+            $("#aanpassenActiviteit #soort option[value='" + typeTraininId + "']").attr("selected","selected");
+            
+            console.log('ok5');
+            break;
+    }
+}
+
+// agenda stop

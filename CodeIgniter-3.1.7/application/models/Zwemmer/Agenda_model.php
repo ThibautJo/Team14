@@ -44,6 +44,32 @@ class Agenda_model extends CI_Model {
         return $query->row();
     }
     
+    public function getVolledigeActiviteit($activiteitId) {
+        $this->db->where('id', $activiteitId);
+        $query = $this->db->get('activiteit');
+        
+        $activiteit = $query->row();
+        $activiteit->typeTraining = $this->getTypeTraining($activiteit->typeTrainingId);
+        $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->typeActiviteitId);
+        
+        return $activiteit;
+    }
+    
+    public function getAllTypeTraining() {
+        // Type trainingen ophalen uit de databank
+        $query = $this->db->get('typetraining');
+        $trainingen = $query->result();
+        $soortTrainingen = [];
+        
+        $teller = 0;
+        foreach ($trainingen as $training) {
+            $soortTrainingen[$teller] = ucfirst($training->typeTraining);
+            $teller++;
+        }
+
+        return $soortTrainingen;
+    }
+    
     public function getActiviteitenByPersoon($persoonId) {
         // Alle activiteiten (trainingen en stages) van een bepaalde persoon ophalen uit de databank
         $this->db->where('persoonid', $persoonId);
@@ -106,6 +132,21 @@ class Agenda_model extends CI_Model {
         $this->db->where('id', $supplementId);
         $query = $this->db->get('supplement');        
         return $query->row();
+    }
+    
+    public function getAllSupplementen() {
+        // Supplementen ophalen uit de databank
+        $query = $this->db->get('supplement');  
+        $supplementen = $query->result();
+        $supplementenNamen = [];
+        
+        $teller = 0;
+        foreach ($supplementen as $supplement) {
+            $supplementenNamen[$teller] = ucfirst($supplement->naam);
+            $teller++;
+        }
+
+        return $supplementenNamen;
     }
     
     public function getSupplementFunctie($functieId) {

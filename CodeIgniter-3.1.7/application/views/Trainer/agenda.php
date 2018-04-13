@@ -38,14 +38,14 @@
             ?>
         </div>
         <p class="mt-4">
-            <?php echo divAnchor('/Trainer/Agenda/aanpassen', 'Aanpassen', 'class="btn button-blue d-flex justify-content-center"') ?>
+            <?php echo divAnchor("/Trainer/Agenda/aanpassen/" . $_GET['persoonId'] . "?persoonId=" . $_GET['persoonId'], 'Aanpassen', 'class="btn button-blue d-flex justify-content-center"') ?>
         </p>
     </div>
 </div>
 
 <!-- Modal voor event waar men op klikt -->
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="openenActiviteit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,31 +91,20 @@
                     height: 'parent', // Hoogte zelfde als zijn parent
                     minTime: "06:00:00", // Begintijd kalender
                     // EventClick functie zorgt ervoor dat je het event kan aanklikken en meer informatie kan bekijken in het modal dat opent
-                    eventClick: function(calEvent) { 
-                        $('#exampleModalCenter').modal('show'); // Modal openen
-                        $('.modal-body').html(calEvent.title); // Modal inhoud opvullen
-                        switch (calEvent.color) { // Filteren op kleur van het event
-                            case '#FF7534':
-                                $('.modal-title').html('Wedstrijd'); // Modal titel opvullen
-                                break;
-                            case '#BB9BFF':
-                                $('.modal-title').html('Medisch onderzoek');
-                                break;
-                            case '#B5DD6C':
-                            case '#7CD246':
-                            case '#0FA865':
-                            case '#93E2C1':
-                                $('.modal-title').html('Training');
-                                break;
-                            case '#A0C7E8':
-                                $('.modal-title').html('Stage');
-                                break;
-                            case '#E5343D':
-                                $('.modal-title').html('Supplement');
-                                $('.modal-body').html('<b>' + calEvent.title + '</b>');
-                                $('.modal-body').append(', ' + calEvent.description);
-                                break;
+                    eventClick: function(calEvent) {
+                        $('#openenActiviteit').modal('show');
+                        if (calEvent.description !== '') {
+                            $('.modal-body').html('<p class="font-weight-bold">' + calEvent.title + '</p>' + '<p>' + calEvent.description + '</p>');
                         }
+                        else {
+                            $('.modal-body').html('<p>' + calEvent.title + '</p>');
+                        }
+                        var kleuren = <?php echo $kleuren ?>;
+                        $.each(kleuren, function(index) {
+                            if (calEvent.color === kleuren[index].kleur) {
+                                $('.modal-title').html(kleuren[index].activiteit);
+                            }
+                        });
                     },
                     events: <?php echo $activiteiten?>
                 });
@@ -132,33 +121,23 @@
                         }
                     },
                     titleFormat: 'D MMMM YYYY',
+                    allDayText: 'Suppl.',
                     height: 'parent',
                     minTime: "06:00:00",
                     eventClick: function(calEvent) {
-                        $('#exampleModalCenter').modal('show');
-                        $('.modal-body').html(calEvent.title);
-                        switch (calEvent.color) {
-                            case '#FF7534':
-                                $('.modal-title').html('Wedstrijd');
-                                break;
-                            case '#BB9BFF':
-                                $('.modal-title').html('Medisch onderzoek');
-                                break;
-                            case '#B5DD6C':
-                            case '#7CD246':
-                            case '#0FA865':
-                            case '#93E2C1':
-                                $('.modal-title').html('Training');
-                                break;
-                            case '#A0C7E8':
-                                $('.modal-title').html('Stage');
-                                break;
-                            case '#E5343D':
-                                $('.modal-title').html('Supplement');
-                                $('.modal-body').html('<b>' + calEvent.title + '</b>');
-                                $('.modal-body').append(', ' + calEvent.description);
-                                break;
+                        $('#openenActiviteit').modal('show');
+                        if (calEvent.description !== '') {
+                            $('.modal-body').html('<p class="font-weight-bold">' + calEvent.title + '</p>' + '<p>' + calEvent.description + '</p>');
                         }
+                        else {
+                            $('.modal-body').html('<p>' + calEvent.title + '</p>');
+                        }
+                        var kleuren = <?php echo $kleuren ?>;
+                        $.each(kleuren, function(index) {
+                            if (calEvent.color === kleuren[index].kleur) {
+                                $('.modal-title').html(kleuren[index].activiteit);
+                            }
+                        });
                     },
                     events: <?php echo $activiteiten?>
                 });
@@ -169,33 +148,23 @@
                 $('#agenda').fullCalendar({
                     defaultView: 'agendaDay', // Dag agenda
                     titleFormat: 'D/M/Y',
+                    allDayText: 'Suppl.',
                     height: 'auto', // Geen scrollbar bij hoogte
                     minTime: "06:00:00",
                     eventClick: function(calEvent) {
-                        $('#exampleModalCenter').modal('show');
-                        $('.modal-body').html(calEvent.title);
-                        switch (calEvent.color) {
-                            case '#FF7534':
-                                $('.modal-title').html('Wedstrijd');
-                                break;
-                            case '#BB9BFF':
-                                $('.modal-title').html('Medisch onderzoek');
-                                break;
-                            case '#B5DD6C':
-                            case '#7CD246':
-                            case '#0FA865':
-                            case '#93E2C1':
-                                $('.modal-title').html('Training');
-                                break;
-                            case '#A0C7E8':
-                                $('.modal-title').html('Stage');
-                                break;
-                            case '#E5343D':
-                                $('.modal-title').html('Supplement');
-                                $('.modal-body').html('<b>' + calEvent.title + '</b>');
-                                $('.modal-body').append(', ' + calEvent.description);
-                                break;
+                        $('#openenActiviteit').modal('show');
+                        if (calEvent.description !== '') {
+                            $('.modal-body').html('<p class="font-weight-bold">' + calEvent.title + '</p>' + '<p>' + calEvent.description + '</p>');
                         }
+                        else {
+                            $('.modal-body').html('<p>' + calEvent.title + '</p>');
+                        }
+                        var kleuren = <?php echo $kleuren ?>;
+                        $.each(kleuren, function(index) {
+                            if (calEvent.color === kleuren[index].kleur) {
+                                $('.modal-title').html(kleuren[index].activiteit);
+                            }
+                        });
                     },
                     events: <?php echo $activiteiten?>
                 });
@@ -203,7 +172,3 @@
         }
     });
 </script>
-<?php
-
-
-

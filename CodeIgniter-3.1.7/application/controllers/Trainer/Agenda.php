@@ -21,7 +21,11 @@ class Agenda extends CI_Controller {
         parent::__construct();
 
         // Helpers inladen
-        $this->load->helper('url');
+        $this->load->helper("url");
+        $this->load->helper('form');
+        $this->load->helper("my_form_helper");
+        $this->load->helper("my_html_helper");
+        $this->load->helper("notation_helper");
         
         // Auteur inladen in footer
         $this->data = new stdClass();
@@ -37,20 +41,18 @@ class Agenda extends CI_Controller {
     public function index($persoonId) {
         $data['titel'] = 'Agenda\'s zwemmers';
         $data['team'] = $this->data->team;
-                
-        // Inladen van alle agenda punten (wedstrijden, medische onderzoeken, supplementen, trainingen en stages
-        $data_wedstrijden = $this->ladenWedstrijden($persoonId);
-        $data_onderzoeken = $this->ladenOnderzoeken($persoonId);
-        $data_supplementen = $this->ladenSupplementen($persoonId);
-        $data_activiteiten = $this->ladenActiviteiten($persoonId);
-        // Eén grote array maken van alle arrays om deze om te kunnen zetten in JSON code
-        $data_agenda = array_merge($data_supplementen, $data_onderzoeken, $data_wedstrijden, $data_activiteiten);
+
+        if ($persoonId == 0) {
+            $data['activiteiten'] = $this->ladenActiviteitenIedereen();
+        }
+        else {
+            $data['activiteiten'] = $this->ladenActiviteitenPersoon($persoonId);
+        }
         
-        // $data_agenda omzetten in JSON code -> Deze wordt in de variabele $activiteiten gestopt
-        $activiteiten = json_encode($data_agenda);
+        $data['listGroupItems'] = $this->ladenListGroup($persoonId, false);
         
-        $data['activiteiten'] = $activiteiten;
-        $data['listGroupItems'] = $this->ladenListGroup($persoonId);
+        $this->load->model("zwemmer/agenda_model");
+        $data['kleuren'] = json_encode($this->agenda_model->getKleurenActiviteiten());
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
@@ -60,18 +62,49 @@ class Agenda extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function ladenListGroup($persoonId) {
+    public function indexIedereen() {
+        $data['activiteiten'] = $this->ladenAlleActiviteiten();
+        
+        $partials = array('hoofding' => 'main_header',
+            'menu' => 'trainer_main_menu',
+            'inhoud' => 'trainer/agenda',
+            'voetnoot' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function ladenListGroup($persoonId, $aanpassen) {
+        if ($aanpassen) {
+            $link = 'aanpassen';
+        }
+        else {
+            $link = 'index';
+        }
+        
+        $zwemmersListGroup = $this->ladenListGroupKeuze($persoonId, $link);
+        
+        return $zwemmersListGroup;
+    }
+    
+    public function ladenListGroupKeuze($persoonId, $link) {
         $this->load->model("trainer/zwemmers_model");
         $zwemmers = $this->zwemmers_model->getZwemmers();
         sort($zwemmers);
-        $zwemmersListGroup = [];
+        $zwemmersListGroup = [];        
+        
+        if ($persoonId == 0) {
+            $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/$link/0?persoonId=0") . '" class="list-group-item list-group-item-action active">Iedereen</a>';
+        }
+        else {
+            $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/$link/0?persoonId=0") . '" class="list-group-item list-group-item-action">Iedereen</a>';
+        }
         
         foreach ($zwemmers as $zwemmer) {
             if ($zwemmer->id == $persoonId) {
-                $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/index/$zwemmer->id") . '" class="list-group-item list-group-item-action active">' . $zwemmer->voornaam . ' ' . $zwemmer->achternaam . '</a>';
+                $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/$link/$zwemmer->id?persoonId=$zwemmer->id") . '" class="list-group-item list-group-item-action active">' . $zwemmer->voornaam . ' ' . $zwemmer->achternaam . '</a>';
             }
             else {
-                $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/index/$zwemmer->id") . '" class="list-group-item list-group-item-action">' . $zwemmer->voornaam . ' ' . $zwemmer->achternaam . '</a>';
+                $zwemmersListGroup[] = '<a href="' . site_url("/Trainer/Agenda/$link/$zwemmer->id?persoonId=$zwemmer->id") . '" class="list-group-item list-group-item-action">' . $zwemmer->voornaam . ' ' . $zwemmer->achternaam . '</a>';
             }
         }
         
@@ -88,7 +121,9 @@ class Agenda extends CI_Controller {
         // Wedstrijden worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($wedstrijden as $wedstrijd) {                    
             $data_wedstrijden[] = array(
+                "extra" => $wedstrijd->wedstrijd->id,
                 "title" => $wedstrijd->wedstrijd->naam, // Titel van het event in de agenda
+                "description" => '',
                 "start" => $wedstrijd->wedstrijd->datumStart, // Beginuur/begindatum van het event in de agenda
                 "end" => $wedstrijd->wedstrijd->datumStop, // Einduur/einddatum van het event in de agenda
                 "color" => $this->agenda_model->getKleurActiviteit(1)->kleur, // Kleur van het event in de agenda
@@ -109,7 +144,9 @@ class Agenda extends CI_Controller {
         // Medische onderzoeken worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($onderzoeken as $onderzoek) {                    
             $data_onderzoeken[] = array(
+                "extra" => $onderzoek->id,
                 "title" => $onderzoek->omschrijving,
+                "description" => '',
                 "start" => $onderzoek->tijdstipStart,
                 "end" => $onderzoek->tijdstipStop,
                 "color" => $this->agenda_model->getKleurActiviteit(2)->kleur,
@@ -183,6 +220,8 @@ class Agenda extends CI_Controller {
             $color = $this->kiesKleurActiviteiten($activiteit->activiteit->id);
                                
             $data_activiteiten[] = array(
+                "extra" => $activiteit->activiteit->id,
+                "description" => '',
                 "title" => $activiteit->activiteit->stageTitel,
                 "start" => $activiteit->activiteit->tijdstipStart,
                 "end" => $activiteit->activiteit->tijdstipStop,
@@ -204,8 +243,8 @@ class Agenda extends CI_Controller {
         // Supplementen worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($supplementen as $supplement) {                    
             $data_supplementen[] = array(
-                "id" => $supplement->id,
-                "description" => $supplement->functie->supplementFunctie,
+                "extra" => $supplement->id,
+                "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
                 "title" => $supplement->supplement->naam,
                 "start" => $supplement->datum,
                 "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
@@ -223,7 +262,112 @@ class Agenda extends CI_Controller {
         return $kleuren;
     }
     
-    public function aanpassen() {
+    public function ladenActiviteitenIedereen() {
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmers = $this->zwemmers_model->getZwemmers();
         
+        // Inladen van alle agenda punten (wedstrijden, medische onderzoeken, supplementen, trainingen en stages) van iedereen
+        $data_wedstrijden = [];
+        $data_onderzoeken = [];
+        $data_supplementen = [];
+        $data_activiteiten = [];
+        foreach ($zwemmers as $zwemmer) {
+            $data_wedstrijden = array_merge($data_wedstrijden, $this->ladenWedstrijden($zwemmer->id));
+            $data_onderzoeken = array_merge($data_onderzoeken, $this->ladenOnderzoeken($zwemmer->id));
+            $data_supplementen = array_merge($data_supplementen, $this->ladenSupplementen($zwemmer->id));
+            $data_activiteiten = array_merge($data_activiteiten, $this->ladenActiviteiten($zwemmer->id));
+        }
+        
+        // Eén grote array maken van alle arrays om deze om te kunnen zetten in JSON code
+        $data_agenda = array_merge($data_supplementen, $data_onderzoeken, $data_wedstrijden, $data_activiteiten);
+        
+        $activiteiten = json_encode($data_agenda);
+        
+        return $activiteiten;
+    }
+    
+     public function ladenActiviteitenPersoon($persoonId) {        
+        // Inladen van alle agenda punten (wedstrijden, medische onderzoeken, supplementen, trainingen en stages) van één persoon
+        $data_wedstrijden = $this->ladenWedstrijden($persoonId);
+        $data_onderzoeken = $this->ladenOnderzoeken($persoonId);
+        $data_supplementen = $this->ladenSupplementen($persoonId);
+        $data_activiteiten = $this->ladenActiviteiten($persoonId);
+        // Eén grote array maken van alle arrays om deze om te kunnen zetten in JSON code
+        $data_agenda = array_merge($data_supplementen, $data_onderzoeken, $data_wedstrijden, $data_activiteiten);
+        
+        // $data_agenda omzetten in JSON code -> Deze wordt in de variabele $activiteiten gestopt
+        $activiteiten = json_encode($data_agenda);
+        
+        return $activiteiten;
+    }
+
+    
+    public function aanpassen($persoonId) {
+        $data['titel'] = 'Agenda\'s aanpassen';
+        $data['team'] = $this->data->team;
+        
+        if ($persoonId == 0) {
+            $data['activiteiten'] = $this->ladenActiviteitenIedereen();
+        }
+        else {
+            $data['activiteiten'] = $this->ladenActiviteitenPersoon($persoonId);
+        }
+        
+        $data['listGroupItems'] = $this->ladenListGroup($persoonId, true);
+        
+        $this->load->model("zwemmer/agenda_model");
+        $data['kleuren'] = json_encode($this->agenda_model->getKleurenActiviteiten());
+        $data['activiteitenTitels'] = $this->agenda_model->getKleurenActiviteiten();
+        $data['soortTraining'] = $this->agenda_model->getAllTypeTraining();
+        $data['voorPersonen'] = $this->ladenZwemmers();
+        $data['supplementennamen'] = $this->agenda_model->getAllSupplementen();
+
+        $partials = array('hoofding' => 'main_header',
+            'menu' => 'trainer_main_menu',
+            'inhoud' => 'trainer/agenda_aanpassen',
+            'voetnoot' => 'main_footer');
+
+        $this->template->load('main_master', $partials, $data);
+    }
+    
+    public function ladenZwemmers() {
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmers = $this->zwemmers_model->getZwemmers();
+        
+        $voorPersonen = [];
+        $voorPersonen[] = 'Iedereen';
+        foreach ($zwemmers as $zwemmer) {
+            $voorPersonen[] = $zwemmer->voornaam . ' ' . $zwemmer->achternaam;
+        }
+        
+        return $voorPersonen;
+    }
+    
+    public function wijzigActiviteit($id) {
+        $this->load->model("zwemmer/agenda_model");
+        $data = $this->agenda_model->getActiviteit($id);
+
+        print json_encode($data);
+    }
+    
+    public function wijzigWedstrijd($id) {
+        $this->load->model("zwemmer/agenda_model");
+        $data = $this->agenda_model->getActiviteit($id);
+
+        print json_encode($data);
+    }
+    
+    public function wijzigOnderzoek($id) {
+        $this->load->model("zwemmer/agenda_model");
+        $data = $this->agenda_model->getActiviteit($id);
+
+        print json_encode($data);
+    }
+    
+    public function wijzigSupplement($id) {
+        $this->load->model("zwemmer/agenda_model");
+        $data = $this->agenda_model->getActiviteit($id);
+
+        print json_encode($data);
     }
 }
