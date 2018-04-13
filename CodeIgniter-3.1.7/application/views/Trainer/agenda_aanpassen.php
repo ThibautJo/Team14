@@ -59,7 +59,7 @@
             </div>
             <div class="modal-body"> <!-- Modal inhoud -->
                 <?php
-                echo haalJavascriptOp("validator.js"); 
+                echo haalJavascriptOp("validator.js");
 
                 $attributenFormulier = array('id' => 'aanpassenFormulier',
                                                 'data-toggle' => 'validator',
@@ -83,7 +83,7 @@
                             'placeholder' => 'Gebeurtenisnaam', 
                             'required' => 'required'));
                         ?>
-                        <div class="help-block with-errors text-danger"></div>
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
 
