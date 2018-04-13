@@ -59,10 +59,9 @@
             </div>
             <div class="modal-body"> <!-- Modal inhoud -->
                 <?php
-                echo haalJavascriptOp("validator.js");
-
                 $attributenFormulier = array('id' => 'aanpassenFormulier',
-                                                'data-toggle' => 'validator',
+                                                'class' => 'needs-validation',
+                                                'novalidate' => '',
                                                 'role' => 'form');
                 echo form_open('agenda/registreer', $attributenFormulier);
                 
@@ -75,7 +74,7 @@
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
                         <?php
-                        echo form_labelpro('Gebeurtenisnaam', 'gebeurtenisnaam');
+                        echo form_label('Gebeurtenisnaam', 'gebeurtenisnaam');
                         echo form_input(array('name' => 'gebeurtenisnaam',
                             'id' => 'gebeurtenisnaam',
                             'value' => '', 
@@ -83,24 +82,28 @@
                             'placeholder' => 'Gebeurtenisnaam', 
                             'required' => 'required'));
                         ?>
-                        <div class="help-block with-errors"></div>
+                        <div class="invalid-feedback">
+                            Vul dit veld in.
+                        </div>
                     </div>
                 </div>
 
                 <div id="training-form" class="d-none">
                     <div class="form-group">
                         <?php
-                        echo form_labelpro('Soort training', 'soort');
+                        echo form_label('Soort training', 'soort');
                         echo form_dropdown('soort', $soortTraining, '', 'id="soort" class="form-control" required="required"');
                         ?>
-                        <div class="help-block with-errors"></div>
+                        <div class="invalid-feedback">
+                            Maak een keuze uit de lijst.
+                        </div>
                     </div>
                 </div>
                 
                 <div id="wedstrijd-form" class="d-none">
                     <div class="form-group">
                         <?php
-                        echo form_labelpro('Plaats', 'plaats');
+                        echo form_label('Plaats', 'plaats');
                         echo form_input(array('name' => 'plaats',
                             'id' => 'plaats',
                             'value' => '', 
@@ -108,12 +111,14 @@
                             'placeholder' => 'Plaats', 
                             'required' => 'required'));
                         ?>
-                        <div class="help-block with-errors text-danger"></div>
+                        <div class="invalid-feedback">
+                            Vul dit veld in.
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <?php
-                        echo form_labelpro('Programma (link)', 'programma');
+                        echo form_label('Programma (link)', 'programma');
                         echo form_input(array('name' => 'programma',
                             'id' => 'programma',
                             'value' => '', 
@@ -121,7 +126,9 @@
                             'placeholder' => 'http://www.programma.be', 
                             'required' => 'required'));
                         ?>
-                        <div class="help-block with-errors text-danger"></div>
+                        <div class="invalid-feedback">
+                            Vul dit veld in.
+                        </div>
                     </div>
                 </div>
                 
@@ -129,7 +136,7 @@
                     <div class="row">
                         <div class="form-group col-8">
                             <?php
-                            echo form_labelpro('Begindatum', 'begindatum');
+                            echo form_label('Begindatum', 'begindatum');
                             echo form_input(array('name' => 'begindatum',
                                 'id' => 'begindatum', 
                                 'value' => '',
@@ -139,22 +146,26 @@
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
                             ?>
-                            <div class="help-block with-errors"></div>
+                            <div class="invalid-feedback">
+                                Kies een datum.
+                            </div>
                         </div>
 
                         <div class="form-group col-4">
                             <?php
-                            echo form_labelpro('Beginuur', 'beginuur');
+                            echo form_label('Beginuur', 'beginuur');
                             echo form_dropdown('beginuur', $uren, '', 'id="beginuur" class="form-control" required="required"');
                             ?>
-                            <div class="help-block with-errors"></div>
+                            <div class="invalid-feedback">
+                                Kies een uur.
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-8">
                             <?php
-                            echo form_labelpro('Einddatum', 'einddatum');
+                            echo form_label('Einddatum', 'einddatum');
                             echo form_input(array('name' => 'einddatum',
                                 'id' => 'einddatum', 
                                 'value' => '',
@@ -164,15 +175,19 @@
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
                             ?>
-                            <div class="help-block with-errors"></div>
+                            <div class="invalid-feedback">
+                                Kies een datum.
+                            </div>
                         </div>
 
                         <div class="form-group col-4">
                             <?php
-                            echo form_labelpro('Einduur', 'einduur');
+                            echo form_label('Einduur', 'einduur');
                             echo form_dropdown('einduur', $uren, '', 'id="einduur" class="form-control" required="required"');
                             ?>
-                            <div class="help-block with-errors"></div>
+                            <div class="invalid-feedback">
+                                Kies een uur.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,16 +195,18 @@
                 <div id="supplement-form" class="d-none">
                     <div class="form-group">
                         <?php
-                        echo form_labelpro('Supplementnaam', 'supplementnaam');
+                        echo form_label('Supplementnaam', 'supplementnaam');
                         echo form_dropdown('supplementnaam', $supplementennamen, '', 'id="supplementnaam" class="form-control" required="required"');
                         ?>
-                        <div class="help-block with-errors"></div>
+                        <div class="invalid-feedback">
+                            Maak een keuze uit de lijst.
+                        </div>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Extra opmerkingen', 'opmerking');
+                    echo form_label('Extra opmerkingen', 'opmerking');
                     
                     echo form_textarea(array('name' => 'opmerking',
                         'id' => 'opmerking',
@@ -198,15 +215,16 @@
                         'placeholder' => 'opmerking', 
                         'rows' => '3'));
                     ?>
-                    <div class="help-block with-errors text-danger"></div>
                 </div>
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Toevoegen voor', 'personen');
+                    echo form_label('Toevoegen voor', 'personen');
                     echo form_dropdown('personen', $voorPersonen, '', 'id="personen" class="form-control" required="required"');
                     ?>
-                    <div class="help-block with-errors"></div>
+                    <div class="invalid-feedback">
+                        Maak een keuze uit de lijst.
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
