@@ -34,7 +34,7 @@
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/index/0?persoonId=0') ?>">Agenda</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/Aanpassen') ?>">Agenda beheren</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/aanpassen/0?persoonId=0') ?>">Agenda beheren</a>
                 </li>
             </ul>
         </div>
