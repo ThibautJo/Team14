@@ -19,6 +19,10 @@ class Agenda extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
+        
+        // controleren of persoon is aangemeld
+        if (!$this->authex->isAangemeld()) {
+        redirect('welcome/meldAan');}
 
         // Helpers inladen
         $this->load->helper('url');

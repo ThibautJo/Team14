@@ -34,8 +34,8 @@ echo form_open('Welcome/controleerAanmelden', $attributes);
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <?php echo form_submit('knop', 'Aanmelden', 'class="btn button-blue"'); ?>
                     <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                    <?php echo form_submit('knop', 'Aanmelden', 'class="btn button-blue"'); ?>
                 </div>
             </div>
             <?php echo form_close(); ?>

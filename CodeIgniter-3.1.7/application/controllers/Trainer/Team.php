@@ -22,6 +22,13 @@ class Team extends CI_Controller {
 
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->helper("my_form_helper");
+        $this->load->helper("my_html_helper");
+        $this->load->helper("my_url_helper");
+        
+        // Auteur inladen in footer
+        $this->data = new stdClass();
+        $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
 
     // +----------------------------------------------------------
@@ -32,7 +39,8 @@ class Team extends CI_Controller {
 
     public function index() {
         $data['titel'] = 'Team beheren';
-     
+        $data['team'] = $this->data->team;
+        
         $zwemmers = $this->ladenZwemmers();
         
         $data['zwemmers'] = $zwemmers;
@@ -50,22 +58,20 @@ class Team extends CI_Controller {
         $zwemmers = $this->zwemmers_model->getZwemmers();
         
         $data_zwemmers = array();
-        
         foreach ($zwemmers as $zwemmer) {                    
             $data_zwemmers[] = array(
-                "voornaam" => $zwemmer->Voornaam,
-                "achternaam" => $zwemmer->Achternaam,
-                "straat" => $zwemmer->Straat,
-                "huisnummer" => $zwemmer->Huisnummer,
-                "postcode" => $zwemmer->Postcode,
-                "gemeente" => $zwemmer->Gemeente,
-                "telefoonnummer" => $zwemmer->Telefoonnummer,
-                "email" => $zwemmer->Email,
-                "wachtwoord" => $zwemmer->Wachtwoord,
-                "omschrijving" => $zwemmer->Omschrijving,
-                "foto" => $zwemmer->Foto,
-                "color" => '#FF7534',
-                "textColor" => '#000'
+                "voornaam" => $zwemmer->voornaam,
+                "achternaam" => $zwemmer->achternaam,
+                "straat" => $zwemmer->straat,
+                "huisnummer" => $zwemmer->huisnummer,
+                "postcode" => $zwemmer->postcode,
+                "gemeente" => $zwemmer->gemeente,
+                "telefoonnummer" => $zwemmer->telefoonnummer,
+                "email" => $zwemmer->email,
+                "wachtwoord" => $zwemmer->wachtwoord,
+                "omschrijving" => $zwemmer->omschrijving,
+                "foto" => $zwemmer->foto,
+                "color" => '#FF7534',"textColor" => '#000'
             );
         }
         return $zwemmers;
@@ -73,6 +79,7 @@ class Team extends CI_Controller {
     
     public function aanpassen() {
         $data['titel'] = 'Team beheren';
+        $data['team'] = $this->data->team;
         $zwemmers = $this->ladenZwemmers();
         $data['zwemmers'] = $zwemmers;
         
@@ -104,24 +111,34 @@ class Team extends CI_Controller {
         redirect('/trainer/team_lijst');
     }
     
-    public function registreer()
+    public function opslaanZwemmer($actie = "toevoegen")
     {       
         $persoon = new stdClass();
         
-        $persoon->id=$this->input->post('id');
+        // $persoon->id=$this->input->post('id');
         $persoon->voornaam=$this->input->post('voornaam');
         $persoon->achternaam=$this->input->post('achternaam');
         $persoon->email=$this->input->post('email');
         $persoon->wachtwoord=$this->input->post('wachtwoord');
         $persoon->omschrijving=$this->input->post('omschrijving');
         
-        $this->load->model('zwemmers_model');
-        if ($persoon->id == 0) {
+        $this->load->model('trainer/zwemmers_model');
+        //        if($persoon->ID == 0) {
+        if($actie == "toevoegen") {
             $this->zwemmers_model->insert($persoon);
         } else {
+            $persoon->id = $this->input->post('id');
             $this->zwemmers_model->update($persoon);
         }
         redirect('trainer/team');
-        
+    }
+    
+    public function wijzigZwemmer($id) {
+        $data = new stdClass();
+
+        $this->load->model('trainer/zwemmers_model');
+        $data = $this->zwemmers_model->get($id);
+
+        print json_encode($data);
     }
 }
