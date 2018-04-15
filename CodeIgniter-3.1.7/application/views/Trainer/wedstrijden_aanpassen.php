@@ -11,52 +11,46 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
+echo haalJavascriptOp("validator.js");
 ?>
 
 <div id="wedstrijd">
   <h1><?php echo $maand; ?></h1>
 
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Datum</th>
-        <th scope="col">Naam</th>
-        <th scope="col">Locatie</th>
-        <th scope="col">Programma</th>
-        <th scope="col">INgeschrevenen</th>
-        <th scope="col"></th>
-        <th scope="col"><button type='button' class='btn btn-warning btn-xs btn-round' data-toggle="modal" data-target="#wedstrijdToevoegen" id='' onclick="reeksenLeegmaken()" value=''><i class='fas fa-plus'></button></th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
+  <?php
+  $template = array(
+    'table_open' => '<table class="table table-hover">'
+  );
+  $this->table->set_template($template);
 
-      // var_dump($wedstrijden[0]);
+  $this->table->set_heading(array('data' => 'Datum', 'scope' => 'col'), array('data' => 'Naam', 'scope' => 'col'), array('data' => 'Locatie', 'scope' => 'col'),
+                            array('data' => 'Programma', 'scope' => 'col'), array('data' => 'Ingeschrevenen', 'scope' => 'col'), "Actie",
+                          "<button type='button' class='btn btn-warning btn-xs btn-round' data-toggle='modal' data-target='#wedstrijdToevoegen' id='' onclick='reeksenLeegmaken()' value=''><i class='fas fa-plus'></button>");
 
-      foreach ($wedstrijden as $wedstrijd) {
-        echo "<tr scope='row' id='". $wedstrijd->id ."'>";
-        echo "<td>" . date("d-m-Y", strtotime($wedstrijd->datumStart)) . "</td>";
-        echo "<td>" . $wedstrijd->naam . "</td>";
-        echo "<td>" . $wedstrijd->plaats . "</td>";
-        echo "<td><a href='http://".$wedstrijd->programma."'>Open Programma</a></td>";
-        echo "<td>";
-        if ($wedstrijd->personen->namen) {
-          foreach ($wedstrijd->personen->namen as $persoon) {
-            echo $persoon;
-          }
-        }
-        else {
-          echo "...";
-        }
-        echo "</td>";
-        echo "<td>  <button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button></td>";
-        echo "<td>  <button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button></td>";
-        echo "</tr>";
-      }
+  $this->table->add_row();
 
-      ?>
-    </tbody>
-  </table>
+  // var_dump($wedstrijden);
+
+  foreach ($wedstrijden as $wedstrijd) {
+  echo "<tr scope='row' id='". $wedstrijd->id ."'>";
+  if ($wedstrijd->personen->namen) {
+    foreach ($wedstrijd->personen->namen as $persoon) {
+      $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
+      array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon,
+      "<button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button>",
+     "<button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button>" );
+    }
+  }
+  else {
+    $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
+    array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), '...',
+    "<button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button>",
+   "<button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button>" );
+  }
+  echo "</tr>";
+  }
+  echo $this->table->generate();
+   ?>
 
   <button type="button" class="btn btn-primary" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=weergaven'">Weergaven</button>
 
@@ -72,15 +66,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="form-wedstrijd" action="#" method="post">
+        <?php
+        $attributenFormulier = array('id' => 'form-wedstrijd',
+            'data-toggle' => 'validator',
+            'role' => 'form');
+        echo form_open('#', $attributenFormulier);
+
+         ?>
           <table>
             <tr>
               <td>
-                <label for="titel-wedstrijd">Titel</label>
-                <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
+                <?php
+                    echo form_label("Titel", 'titel-wedstrijd');
+                    echo form_input(array('name'=>'titel-wedstrijd', 'id'=>'titel-wedstrijd', 'required' => 'required'));
+                ?>
               </td>
               <td rowspan="4" class="reeksen">
-                <label for="programma-wedstrijd">Voeg een reeks toe:</label>
+                <?php echo form_label("Voeg een reeks toe:", 'programma-wedstrijd'); ?>
                 <select class="afstand-wedstrijd">
                   <?php
                   //adding slag en afstand
@@ -104,27 +106,33 @@
             </tr>
             <tr>
               <td>
-                <label for="datum-wedstrijd">Datum</label>
-                <input type="date" name="datum-wedstrijdStart" id="datum-wedstrijdStart" required> <p style="display: inline; margin: 0 10px;"> tot </p>
-                <input type="date" name="datum-wedstrijdStop" id="datum-wedstrijdStop" required>
+                <?php
+                  echo form_label("Datum", 'datum-wedstrijd');
+                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStart', 'id'=>'datum-wedstrijdStart', 'required'));
+                  echo '<p style="display: inline; margin: 0 10px;"> tot </p>';
+                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStop', 'id'=>'datum-wedstrijdStop', 'required'));
+                 ?>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="locatie-wedstrijd">Locatie</label>
-                <input type="text" name="locatie-wedstrijd" id="locatie-wedstrijd" required>
+                <?php
+                  echo form_label("Locatie", 'locatie-wedstrijd');
+                  echo form_input(array('name'=>'locatie-wedstrijd', 'id'=>'locatie-wedstrijd', 'required'));
+                 ?>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="programma-wedstrijd">programma</label>
-                <input type="text" name="programma-wedstrijd" id="programma-wedstrijd" required>
+                <?php
+                  echo form_label("Programma", 'programma-wedstrijd');
+                  echo form_input(array('name'=>'programma-wedstrijd', 'id'=>'programma-wedstrijd', 'required'));
+                 ?>
               </td>
             </tr>
 
           </table>
-
-        </form>
+        <?php echo form_close(); ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="wedstrijdOpslaan('toevoegen')">Opslaan</button>
@@ -144,15 +152,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="form-wedstrijd" action="#" method="post">
+        <?php
+        $attributenFormulier = array('id' => 'form-wedstrijd',
+            'data-toggle' => 'validator',
+            'role' => 'form');
+        echo form_open('#', $attributenFormulier);
+
+         ?>
           <table>
             <tr>
               <td>
-                <label for="titel-wedstrijd">Titel</label>
-                <input type="text" name="titel-wedstrijd" id="titel-wedstrijd" required>
+                <?php
+                    echo form_label("Titel", 'titel-wedstrijd');
+                    echo form_input(array('name'=>'titel-wedstrijd', 'id'=>'titel-wedstrijd', 'required' => 'required'));
+                ?>
               </td>
               <td rowspan="4" class="reeksen">
-                <label for="programma-wedstrijd">Voeg een reeks toe:</label>
+                <?php echo form_label("Voeg een reeks toe:", 'programma-wedstrijd'); ?>
                 <select class="afstand-wedstrijd">
                   <?php
                   //adding slag en afstand
@@ -169,34 +185,40 @@
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" onclick="reeksToevoegen('aanpassen')" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" onclick="reeksToevoegen('toevoegen')" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="datum-wedstrijd">Datum</label>
-                <input type="date" name="datum-wedstrijdStart" id="datum-wedstrijdStart" required> <p style="display: inline; margin: 0 10px;"> tot </p>
-                <input type="date" name="datum-wedstrijdStop" id="datum-wedstrijdStop" required>
+                <?php
+                  echo form_label("Datum", 'datum-wedstrijd');
+                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStart', 'id'=>'datum-wedstrijdStart', 'required'));
+                  echo '<p style="display: inline; margin: 0 10px;"> tot </p>';
+                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStop', 'id'=>'datum-wedstrijdStop', 'required'));
+                 ?>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="locatie-wedstrijd">Locatie</label>
-                <input type="text" name="locatie-wedstrijd" id="locatie-wedstrijd" required>
+                <?php
+                  echo form_label("Locatie", 'locatie-wedstrijd');
+                  echo form_input(array('name'=>'locatie-wedstrijd', 'id'=>'locatie-wedstrijd', 'required'));
+                 ?>
               </td>
             </tr>
             <tr>
               <td>
-                <label for="programma-wedstrijd">programma</label>
-                <input type="text" name="programma-wedstrijd" id="programma-wedstrijd" required>
+                <?php
+                  echo form_label("Programma", 'programma-wedstrijd');
+                  echo form_input(array('name'=>'programma-wedstrijd', 'id'=>'programma-wedstrijd', 'required'));
+                 ?>
               </td>
             </tr>
 
           </table>
-          <input type="text" name="wedstrijdID" id="wedstrijdID" value="" hidden>
-        </form>
+        <?php echo form_close(); ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="wedstrijdOpslaan('aanpassen')">Opslaan</button>

@@ -11,49 +11,43 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
+$attributenFormulier = array('id' => 'mijnFormulier',
+    'data-toggle' => 'validator',
+    'role' => 'form');
 ?>
 
 <div id="wedstrijd">
   <h1><?php echo $maand; ?></h1>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Datum</th>
-        <th scope="col">Naam</th>
-        <th scope="col">Locatie</th>
-        <th scope="col">Programma</th>
-        <th scope="col">INgeschrevenen</th>
-      </tr>
-    </thead>
-    <tbody>
       <?php
+      $template = array(
+        'table_open' => '<table class="table">'
+      );
+      $this->table->set_template($template);
+
+      $this->table->set_heading(array('data' => 'Datum', 'scope' => 'col'), array('data' => 'Naam', 'scope' => 'col'), array('data' => 'Locatie', 'scope' => 'col'),
+                                array('data' => 'Programma', 'scope' => 'col'), array('data' => 'Ingeschrevenen', 'scope' => 'col'));
+
+      $this->table->add_row();
 
       // var_dump($wedstrijden);
 
       foreach ($wedstrijden as $wedstrijd) {
-      echo "<tr scope='row'>";
       echo "<tr scope='row' id='". $wedstrijd->id ."'>";
-      echo "<td>" . date("d-m-Y", strtotime($wedstrijd->datumStart)) . "</td>";
-      echo "<td>" . $wedstrijd->naam . "</td>";
-      echo "<td>" . $wedstrijd->plaats . "</td>";
-      echo "<td><a href='http://".$wedstrijd->programma."'>Open Programma</a></td>";
-      echo "<td>";
       if ($wedstrijd->personen->namen) {
         foreach ($wedstrijd->personen->namen as $persoon) {
-          echo $persoon;
+          $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
+          array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon );
         }
       }
       else {
-        echo "...";
+        $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
+        array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), '...' );
       }
-      echo "</td>";
       echo "</tr>";
       }
-
+      echo $this->table->generate();
        ?>
-    </tbody>
-  </table>
 
   <button type="button" class="btn btn-primary" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=aanpassen'">Aanpassen</button>
 
