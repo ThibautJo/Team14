@@ -18,8 +18,8 @@ class Wedstrijden extends CI_Controller {
 
   public function __construct() {
       parent::__construct();
-      
-      // controleren of bevoegde persoon is aangemeld        
+
+      // controleren of bevoegde persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -30,8 +30,11 @@ class Wedstrijden extends CI_Controller {
         }
 
     $this->load->helper('url');
+    $this->load->helper('form');
     $this->load->helper('my_html');
     $this->load->helper('notation');
+
+    $this->load->library('table');
 
     // Auteur inladen in footer
     $this->data = new stdClass();
