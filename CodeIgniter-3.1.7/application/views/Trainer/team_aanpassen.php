@@ -58,7 +58,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Voornaam', 'voornaam');
+                    echo form_label('Voornaam', 'voornaam');
                     echo form_input(array('name' => 'voornaam',
                         'id' => 'voornaam',
                         'value' => '',
@@ -71,7 +71,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Achternaam', 'achternaam');
+                    echo form_label('Achternaam', 'achternaam');
                     echo form_input(array('name' => 'achternaam',
                         'id' => 'achternaam',
                         'value' => '',
@@ -84,7 +84,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Email', 'email');
+                    echo form_label('Email', 'email');
                     echo form_input(array('name' => 'email',
                         'id' => 'email',
                         'value' => '',
@@ -97,7 +97,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Wachtwoord', 'wachtwoord');
+                    echo form_label('Wachtwoord', 'wachtwoord');
                     echo form_input(array('name' => 'wachtwoord',
                         'id' => 'wachtwoord',
                         'value' => '',
@@ -110,7 +110,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Over jezelf', 'over jezelf');
+                    echo form_label('Over jezelf', 'over jezelf');
                     echo form_input(array('name' => 'omschrijving',
                         'id' => 'omschrijving',
                         'value' => '',
@@ -151,7 +151,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Voornaam', 'voornaam');
+                    echo form_label('Voornaam', 'voornaam');
                     echo form_input(array('name' => 'voornaam',
                         'id' => 'voornaam',
                         'value' => '',
@@ -164,7 +164,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Achternaam', 'achternaam');
+                    echo form_label('Achternaam', 'achternaam');
                     echo form_input(array('name' => 'achternaam',
                         'id' => 'achternaam',
                         'value' => '',
@@ -177,7 +177,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Email', 'email');
+                    echo form_label('Email', 'email');
                     echo form_input(array('name' => 'email',
                         'id' => 'email',
                         'value' => '',
@@ -190,7 +190,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Wachtwoord', 'wachtwoord');
+                    echo form_label('Wachtwoord', 'wachtwoord');
                     echo form_input(array('name' => 'wachtwoord',
                         'id' => 'wachtwoord',
                         'value' => '',
@@ -203,7 +203,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Over jezelf', 'over jezelf');
+                    echo form_label('Over jezelf', 'over jezelf');
                     echo form_input(array('name' => 'omschrijving',
                         'id' => 'omschrijving',
                         'value' => '',

@@ -2,6 +2,13 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * @class Team
+ * @brief Controller-klasse voor team
+ *
+ * Controller-klasse met alle methodes die gebruikt worden om zwemmers(personen) te beheren
+ */
+
 class Team extends CI_Controller {
 
     // +----------------------------------------------------------
@@ -15,16 +22,20 @@ class Team extends CI_Controller {
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
-
+    
+    /**
+     * Constructor
+     */
+    
     public function __construct() {
 
         parent::__construct();
 
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->helper("my_form_helper");
-        $this->load->helper("my_html_helper");
-        $this->load->helper("my_url_helper");
+        $this->load->helper("MY_form_helper");
+        $this->load->helper("MY_html_helper");
+        $this->load->helper("MY_url_helper");
         
         // Auteur inladen in footer
         $this->data = new stdClass();
@@ -36,7 +47,14 @@ class Team extends CI_Controller {
     // |    Zwemmers beheren
     // |
     // +----------------------------------------------------------
-
+    
+    /**
+     * Haalt alle personen op via Zwemmers_model en
+     * toont de resulterende objecten in de view team_lijst.php
+     *
+     * @see Zwemmers_model::getZwemmers()
+     * @see team_lijst.php
+     */
     public function index() {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
@@ -53,6 +71,13 @@ class Team extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
+    /**
+     * Haalt de gegevens op van de zwemmers(personen) via Zwemmers_model en
+     * stopt de resulterende objecten in een array $zwemmers
+     * 
+     * @see Zwemmers_model::getZwemmers()
+     * @return type $zwemmers
+     */
     public function ladenZwemmers(){
         $this->load->model("trainer/zwemmers_model");
         $zwemmers = $this->zwemmers_model->getZwemmers();
@@ -76,7 +101,13 @@ class Team extends CI_Controller {
         }
         return $zwemmers;
     }
-    
+    /**
+     * Haalt alle personen op via Zwemmers_model en
+     * toont de resulterende objecten in de view team_lijst.php
+     *
+     * @see Zwemmers_model::getZwemmers()
+     * @see team_aanpassen.php
+     */
     public function aanpassen() {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
@@ -91,8 +122,10 @@ class Team extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
+    
     public function wijzig() {
         $data['titel'] = 'Team wijzigen';
+        $data['team'] = $this->data->team;
         $zwemmers = $this->ladenZwemmers();
         $data['zwemmers'] = $zwemmers;
         
@@ -111,6 +144,12 @@ class Team extends CI_Controller {
         redirect('/trainer/team_lijst');
     }
     
+    /**
+     * Slaagt het nieuw/aangepaste zwemmer op via Zwemmers_model en toont de aangepaste lijst in de view team_lijst.php
+     *
+     * @see Zwemmers_model::insert($persoon);
+     * @see Zwemmers_model::update($persoon);
+     */
     public function opslaanZwemmer($actie = "toevoegen")
     {       
         $persoon = new stdClass();
@@ -133,6 +172,14 @@ class Team extends CI_Controller {
         redirect('trainer/team');
     }
     
+    /**
+     * Haalt de id=$id op van het te wijzigen persoon-record via Zwemmers_model
+     * en toont de objecten in de view team_aanpassen.php
+     *
+     * @param $id De id van het te wijzigen zwemmer(persoon)
+     * @see Zwemmers_model::get();
+     * @see team_aanpassen.php
+     */
     public function wijzigZwemmer($id) {
         $data = new stdClass();
 
