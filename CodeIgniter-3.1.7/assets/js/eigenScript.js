@@ -1,4 +1,3 @@
-
 // form validation
 (function() {
   'use strict';
@@ -17,7 +16,10 @@
     });
   }, false);
 })();
-
+//modal Close
+$(".close").click(function(){
+  $('.modal').modal('hide');
+});
 // wedstrijden starts
 function wedstrijdOpslaan(actie){
 
@@ -424,7 +426,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit) {
     $('#aanpassenActiviteit #wedstrijd-form').addClass('d-none');
     $('#aanpassenActiviteit #tijdstip-form').addClass('d-none');
     $('#aanpassenActiviteit #supplement-form').addClass('d-none');
-    
+
     switch (true) {
         case activiteit === "Wedstrijd":
             break;
@@ -441,7 +443,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit) {
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['stageTitel']);
             $("#aanpassenActiviteit #soort option[value='" + typeTraininId + "']").attr("selected","selected");
-            
+
             console.log('ok5');
             break;
     }

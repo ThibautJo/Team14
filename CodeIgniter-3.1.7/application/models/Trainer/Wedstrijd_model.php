@@ -23,7 +23,12 @@ class Wedstrijd_model extends CI_Model {
     $this->load->helper('url');
   }
 
-  public function getWedstrijden() {
+  public function getWedstrijden($start = null, $end = null) {
+    if($start != null && $end != null){
+      $this->db->where('datumStart >=', $start);
+      $this->db->where('datumStop <=', $end);
+    }
+
     $query = $this->db->get('wedstrijd');
     return $query->result();
   }

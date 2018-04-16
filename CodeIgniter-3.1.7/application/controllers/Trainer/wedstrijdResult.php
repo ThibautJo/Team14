@@ -17,17 +17,17 @@ class Wedstrijden extends CI_Controller {
   // +----------------------------------------------------------
 
   public function __construct() {
-    parent::__construct();
+      parent::__construct();
 
-    // controleren of bevoegde persoon is aangemeld
-    if (!$this->authex->isAangemeld()) {
-      redirect('welcome/meldAan');
-    } else {
-      $persoon = $this->authex->getPersoonInfo();
-      if ($persoon->soort != "Trainer") {
-        redirect('welcome/meldAan');
-      }
-    }
+      // controleren of bevoegde persoon is aangemeld
+        if (!$this->authex->isAangemeld()) {
+            redirect('welcome/meldAan');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->soort != "Trainer") {
+                redirect('welcome/meldAan');
+            }
+        }
 
     $this->load->helper('url');
     $this->load->helper('form');
@@ -44,57 +44,19 @@ class Wedstrijden extends CI_Controller {
 
   // +----------------------------------------------------------
   // |
-  // |    wedstrijd beheren
+  // |    Zwemmers beheren
   // |
   // +----------------------------------------------------------
 
   public function index() {
-
     $data['titel'] = 'Wedstrijden';
     $data['team'] = $this->data->team;
 
     //wedstrijden ophalen van de huidige maand
-    $maand = $this->input->get('maand');
-    $jaar = $this->input->get('jaar');
-    ($maand == null) ? $data['maand'] = 0 : $data['maand'] = $maand;
-    ($jaar == null) ? $data['jaar'] = date("Y") : $data['jaar'] = $jaar;
-
-    if ($this->input->get('actie') == "vorige") {
-      $jaar -= 1;
-      $data["jaar"] = $jaar;
-    }
-    else{
-      if ($this->input->get('actie') != null) {
-        $jaar += 1;
-        $data["jaar"] = $jaar;
-      }
-    }
-
-    $firstDay = null;
-    $lastDay = null;
-    if ($jaar != null) {
-      if ($maand != null && $maand != 0) {
-        $date = date_create($jaar."-".$maand."-1");
-        $query_date = date_format($date,"Y-m-d");
-
-        // First day of the month.
-        $firstDay = date('Y-m-01', strtotime($query_date));
-
-        // Last day of the month.
-        $lastDay = date('Y-m-t', strtotime($query_date));
-      }
-      else{
-        //alle wedstrijden van ander jaren laten zien
-        // First day of the year.
-        $firstDay = date('Y-m-d',strtotime(date($jaar.'-01-01')));
-
-        // Last day of the year.
-        $lastDay = date('Y-m-d', strtotime($jaar.'-12-31'));
-      }
-    }
+    $data['maand'] = date("F");
 
     $this->load->model('trainer/wedstrijd_model');
-    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
+    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden();
 
     $i = 0;
     foreach ($data['wedstrijden'] as $wedstrijd) {
