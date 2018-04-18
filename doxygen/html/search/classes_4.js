@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['team',['Team',['../class_team.html',1,'']]],
-  ['template',['Template',['../class_template.html',1,'']]]
+  ['persoon_5fmodel',['Persoon_model',['../class_persoon__model.html',1,'']]]
 ];

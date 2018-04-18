@@ -27,9 +27,9 @@ foreach ($functies as $functie) {
 }
 
 $attributenFormulier = array('id' => 'form-supplement',
-    'data-toggle' => 'validator',
+    'class' => 'needs-validation',
+    'novalidate' => '',
     'role' => 'form');
-
 ?>
 
 <table class="table">
@@ -74,7 +74,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                 ?>
                         <div class="form-group">
                             <?php
-                            echo form_labelpro('Naam', 'naam');
+                            echo form_label('Naam', 'naam');
                             echo form_input(array('name' => 'naam',
                                 'id' => 'naam',
                                 'value' => '',
@@ -82,20 +82,20 @@ $attributenFormulier = array('id' => 'form-supplement',
                                 'placeholder' => 'Naam',
                                 'required' => 'required'));
                             ?>
-                            <div class="help-block with-errors"></div>
+                            <div class="invalid-feedback">
+                                Vul dit veld in.
+                            </div>
                         </div>
                         <div class="form-group">
                             <?php
-                            echo form_labelpro('Functie', 'functie');
+                            echo form_label('Functie', 'functie');
                             echo form_dropdown('functie', $functieOpties, '');
-
                             ?>
-                            <div class="help-block with-errors"></div>
                         </div>
                  
                         <div class="form-group">
                             <?php
-                            echo form_labelpro('Omschrijving', 'omschrijving');
+                            echo form_label('Omschrijving', 'omschrijving');
                             echo form_input(array('name' => 'omschrijving',
                                 'id' => 'omschrijving',
                                 'value' => '',
@@ -103,7 +103,9 @@ $attributenFormulier = array('id' => 'form-supplement',
                                 'placeholder' => 'Omschrijving',
                                 'required' => 'required'));
                             ?>
-                            <div class="help-block with-errors"></div>
+                            <div class="invalid-feedback">
+                                Vul dit veld in.
+                            </div>
                         </div>
                           
                       <?php echo form_close();?>
@@ -139,7 +141,7 @@ $attributenFormulier = array('id' => 'form-supplement',
         
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Naam', 'naam');
+                    echo form_label('Naam', 'naam');
                     echo form_input(array('name' => 'naam',
                         'id' => 'naam',
                         'value' => '',
@@ -147,20 +149,21 @@ $attributenFormulier = array('id' => 'form-supplement',
                         'placeholder' => 'Naam',
                         'required' => 'required'));
                     ?>
-                    <div class="help-block with-errors"></div>
+                    <div class="invalid-feedback">
+                        Vul dit veld in.
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Functie', 'functie');
+                    echo form_label('Functie', 'functie');
                     echo form_dropdown('functie', $functieOpties, '', "id='functie'");
                     ?>
-                    <div class="help-block with-errors"></div>
                 </div>
                 
                 <div class="form-group">
                     <?php
-                    echo form_labelpro('Omschrijving', 'omschrijving');
+                    echo form_label('Omschrijving', 'omschrijving');
                     echo form_input(array('name' => 'omschrijving',
                         'id' => 'omschrijving',
                         'value' => '',
@@ -168,7 +171,9 @@ $attributenFormulier = array('id' => 'form-supplement',
                         'placeholder' => 'Omschrijving',
                         'required' => 'required'));
                     ?>
-                    <div class="help-block with-errors"></div>
+                    <div class="invalid-feedback">
+                        Vul dit veld in.
+                    </div>
                 </div>
 
                 <?php echo form_close(); ?>

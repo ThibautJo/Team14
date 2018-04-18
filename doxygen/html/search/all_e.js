@@ -8,6 +8,8 @@ var searchData=
   ['max_5flength',['max_length',['../class_c_i___form__validation.html#a0896e538dd761148e6b3dfb0e033d344',1,'CI_Form_validation']]],
   ['mcrypt_5fdecode',['mcrypt_decode',['../class_c_i___encrypt.html#a85f02c928abbbc5a6bf038ea5292324d',1,'CI_Encrypt']]],
   ['mcrypt_5fencode',['mcrypt_encode',['../class_c_i___encrypt.html#aa1d7e40f65deb526fe4619da65c6b1ec',1,'CI_Encrypt']]],
+  ['melding',['Melding',['../class_melding.html',1,'']]],
+  ['melding_5fmodel',['Melding_model',['../class_melding__model.html',1,'']]],
   ['memory_5fusage',['memory_usage',['../class_c_i___benchmark.html#abdb10dca75c4c15f94796af1602d5b80',1,'CI_Benchmark']]],
   ['message',['message',['../class_c_i___email.html#a62559aacd297073072c30009daa8de86',1,'CI_Email']]],
   ['method',['method',['../class_c_i___input.html#aaa22626885bdf9dda2346ee6422203ef',1,'CI_Input\method()'],['../class_c_i___xmlrpc.html#a3d7e090549ec52eba8cf65598eefa72c',1,'CI_Xmlrpc\method()']]],

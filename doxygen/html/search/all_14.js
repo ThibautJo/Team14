@@ -27,7 +27,6 @@ var searchData=
   ['server',['server',['../class_c_i___input.html#aab98211ca0db00061e8eb8b928f4fd90',1,'CI_Input\server()'],['../class_c_i___xmlrpc.html#a9969815a7195f6915eb73afcab3f9e9e',1,'CI_Xmlrpc\server()']]],
   ['sess_5fdestroy',['sess_destroy',['../class_c_i___session.html#a9451d1625c402b8d712aedaa5ebc752d',1,'CI_Session']]],
   ['sess_5fregenerate',['sess_regenerate',['../class_c_i___session.html#afec342ef8722ac0ce4a672e6cfad60c0',1,'CI_Session']]],
-  ['sessies_5fmodel',['Sessies_model',['../class_sessies__model.html',1,'']]],
   ['sessionhandlerinterface',['SessionHandlerInterface',['../interface_session_handler_interface.html',1,'']]],
   ['set',['set',['../class_c_i___d_b__query__builder.html#a1589c46344f3a216a129cf65659b117c',1,'CI_DB_query_builder']]],
   ['set_5fallowed_5ftypes',['set_allowed_types',['../class_c_i___upload.html#a7c7ddfefedddc3fd625dd816d67c21bf',1,'CI_Upload']]],
@@ -111,6 +110,8 @@ var searchData=
   ['subject',['subject',['../class_c_i___email.html#aaa61b3aaa6cc4c90e26686e4bf41587a',1,'CI_Email']]],
   ['substr',['substr',['../class_c_i___log.html#a101caef57ef0b165da5747e2c2e6c9dc',1,'CI_Log\substr()'],['../class_c_i___output.html#a101caef57ef0b165da5747e2c2e6c9dc',1,'CI_Output\substr()'],['../class_c_i___email.html#a101caef57ef0b165da5747e2c2e6c9dc',1,'CI_Email\substr()'],['../class_c_i___encrypt.html#a101caef57ef0b165da5747e2c2e6c9dc',1,'CI_Encrypt\substr()'],['../class_c_i___encryption.html#a101caef57ef0b165da5747e2c2e6c9dc',1,'CI_Encryption\substr()'],['../class_c_i___zip.html#a101caef57ef0b165da5747e2c2e6c9dc',1,'CI_Zip\substr()']]],
   ['supplement',['Supplement',['../class_supplement.html',1,'']]],
+  ['supplement_5fform_2ephp',['supplement_form.php',['../supplement__form_8php.html',1,'']]],
+  ['supplement_5flijst_2ephp',['supplement_lijst.php',['../supplement__lijst_8php.html',1,'']]],
   ['supplement_5fmodel',['Supplement_model',['../class_supplement__model.html',1,'']]],
   ['supplementfunctie_5fmodel',['Supplementfunctie_model',['../class_supplementfunctie__model.html',1,'']]],
   ['system_5furl',['system_url',['../class_c_i___config.html#a71e857f8dd38c230f1ce11bacf177ba8',1,'CI_Config']]]
