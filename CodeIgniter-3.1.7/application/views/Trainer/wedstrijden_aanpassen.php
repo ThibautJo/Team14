@@ -1,5 +1,11 @@
 
 <?php
+/**
+ * @file wedstrijden_aanpassen.php
+ *
+ * View waarin de gegevens van een wedstrijden worden weergegeven
+ */
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -194,7 +200,6 @@ $maanden = array(
             'data-toggle' => 'validator',
             'role' => 'form');
         echo form_open('#', $attributenFormulier);
-
          ?>
           <table>
             <tr>
@@ -222,7 +227,7 @@ $maanden = array(
                   }
                   ?>
                 </select>
-                <button type="button" class="btn btn-default" onclick="reeksToevoegen('toevoegen')" aria-label="Left Align" style="margin-left: 10px;">
+                <button type="button" class="btn btn-default" onclick="reeksToevoegen('aanpassen')" aria-label="Left Align" style="margin-left: 10px;">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">+</span>
                 </button>
               </td>

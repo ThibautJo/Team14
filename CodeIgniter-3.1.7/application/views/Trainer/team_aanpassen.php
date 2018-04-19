@@ -10,7 +10,6 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
-echo haalJavascriptOp("validator.js");
 
 $attributenFormulier = array('id' => 'form-zwemmer',
     'data-toggle' => 'validator',
@@ -22,6 +21,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
     <div style="float:right">
         <?php
         echo "<button type='button' class='btn btn-warning btn-xs btn-round' data-toggle='modal' data-toggle='tooltip' title='Zwemmer toevoegen' data-target='#zwemmerToevoegen'><i class='fas fa-plus'></i></button>";
+        echo "<button type='button' class='btn btn-warning btn-xs btn-round' data-toggle='modal' data-toggle='tooltip' title='Zwemmer toevoegen uit archief' data-target='#zwemmerToevoegenUitArchief'><i class='fas fa-archive'></i></button>";
         ?>
         <br>
     </div>
@@ -33,7 +33,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
                 <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->id . "' onclick='zwemmerUpdate(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer wijzigen' data-target='#zwemmerAanpassen'>" . "<i class='fas fa-pencil-alt'></i></button>"
-                . anchor('Trainer/Team/archiveer/' . $zwemmer->id, form_button("knopSchrap", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
+                        . anchor('Trainer/Team/archiveren/' . $zwemmer->id, form_button("knopArchiveer", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
             }
             ?>
         </tbody>
@@ -120,6 +120,8 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                
+                <?php echo form_close();?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
@@ -212,10 +214,50 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                <?php echo form_close();?>
             </div>
             <div class="modal-footer form-group">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
                 <button type="button" class="btn button-blue" onclick="zwemmerOpslaan('aanpassen')">Opslaan</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+$archief=[];
+
+foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
+    $archief = $zwemmeruitarchief->voornaam;
+}
+
+?>
+<!-- Uit archief halen -->
+<div class="modal fade" id="zwemmerUitArchiefHalen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer toevoegen</h5> <!-- Modal titel -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- Modal sluit knop ( X ) -->
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> <!-- Modal inhoud -->
+                <?php
+                echo form_open('', $attributenFormulier);
+                ?>
+                <div class="form-group">
+                            <?php
+                            echo form_labelpro('Functie', 'functie');
+                            echo form_dropdown('functie', $archief, '');
+
+                            ?>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                <?php echo form_close();?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                <button type="button" class="btn button-blue" onclick="zwemmerOpslaan('toevoegen')">Opslaan</button>
             </div>
         </div>
     </div>

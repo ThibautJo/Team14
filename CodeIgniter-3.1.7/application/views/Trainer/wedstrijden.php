@@ -1,5 +1,10 @@
-
 <?php
+/**
+ * @file wedstrijden_weergaven.php
+ *
+ * View waarin de gegevens van een wedstrijden worden weergegeven
+ */
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
