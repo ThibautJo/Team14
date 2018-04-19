@@ -5,17 +5,16 @@ if (!defined('BASEPATH'))
 
 class Authex {
 
+     // +----------------------------------------------------------
+    // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
-    // | TV Shop
+    // |    Auteur: Jolien Lauwers       |       Helper: 
     // +----------------------------------------------------------
-    // | 2ITF - 201x-201x
-    // +----------------------------------------------------------
-    // | Authex library
+    // |
+    // |    Authex library
     // |
     // +----------------------------------------------------------
-    // | Nelson Wells (http://nelsonwells.net/2010/05/creating-a-simple-extensible-codeigniter-authentication-library/)
-    // | 
-    // | aangepast door Thomas More
+    // |    Team 14
     // +----------------------------------------------------------
 
     public function __construct() {

@@ -1,19 +1,19 @@
 <?php
 /**
- * @class Supplement_model
- * @brief Model-klasse voor supplementen
+ * @class StartpaginaItem_model.
+ * @brief Model-klasse voor startpaginaItems.
  * 
- * Model-klasse die alle methodes bevat om te interageren met de database-table supplement
+ * Model-klasse die alle methodes bevat om te interacteren met de database-table startpaginaItem.
  */
 
 
-class Supplement_model extends CI_Model {
+class StartpaginaItem_model extends CI_Model {
 
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
     // |
-    // |    Supplement model
+    // |    StartpaginaItem model
     // |
     // +----------------------------------------------------------
     // |    Team 14
@@ -22,69 +22,50 @@ class Supplement_model extends CI_Model {
     /**
      * Constructor
      */
+    
     function __construct() {
-        parent::__construct();
-        
+        parent::__construct();        
     }
     
     /**
-     * Retourneert het record met id=$id uit de tabel supplement
-     * @param $id De id van het record dat opgevraagd wordt
-     * @return Het opgevraagde record
+     * Retourneert het record met id=$id uit de tabel startpaginaItem.
+     * @param $id De id van het record dat opgevraagd wordt.
+     * @return Het opgevraagde record.
      */
     
     function get($id) {
         $this->db->where('id', $id);
-        $query = $this->db->get('supplement');
+        $query = $this->db->get('startpaginaitem');
         return $query->row();
-    }
-       
-    /**
-     * Retourneert alle namen alfabetisch met hun functie uit de tabel supplement en supplementfunctie
-     * @return Een array van supplementnamen met bijhorende functieId
-     */
-    
-    function getAllByNaamSupplementWithFunctie() {
-        $this->db->order_by('naam', 'asc');
-        
-        $query = $this->db->get('supplement');
-        $supplementen = $query->result();
-        
-        $this->load->model('trainer/supplementfunctie_model');
-        
-        foreach ($supplementen as $supplement) {
-            $supplement->supplementFunctie = $this->supplementfunctie_model->get($supplement->supplementFunctieId);
-        }
-        return $supplementen;
-    }
+    }          
     
     /**
-     * Verwijdert het record met id=$id uit de tabel supplement
-     * @param $id De id van het record dat opgevraagd wordt
+     * Verwijdert het record met id=$id uit de tabel startpaginaItem.
+     * @param $id De id van het record dat opgevraagd wordt.
      */
     
     function delete($id){
         $this->db->where('id', $id);
-        $this->db->delete('supplement');
+        $this->db->delete('startpaginaitem');
     }
     
     /**
-     * Voegt een nieuw record toe aan de tabel supplement
-     * 
-     * @param $supplement Het supplementen object waar de ingevulde data in zit
+     * Voegt een nieuw record toe aan de tabel startpaginaItem.
+     * @param $startpaginaitem Het startpaginaItem waar de ingevulde data in wordt bewaard.
      */
-    function insert($supplement) {
-        $this->db->insert('supplement', $supplement);
+    
+    function insert($startpaginaitem) {
+        $this->db->insert('startpaginaitem', $startpaginaitem);
     }
     
     /**
-     * Wijzigt een supplement-record uit de tabel supplement
-     * 
-     * @param $supplement Het supplementen object waar de aangepaste data in zit
+     * Wijzigt een startpaginaItem-object uit de tabel startpaginaItem.
+     * @param $startpaginaitem Het supplementen object waar de aangepaste data in zit.
      */
-    function update($supplement) {
-        $this->db->where('id', $supplement->id);
-        $this->db->update('supplement', $supplement);
+    
+    function update($startpaginaitem) {
+        $this->db->where('id', $startpaginaitem->id);
+        $this->db->update('startpaginaitem', $startpaginaitem);
     }
 
 }
