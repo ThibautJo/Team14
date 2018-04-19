@@ -127,7 +127,26 @@ class Agenda_model extends CI_Model {
         return $query->result();
     }
     
+    public function getOnderzoek($onderzoekId) {
+        // Alle medische onderzoeken van een bepaalde persoon ophalen uit de databank
+        $this->db->where('id', $onderzoekId);
+        $query = $this->db->get('medischeafspraak');
+        return $query->row();
+    }
+    
     public function getSupplement($supplementId) {
+        // Supplement ophalen uit de databank
+        $this->db->where('id', $supplementId);
+        $query = $this->db->get('supplementperpersoon');
+        
+        $supplement = $query->row();
+        $supplement->supplement = $this->getSupplementPersoon($supplement->supplementId);
+        $supplement->functie = $this->getSupplementFunctie($supplement->supplement->supplementFunctieId);
+                
+        return $supplement;
+    }
+    
+    public function getSupplementPersoon($supplementId) {
         // Supplement ophalen uit de databank
         $this->db->where('id', $supplementId);
         $query = $this->db->get('supplement');        
@@ -165,7 +184,7 @@ class Agenda_model extends CI_Model {
         
         foreach ($supplementen as $supplement) {
             // Tabel supplementperpersoon joinen met de tabel supplementfunctie
-            $supplement->supplement = $this->getSupplement($supplement->supplementId);
+            $supplement->supplement = $this->getSupplementPersoon($supplement->supplementId);
 
             $supplement->functie = $this->getSupplementFunctie($supplement->supplement->supplementFunctieId);
         }
