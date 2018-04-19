@@ -135,8 +135,8 @@
                 </div>
                 
                 <div id="tijdstip-form" class="d-none">
-                    <div class="row">
-                        <div class="form-group col-8">
+                    <div class="row begindatum">
+                        <div id="container-begindatum" class="form-group col-8">
                             <?php
                             echo form_label('Begindatum', 'begindatum');
                             echo form_input(array('name' => 'begindatum',
@@ -165,8 +165,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="form-group col-8">
+                    <div class="row einddatum">
+                        <div id="container-einddatum" class="form-group col-8">
                             <?php
                             echo form_label('Einddatum', 'einddatum');
                             echo form_input(array('name' => 'einddatum',
@@ -212,9 +212,11 @@
                         echo form_input(array('name' => 'datum',
                             'id' => 'datum', 
                             'value' => '',
-                            'class' => 'form-control',
-                            'required' => 'required',
-                            'type' => 'date'));
+                            'class' => 'form-control datepicker2',
+                                'required' => 'required',
+                                'data-provide' => 'datepicker',
+                                'data-date-format' => 'dd/mm/yyyy',
+                                'data-date-language' => 'nl-BE'));
                         ?>
                         <div class="invalid-feedback">
                             Kies een datum.
@@ -287,7 +289,7 @@
     $(document).ready(function () {
         $('.datepicker2').datepicker({
             autoclose: true,
-            orientation: 'bottom auto'
+            orientation: 'auto'
         });
         
         // Breedte van het scherm opslaan in een variabele
