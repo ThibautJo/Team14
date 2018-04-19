@@ -200,7 +200,6 @@ $maanden = array(
             'data-toggle' => 'validator',
             'role' => 'form');
         echo form_open('#', $attributenFormulier);
-
          ?>
           <table>
             <tr>

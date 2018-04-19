@@ -285,7 +285,6 @@ function zwemmerOpslaan(actie) {
 }
 //zwemmer end
 
-
 // supplement start
 
 function supplementUpdate(supplementID) {
