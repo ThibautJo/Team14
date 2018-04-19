@@ -61,24 +61,42 @@ echo haalJavascriptOp("validator.js");
                 <td>
                   <?php
                   echo form_label("Naam", 'naam-persoon');
-                  echo form_input(array('name'=>'naam-persoon', 'id'=>'naam-persoon', 'required' => 'required'));
                   ?>
+                  <select class="" name="" id="zwemmersToevoegen">
+                    <?php
+                        foreach ($zwemmers as $zwemmer) {
+                          echo "<option value='".$zwemmer->id."'>".$zwemmer->voornaam." ".$zwemmer->achternaam."</option>";
+                        }
+                     ?>
+                  </select>
                 </td>
               </tr>
               <tr>
-                <td>
+                <td colspan="2">
                   <?php
                   echo form_label("Wedstrijd", 'naam-wedstrijd');
-                  echo form_input(array('name'=>'naam-wedstrijd', 'id'=>'naam-wedstrijd', 'required' => 'required'));
                   ?>
+                  <select class="" name="" id="wedstrijdenToevoegen">
+                    <?php
+                        foreach ($wedstrijden as $wedstrijd) {
+                          echo "<option value='".$wedstrijd->id."'>".$wedstrijd->naam."</option>";
+                        }
+                     ?>
+                  </select>
                 </td>
               </tr>
               <tr>
                 <td>
                   <?php
                   echo form_label("Ronde", 'naam-ronde');
-                  echo form_input(array('name'=>'naam-ronde', 'id'=>'naam-ronde', 'required' => 'required'));
                   ?>
+                  <select class="" name="" id="rondeToevoegen">
+                    <?php
+                        foreach ($rondes as $ronde) {
+                          echo "<option value='".$ronde->id."'>".$ronde->ronde."</option>";
+                        }
+                     ?>
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -90,6 +108,12 @@ echo haalJavascriptOp("validator.js");
                 </td>
               </tr>
               <tr>
+                <td>
+                  <?php
+                  echo form_label("Tijd", 'naam-tijd');
+                  echo form_input(array('name'=>'naam-tijd', 'id'=>'naam-tijd', 'required' => 'required'));
+                  ?>
+                </td>
                 <td>
                   <?php
                   echo form_label("Tijd", 'naam-tijd');

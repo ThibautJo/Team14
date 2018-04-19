@@ -90,7 +90,7 @@ function wedstrijdOpvragen(wedstrijdID) {
     });
 
   // modal openen met ingevulde gegevens van dit object
-  $("#wedstrijdAanpassen").modal()
+  $("#wedstrijdAanpassen").modal();
 
 }
 function opvullenModalAanpassen(dataWedstrijd, wedstrijdID){
@@ -182,7 +182,7 @@ function reeksToevoegen(actie){
   //checken of de combinatie al bestaat ( zodat we geen dezelfde reeksen hebben)
   tijdelijk1.forEach((s,index) => {
     [$(modalToUse+' .afstand-wedstrijd').val(), $(modalToUse+' .slag-wedstrijd').val()].forEach((m,index2,array) => {
-      console.log($(modalToUse+' .afstand-wedstrijd').val() + "" + $(modalToUse+' .slag-wedstrijd').val());
+      console.log($(modalToUse+' .afstand-wedstrijd').val() + "-" + $(modalToUse+' .slag-wedstrijd').val());
       if (tijdelijk1[index] == m && tijdelijk2[index] == array[index2+1] ) {
           //zit de combinatie al in de reeks?
           ok = false;
@@ -190,7 +190,6 @@ function reeksToevoegen(actie){
 
     });
   });
-
 
   if (ok) {
     tijdelijk1.push($(modalToUse+' .afstand-wedstrijd').val());

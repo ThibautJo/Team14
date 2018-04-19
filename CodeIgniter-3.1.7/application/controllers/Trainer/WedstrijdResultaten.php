@@ -66,6 +66,7 @@ class WedstrijdResultaten extends CI_Controller {
     $data['team'] = $this->data->team;
 
     $this->load->model('trainer/wedstrijd_model');
+    $this->load->model('trainer/Zwemmers_model');
     // gegevens ophalen om tabel te vullen
     $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel();
 
@@ -73,6 +74,16 @@ class WedstrijdResultaten extends CI_Controller {
 
     if ($this->input->get('pagina') == "aanpassen") {
       $inhoud = "trainer/wedstrijd_resultaten_aanpassen";
+      // variabel benodigdheden voor comboboxen op te vullen
+      // 1. Zwemmers
+      $data['zwemmers'] = $this->Zwemmers_model->getZwemmers();
+      // 2. wedstrijden
+      $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden();
+      // 3. Rondes
+      $data['rondes'] = $this->wedstrijd_model->getRondes();
+      // 4. reeksen (afstand + slag) (bestaande reeksen) (jquery -> ajax)
+      // Tijd word zelf ingevuld met een formaat
+
     }
     else{
       $inhoud = "trainer/wedstrijd_resultaten";

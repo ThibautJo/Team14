@@ -243,6 +243,10 @@ class Wedstrijd_model extends CI_Model {
     return $resultaten;
 
   }
+  public function getRondes(){
+    $query = $this->db->get('ronde');
+    return $query->result();
+  }
   public function getRondeWithId($id){
     $this->db->where('id', $id);
     $query = $this->db->get('ronde');
