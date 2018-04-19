@@ -26,7 +26,8 @@
   array('data' => 'Reeks', 'scope' => 'col'), array('data' => 'Tijd', 'scope' => 'col'));
 
   foreach ($resultaten->resultaten as $resultaat) {
-    $this->table->add_row($resultaat->persoonNaam, $resultaat->wedstrijdNaam, $resultaat->ronde, $resultaat->reeks, $resultaat->tijd);
+    $time = date("H:i:s",strtotime($resultaat->tijd));
+    $this->table->add_row($resultaat->persoonNaam, $resultaat->wedstrijdNaam, $resultaat->ronde, $resultaat->reeks, $time);
   }
 
   echo $this->table->generate();
