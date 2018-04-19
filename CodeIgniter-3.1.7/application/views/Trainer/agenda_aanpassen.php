@@ -65,11 +65,13 @@
                                                 'role' => 'form');
                 echo form_open('agenda/registreer', $attributenFormulier);
                 
-                $uren = array('06:00', '06:30', '07:00', '07:00');
-                
+                $uren = array('06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00');
+                $persoon = $_GET['persoonId'];
                 ?>
                 
                 <?php echo form_hidden('id', ''); ?>
+                
+                <?php echo form_hidden('persoon', "$persoon"); ?>
 
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
@@ -92,7 +94,7 @@
                     <div class="form-group">
                         <?php
                         echo form_label('Soort training', 'soort');
-                        echo form_dropdown('soort', $soortTraining, '', 'id="soort" class="form-control" required="required"');
+                        echo form_dropdown('soort', $soortTraining, '', 'id="soort" class="form-control"');
                         ?>
                         <div class="invalid-feedback">
                             Maak een keuze uit de lijst.
@@ -154,7 +156,8 @@
                         <div class="form-group col-4">
                             <?php
                             echo form_label('Beginuur', 'beginuur');
-                            echo form_dropdown('beginuur', $uren, '', 'id="beginuur" class="form-control" required="required"');
+                            
+                            echo form_dropdown('beginuur', $uren, '', 'id="beginuur" class="form-control"');
                             ?>
                             <div class="invalid-feedback">
                                 Kies een uur.
@@ -183,7 +186,7 @@
                         <div class="form-group col-4">
                             <?php
                             echo form_label('Einduur', 'einduur');
-                            echo form_dropdown('einduur', $uren, '', 'id="einduur" class="form-control" required="required"');
+                            echo form_dropdown('einduur', $uren, '', 'id="einduur" class="form-control"');
                             ?>
                             <div class="invalid-feedback">
                                 Kies een uur.
@@ -196,10 +199,25 @@
                     <div class="form-group">
                         <?php
                         echo form_label('Supplementnaam', 'supplementnaam');
-                        echo form_dropdown('supplementnaam', $supplementennamen, '', 'id="supplementnaam" class="form-control" required="required"');
+                        echo form_dropdown('supplementnaam', $supplementennamen, '', 'id="supplementnaam" class="form-control"');
                         ?>
                         <div class="invalid-feedback">
                             Maak een keuze uit de lijst.
+                        </div>
+                    </div>
+                                        
+                    <div class="form-group">
+                        <?php
+                        echo form_label('Datum', 'datum');
+                        echo form_input(array('name' => 'datum',
+                            'id' => 'datum', 
+                            'value' => '',
+                            'class' => 'form-control',
+                            'required' => 'required',
+                            'type' => 'date'));
+                        ?>
+                        <div class="invalid-feedback">
+                            Kies een datum.
                         </div>
                     </div>
                 </div>
@@ -220,7 +238,7 @@
                 <div class="form-group">
                     <?php
                     echo form_label('Toevoegen voor', 'personen');
-                    echo form_dropdown('personen', $voorPersonen, '', 'id="personen" class="form-control" required="required"');
+                    echo form_dropdown('personen', $voorPersonen, '', 'id="personen" class="form-control"');
                     ?>
                     <div class="invalid-feedback">
                         Maak een keuze uit de lijst.
@@ -292,8 +310,8 @@
                         var kleuren = <?php echo $kleuren ?>;
                         $.each(kleuren, function(index) {
                             if (calEvent.color == kleuren[index].kleur) {
-                                $('.modal-title').html('Activiteit aanpassen');
-                                aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra);
+                                $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
+                                aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, $('input[name=persoon]').val());
                                 console.log('ok');
                             }
                         });
@@ -301,8 +319,8 @@
                     selectable: true,
                     select: function(startDate, endDate) {
                         $('#toevoegenActiviteit').modal('show');
-                        $('.modal-title').html('Activiteit toevoegen');
-                        $('.modal-body').html('');
+//                        $('.modal-title').html('Activiteit toevoegen');
+//                        $('.modal-body').html('');
                     },
                     events: <?php echo $activiteiten?>
                 });

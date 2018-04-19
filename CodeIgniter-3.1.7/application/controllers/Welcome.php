@@ -49,12 +49,14 @@ class Welcome extends CI_Controller {
         $data['titel'] = 'Fout';
         $data['team'] = $this->data->team;
         $data['persoon']  = $this->authex->getPersoonInfo();
+        $data['showModal'] = "<script>$('#aanmeldFormulier').modal('show');</script>";
 
         $data['foutBoodschap'] = "De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.";
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
-            'foutMelding' => 'bezoeker/home_fout',
+            'aanmeldFormulier' => 'bezoeker/home_aanmelden',
+            'foutMelding' => 'bezoeker/home_aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
 
         $this->template->load('bezoeker_main_master', $partials, $data);

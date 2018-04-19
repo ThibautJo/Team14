@@ -130,6 +130,10 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
                 });
+                
+                $('#submit-login').click(function () {
+                    $('#aanmeldFormulier').modal('show');
+                });
 
             });
 
