@@ -75,7 +75,7 @@
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/Team') ?>">Team</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Team/aanpassen') ?>">Zwemmers beheren</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Team/aanpassen') ?>">Team beheren</a>
                 </li>
             </ul>
         </div>
@@ -87,10 +87,10 @@
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="meldingenSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Meldingen') ?>">Meldingen</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Melding') ?>">Meldingen</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Meldingen/beheren') ?>">Meldingen beheren</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Melding/beheren') ?>">Meldingen beheren</a>
                 </li>
             </ul>
         </div>

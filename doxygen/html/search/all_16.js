@@ -7,7 +7,7 @@ var searchData=
   ['unmark_5ftemp',['unmark_temp',['../class_c_i___session.html#a602eaf2b4a6936ed9bb8750892fac551',1,'CI_Session']]],
   ['unset_5ftempdata',['unset_tempdata',['../class_c_i___session.html#a79d3115c19f6dfa873ca5f3a7929f24a',1,'CI_Session']]],
   ['unset_5fuserdata',['unset_userdata',['../class_c_i___session.html#a8d3a4935d2ff2088f11654445d9a0122',1,'CI_Session']]],
-  ['update',['update',['../class_c_i___d_b__query__builder.html#a130a26da2dd4e4582ee18f42d71fe6e4',1,'CI_DB_query_builder\update()'],['../class_c_i___cart.html#adddf5d1a4f704b647f28b0322f8b64f2',1,'CI_Cart\update()'],['../class_c_i___javascript.html#a97c369870fff724c8bbdae779a715446',1,'CI_Javascript\update()']]],
+  ['update',['update',['../class_supplement__model.html#ab8a94aa2d6d80c4fe3439b23bee8479b',1,'Supplement_model\update()'],['../class_c_i___d_b__query__builder.html#a130a26da2dd4e4582ee18f42d71fe6e4',1,'CI_DB_query_builder\update()'],['../class_c_i___cart.html#adddf5d1a4f704b647f28b0322f8b64f2',1,'CI_Cart\update()'],['../class_c_i___javascript.html#a97c369870fff724c8bbdae779a715446',1,'CI_Javascript\update()']]],
   ['update_5fbatch',['update_batch',['../class_c_i___d_b__query__builder.html#a718928dc54d935761439538836f1e70d',1,'CI_DB_query_builder']]],
   ['update_5fstring',['update_string',['../class_c_i___d_b__driver.html#af9eb76a74d10fa81e44ecb0dd9bf00d4',1,'CI_DB_driver']]],
   ['upload',['upload',['../class_c_i___f_t_p.html#a6e11a64f2c0a3f8f1659f4e32032031d',1,'CI_FTP']]],

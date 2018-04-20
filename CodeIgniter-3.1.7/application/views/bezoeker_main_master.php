@@ -19,7 +19,11 @@
         <?php echo pasStylesheetAan("bezoeker_eigenStijl.css"); ?>
         <?php echo pasStylesheetAan("scroll.css"); ?>
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+               
         <script type="text/javascript">
             var site_url = '<?php echo site_url(); ?>';
             var base_url = '<?php echo base_url(); ?>';
@@ -72,7 +76,7 @@
             <!-- Team sectie -->
 
             <div id="Team">
-
+                
             </div>
 
             <!-- Wedstrijden sectie -->
@@ -94,10 +98,7 @@
 
         <!-- Javascript scriptjes -->
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script>
+         <script>
 
             $(document).ready(function () {
 
@@ -129,6 +130,10 @@
                 $('a[href*=\\#]').on('click', function (event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
+                });
+                
+                $('#submit-login').click(function () {
+                    $('#aanmeldFormulier').modal('show');
                 });
 
             });

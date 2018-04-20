@@ -24,8 +24,13 @@
     </thead>
     <tbody>
 <?php
-    foreach ($meldingen as $melding) {        
-        echo "<tr><td>" . $melding->melding->datumStop . "</td><td>" . $melding->melding->meldingBericht ."</td>";}
+    foreach ($meldingen as $melding) { 
+        $datum = $melding->datumStop;
+        if ($datum >= date("Y-m-d")) {
+            echo "<tr><td>" . $datum . "</td><td>" . $melding->meldingBericht ."</td>";
+        }
+    };
+        
 ?>
        </tbody>
 </table>

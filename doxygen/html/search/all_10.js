@@ -3,6 +3,7 @@ var searchData=
   ['offset',['offset',['../class_c_i___d_b__query__builder.html#afd31b65425a2b5cf30711bf29e1b1851',1,'CI_DB_query_builder']]],
   ['open',['open',['../class_c_i___session__database__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_database_driver\open()'],['../class_c_i___session__files__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_files_driver\open()'],['../class_c_i___session__memcached__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_memcached_driver\open()'],['../class_c_i___session__redis__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_redis_driver\open()']]],
   ['open_5ftag',['open_tag',['../class_x_m_l___r_p_c___message.html#a7709ec5b6f0e3769592f8afdc23b9169',1,'XML_RPC_Message']]],
+  ['opslaansupplement',['opslaanSupplement',['../class_supplement.html#a1147dafd79457c214282b7f8bf9bb95e',1,'Supplement']]],
   ['optimize_5fdatabase',['optimize_database',['../class_c_i___d_b__utility.html#acb26598e177f525b39978f6dfca1f212',1,'CI_DB_utility']]],
   ['optimize_5ftable',['optimize_table',['../class_c_i___d_b__utility.html#a6aed9274f43b64eeee607d172b51529d',1,'CI_DB_utility']]],
   ['or_5fgroup_5fstart',['or_group_start',['../class_c_i___d_b__query__builder.html#a80d5e4a0d8f2d0f202e8df6816865838',1,'CI_DB_query_builder']]],
