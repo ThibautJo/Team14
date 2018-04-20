@@ -53,10 +53,10 @@
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/Wedstrijden/index?pagina=aanpassen') ?>">Wedstrijden beheren</a>
                 </li>
                 <li>
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/WedstrijdResultaten/index') ?>">Wedstrijdresultaten</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/WedstrijdResultaten/index?pagina=weergaven') ?>">Wedstrijdresultaten</a>
                 </li>
                 <li>
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/WedstrijdResultaten/index') ?>">Wedstrijdresultaten beheren</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/WedstrijdResultaten/index?pagina=aanpassen') ?>">Wedstrijdresultaten beheren</a>
                 </li>
                 <li>
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/Inschrijvingen') ?>">Inschrijvingen</a>

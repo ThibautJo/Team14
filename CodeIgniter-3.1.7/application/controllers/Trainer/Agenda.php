@@ -362,21 +362,21 @@ class Agenda extends CI_Controller {
     
     public function wijzigWedstrijd($id) {
         $this->load->model("zwemmer/agenda_model");
-        $data = $this->agenda_model->getActiviteit($id);
+        $data = $this->agenda_model->getWedstrijd($id);
 
         print json_encode($data);
     }
     
     public function wijzigOnderzoek($id) {
         $this->load->model("zwemmer/agenda_model");
-        $data = $this->agenda_model->getActiviteit($id);
+        $data = $this->agenda_model->getOnderzoek($id);
 
         print json_encode($data);
     }
     
     public function wijzigSupplement($id) {
         $this->load->model("zwemmer/agenda_model");
-        $data = $this->agenda_model->getActiviteit($id);
+        $data = $this->agenda_model->getSupplement($id);
 
         print json_encode($data);
     }

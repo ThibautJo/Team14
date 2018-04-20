@@ -120,7 +120,7 @@ class Wedstrijd_model extends CI_Model {
   public function deleteWedstrijd($id) {
     $this->db->where('id', $id);
     $this->db->delete('wedstrijd');
-    //ook bijhorende reeksen verwijderen
+    //ook bijhorende reekse<getwedstrijdwith></getwedstrijdwith><getwedstrijdwith></getwedstrijdwith><getwedstrijdwi></getwedstrijdwi><getwedstrijd></getwedstrijd><getwed></getwed>n verwijderen
     $this->db->where('wedstrijdId', $id);
     $this->db->delete('reeksperwedstrijd');
   }
@@ -213,6 +213,60 @@ class Wedstrijd_model extends CI_Model {
 
     //toevoegen van degene die er gekozen waren
     $this->insertReeksen($wedID,$reeksen);
+  }
+
+
+  public function getResultatenTabel(){
+
+    $resultaten = new stdClass();
+
+    $query = $this->db->get('resultaat');
+    $resultaten->resultaten = $query->result();
+    $i = 0;
+    foreach ($resultaten->resultaten as $resultaat) {
+      $inschrijving = $this->getIngeschrevenenWithId($resultaat->inschrijvingId);
+      $ronde = $this->getRondeWithId($resultaat->rondeId);
+      $reeks = $this->getReeksWithID($inschrijving->reeksPerWedstrijdId);
+      $persoon = $this->getPersoonWithId($inschrijving->persoonId);
+      $slag = $this->getSlagWithID($reeks->slagId);
+      $afstand = $this->getAfstandWithID($reeks->afstandId);
+      $wedstrijd = $this->getWedstrijdenWithId($reeks->wedstrijdId);
+
+      $resultaten->resultaten[$i]->ronde = $ronde->ronde;
+      $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
+      $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
+      $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+
+      $i++;
+    }
+
+    return $resultaten;
+
+  }
+  public function getRondes(){
+    $query = $this->db->get('ronde');
+    return $query->result();
+  }
+  public function getRondeWithId($id){
+    $this->db->where('id', $id);
+    $query = $this->db->get('ronde');
+    return $query->row();
+  }
+  public function getIngeschrevenenWithId($id){
+    $this->db->where('id', $id);
+    $query = $this->db->get('inschrijving');
+    return $query->row();
+  }
+
+  public function getReeksWithID($id){
+    $this->db->where('id', $id);
+    $query = $this->db->get('reeksperwedstrijd');
+    return $query->row();
+  }
+  public function getPersoonWithId($id){
+    $this->db->where('id', $id);
+    $query = $this->db->get('persoon');
+    return $query->row();
   }
 
 }

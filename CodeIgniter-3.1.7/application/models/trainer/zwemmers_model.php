@@ -37,6 +37,7 @@ class Zwemmers_model extends CI_Model {
     }
     
     public function getZwemmersArchief() {
+        $this->db->where('soort', "Zwemmer");
         $this->db->where('actief', 0);
         $query = $this->db->get('persoon');
         
@@ -52,6 +53,12 @@ class Zwemmers_model extends CI_Model {
     function archiveer($id){
         $this->db->where('id', $id);
         $this->db->set('actief', 0 );
+        $this->db->update('persoon', $persoon);
+    }
+    
+    function uitArchiefHalen($id){
+        $this->db->where('id', $id);
+        $this->db->set('actief', 1 );
         $this->db->update('persoon', $persoon);
     }
     

@@ -59,7 +59,7 @@ class Team extends CI_Controller {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
         
-        $zwemmers = $this->ladenZwemmers();
+        $zwemmers = $this->ladenTeam();
         
         $data['zwemmers'] = $zwemmers;
 
@@ -78,7 +78,7 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::getZwemmers()
      * @return type $zwemmers
      */
-    public function ladenZwemmers(){
+    public function ladenTeam(){
         $this->load->model("trainer/zwemmers_model");
         $zwemmers = $this->zwemmers_model->getTeam();
         
@@ -101,6 +101,30 @@ class Team extends CI_Controller {
         }
         return $zwemmers;
     }
+    
+    public function ladenArchief(){
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmersuitarchief = $this->zwemmers_model->uitArchiefHalen();
+        
+        $data_zwemmersuitarchief = array();
+        foreach ($zwemmersuitarchief as $zwemmeruitarchief) {                    
+            $data_zwemmersuitarchief[] = array(
+                "voornaam" => $zwemmeruitarchief->voornaam,
+                "achternaam" => $zwemmeruitarchief->achternaam,
+                "straat" => $zwemmeruitarchief->straat,
+                "huisnummer" => $zwemmeruitarchief->huisnummer,
+                "postcode" => $zwemmeruitarchief->postcode,
+                "gemeente" => $zwemmeruitarchief->gemeente,
+                "telefoonnummer" => $zwemmeruitarchief->telefoonnummer,
+                "email" => $zwemmeruitarchief->email,
+                "wachtwoord" => $zwemmeruitarchief->wachtwoord,
+                "omschrijving" => $zwemmeruitarchief->omschrijving,
+                "foto" => $zwemmeruitarchief->foto,
+                "color" => '#FF7534',"textColor" => '#000'
+            );
+        }
+        return $zwemmeruitarchief;
+    }
     /**
      * Haalt alle personen op via Zwemmers_model en
      * toont de resulterende objecten in de view team_lijst.php
@@ -111,7 +135,7 @@ class Team extends CI_Controller {
     public function aanpassen() {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
-        $zwemmers = $this->ladenZwemmers();
+        $zwemmers = $this->ladenTeam();
         $data['zwemmers'] = $zwemmers;
         
         $partials = array('hoofding' => 'main_header',
@@ -126,7 +150,7 @@ class Team extends CI_Controller {
     public function wijzig() {
         $data['titel'] = 'Team wijzigen';
         $data['team'] = $this->data->team;
-        $zwemmers = $this->ladenZwemmers();
+        $zwemmers = $this->ladenTeam();
         $data['zwemmers'] = $zwemmers;
         
         $partials = array('hoofding' => 'main_header',
@@ -143,6 +167,14 @@ class Team extends CI_Controller {
         
         redirect('trainer/team');
     }
+    
+    public function uitArchiefHalen($id) {
+        $this->load->model('trainer/zwemmers_model');
+        $this->zwemmers_model->uitArchiefHalen($id);
+        
+        redirect('trainer/team');
+    }
+    
     
     /**
      * Slaagt het nieuw/aangepaste zwemmer op via Zwemmers_model en toont de aangepaste lijst in de view team_lijst.php
@@ -169,7 +201,7 @@ class Team extends CI_Controller {
             $persoon->id = $this->input->post('id');
             $this->zwemmers_model->update($persoon);
         }
-        redirect('trainer/team_lijst');
+        redirect('trainer/team');
     }
     
     /**

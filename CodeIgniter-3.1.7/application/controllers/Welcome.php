@@ -49,11 +49,11 @@ class Welcome extends CI_Controller {
         $data['titel'] = 'Fout';
         $data['team'] = $this->data->team;
         $data['persoon']  = $this->authex->getPersoonInfo();
-
         $data['foutBoodschap'] = "De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.";
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
+            'aanmeldFormulier' => 'bezoeker/home_fout',
             'foutMelding' => 'bezoeker/home_fout',
             'voetnoot' => 'bezoeker_main_footer');
 
