@@ -247,8 +247,8 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
                 ?>
                 <div class="form-group">
                             <?php
-                            echo form_labelpro('Functie', 'functie');
-                            echo form_dropdown('functie', $archief, '');
+                            echo form_label('Archief', 'archief');
+                            echo form_dropdown('archief', $archief, '');
 
                             ?>
                             <div class="help-block with-errors"></div>
