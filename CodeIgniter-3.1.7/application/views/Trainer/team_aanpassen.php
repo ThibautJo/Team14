@@ -10,7 +10,6 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
-echo haalJavascriptOp("validator.js");
 
 $attributenFormulier = array('id' => 'form-zwemmer',
     'data-toggle' => 'validator',
@@ -33,7 +32,8 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
                 <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->id . "' onclick='zwemmerUpdate(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer wijzigen' data-target='#zwemmerAanpassen'>" . "<i class='fas fa-pencil-alt'></i></button>"
-                . anchor('Trainer/Team/archiveer/' . $zwemmer->id, form_button("knopSchrap", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
+                . "<td><button type='button' class='btn btn-danger' id='archiveren" . $zwemmer->id . "' onclick='zwemmerArchiveer(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer archiveren'>" . "<i class='fas fa-archive'></i></button>"
+                        . anchor('Trainer/Team/archiveren/' . $zwemmer->id, form_button("knopArchiveer", "<i class='fas fa-pencil-alt'></i>", $archiveren)) . "</td></tr>\n";
             }
             ?>
         </tbody>
@@ -120,6 +120,8 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                
+                <?php echo form_close();?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
@@ -212,6 +214,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
+                <?php echo form_close();?>
             </div>
             <div class="modal-footer form-group">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->

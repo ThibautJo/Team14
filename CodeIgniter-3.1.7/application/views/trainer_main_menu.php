@@ -75,7 +75,7 @@
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/Team') ?>">Team</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Team/aanpassen') ?>">Zwemmers beheren</a>
+                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Team/aanpassen') ?>">Team beheren</a>
                 </li>
             </ul>
         </div>

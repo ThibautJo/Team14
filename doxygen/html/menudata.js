@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 for the JavaScript code in this file
 */
 var menudata={children:[
+<<<<<<< HEAD
 {text:"Hoofd Pagina",url:"index.html"},
 {text:"Gerelateerde pagina's",url:"pages.html"},
 {text:"Namespaces",url:"namespaces.html",children:[
@@ -87,3 +88,6 @@ var menudata={children:[
 {text:"Variabelen",url:"functions_vars.html"}]}]},
 {text:"Bestanden",url:"files.html",children:[
 {text:"Bestandslijst",url:"files.html"}]}]}
+=======
+{text:"Hoofd Pagina",url:"index.html"}]}
+>>>>>>> 07c31ef372336fc804255f2b4f42ec18a8bc5791

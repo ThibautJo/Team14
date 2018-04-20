@@ -80,7 +80,7 @@ class Team extends CI_Controller {
      */
     public function ladenZwemmers(){
         $this->load->model("trainer/zwemmers_model");
-        $zwemmers = $this->zwemmers_model->getZwemmers();
+        $zwemmers = $this->zwemmers_model->getTeam();
         
         $data_zwemmers = array();
         foreach ($zwemmers as $zwemmer) {                    
@@ -137,11 +137,11 @@ class Team extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function archiveer($id) {
+    public function archiveren($id) {
         $this->load->model('trainer/zwemmers_model');
-        $data['zwemmers'] = $this->zwemmers_model->delete($id);
+        $this->zwemmers_model->archiveer($id);
         
-        redirect('/trainer/team_lijst');
+        redirect('trainer/team');
     }
     
     /**
@@ -169,7 +169,7 @@ class Team extends CI_Controller {
             $persoon->id = $this->input->post('id');
             $this->zwemmers_model->update($persoon);
         }
-        redirect('trainer/team');
+        redirect('trainer/team_lijst');
     }
     
     /**

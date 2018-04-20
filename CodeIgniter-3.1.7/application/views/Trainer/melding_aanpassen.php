@@ -126,34 +126,39 @@ $attributenFormulier = array('id' => 'form-melding',
                     echo form_input(array('type' => 'hidden', 'name' => 'id', 'id' => 'id', 'value' => ''));
                     ?>
                 </div>
-        
                 <div class="form-group">
-                            <?php
-                            echo form_label('Vervaldatum', 'datumStop');
-                            echo form_input(array('type' => 'date',
-                                'id' => 'datumStop',
-                                'value' => '',
-                                'class' => 'form-control',
-                                'required' => 'required'));
-                            ?>
-                            <div class="invalid-feedback">
-                                Kies een datum.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php
-                            echo form_label('Inhoud', 'inhoud');
-                            echo form_input(array('name' => 'inhoud',
-                                'id' => 'inhoud',
-                                'value' => '',
-                                'class' => 'form-control',
-                                'placeholder' => 'Inhoud',
-                                'required' => 'required'));
-                            ?>
-                            <div class="invalid-feedback">
-                                Vul dit veld in.
-                            </div>
-                        </div>
+                    <?php
+                    echo form_label('Aan', 'aan');
+                    echo form_dropdown('zwemmer', $personen, '');
+                    ?>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_label('Vervaldatum', 'datumStop');
+                    echo form_input(array('type' => 'date',
+                        'id' => 'datumStop',
+                        'value' => 'date("Y-m-d")',
+                        'class' => 'form-control',
+                        'required' => 'required'));
+                    ?>
+                    <div class="invalid-feedback">
+                        Kies een datum.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_label('Inhoud', 'inhoud');
+                    echo form_input(array('name' => 'inhoud',
+                        'id' => 'inhoud',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Inhoud',
+                        'required' => 'required'));
+                    ?>
+                    <div class="invalid-feedback">
+                        Vul dit veld in.
+                    </div>
+                </div>
 
                 <?php echo form_close(); ?>
             </div>
