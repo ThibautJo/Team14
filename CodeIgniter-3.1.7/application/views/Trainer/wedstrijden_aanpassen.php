@@ -207,6 +207,7 @@ $maanden = array(
                 <?php
                     echo form_label("Titel", 'titel-wedstrijd');
                     echo form_input(array('name'=>'titel-wedstrijd', 'id'=>'titel-wedstrijd', 'required' => 'required'));
+                    echo form_label("Fout", 'titel-wedstrijd', array("id" => "titel-wedstrijd-fout"));
                 ?>
               </td>
               <td rowspan="4" class="reeksen">
@@ -272,6 +273,15 @@ $maanden = array(
 
 </div>
 <script type="text/javascript">
+
+function form_validatie(formID){
+  $('#'+formID+' *').filter('input').each(function(){
+    if($(this).attr("required") && $(this).val() == ""){
+      alert("niet alle velden zijn ingevuld");
+
+    }
+  });
+}
 
 $('#datumSelected').on('change', function() {
   datumSelect();
