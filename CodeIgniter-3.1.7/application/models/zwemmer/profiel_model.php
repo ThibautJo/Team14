@@ -23,10 +23,10 @@ class profiel_model extends CI_Model{
         
     }
     
-    public function getProfielByPersoon($id){
-        $this->db->where('id', $id);
+    public function getProfielByPersoon($persoonId){
+        $this->db->where('id', $persoonId);
         $query = $this->db->get('persoon');
-        $profiel = $query->result();
+        $profiel = $query->row();
         
         return $profiel;
     }
