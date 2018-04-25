@@ -124,10 +124,10 @@ class Melding extends CI_Controller {
         $melding->datumStop = $this->input->post('datumStop');
         $melding->meldingBericht = ucfirst($this->input->post('inhoud'));
 
-//        $functieId = $this->input->post('functie');
-//        $this->load->model('trainer/supplementfunctie_model');
-//        $functie = $this->supplementfunctie_model->get($functieId);
-//        $supplement->supplementFunctieId = $functie->id;
+        $persoonId = $this->input->post('aan');
+        $this->load->model('persoon_model');
+        $persoon = $this->persoon_model->get($persoonId);
+        $melding->persoonId = $persoon->id;
 
         $this->load->model('trainer/melding_model');
 

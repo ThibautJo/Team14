@@ -89,7 +89,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                         <div class="form-group">
                             <?php
                             echo form_label('Functie', 'functie');
-                            echo form_dropdown('functie', $functieOpties, '');
+                            echo form_dropdown('functie', $functieOpties, '', "class='form-control'");
                             ?>
                         </div>
                  
@@ -157,7 +157,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                 <div class="form-group">
                     <?php
                     echo form_label('Functie', 'functie');
-                    echo form_dropdown('functie', $functieOpties, '', "id='functie'");
+                    echo form_dropdown('functie', $functieOpties, '', "id='functie' class='form-control'");
                     ?>
                 </div>
                 

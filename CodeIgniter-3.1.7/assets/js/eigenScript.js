@@ -515,14 +515,13 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon) {
 // melding start
 
 function meldingUpdate(meldingID) {
-
+        
     console.log("id =" + meldingID);
     var id = $("#" + meldingID).val();
-
+    
     $.post(site_url + '/Trainer/melding/wijzigMelding/' + id, function (data) {
         //data = object van melding
         data = JSON.parse(data);
-        // console.log(data[0]["Naam"]);
 
         //modal opvullen met object melding
         opvullenModalMeldingAanpassen(data);
@@ -533,7 +532,7 @@ function meldingUpdate(meldingID) {
 
 
     // modal openen met ingevulde gegevans van dit object
-    $("#meldingAanpassen").modal()
+    $("#meldingAanpassen").modal();
 
 }
 function opvullenModalMeldingAanpassen(dataMelding) {

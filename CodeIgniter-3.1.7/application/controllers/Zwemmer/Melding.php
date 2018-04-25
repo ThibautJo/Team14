@@ -36,7 +36,7 @@ class Melding extends CI_Controller {
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
         
-        $persoonId = 1;
+        $persoonId = 5;
 
         $this->load->model('zwemmer/melding_model');
         $data['meldingen'] = $this->melding_model->getMeldingByPersoon($persoonId);

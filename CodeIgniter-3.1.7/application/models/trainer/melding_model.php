@@ -32,8 +32,7 @@ class Melding_model extends CI_Model {
             $melding = $queryMelding->row();
             
             $obj_merged = (object) array_merge((array)$persoon, (array)$melding);
-             
-        
+
         
         return $obj_merged;
     }
@@ -49,51 +48,27 @@ class Melding_model extends CI_Model {
         $query = $this->db->get('meldingperpersoon');
         $meldingPerPersoon = $query->result();
         
+        
+        
         $meldingenPerPersoon = array();
         foreach ($meldingPerPersoon as $item) {
-            $this->db->where('id', $item->id);
+            $meldingpersoon = array();
+            $meldingpersoon['meldingPerPersoon'] = $item->id;
+            
+            
+            $this->db->where('id', $item->persoonId);
             $queryPersoon = $this->db->get('persoon');
-            $this->db->where('id', $item->id);
+            $this->db->where('id', $item->meldingId);
             $queryMelding = $this->db->get('melding');
             $persoon = $queryPersoon->row();
             $melding = $queryMelding->row();
             
-            $obj_merged = (object) array_merge((array)$persoon, (array)$melding);
+            $obj_merged = (object) array_merge((array)$persoon, (array)$melding, (array)$meldingpersoon);
             array_push($meldingenPerPersoon, $obj_merged);
              
         }
+ 
         return $meldingenPerPersoon;
-        
-        
-        /*
-        $this->db->order_by('datumStop');
-        $query = $this->db->get('melding');
-        $meldingen = $query->result();
-        
-        $persoonIDs = array();
-        foreach ($meldingen as $melding) {
-            $this->db->where('meldingId', $melding->id);
-            $query = $this->db->get('meldingperpersoon');
-            $meldingPerPersonen = $query->result();
-            foreach ($meldingPerPersonen as $meldingPerPersoon) {
-                array_push($persoonIDs, $meldingPerPersoon->persoonId);
-            }
-        }
-        
-        $namen = array();
-        foreach ($persoonIDs as $value) {
-            $this->db->where('id', $meldingPerPersoon->persoonId);
-            $query = $this->db->get('persoon');
-            $result = $query->row();
-            array_push($namen, $result->voornaam . ' ' . $result->achternaam);
-        }
-        
-        $personen = new stdClass();
-        $personen->ID = $persoonIDs;
-        $personen->namen = $namen;
-        
-        return $personen;
-         * */
     }
     
     /**

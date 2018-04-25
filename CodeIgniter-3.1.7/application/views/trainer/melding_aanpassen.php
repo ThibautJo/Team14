@@ -42,7 +42,7 @@ $attributenFormulier = array('id' => 'form-melding',
         if ($datum >= date("Y-m-d")) {
                 
                    echo "<tr><td>" . $datum . "</td><td>" . $melding->voornaam . "</td><td>" . $melding->meldingBericht ."</td><td>"
-                    . "<button type='button' class='btn btn-success' id='aanpassen" . $melding->id . "' onclick='meldingUpdate(this.id)' value='" . $melding->id . "'data-toggle='modal' data-target='#meldingAanpassen'><i class='fas fa-pencil-alt'></i></button></td><td>"
+                    . "<button type='button' class='btn btn-success' id='aanpassen" . $melding->meldingPerPersoon . "' onclick='meldingUpdate(this.id)' value='" . $melding->meldingPerPersoon . "' data-toggle='modal' data-target='#meldingAanpassen'><i class='fas fa-pencil-alt'></i></button></td><td>"
                     . "<button type='button' class='btn btn-danger' id='verwijder" . $melding->id . "' onclick='meldingVerwijder(this.id)' value='" . $melding->id . "'><i class='fas fa-trash-alt'></i></button></td></tr>\n"; 
                 
             
@@ -70,7 +70,7 @@ $attributenFormulier = array('id' => 'form-melding',
                         <div class="form-group">
                             <?php
                             echo form_label('Aan', 'aan');
-                            echo form_dropdown('zwemmer', $personen, '');
+                            echo form_dropdown('zwemmer', $personen, '', "class='form-control'");
                             ?>
                         </div>
                         <div class="form-group">
@@ -134,7 +134,7 @@ $attributenFormulier = array('id' => 'form-melding',
                 <div class="form-group">
                     <?php
                     echo form_label('Aan', 'aan');
-                    echo form_dropdown('zwemmer', $personen, '', "id='aan'");
+                    echo form_dropdown('zwemmer', $personen, '', "id='aan' class='form-control'" );
                     ?>
                 </div>
                 <div class="form-group">
@@ -175,5 +175,11 @@ $attributenFormulier = array('id' => 'form-melding',
         </div>
     </div>
 </div>
+
+<script>
+
+
+
+</script>
 
 
