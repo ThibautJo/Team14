@@ -511,3 +511,98 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon) {
 }
 
 // agenda stop
+
+// melding start
+
+function meldingUpdate(meldingID) {
+
+    console.log("id =" + meldingID);
+    var id = $("#" + meldingID).val();
+
+    $.post(site_url + '/Trainer/melding/wijzigMelding/' + id, function (data) {
+        //data = object van melding
+        data = JSON.parse(data);
+        // console.log(data[0]["Naam"]);
+
+        //modal opvullen met object melding
+        opvullenModalMeldingAanpassen(data);
+
+    }).fail(function () {
+        alert("Er is iets misgelopen, neem contact op met de administrator.");
+    });
+
+
+    // modal openen met ingevulde gegevans van dit object
+    $("#meldingAanpassen").modal()
+
+}
+function opvullenModalMeldingAanpassen(dataMelding) {
+    $('#meldingAanpassen #id').attr("value", dataMelding["id"]);
+    $('#meldingAanpassen #datumStop').val(dataMelding["datumStop"]);
+    $('#meldingAanpassen #inhoud').attr("value", dataMelding["meldingBericht"]);
+    $('#meldingAanpassen #aan').attr("value", dataMelding["voornaam"]);
+    
+    console.log(dataMelding["voornaam"]);
+    $("#aan option").each(function ()
+    {
+            console.log($(this).val());
+
+        if ($(this).val() === dataMelding["voornaam"]) {
+            $("option[value=" + $(this).val() + "]").attr("selected", "selected");
+        }
+    });
+    
+
+}
+
+function meldingVerwijder(elementID) {
+    if (!confirm("Zeker dat je dit wilt verwijderen?")) {
+        return false;
+    } else {
+        //id van melding
+        var id = $("#" + elementID).val();
+        // alert(id);
+        //verwijderen
+        $.post(site_url + '/Trainer/melding/verwijderMelding/' + id, function (data) {
+            alert("Melding is verwijderd!");
+            $("tr#" + id).remove();
+        }).fail(function () {
+            alert("Er is iets misgelopen, neem contact op met de administrator.");
+        });
+    }
+}
+
+function meldingOpslaan(actie) {
+
+    var ok = true;
+    var formToSubmit = '';
+    //form valideren
+    if (actie == "toevoegen") {
+        $('#meldingToevoegen #form-melding *').filter('input').each(function () {
+            if ($(this).attr("required") && $(this).val() == "") {
+                alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
+        });
+        formToSubmit = "#meldingToevoegen #form-melding";
+    } else {
+        $('#meldingAanpassen #form-melding *').filter('input').each(function () {
+            if ($(this).attr("required") && $(this).val() == "") {
+                alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
+        });
+        formToSubmit = "#meldingAanpassen #form-melding";
+    }
+
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Trainer/melding/opslaanMelding/' + actie);
+
+        $(formToSubmit).submit();
+    }
+}
+
+// melding end

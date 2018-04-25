@@ -9,7 +9,7 @@ class Zwemmers_model extends CI_Model {
     // |    Auteur: Klaus Daems       |       Helper:
     // +----------------------------------------------------------
     // |
-    // |    Agenda model
+    // |    Zwemmers_model
     // |
     // +----------------------------------------------------------
     // |    Team 14

@@ -3,13 +3,26 @@
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
-// |    Auteur: Jolien Lauwers      |       Helper:
+// |    Auteur: Klaus Daems       |       Helper:
 // +----------------------------------------------------------
 // |
-// |    Helpmenu view
+// |    Profiel view
 // |
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
 
+
 ?>
+<table class="table">
+        <tbody>
+            <?php
+            foreach ($profielen as $profiel) {
+                echo "<tr>"
+                . "<td>" . $profiel->voornaam . "</td></tr>\n";
+            }
+            ?>
+        </tbody>
+    </table>
+
+

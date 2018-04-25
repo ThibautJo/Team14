@@ -104,7 +104,7 @@ class Team extends CI_Controller {
     
     public function ladenArchief(){
         $this->load->model("trainer/zwemmers_model");
-        $zwemmersuitarchief = $this->zwemmers_model->uitArchiefHalen();
+        $zwemmersuitarchief = $this->zwemmers_model->getZwemmersArchief();
         
         $data_zwemmersuitarchief = array();
         foreach ($zwemmersuitarchief as $zwemmeruitarchief) {                    
@@ -123,7 +123,7 @@ class Team extends CI_Controller {
                 "color" => '#FF7534',"textColor" => '#000'
             );
         }
-        return $zwemmeruitarchief;
+        return $zwemmersuitarchief;
     }
     /**
      * Haalt alle personen op via Zwemmers_model en
@@ -137,6 +137,8 @@ class Team extends CI_Controller {
         $data['team'] = $this->data->team;
         $zwemmers = $this->ladenTeam();
         $data['zwemmers'] = $zwemmers;
+        $zwemmersuitarchief = $this->ladenArchief();
+        $data['zwemmersuitarchief'] = $zwemmersuitarchief;
         
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
