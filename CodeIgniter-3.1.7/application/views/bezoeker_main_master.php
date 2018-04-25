@@ -72,6 +72,9 @@
         <!-- Inhoud -->
 
         <main id="inhoud">
+            
+            <div class="text-center"><h1>Dit is een testproject van Thomas More Hogeschool Geel.</h1></div>
+            <br>
 
             <!-- Team sectie -->
 

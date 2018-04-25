@@ -18,10 +18,10 @@
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="profielSubMenu" data-parent="#sidenav">
                 <li class="pt-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Profiel') ?>">Profiel</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Trainer/Profiel') ?>">Profiel</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Profiel/Aanpassen') ?>">Profiel aanpassen</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Trainer/Profiel/Aanpassen') ?>">Profiel aanpassen</a>
                 </li>
             </ul>
         </div>
@@ -59,10 +59,10 @@
                     <a class="nav-link1" href="<?php echo site_url('/Trainer/WedstrijdResultaten/index?pagina=aanpassen') ?>">Wedstrijdresultaten beheren</a>
                 </li>
                 <li>
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Inschrijvingen') ?>">Inschrijvingen</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Trainer/Inschrijvingen') ?>">Inschrijvingen</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Inschrijvingen/aanpassen') ?>">Inschrijvingen beheren</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Trainer/Inschrijvingen/aanpassen') ?>">Inschrijvingen beheren</a>
                 </li>
             </ul>
         </div>

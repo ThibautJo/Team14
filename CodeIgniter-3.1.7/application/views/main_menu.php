@@ -31,7 +31,7 @@
                     <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Profiel') ?>">Profiel</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Profiel/Aanpassen') ?>">Profiel aanpassen</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Zwemmer/Profiel/Aanpassen') ?>">Profiel aanpassen</a>
                 </li>
             </ul>
         </div>
@@ -50,13 +50,13 @@
                     <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Wedstrijdresultaten') ?>">Wedstrijdresultaten</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Inschrijven') ?>">Inschrijven</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Zwemmer/Inschrijven') ?>">Inschrijven</a>
                 </li>
             </ul>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Zwemmer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
+        <a class="nav-link d-flex align-items-center" href="<?php // echo site_url('/Zwemmer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex justify-content-between align-items-center" href="<?php echo site_url('/Zwemmer/Melding') ?>"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span>
