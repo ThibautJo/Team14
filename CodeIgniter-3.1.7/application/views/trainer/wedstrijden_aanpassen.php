@@ -40,7 +40,7 @@ $maanden = array(
 <div id="wedstrijd">
   <h1 style="display: inline;"><?php if($maand == 0){ echo "Alle wedstrijden";}else{echo $maanden[$maand]; }?></h1>
   <form action="#" method="post" style="display: inline-block; margin: 10px;">
-    <select id="datumSelected">
+    <select id="datumSelected" title="Maand aanduiden">
       <?php
 
       foreach ($maanden as $key => $value) {
@@ -68,7 +68,7 @@ $maanden = array(
 
   $this->table->set_heading(array('data' => 'Datum', 'scope' => 'col'), array('data' => 'Naam', 'scope' => 'col'), array('data' => 'Locatie', 'scope' => 'col'),
                             array('data' => 'Programma', 'scope' => 'col'), array('data' => 'Ingeschrevenen', 'scope' => 'col'), "Actie",
-                          "<button type='button' class='btn btn-warning btn-xs btn-round' data-toggle='modal' data-target='#wedstrijdToevoegen' id='' onclick='reeksenLeegmaken()' value=''><i class='fas fa-plus'></button>");
+                          "<button type='button' class='btn btn-warning btn-xs btn-round' data-toggle='modal' title='Wedstrijd toevoegen' data-target='#wedstrijdToevoegen' id='' onclick='reeksenLeegmaken()' value=''><i class='fas fa-plus'></button>");
 
   $this->table->add_row();
 
@@ -80,8 +80,8 @@ $maanden = array(
     foreach ($wedstrijd->personen->namen as $persoon) {
       $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
       array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon,
-      "<button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button>",
-     "<button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button>" );
+      "<button type='button' class='btn btn-success' id='aanpassen".$wedstrijd->id."' onclick='wedstrijdOpvragen(this.id)' title='Wedstrijd aanpassen' value='".$wedstrijd->id."'><i class='fas fa-pencil-alt'></i></button>",
+     "<button type='button' class='btn btn-danger' id='verwijder".$wedstrijd->id."' onclick='wedstrijdVerwijder(this.id)' title='Wedstrijd verwijderen' value='".$wedstrijd->id."'><i class='fas fa-trash-alt'></i></button>" );
     }
   }
   else {
@@ -95,7 +95,7 @@ $maanden = array(
   echo $this->table->generate();
    ?>
 
-  <button type="button" class="btn btn-primary" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=weergaven'">Weergaven</button>
+  <button type="button" class="btn btn-primary" title="Wedstrijd weergave pagina" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=weergaven'">Weergaven</button>
 
 
   <!-- Modal toevoegen -->
@@ -292,15 +292,14 @@ function form_validatie(formID){
       ok = false;
     }
     else {
-      // $(foutID).Attr('hidden', "true");
+      $(foutID).css({'display': 'none'});
       $(this).css({"margin-bottom": '20px', "border-color": "blue"});
       $(foutID).css({"margin-bottom": '0px'});
     }
   });
 
   // true = geen fouten gevonden
-  // return ok;
-  alert(ok);
+  return ok;
 }
 
 $('#datumSelected').on('change', function() {
