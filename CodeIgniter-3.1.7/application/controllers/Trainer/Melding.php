@@ -41,7 +41,7 @@ class Melding extends CI_Controller {
 
         $this->load->model('trainer/melding_model');
         $data['meldingen'] = $this->melding_model->getMeldingen();
-
+        
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
             'inhoud' => 'trainer/melding',
@@ -55,7 +55,18 @@ class Melding extends CI_Controller {
         $data['team'] = $this->data->team;
 
         $this->load->model('trainer/melding_model');
-        $data['meldingen'] = $this->melding_model->getMeldingen();
+       // $data['meldingen'] = $this->melding_model->getMeldingen();
+                
+        $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
+        
+//        $i = 0;
+//        foreach ($data['meldingen'] as $melding) {
+//            $data['meldingen'][$i]->personen = $this->melding_model->getMeldingPerPersoon();
+//            $i++;
+//        }
+//        
+//        var_dump($data['meldingen'][0]);
+
 
         $this->load->model('trainer/zwemmers_model');
         $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
@@ -66,6 +77,70 @@ class Melding extends CI_Controller {
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
+    }
+    
+    /**
+     * Haalt de id=$id op van het te wijzigen melding-record via Melding_model
+     *
+     * @param $id De id van het te wijzigen melding
+     */
+    public function wijzigMelding($id) {
+        $data = new stdClass();
+
+        $this->load->model('trainer/melding_model');
+        
+        $data = $this->melding_model->get($id);
+
+//        $this->load->model('trainer/supplementfunctie_model');
+//        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
+
+        print json_encode($data);
+    }
+    
+    /**
+     * Verwijdert het melding-record met id=$id via Melding_model en toont de aangepaste lijst in de view melding_aanpassen.php
+     *
+     * @param $id De id van het melding-record dat verwijdert wordt
+     * @see Melding_model::delete()
+     */
+    public function verwijderMelding($id) {
+        $this->load->model('trainer/melding_model');
+        $this->melding_model->delete($id);
+
+        redirect('/trainer/melding/beheren');
+    }
+    
+    /**
+     * Slaagt het nieuw/aangepaste melding op via Melding_model en toont de aangepaste lijst in de view melding_aanpassen.php
+     *
+     * @see Supplementfunctie_model::get();
+     * @see Melding_model::insert();
+     * @see Melding_model::update();
+     */
+    public function opslaanMelding($actie = "toevoegen") {
+        $melding = new stdClass();
+
+       // $supplement->ID = $this->input->post('id');
+        $melding->datumStop = $this->input->post('datumStop');
+        $melding->meldingBericht = ucfirst($this->input->post('inhoud'));
+
+//        $functieId = $this->input->post('functie');
+//        $this->load->model('trainer/supplementfunctie_model');
+//        $functie = $this->supplementfunctie_model->get($functieId);
+//        $supplement->supplementFunctieId = $functie->id;
+
+        $this->load->model('trainer/melding_model');
+
+//        if($supplement->ID == 0) {
+        if($actie == "toevoegen") {
+            $this->melding_model->insert($melding);
+        } else {
+            $melding->id = $this->input->post('id');
+            $this->melding_model->update($melding);
+        }
+
+       redirect('/trainer/melding/beheren');
+
     }
     
 }

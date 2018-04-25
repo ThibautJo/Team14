@@ -15,7 +15,7 @@
 $personen="";
 
 foreach ($zwemmers as $zwemmer) {
-    $personen[$zwemmer->id] = ucfirst($zwemmer->voornaam);
+    $personen[$zwemmer->voornaam] = ucfirst($zwemmer->voornaam);
 }
 
 $attributenFormulier = array('id' => 'form-melding',
@@ -28,6 +28,7 @@ $attributenFormulier = array('id' => 'form-melding',
     <thead>
       <tr>
         <th>Datum</th>
+        <th>Aan</th>
         <th>Inhoud</th>
         <th></th>
         <th><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#meldingToevoegen'><i class='fas fa-plus'></i></button></th>
@@ -39,9 +40,12 @@ $attributenFormulier = array('id' => 'form-melding',
     foreach ($meldingen as $melding) { 
         $datum = $melding->datumStop;
         if ($datum >= date("Y-m-d")) {
-            echo "<tr><td>" . $datum . "</td><td>" . $melding->meldingBericht ."</td><td>"
+                
+                   echo "<tr><td>" . $datum . "</td><td>" . $melding->voornaam . "</td><td>" . $melding->meldingBericht ."</td><td>"
                     . "<button type='button' class='btn btn-success' id='aanpassen" . $melding->id . "' onclick='meldingUpdate(this.id)' value='" . $melding->id . "'data-toggle='modal' data-target='#meldingAanpassen'><i class='fas fa-pencil-alt'></i></button></td><td>"
-                    . "<button type='button' class='btn btn-danger' id='verwijder" . $melding->id . "' onclick='meldingVerwijder(this.id)' value='" . $melding->id . "'><i class='fas fa-trash-alt'></i></button></td></tr>\n";
+                    . "<button type='button' class='btn btn-danger' id='verwijder" . $melding->id . "' onclick='meldingVerwijder(this.id)' value='" . $melding->id . "'><i class='fas fa-trash-alt'></i></button></td></tr>\n"; 
+                
+            
         }
     };
         
@@ -73,6 +77,7 @@ $attributenFormulier = array('id' => 'form-melding',
                             <?php
                             echo form_label('Vervaldatum', 'datumStop');
                             echo form_input(array('type' => 'date',
+                                'name' => 'datumStop',
                                 'id' => 'datumStop',
                                 'value' => date("Y-m-d"),
                                 'class' => 'form-control',
@@ -129,13 +134,14 @@ $attributenFormulier = array('id' => 'form-melding',
                 <div class="form-group">
                     <?php
                     echo form_label('Aan', 'aan');
-                    echo form_dropdown('zwemmer', $personen, '');
+                    echo form_dropdown('zwemmer', $personen, '', "id='aan'");
                     ?>
                 </div>
                 <div class="form-group">
                     <?php
                     echo form_label('Vervaldatum', 'datumStop');
                     echo form_input(array('type' => 'date',
+                        'name' => 'datumStop',
                         'id' => 'datumStop',
                         'value' => 'date("Y-m-d")',
                         'class' => 'form-control',
