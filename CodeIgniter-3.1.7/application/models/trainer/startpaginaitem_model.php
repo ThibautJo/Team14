@@ -7,7 +7,7 @@
  */
 
 
-class StartpaginaItem_model extends CI_Model {
+class startpaginaitem_model extends CI_Model {
 
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
