@@ -23,6 +23,8 @@ class Profiel extends CI_Controller{
     public function __construct() {
         parent::__construct();
         
+        
+        
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
         redirect('welcome/meldAan');}
@@ -42,8 +44,12 @@ class Profiel extends CI_Controller{
         $data['titel'] = 'Profiel zwemmer';
         $data['team'] = $this->data->team;
         
-        $profielen = $this->ladenProfiel();
-        $data['profielen'] = $profielen;
+        $persoonAangemeld = $this->authex->getPersoonInfo();
+        $persoonId = $persoonAangemeld->id;
+        
+        $this->load->model("zwemmer/profiel_model");
+        $profiel = $this->profiel_model->getProfielByPersoon($persoonId);
+        $data['profiel'] = $profiel;
         
         $partials = array('hoofding' => 'main_header',
             'menu' => 'main_menu',
@@ -51,30 +57,6 @@ class Profiel extends CI_Controller{
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
-    }
-    
-    public function ladenProfiel($id){
-        $this->load->model("zwemmer/profiel_model");
-        $profielen = $this->profiel_model->getProfielByPersoon($id);
-        
-        $data_profielen = array();
-        foreach ($profielen as $profiel) {                    
-            $data_profielen[] = array(
-                "voornaam" => $profiel->voornaam,
-                "achternaam" => $profiel->achternaam,
-                "straat" => $profiel->straat,
-                "huisnummer" => $profiel->huisnummer,
-                "postcode" => $profiel->postcode,
-                "gemeente" => $profiel->gemeente,
-                "telefoonnummer" => $profiel->telefoonnummer,
-                "email" => $profiel->email,
-                "wachtwoord" => $profiel->wachtwoord,
-                "omschrijving" => $profiel->omschrijving,
-                "foto" => $profiel->foto,
-                "color" => '#FF7534',"textColor" => '#000'
-            );
-        }
-        return $data_profielen;
     }
     
 }

@@ -14,15 +14,12 @@
 
 
 ?>
-<table class="table">
-        <tbody>
-            <?php
-            foreach ($profielen as $profiel) {
-                echo "<tr>"
-                . "<td>" . $profiel->voornaam . "</td></tr>\n";
-            }
-            ?>
-        </tbody>
-    </table>
+<div>
+    
+    <p><?php echo $profiel->voornaam ?></p>
+            
+</div>
+            
+
 
 
