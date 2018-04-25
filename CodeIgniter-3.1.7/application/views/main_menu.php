@@ -7,7 +7,7 @@
         echo toonAfbeelding('Profiel/Avatar_Pieter Timmers.png', 'id="avatar" class="shadow img-circle"');
         ?>
     </div>
-    <p class="text-white pt-2 mb-0">Pieter Timmers</p>
+    <p class="text-white pt-2 mb-0"><?php echo $persoonAangemeld->voornaam ?></p>
 </div>
 
 <!-- Links in de verticale menu -->
