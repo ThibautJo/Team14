@@ -37,7 +37,7 @@ class Team extends CI_Controller {
         $data['zwemmers'] = $zwemmers;
 
         $partials = array('hoofding' => 'main_header',
-            'menu' => 'trainer_main_menu',
+            'menu' => 'main_menu',
             'inhoud' => 'trainer/team_lijst',
             'voetnoot' => 'main_footer');
 

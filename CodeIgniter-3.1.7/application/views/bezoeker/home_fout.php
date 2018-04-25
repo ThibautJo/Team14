@@ -4,12 +4,13 @@
         $('#aanmeldFormulier').modal('show');   
     
         $("#aanmeldFormulier").on('hidden.bs.modal', function () {
-            alert('The modal is now hidden.');
-            // redirect naar meldAan hier (?)
     });
 });
 </script>
-
+<?php
+$attributes = array('name' => 'mijnFormulier');
+echo form_open('Welcome/controleerAanmelden', $attributes);
+?>
 <div class="modal show fade" id="aanmeldFormulier" tabindex="-1" role="dialog" aria-labelledby="aanmeldFormulier" aria-hidden="false">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -29,12 +30,24 @@
                     </button>
                 </div>
                 <div class="modal-body"> <!-- Modal inhoud -->
-                    <p>De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.</p>
+                    <p style="color: red;">De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.</p>
+                    <p>
+                        <div><?php echo form_label('E-mail:', 'email'); ?></div>
+                        <div><?php echo form_input(array('name' => 'email', 'id' => 'email', 'size' => '30', 'class' => 'form-control')); ?></div>
+                    </p>
+                    <p>
+                        <div><?php echo form_label('Wachtwoord:', 'wachtwoord'); ?></div>
+                        <div><?php
+                                    $data = array('name' => 'wachtwoord', 'id' => 'wachtwoord', 'size' => '30', 'class' => 'form-control');
+                                    echo form_password($data);
+                                    ?></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                    <?php echo form_submit('knop', 'Aanmelden', 'class="btn button-blue"'); ?>
                 </div>
             </div>
+                        <?php echo form_close(); ?>
         </div>
     </div>
 </div>

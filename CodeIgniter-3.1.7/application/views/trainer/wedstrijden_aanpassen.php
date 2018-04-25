@@ -278,29 +278,7 @@ $maanden = array(
 </div>
 <script type="text/javascript">
 
-function form_validatie(formID){
-  var ok = true;
-  var formID = '#'+formID;
 
-  $(formID+' *').filter('input').each(function(){
-    var foutID = "#"+$(this).attr("id")+"-fout";
-
-    if($(this).attr("required") && $(this).val() == ""){
-      $(foutID).removeAttr('hidden');
-      $(this).css({"margin-bottom": '0px', "border-color": "red"});
-      $(foutID).css({"margin-bottom": '20px'});
-      ok = false;
-    }
-    else {
-      $(foutID).css({'display': 'none'});
-      $(this).css({"margin-bottom": '20px', "border-color": "blue"});
-      $(foutID).css({"margin-bottom": '0px'});
-    }
-  });
-
-  // true = geen fouten gevonden
-  return ok;
-}
 
 $('#datumSelected').on('change', function() {
   datumSelect();

@@ -56,7 +56,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="<?php // echo site_url('/Zwemmer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
+        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Zwemmer/Team') ?>"><i class="material-icons md-18 mr-3">group</i><span class="menu-text">Team</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex justify-content-between align-items-center" href="<?php echo site_url('/Zwemmer/Melding') ?>"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span>

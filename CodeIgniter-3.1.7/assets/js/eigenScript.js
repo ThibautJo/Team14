@@ -1,21 +1,27 @@
-// form validation
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
+function form_validatie(formID){
+  var ok = true;
+  var formID = '#'+formID;
+
+  $(formID+' *').filter('input').each(function(){
+    var foutID = "#"+$(this).attr("id")+"-fout";
+
+    if($(this).attr("required") && $(this).val() == ""){
+      $(foutID).removeAttr('hidden');
+      $(this).css({"margin-bottom": '0px', "border-color": "red"});
+      $(foutID).css({"margin-bottom": '20px'});
+      ok = false;
+    }
+    else {
+      $(foutID).css({'display': 'none'});
+      $(this).css({"margin-bottom": '20px', "border-color": "blue"});
+      $(foutID).css({"margin-bottom": '0px'});
+    }
+  });
+
+  // true = geen fouten gevonden
+  return ok;
+}
+
 //modal Close
 $(".close").click(function(){
   $('.modal').modal('hide');

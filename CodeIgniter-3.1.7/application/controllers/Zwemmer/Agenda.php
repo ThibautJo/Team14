@@ -43,8 +43,10 @@ class Agenda extends CI_Controller {
     public function index() {
         $data['titel'] = 'Agenda';
         $data['team'] = $this->data->team;
+        $persoonAangemeld = $this->authex->getPersoonInfo();
         
-        $persoonId = 1;
+        
+        $persoonId = $persoonAangemeld->id;
         
         // Inladen van alle agenda punten (wedstrijden, medische onderzoeken, supplementen, trainingen en stages
         $data_wedstrijden = $this->ladenWedstrijden($persoonId);
