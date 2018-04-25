@@ -137,6 +137,7 @@ class Team extends CI_Controller {
         $data['team'] = $this->data->team;
         $zwemmers = $this->ladenTeam();
         $data['zwemmers'] = $zwemmers;
+        
         $zwemmersuitarchief = $this->ladenArchief();
         $data['zwemmersuitarchief'] = $zwemmersuitarchief;
         

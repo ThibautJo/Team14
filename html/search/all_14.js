@@ -103,6 +103,8 @@ var searchData=
   ['slideup',['slideUp',['../class_c_i___javascript.html#a3d94535f1d68c62698e733d34152d1f9',1,'CI_Javascript']]],
   ['sortable',['sortable',['../class_c_i___jquery.html#afb2aa7347e6ff89ab0177478a7f3869d',1,'CI_Jquery']]],
   ['start_5fcache',['start_cache',['../class_c_i___d_b__query__builder.html#a2d4f0c7b71f87dc7ca7f7fcfbdd12ba0',1,'CI_DB_query_builder']]],
+  ['startpagina',['Startpagina',['../class_startpagina.html',1,'']]],
+  ['startpaginaitem_5fmodel',['StartpaginaItem_model',['../class_startpagina_item__model.html',1,'']]],
   ['stop_5fcache',['stop_cache',['../class_c_i___d_b__query__builder.html#a612e54a6230b7e899c4d2a42a234bd5a',1,'CI_DB_query_builder']]],
   ['stored_5fprocedure',['stored_procedure',['../class_c_i___d_b__oci8__driver.html#adb2007e6a64069385b285c77480d87b7',1,'CI_DB_oci8_driver']]],
   ['strip_5fimage_5ftags',['strip_image_tags',['../class_c_i___security.html#abb836a42971c7bc641588db779c6ab1d',1,'CI_Security\strip_image_tags()'],['../class_c_i___form__validation.html#abb836a42971c7bc641588db779c6ab1d',1,'CI_Form_validation\strip_image_tags()']]],

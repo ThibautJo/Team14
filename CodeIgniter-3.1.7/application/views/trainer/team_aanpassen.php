@@ -40,7 +40,9 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
     </table>
 </div>
 
-
+<?php 
+$opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
+?>
 <!-- Modal Toevoegen -->
 <div class="modal fade" id="zwemmerToevoegen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -55,7 +57,15 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 <?php
                 echo form_open('', $attributenFormulier);
                 ?>
-
+                
+                <div class="form-group">
+                    <?php
+                    echo form_label('Soort', 'soort');
+                    echo form_dropdown('soort', $opties, '', 'class="form-control"')
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_label('Voornaam', 'voornaam');
@@ -224,19 +234,20 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
     </div>
 </div>
 <?php
-$archief=[];
+$archief="";
+$archief[0]="--Select---";
 
 foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
-    $archief = $zwemmeruitarchief->voornaam;
+    $archief = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
 }
 
 ?>
-<!-- Uit archief halen -->
-<div class="modal fade" id="zwemmerUitArchiefHalen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Zwemmer uit archief halen -->
+<div class="modal fade" id="zwemmerToevoegenUitArchief" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
-                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer toevoegen</h5> <!-- Modal titel -->
+                <h5 class="modal-title" id="exampleModalLongTitle">Zwemmer toevoegen uit archief</h5> <!-- Modal titel -->
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- Modal sluit knop ( X ) -->
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -248,7 +259,7 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
                 <div class="form-group">
                             <?php
                             echo form_label('Archief', 'archief');
-                            echo form_dropdown('archief', $archief, '');
+                            echo form_dropdown('archief', $archief, '0', 'class="form-control"');
 
                             ?>
                             <div class="help-block with-errors"></div>
