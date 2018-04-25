@@ -51,6 +51,7 @@ class Agenda extends CI_Controller {
     public function index($persoonId) {
         $data['titel'] = 'Agenda\'s zwemmers';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         if ($persoonId == 0) {
             $data['activiteiten'] = $this->ladenActiviteitenIedereen();
