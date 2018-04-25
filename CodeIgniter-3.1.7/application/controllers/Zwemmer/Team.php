@@ -29,7 +29,7 @@ class Team extends CI_Controller {
     }
 
     public function index() {
-        $data['titel'] = 'Team beheren';
+        $data['titel'] = 'Team';
         $data['team'] = $this->data->team;
         
         $zwemmers = $this->ladenTeam();
@@ -38,7 +38,7 @@ class Team extends CI_Controller {
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'main_menu',
-            'inhoud' => 'trainer/team_lijst',
+            'inhoud' => 'zwemmer/team',
             'voetnoot' => 'main_footer');
 
         $this->template->load('main_master', $partials, $data);
