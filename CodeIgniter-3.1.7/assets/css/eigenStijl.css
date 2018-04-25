@@ -276,6 +276,13 @@ h2 {
   margin: 10px 0 20px 0;
   /* border: 1px solid black; */
 }
+#form-wedstrijd .fout{
+  margin-bottom: 20px;
+  color: red;
+}
+label.fout{
+  display: none;
+}
 #form-wedstrijd label{
   display: block;
   margin: 0;

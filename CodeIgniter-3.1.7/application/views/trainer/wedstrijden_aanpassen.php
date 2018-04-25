@@ -122,6 +122,7 @@ $maanden = array(
                 <?php
                     echo form_label("Titel", 'titel-wedstrijd');
                     echo form_input(array('name'=>'titel-wedstrijd', 'id'=>'titel-wedstrijd', 'required' => 'required'));
+                    echo form_label("Vak is leeg!", 'titel-wedstrijd', array("id" => "titel-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                 ?>
               </td>
               <td rowspan="4" class="reeksen">
@@ -151,9 +152,10 @@ $maanden = array(
               <td>
                 <?php
                   echo form_label("Datum", 'datum-wedstrijd');
-                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStart', 'id'=>'datum-wedstrijdStart', 'required'));
+                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStart', 'id'=>'datum-wedstrijd', 'required' => 'required'));
                   echo '<p style="display: inline; margin: 0 10px;"> tot </p>';
-                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStop', 'id'=>'datum-wedstrijdStop', 'required'));
+                  echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStop', 'id'=>'datum-wedstrijd', 'required' => 'required'));
+                  echo form_label("Vak is leeg!", 'datum-wedstrijd', array("id" => "datum-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                  ?>
               </td>
             </tr>
@@ -161,7 +163,8 @@ $maanden = array(
               <td>
                 <?php
                   echo form_label("Locatie", 'locatie-wedstrijd');
-                  echo form_input(array('name'=>'locatie-wedstrijd', 'id'=>'locatie-wedstrijd', 'required'));
+                  echo form_input(array('name'=>'locatie-wedstrijd', 'id'=>'locatie-wedstrijd', 'required' => 'required'));
+                  echo form_label("Vak is leeg!", 'locatie-wedstrijd', array("id" => "locatie-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                  ?>
               </td>
             </tr>
@@ -169,7 +172,8 @@ $maanden = array(
               <td>
                 <?php
                   echo form_label("Programma", 'programma-wedstrijd');
-                  echo form_input(array('name'=>'programma-wedstrijd', 'id'=>'programma-wedstrijd', 'required'));
+                  echo form_input(array('name'=>'programma-wedstrijd', 'id'=>'programma-wedstrijd', 'required' => 'required'));
+                  echo form_label("Vak is leeg!", 'programma-wedstrijd', array("id" => "programma-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                  ?>
               </td>
             </tr>
@@ -178,7 +182,8 @@ $maanden = array(
         <?php echo form_close(); ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="wedstrijdOpslaan('toevoegen')">Opslaan</button>
+        <button type="button" class="btn btn-primary" onclick="form_validatie('wedstrijdToevoegen')">Opslaan</button>
+        <!-- <button type="button" class="btn btn-primary" onclick="wedstrijdOpslaan('toevoegen')">Opslaan</button> -->
       </div>
     </div>
   </div>
@@ -207,7 +212,6 @@ $maanden = array(
                 <?php
                     echo form_label("Titel", 'titel-wedstrijd');
                     echo form_input(array('name'=>'titel-wedstrijd', 'id'=>'titel-wedstrijd', 'required' => 'required'));
-                    echo form_label("Fout", 'titel-wedstrijd', array("id" => "titel-wedstrijd-fout"));
                 ?>
               </td>
               <td rowspan="4" class="reeksen">
@@ -275,12 +279,28 @@ $maanden = array(
 <script type="text/javascript">
 
 function form_validatie(formID){
-  $('#'+formID+' *').filter('input').each(function(){
-    if($(this).attr("required") && $(this).val() == ""){
-      alert("niet alle velden zijn ingevuld");
+  var ok = true;
+  var formID = '#'+formID;
 
+  $(formID+' *').filter('input').each(function(){
+    var foutID = "#"+$(this).attr("id")+"-fout";
+
+    if($(this).attr("required") && $(this).val() == ""){
+      $(foutID).removeAttr('hidden');
+      $(this).css({"margin-bottom": '0px', "border-color": "red"});
+      $(foutID).css({"margin-bottom": '20px'});
+      ok = false;
+    }
+    else {
+      // $(foutID).Attr('hidden', "true");
+      $(this).css({"margin-bottom": '20px', "border-color": "blue"});
+      $(foutID).css({"margin-bottom": '0px'});
     }
   });
+
+  // true = geen fouten gevonden
+  // return ok;
+  alert(ok);
 }
 
 $('#datumSelected').on('change', function() {
