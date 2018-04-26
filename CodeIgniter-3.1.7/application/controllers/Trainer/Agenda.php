@@ -126,6 +126,7 @@ class Agenda extends CI_Controller {
                 "description" => '',
                 "start" => $wedstrijd->wedstrijd->datumStart, // Beginuur/begindatum van het event in de agenda
                 "end" => $wedstrijd->wedstrijd->datumStop, // Einduur/einddatum van het event in de agenda
+                "persoon" => $wedstrijd->persoonId,
                 "color" => $this->agenda_model->getKleurActiviteit(1)->kleur, // Kleur van het event in de agenda
                 "textColor" => '#000' // Tekstkleur van het event in de agenda
             );
@@ -149,6 +150,7 @@ class Agenda extends CI_Controller {
                 "description" => '',
                 "start" => $onderzoek->tijdstipStart,
                 "end" => $onderzoek->tijdstipStop,
+                "persoon" => $onderzoek->persoonId,
                 "color" => $this->agenda_model->getKleurActiviteit(2)->kleur,
                 "textColor" => '#000'
             );
@@ -225,6 +227,7 @@ class Agenda extends CI_Controller {
                 "title" => $activiteit->activiteit->stageTitel,
                 "start" => $activiteit->activiteit->tijdstipStart,
                 "end" => $activiteit->activiteit->tijdstipStop,
+                "persoon" => $activiteit->persoonId,
                 "color" => $color,
                 "textColor" => '#000'
             );
@@ -247,6 +250,7 @@ class Agenda extends CI_Controller {
                 "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
                 "title" => $supplement->supplement->naam,
                 "start" => $supplement->datum,
+                "persoon" => $supplement->persoonId,
                 "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
                 "textColor" => '#fff'
             );
@@ -373,14 +377,15 @@ class Agenda extends CI_Controller {
     }
     
     public function registreerActiviteit() {
+        $uren = array('06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00');
         $activiteit = new stdClass();
+        $activiteitPerPersoon = new stdClass();
         
         $id = $this->input->post('id');
-//        $activiteit->persoon = $this->input->post('persoon');
-        $activiteit->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $this->input->post('beginuur') . ':00';
-        $activiteit->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $this->input->post('einduur') . ':00';
+        $activiteit->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $uren[$this->input->post('beginuur')] . ':00';
+        $activiteit->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $uren[$this->input->post('einduur')] . ':00';
         if ($this->input->post('soort') !== '') {
-            $activiteit->typeTrainingId = $this->input->post('soort');
+            $activiteit->typeTrainingId = $this->input->post('soort')+1;
             $activiteit->typeActiviteitId = 1;
         }
         else {
@@ -390,14 +395,28 @@ class Agenda extends CI_Controller {
         $activiteit->stageTitel = $this->input->post('gebeurtenisnaam');
         
         $this->load->model('trainer/agenda_model');
-        if ($id == 0) {
-            $this->brouwerij_model->insert($activiteit);
+        if ($id === 0) {
+            $this->agenda_model->insertActiviteit($activiteit);
         }
         else {
             $activiteit->id = $id;
-            $this->brouwerij_model->update($activiteit);
+            $this->agenda_model->updateActiviteit($activiteit);
         }
         
-        redirect('/Trainer/aanpassen');
+        $this->load->model('zwemmers_model');
+        $zwemmers = $this->zwemmers_model->getZwemmers();
+        if ($this->input->post('persoon') === 0) {
+            foreach ($zwemmers as $zwemmer) {
+                $activiteitPerPersoon->persoonId = $zwemmer->id;
+                $activiteitPerPersoon->activiteitId = $id;
+            }
+        }
+        else {
+            $activiteitPerPersoon->persoonId = $this->input->post('persoon');
+            $activiteitPerPersoon->activiteitId = $id;
+        }
+        $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+        
+        redirect('/Trainer/Agenda/aanpassen/0?persoonId=0');
     }
 }

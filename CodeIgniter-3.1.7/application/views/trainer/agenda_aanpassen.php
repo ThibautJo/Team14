@@ -71,7 +71,7 @@
                 
                 <?php echo form_hidden('id', ''); ?>
                 
-                <?php echo form_hidden('persoon', "$persoon"); ?>
+                <?php echo form_hidden('persoon', $persoon); ?>
 
                 <div id="titel-form" class="d-none">
                     <div class="form-group">

@@ -22,7 +22,7 @@ class Agenda_model extends CI_Model {
         $this->load->helper("my_url_helper");
         $this->load->helper('url');
     }
-
+    
     public function getActiviteit($activiteitId) {
         // Activiteit ophalen uit de databank
         $this->db->where('id', $activiteitId);
