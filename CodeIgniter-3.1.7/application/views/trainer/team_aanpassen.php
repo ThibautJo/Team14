@@ -238,7 +238,7 @@ $archief="";
 $archief[0]="--Select---";
 
 foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
-    $archief = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
+    $archief[] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
 }
 
 ?>
