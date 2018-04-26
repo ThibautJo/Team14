@@ -373,6 +373,31 @@ class Agenda extends CI_Controller {
     }
     
     public function registreerActiviteit() {
+        $activiteit = new stdClass();
         
+        $id = $this->input->post('id');
+//        $activiteit->persoon = $this->input->post('persoon');
+        $activiteit->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $this->input->post('beginuur') . ':00';
+        $activiteit->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $this->input->post('einduur') . ':00';
+        if ($this->input->post('soort') !== '') {
+            $activiteit->typeTrainingId = $this->input->post('soort');
+            $activiteit->typeActiviteitId = 1;
+        }
+        else {
+            $activiteit->typeTrainingId = null;
+            $activiteit->typeActiviteitId = 2;
+        }
+        $activiteit->stageTitel = $this->input->post('gebeurtenisnaam');
+        
+        $this->load->model('trainer/agenda_model');
+        if ($id == 0) {
+            $this->brouwerij_model->insert($activiteit);
+        }
+        else {
+            $activiteit->id = $id;
+            $this->brouwerij_model->update($activiteit);
+        }
+        
+        redirect('/Trainer/aanpassen');
     }
 }

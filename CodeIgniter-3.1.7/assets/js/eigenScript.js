@@ -456,7 +456,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon, site_ur
     
     switch (true) {
         case activiteit === "Wedstrijd":
-            $('#aanpassenFormulier').attr('action', site_url + '/Trainer/Agenda/registreerWedstrijd');
+            $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerWedstrijd');
             $('#aanpassenActiviteit #aanpassenFormulier').attr('novalidate', '');
             $('#aanpassenActiviteit #titel-form').removeClass('d-none');
             $('#aanpassenActiviteit #wedstrijd-form').removeClass('d-none');
@@ -471,6 +471,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon, site_ur
             $("#aanpassenActiviteit #personen option[value='" + voorPersoon + "']").attr("selected","selected");
             break;
         case activiteit === "Medische afspraak":
+            $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerOnderzoek');
             $('#aanpassenActiviteit #titel-form').removeClass('d-none');
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['omschrijving']);
@@ -481,6 +482,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon, site_ur
             $("#aanpassenActiviteit #personen option[value='" + voorPersoon + "']").attr("selected","selected");
             break;
         case activiteit === "Supplement":
+            $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerSupplement');
             $('#aanpassenActiviteit #supplement-form').removeClass('d-none');
             $("#aanpassenActiviteit #supplementnaam option[value='" + (data['supplement']['id']-1) + "']").attr("selected","selected");
             $('#aanpassenActiviteit #datum').datepicker('update', dateHelper_getDate(data['datum']));
@@ -489,6 +491,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon, site_ur
             $('#aanpassenActiviteit .datepicker').datepicker('update', '19-04-2018');
             break;
         case activiteit === "Stage":
+            $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerActiviteit');
             $('#aanpassenActiviteit #titel-form').removeClass('d-none');
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['stageTitel']);
@@ -499,6 +502,7 @@ function opvullenModalActiviteitAanpassen(data, activiteit, voorPersoon, site_ur
             $("#aanpassenActiviteit #personen option[value='" + voorPersoon + "']").attr("selected","selected");
             break;
         default:
+            $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerActiviteit');
             var typeTraininId = data["typeTrainingId"] - 1;
             $('#aanpassenActiviteit #titel-form').removeClass('d-none');
             $('#aanpassenActiviteit #training-form').removeClass('d-none');
