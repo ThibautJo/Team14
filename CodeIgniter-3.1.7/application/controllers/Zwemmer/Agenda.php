@@ -46,7 +46,6 @@ class Agenda extends CI_Controller {
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $data['persoonAangemeld'] = $persoonAangemeld;
         
-        
         $persoonId = $persoonAangemeld->id;
         
         

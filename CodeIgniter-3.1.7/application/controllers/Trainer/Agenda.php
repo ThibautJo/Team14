@@ -73,17 +73,6 @@ class Agenda extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function indexIedereen() {
-        $data['activiteiten'] = $this->ladenAlleActiviteiten();
-        
-        $partials = array('hoofding' => 'main_header',
-            'menu' => 'trainer_main_menu',
-            'inhoud' => 'trainer/agenda',
-            'voetnoot' => 'main_footer');
-
-        $this->template->load('main_master', $partials, $data);
-    }
-    
     public function ladenListGroup($persoonId, $aanpassen) {
         if ($aanpassen) {
             $link = 'aanpassen';
@@ -316,6 +305,7 @@ class Agenda extends CI_Controller {
     public function aanpassen($persoonId) {
         $data['titel'] = 'Agenda\'s aanpassen';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         
         if ($persoonId == 0) {
             $data['activiteiten'] = $this->ladenActiviteitenIedereen();
@@ -380,5 +370,9 @@ class Agenda extends CI_Controller {
         $data = $this->agenda_model->getSupplement($id);
 
         print json_encode($data);
+    }
+    
+    public function registreerActiviteit() {
+        
     }
 }
