@@ -68,7 +68,7 @@ class Team extends CI_Controller {
     public function index() {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
-        
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         $zwemmers = $this->ladenTeam();
         
         $data['zwemmers'] = $zwemmers;
@@ -145,6 +145,7 @@ class Team extends CI_Controller {
     public function aanpassen() {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         $zwemmers = $this->ladenTeam();
         $data['zwemmers'] = $zwemmers;
         
@@ -163,6 +164,7 @@ class Team extends CI_Controller {
     public function wijzig() {
         $data['titel'] = 'Team wijzigen';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         $zwemmers = $this->ladenTeam();
         $data['zwemmers'] = $zwemmers;
         

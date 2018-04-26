@@ -30,7 +30,7 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
             <?php
             foreach ($zwemmers as $zwemmer) {
                 echo "<tr>"
-                . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
+                . "<td>" . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
                 <td><button type='button' class='btn btn-success' id='aanpassen" . $zwemmer->id . "' onclick='zwemmerUpdate(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer wijzigen' data-target='#zwemmerAanpassen'>" . "<i class='fas fa-pencil-alt'></i></button>"
                         . anchor('Trainer/Team/archiveren/' . $zwemmer->id, form_button("knopArchiveer", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
