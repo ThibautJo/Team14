@@ -17,6 +17,10 @@ class Team extends CI_Controller {
         
         parent::__construct();
         
+        // controleren of persoon is aangemeld
+        if (!$this->authex->isAangemeld()) {
+        redirect('welcome/meldAan');}
+        
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->helper("MY_form_helper");
