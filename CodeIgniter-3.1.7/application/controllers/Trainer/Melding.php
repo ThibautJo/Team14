@@ -20,9 +20,15 @@ class Melding extends CI_Controller {
 
         parent::__construct();
         
-        // controleren of persoon is aangemeld
+           // controleren of bevoegde persoon is aangemeld        
         if (!$this->authex->isAangemeld()) {
-        redirect('welcome/meldAan');}
+            redirect('welcome/meldAan');
+        } else {
+            $persoon = $this->authex->getPersoonInfo();
+            if ($persoon->soort != "Trainer") {
+                redirect('welcome/meldAan');
+            }
+        }
 
         // Helpers inladen
         $this->load->helper('url');
