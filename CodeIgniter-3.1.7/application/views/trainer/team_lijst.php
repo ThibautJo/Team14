@@ -26,6 +26,6 @@ $aanpassen = array('class' => 'btn btn-warning btn-lg btn-round', 'data-toggle' 
     </div>
     <?php
     foreach ($zwemmers as $zwemmer)
-        echo "<div><h2>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . " " . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</h2></div>"
+        echo "<div><h2>" . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"') . " " . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</h2></div>"
         ?>
 </div>
