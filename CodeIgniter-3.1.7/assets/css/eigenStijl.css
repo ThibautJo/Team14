@@ -258,6 +258,22 @@ h2 {
     display: none;
 }
 
+#singleScreenOverlay {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    z-index: 9000;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+#singleScreenOverlay .arrow {
+    height: 100px;
+    position: absolute;
+}
+
 
 /* EIND PAGINA agenda*/
 

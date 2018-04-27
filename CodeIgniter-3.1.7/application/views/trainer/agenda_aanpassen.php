@@ -19,11 +19,28 @@
 <script src="<?php echo base_url() ?>assets/scripts/fullcalendar/fullcalendar.min.js"></script>
 <script src="<?php echo base_url() ?>assets/scripts/fullcalendar/gcal.js"></script>
 
-
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hulp agenda beheren</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <?php echo toonAfbeelding("singlepageoverlay.jpg", 'style="width: 100%"') ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Laat de agenda zien -->
 
-<div class="d-flex row">
+<div class="d-flex row" id="container-agenda">
     <div id="agenda" class="col-12 col-sm-8 col-md-9 col-xl-10 order-1 order-sm-0">
 
     </div>
@@ -42,6 +59,7 @@
             <button type="button" class="btn btn-success" data-toggle="modal" data-toggle="tooltip" title="Activiteit wijzigen" data-target="#activiteitWijzigen"><i class="fas fa-pencil-alt"></i></button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" data-target="#activiteitVerwijderen"><i class="fas fa-trash-alt"></i></button>
             <p><?php echo divAnchor("/Trainer/Agenda/index/" . $_GET['persoonId'] . "?persoonId=" . $_GET['persoonId'], 'Weergaven', 'class="btn button-blue d-flex justify-content-center"') ?></p>
+            <p><div><a class="btn btn-light d-flex justify-content-center text-dark" id="help" data-toggle="modal" data-target="#helpModal"><i class="material-icons">help</i> &nbsp;Hulp</a></div></p>
         </p>
     </div>
 </div>
@@ -286,7 +304,7 @@
 <!-- Script om agenda aan te passen -->
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function () {        
         $('.datepicker2').datepicker({
             autoclose: true,
             orientation: 'auto'
