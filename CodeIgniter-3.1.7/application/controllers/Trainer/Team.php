@@ -66,6 +66,7 @@ class Team extends CI_Controller {
      * @see team_lijst.php
      */
     public function index() {
+        
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
@@ -113,6 +114,7 @@ class Team extends CI_Controller {
     }
     
     public function ladenArchief(){
+        
         $this->load->model("trainer/zwemmers_model");
         $zwemmersuitarchief = $this->zwemmers_model->getZwemmersArchief();
         
@@ -143,6 +145,7 @@ class Team extends CI_Controller {
      * @see team_aanpassen.php
      */
     public function aanpassen() {
+        
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();

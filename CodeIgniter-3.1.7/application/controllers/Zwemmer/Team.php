@@ -33,6 +33,7 @@ class Team extends CI_Controller {
     }
 
     public function index() {
+        
         $data['titel'] = 'Team';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();

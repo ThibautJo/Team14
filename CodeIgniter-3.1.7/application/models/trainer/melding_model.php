@@ -20,6 +20,7 @@ class Melding_model extends CI_Model {
     }
     
     function get($id) {
+        
         $this->db->where('id', $id);
         $query = $this->db->get('meldingperpersoon');
         $meldingPerPersoon = $query->row();
