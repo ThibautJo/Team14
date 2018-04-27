@@ -41,6 +41,7 @@ class Agenda extends CI_Controller {
     // +----------------------------------------------------------
 
     public function index() {
+        
         $data['titel'] = 'Agenda';
         $data['team'] = $this->data->team;
         $persoonAangemeld = $this->authex->getPersoonInfo();
@@ -74,6 +75,7 @@ class Agenda extends CI_Controller {
     }
     
     public function ladenWedstrijden($persoonId) {
+        
         // Wedstrijden worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
         $wedstrijden = $this->agenda_model->getWedstrijdenByPersoon($persoonId);

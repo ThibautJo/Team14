@@ -154,9 +154,9 @@ class Wedstrijd_model extends CI_Model {
     $i = 0;
     foreach ($reeksen->slagen as $slag) {
       $data = array(
-        'WedstrijdId' => $wedID,
-        'SlagId' => $slag,
-        'AfstandId' => $reeksen->afstanden[$i]
+        'wedstrijdId' => $wedID,
+        'slagId' => $slag,
+        'afstandId' => $reeksen->afstanden[$i]
       );
 
       $this->db->insert('reeksperwedstrijd', $data);

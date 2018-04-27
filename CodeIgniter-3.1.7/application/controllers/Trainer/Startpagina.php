@@ -51,6 +51,7 @@ class Startpagina extends CI_Controller {
     public function index() {
         
        $data['titel'] = 'Startpagina beheren';
+       $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
        
        $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',

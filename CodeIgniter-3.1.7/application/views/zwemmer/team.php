@@ -20,7 +20,7 @@
             <?php
             foreach ($zwemmers as $zwemmer) {
                 echo "<tr>"
-                . "<td>" . toonAfbeelding('Zwemmers/' . $zwemmer->foto . '.png', 'id="avatar" class="shadow img-circle"') . "</td>"
+                . "<td>" . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td></tr>\n";
             }
             ?>

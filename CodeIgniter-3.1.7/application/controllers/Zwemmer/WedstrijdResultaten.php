@@ -59,6 +59,7 @@ class WedstrijdResultaten extends CI_Controller {
 
     $data['titel'] = 'Wedstrijd resultaten';
     $data['team'] = $this->data->team;
+    $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
     $this->load->model('trainer/wedstrijd_model');
     $this->load->model('trainer/Zwemmers_model');
