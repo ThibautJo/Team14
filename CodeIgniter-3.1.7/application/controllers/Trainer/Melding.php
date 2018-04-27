@@ -44,6 +44,7 @@ class Melding extends CI_Controller {
     public function index() {
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
         $data['meldingen'] = $this->melding_model->getMeldingen();
@@ -59,6 +60,7 @@ class Melding extends CI_Controller {
     public function beheren() {
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
        // $data['meldingen'] = $this->melding_model->getMeldingen();
