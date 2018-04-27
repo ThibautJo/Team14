@@ -69,6 +69,8 @@ class Supplement extends CI_Controller {
     public function index() {
         $data['titel'] = 'Supplementen beheren';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+
 
         $this->load->model('trainer/supplement_model');
         $data['supplementen'] = $this->supplement_model->getAllByNaamSupplementWithFunctie();

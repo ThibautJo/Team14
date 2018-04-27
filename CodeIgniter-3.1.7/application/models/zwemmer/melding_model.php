@@ -26,7 +26,7 @@ class Melding_model extends CI_Model {
         $meldingen = $query->result();
         
         foreach ($meldingen as $melding) {
-            $melding->melding = $this->getMelding($melding->id);
+            $melding->melding = $this->getMelding($melding->meldingId);
           
         }
         

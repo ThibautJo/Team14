@@ -36,10 +36,17 @@ class Melding extends CI_Controller {
         
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
+<<<<<<< HEAD
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         
         $persoonId = 5;
+=======
+        $persoonAangemeld = $this->authex->getPersoonInfo();
+        $data['persoonAangemeld'] = $persoonAangemeld;
+>>>>>>> f0d97e7a245fdc54c29f9e98475c9e21a0ed0c34
 
+        $persoonId = $persoonAangemeld->id;
+        
         $this->load->model('zwemmer/melding_model');
         $data['meldingen'] = $this->melding_model->getMeldingByPersoon($persoonId);
 

@@ -45,7 +45,11 @@ class Melding extends CI_Controller {
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> f0d97e7a245fdc54c29f9e98475c9e21a0ed0c34
         $this->load->model('trainer/melding_model');
         $data['meldingen'] = $this->melding_model->getMeldingen();
         
@@ -60,6 +64,7 @@ class Melding extends CI_Controller {
     public function beheren() {
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
        // $data['meldingen'] = $this->melding_model->getMeldingen();
