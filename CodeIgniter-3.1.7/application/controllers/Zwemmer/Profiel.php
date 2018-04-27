@@ -43,6 +43,7 @@ class Profiel extends CI_Controller{
     public function index(){
         $data['titel'] = 'Profiel zwemmer';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $persoonId = $persoonAangemeld->id;
