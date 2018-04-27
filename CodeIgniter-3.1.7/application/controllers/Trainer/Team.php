@@ -119,6 +119,7 @@ class Team extends CI_Controller {
         $data_zwemmersuitarchief = array();
         foreach ($zwemmersuitarchief as $zwemmeruitarchief) {                    
             $data_zwemmersuitarchief[] = array(
+                "id" => $zwemmeruitarchief->id,
                 "voornaam" => $zwemmeruitarchief->voornaam,
                 "achternaam" => $zwemmeruitarchief->achternaam,
                 "straat" => $zwemmeruitarchief->straat,
@@ -129,8 +130,7 @@ class Team extends CI_Controller {
                 "email" => $zwemmeruitarchief->email,
                 "wachtwoord" => $zwemmeruitarchief->wachtwoord,
                 "omschrijving" => $zwemmeruitarchief->omschrijving,
-                "foto" => $zwemmeruitarchief->foto,
-                "color" => '#FF7534',"textColor" => '#000'
+                "foto" => $zwemmeruitarchief->foto
             );
         }
         return $zwemmersuitarchief;
@@ -190,6 +190,16 @@ class Team extends CI_Controller {
         redirect('trainer/team');
     }
     
+    public function opslaanZwemmerArchief() {
+        $persoon = new stdClass();
+        
+        $this->load->model('trainer/zwemmers_model');
+        
+        $persoon->id = $this->input->post('id');
+        $this->zwemmers_model->uitArchiefHalen($id);
+            
+        redirect('trainer/team');
+    }
     
     /**
      * Slaagt het nieuw/aangepaste zwemmer op via Zwemmers_model en toont de aangepaste lijst in de view team_lijst.php

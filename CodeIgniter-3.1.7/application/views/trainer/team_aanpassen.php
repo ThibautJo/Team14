@@ -238,7 +238,7 @@ $archief="";
 $archief[0]="--Select---";
 
 foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
-    $archief[] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
+    $archief[$zwemmeruitarchief->id] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
 }
 
 ?>
@@ -256,10 +256,11 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
                 <?php
                 echo form_open('', $attributenFormulier);
                 ?>
+                
                 <div class="form-group">
                             <?php
                             echo form_label('Archief', 'archief');
-                            echo form_dropdown('archief', $archief, '0', 'class="form-control"');
+                            echo form_dropdown('archief', $archief, 'id="zwemmeruitarchief"', 'class="form-control"');
 
                             ?>
                             <div class="help-block with-errors"></div>
@@ -268,7 +269,7 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
-                <button type="button" class="btn button-blue" onclick="zwemmerOpslaan('toevoegen')">Opslaan</button>
+                <button type="button" class="btn button-blue" onclick="zwemmerUitArchiefHalen()">Opslaan</button>
             </div>
         </div>
     </div>

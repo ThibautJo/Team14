@@ -289,6 +289,26 @@ function zwemmerOpslaan(actie) {
         $(formToSubmit).submit();
     }
 }
+
+function zwemmerUitArchiefHalen(){
+    var ok = true;
+    var formToSubmit = '';
+    $('#zwemmerToevoegenUitArchief #form-zwemmer *').filter('select').each(function (){
+        if ($(this).val() !== "--Select--") {
+                alert("Er is geen persoon aangeduid");
+                ok = false;
+                return false;
+            }
+    });
+    formToSubmit = "#zwemmerToevoegenUitArchief #form-zwemmer";
+    
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Trainer/team/uitArchiefHalen');
+
+        $(formToSubmit).submit();
+    }
+}
 //zwemmer end
 
 // supplement start
