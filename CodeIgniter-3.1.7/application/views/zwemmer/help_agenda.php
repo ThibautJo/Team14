@@ -43,6 +43,7 @@
         </div>
 
         <br />
+        <br />
         <div><h4>Om je verder te helpen bij het raadplegen van je persoonlijke agenda, is hieronder een voorbeeld voorzien.</h4></div>
         <br />
 
