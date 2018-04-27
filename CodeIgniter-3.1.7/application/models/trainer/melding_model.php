@@ -37,13 +37,6 @@ class Melding_model extends CI_Model {
         
         return $obj_merged;
     }
-    
-    public function getMeldingen() {
-        $this->db->order_by('datumStop');
-        $query = $this->db->get('melding');
-        
-        return $query->result();
-    }
 
     public function getMeldingPerPersoon() {
         $query = $this->db->get('meldingperpersoon');

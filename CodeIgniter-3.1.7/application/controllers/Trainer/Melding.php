@@ -48,7 +48,7 @@ class Melding extends CI_Controller {
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
-        $data['meldingen'] = $this->melding_model->getMeldingen();
+        $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
         
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
