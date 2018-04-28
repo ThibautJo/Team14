@@ -67,7 +67,7 @@ class WedstrijdResultaten extends CI_Controller {
     $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
     $this->load->model('trainer/wedstrijd_model');
-    $this->load->model('trainer/Zwemmers_model');
+    $this->load->model('trainer/zwemmers_model');
     // gegevens ophalen om tabel te vullen
     $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel();
 
@@ -77,7 +77,7 @@ class WedstrijdResultaten extends CI_Controller {
       $inhoud = "trainer/wedstrijd_resultaten_aanpassen";
       // variabel benodigdheden voor comboboxen op te vullen
       // 1. Zwemmers
-      $data['zwemmers'] = $this->Zwemmers_model->getZwemmers();
+      $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
       // 2. wedstrijden
       $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden();
       // 3. Rondes

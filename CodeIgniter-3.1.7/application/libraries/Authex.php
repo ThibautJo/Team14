@@ -8,7 +8,7 @@ class Authex {
      // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
-    // |    Auteur: Jolien Lauwers       |       Helper: 
+    // |    Auteur: Jolien Lauwers       |       Helper:
     // +----------------------------------------------------------
     // |
     // |    Authex library
@@ -18,14 +18,13 @@ class Authex {
     // +----------------------------------------------------------
 
     public function __construct() {
-        
         $CI = & get_instance();
-        $CI->load->model('persoon_model');
+        // $CI->load->model('persoon_model');
     }
 
     function getPersoonInfo() {
-        
-        // geef persoon-object als zwemmer aangemeld is        
+
+        // geef persoon-object als zwemmer aangemeld is
         $CI = & get_instance();
 
         if (!$this->isAangemeld()) {
@@ -37,7 +36,7 @@ class Authex {
     }
 
     function isAangemeld() {
-        
+
         // persoon is aangemeld als sessievariabele gebruiker_id bestaat
         $CI = & get_instance();
 
@@ -49,7 +48,7 @@ class Authex {
     }
 
     function meldAan($email, $wachtwoord) {
-        
+
         // persoon aanmelden met opgegeven email en wachtwoord
         $CI = & get_instance();
         $persoon = $CI->persoon_model->getPersoon($email, $wachtwoord);
@@ -63,12 +62,12 @@ class Authex {
     }
 
     function meldAf() {
-        
+
         // afmelden, dus sessievariabele wegdoen
         $CI = & get_instance();
         $CI->session->unset_userdata('Id');
     }
-    
+
 //    function registreer($naam, $email, $wachtwoord) {
 //        // nieuwe persoon registreren als email nog niet bestaat
 //        $CI = & get_instance();

@@ -1,6 +1,6 @@
 <?php
 
-class Persoon_model extends CI_Model {
+class persoon_model extends CI_Model {
 
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
@@ -19,8 +19,8 @@ class Persoon_model extends CI_Model {
     }
 
     function get($id) {
-        
-        // geef persoon-object met opgegeven $id   
+
+        // geef persoon-object met opgegeven $id
         $this->db->where('id', $id);
         $query = $this->db->get('persoon');
         return $query->row();
@@ -30,12 +30,12 @@ class Persoon_model extends CI_Model {
         // geef persoon-object met $email en $wachtwoord EN geactiveerd = 1
         $this->db->where('email', $email);
         $query = $this->db->get('persoon');
-        
+
         if ($query->num_rows() == 1) {
             $persoon = $query->row();
             // controleren of het wachtwoord overeenkomt
-            
-            
+
+
             if (password_verify($wachtwoord, $persoon->wachtwoord)){
                 return $persoon;
             } else {

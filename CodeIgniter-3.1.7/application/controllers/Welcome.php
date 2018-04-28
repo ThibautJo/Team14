@@ -66,21 +66,21 @@ class Welcome extends CI_Controller {
         $wachtwoord = $this->input->post('wachtwoord');
 
         if ($this->authex->meldAan($email, $wachtwoord)) {
-            
+
             $persoon = $this->authex->getPersoonInfo();
-            
-            // controleren welk soort gebruiker zich aanmeldt            
+
+            // controleren welk soort gebruiker zich aanmeldt
             switch ($persoon->soort) {
                 case "Trainer":
-                    redirect('trainer/supplement');
+                    redirect('Trainer/supplement');
                     break;
                 case "Zwemmer":
-                    redirect('zwemmer/agenda');
+                    redirect('Zwemmer/agenda');
                     break;
-            }   
-            
+            }
+
         } else {
-            redirect('welcome/toonFout');
+            redirect('Welcome/toonFout');
         }
     }
 

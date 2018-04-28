@@ -132,4 +132,4 @@ $autoload['language'] = array('calender', 'date', 'db', 'form', 'profiler', 'upl
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('persoon_model');
