@@ -13,7 +13,8 @@
 
 $attributenFormulier = array('id' => 'form-zwemmer',
     'data-toggle' => 'validator',
-    'role' => 'form');
+    'role' => 'form',
+    'enctype' => 'multipart/form-data');
 
 $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Zwemmer archiveren');
 ?>
@@ -131,6 +132,18 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     <div class="help-block with-errors"></div>
                 </div>
                 
+                <div class="form-group">
+                    <?php
+                    echo form_label('Upload profielfoto ', 'upload profielfoto ');
+                    echo form_label(' -> "Avatar_Voornaam_Achternaam.jpg"');
+                    echo form_upload(array('name' => 'upload',
+                        'id' => 'upload',
+                        'value' => '',
+                        'class' => 'form-control-file'))
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                
                 <?php echo form_close();?>
             </div>
             <div class="modal-footer">
@@ -220,7 +233,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                         'id' => 'omschrijving',
                         'value' => '',
                         'class' => 'form-control',
-                        'placeholder' => 'Omschrijving',));
+                        'placeholder' => 'Omschrijving'));
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
