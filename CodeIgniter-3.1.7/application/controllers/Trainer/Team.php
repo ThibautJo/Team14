@@ -249,4 +249,21 @@ class Team extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    /**
+     * Haalt de id=$id op van het te tonen persoon-record via Zwemmers_model
+     * en toont de objecten in de view team.php
+     *
+     * @param $id De id van het te tonen zwemmer(persoon)
+     * @see Zwemmers_model::get();
+     * @see team.php
+     */
+    public function profielTonen($id) {
+        $data = new stdClass();
+
+        $this->load->model('trainer/zwemmers_model');
+        $data = $this->zwemmers_model->get($id);
+
+        print json_encode($data);
+    }
 }

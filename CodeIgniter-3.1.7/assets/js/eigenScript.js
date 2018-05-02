@@ -211,17 +211,6 @@ function reeksToevoegen(actie){
 //wedstrijden end
 
 // zwemmer start
-function popupZwemmerToevoegen() {
-    $(".popup-dialog").css({"display": "none"});
-    $(".popup-background").css({"display": "block"});
-    $("#toevoegen").css({"display": "block"});
-}
-
-function popupZwemmerWijzigen() {
-    $(".popup-dialog").css({"display": "none"});
-    $(".popup-background").css({"display": "block"});
-    $("#wijzigen").css({"display": "block"});
-}
 
 function zwemmerUpdate(persoonID) {
 
@@ -240,7 +229,7 @@ function zwemmerUpdate(persoonID) {
         alert("Er is iets misgelopen, neem contact op met de administrator.");
     });
     // modal openen met ingevulde gegevans van dit object
-    $("#zwemmerAanpassen").modal()
+    $("#zwemmerAanpassen").modal();
 
 }
 
@@ -254,6 +243,43 @@ function opvullenModalZwemmerAanpassen(dataZwemmer) {
     $('#zwemmerAanpassen #email').val(dataZwemmer["email"]);
     $('#zwemmerAanpassen #wachtwoord').val(dataZwemmer["wachtwoord"]);
     $('#zwemmerAanpassen #omschrijving').val(dataZwemmer["omschrijving"]);
+
+}
+
+function zwemmerProfielTonen(persoonID) {
+
+    console.log("id =" + persoonID);
+    var id = $("#" + persoonID).val();
+
+    $.post(site_url + '/Trainer/team/profielTonen/' + id, function (data) {
+        //data = object van supplement
+        data = JSON.parse(data);
+        // console.log(data[0]["Naam"]);
+
+        //modal opvullen met object wedstrijd
+        opvullenModalZwemmerProfielTonen(data);
+
+    }).fail(function () {
+        alert("Er is iets misgelopen, neem contact op met de administrator.");
+    });
+    // modal openen met ingevulde gegevans van dit object
+    $("#profielTonen").modal();
+
+}
+function opvullenModalZwemmerProfielTonen(dataZwemmer) {
+    console.log(dataZwemmer);
+    console.log(dataZwemmer["id"]);
+    // console.log(dataZwemmer[0]["Voornaam"]);
+    $('#profielTonen #id').attr("value", dataZwemmer["id"]);
+    $('#profielTonen #voornaam').val(dataZwemmer["voornaam"]);
+    $('#profielTonen #achternaam').val(dataZwemmer["achternaam"]);
+    $('#profielTonen #straat').val(dataZwemmer["straat"]);
+    $('#profielTonen #huisnummer').val(dataZwemmer["huisnummer"]);
+    $('#profielTonen #poastcode').val(dataZwemmer["poastcode"]);
+    $('#profielTonen #gemeente').val(dataZwemmer["gemeente"]);
+    $('#profielTonen #telefoonnummer').val(dataZwemmer["telefoonnummer"]);
+    $('#profielTonen #email').val(dataZwemmer["email"]);
+    $('#profielTonen #omschrijving').val(dataZwemmer["omschrijving"]);
 
 }
 
