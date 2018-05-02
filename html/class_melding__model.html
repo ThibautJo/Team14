@@ -80,9 +80,21 @@ Klasse diagram voor Melding_model</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Members</h2></td></tr>
+<tr class="memitem:a50e3bfb586b2f42932a6a93f3fbb0828"><td class="memItemLeft" align="right" valign="top"><a id="a50e3bfb586b2f42932a6a93f3fbb0828"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> ($id)</td></tr>
+<tr class="separator:a50e3bfb586b2f42932a6a93f3fbb0828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2561820641124dfd35710fc3a7034d6a"><td class="memItemLeft" align="right" valign="top"><a id="a2561820641124dfd35710fc3a7034d6a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>getMeldingen</b> ()</td></tr>
 <tr class="separator:a2561820641124dfd35710fc3a7034d6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903e758e4195799d827e7faedcfb3c0c"><td class="memItemLeft" align="right" valign="top"><a id="a903e758e4195799d827e7faedcfb3c0c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>getMeldingPerPersoon</b> ()</td></tr>
+<tr class="separator:a903e758e4195799d827e7faedcfb3c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f8258add505482d7f00ea26493a5723"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_melding__model.html#a2f8258add505482d7f00ea26493a5723">delete</a> ($id)</td></tr>
+<tr class="separator:a2f8258add505482d7f00ea26493a5723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99bcdc2276aa058e18eb888ec7f7dfb3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_melding__model.html#a99bcdc2276aa058e18eb888ec7f7dfb3">insert</a> ($melding)</td></tr>
+<tr class="separator:a99bcdc2276aa058e18eb888ec7f7dfb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136f00612018561bf1b8c43a7b41837d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_melding__model.html#a136f00612018561bf1b8c43a7b41837d">update</a> ($melding)</td></tr>
+<tr class="separator:a136f00612018561bf1b8c43a7b41837d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f7b2623117931f9f287cb02c9cb3188"><td class="memItemLeft" align="right" valign="top"><a id="a4f7b2623117931f9f287cb02c9cb3188"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>getMeldingByPersoon</b> ($persoonId)</td></tr>
 <tr class="separator:a4f7b2623117931f9f287cb02c9cb3188"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,8 +107,83 @@ Public Members</h2></td></tr>
 <tr class="memitem:a4537dad3b44254124991341cc91b28fb inherit pub_methods_class_c_i___model"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_i___model.html#a4537dad3b44254124991341cc91b28fb">__get</a> ($key)</td></tr>
 <tr class="separator:a4537dad3b44254124991341cc91b28fb inherit pub_methods_class_c_i___model"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Documentatie van functie members</h2>
+<a id="a2f8258add505482d7f00ea26493a5723"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f8258add505482d7f00ea26493a5723">&#9670;&nbsp;</a></span>delete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">delete </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verwijdert het record met id=$id uit de tabel melding </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$id</td><td>De id van het record dat opgevraagd wordt </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a99bcdc2276aa058e18eb888ec7f7dfb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99bcdc2276aa058e18eb888ec7f7dfb3">&#9670;&nbsp;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">insert </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$melding</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Voegt een nieuw record toe aan de tabel melding</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$melding</td><td>Het meldingen object waar de ingevulde data in zit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a136f00612018561bf1b8c43a7b41837d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a136f00612018561bf1b8c43a7b41837d">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">update </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$melding</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Wijzigt een melding-record uit de tabel melding</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$melding</td><td>Het meldingen object waar de aangepaste data in zit </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>De documentatie voor deze klasse is gegenereerd op grond van het volgende bestand:<ul>
-<li>C:/wamp64/www/Team14/CodeIgniter-3.1.7/application/models/trainer/Melding_model.php</li>
+<li>C:/wamp64/www/Team14/CodeIgniter-3.1.7/application/models/trainer/melding_model.php</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
