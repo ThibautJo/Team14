@@ -64,6 +64,7 @@ class Agenda extends CI_Controller {
         
         $this->load->model("zwemmer/agenda_model");
         $data['kleuren'] = json_encode($this->agenda_model->getKleurenActiviteiten());
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',

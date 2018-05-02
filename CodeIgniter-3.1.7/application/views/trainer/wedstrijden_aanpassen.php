@@ -17,7 +17,7 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
-echo haalJavascriptOp("validator.js");
+
 
 $maandKey = null;
 $maanden = array(
@@ -182,7 +182,7 @@ $maanden = array(
         <?php echo form_close(); ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="form_validatie('wedstrijdToevoegen')">Opslaan</button>
+        <button type="button" class="btn btn-primary" onclick="wedstrijdOpslaan('toevoegen')">Opslaan</button>
         <!-- <button type="button" class="btn btn-primary" onclick="wedstrijdOpslaan('toevoegen')">Opslaan</button> -->
       </div>
     </div>
@@ -205,6 +205,7 @@ $maanden = array(
             'data-toggle' => 'validator',
             'role' => 'form');
         echo form_open('#', $attributenFormulier);
+        echo form_input(array('name'=>'wedstrijdID', 'id'=>'wedstrijdID', 'hidden' => 'hidden'));
          ?>
           <table>
             <tr>

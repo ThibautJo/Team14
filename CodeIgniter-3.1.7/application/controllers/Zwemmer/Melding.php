@@ -33,10 +33,15 @@ class Melding extends CI_Controller {
     }
 
     public function index() {
+        
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
+        
+        $persoonId = 5;
+
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $data['persoonAangemeld'] = $persoonAangemeld;
+
 
         $persoonId = $persoonAangemeld->id;
         

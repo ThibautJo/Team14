@@ -50,6 +50,7 @@ class Help extends CI_Controller {
         
         $data['titel'] = 'Hoe werkt de Agenda-tool?';
         $data['team'] = $this->data->team;
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
        
         $partials = array('hoofding' => 'main_header',
             'menu' => 'main_menu',

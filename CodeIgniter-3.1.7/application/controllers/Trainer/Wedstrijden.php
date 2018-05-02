@@ -65,6 +65,7 @@ class Wedstrijden extends CI_Controller {
 
     $data['titel'] = 'Wedstrijden';
     $data['team'] = $this->data->team;
+    $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
     //wedstrijden ophalen van de huidige maand
     $maand = $this->input->get('maand');
