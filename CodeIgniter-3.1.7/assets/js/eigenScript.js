@@ -1,13 +1,15 @@
-function form_validatie(formID){
-  var ok = true;
+function form_validatie(formID, bool){
+  // bool = true --> controlleert ook op comboboxes
+  //(dit is handig om toevoegen en minder bij aanpassen) (vraag uitleg thibaut)
 
+  var ok = true;
+  //inputs checken
   $(formID+' *').filter('input').each(function(){
     var foutID = "#"+$(this).attr("id")+"-fout";
 
     if($(this).attr("required") && $(this).val() == ""){
       $(foutID).removeAttr('hidden');
       $(this).css({"margin-bottom": '0px', "border-color": "red"});
-      // $(foutID).css({"margin-bottom": '20px'});
       ok = false;
     }
     else {
@@ -16,6 +18,23 @@ function form_validatie(formID){
       $(foutID).css({"margin-bottom": '0px'});
     }
   });
+  //comboboxes checken
+  if (bool === true) {
+    $(formID+' *').filter('select').each(function(){
+      var foutID = "#"+$(this).attr("id")+"-fout";
+
+      if($(this).attr("required") && $('#'+this.id).prop('selectedIndex') == 0 ){
+        $(foutID).removeAttr('hidden');
+        $(this).css({"margin-bottom": '0px', "border-color": "red"});
+        ok = false;
+      }
+      else {
+        $(foutID).css({'display': 'none'});
+        $(this).css({"margin-bottom": '20px', "border-color": "blue"});
+        $(foutID).css({"margin-bottom": '0px'});
+      }
+    });
+  }
 
   // true = geen fouten gevonden
   return ok;
@@ -34,7 +53,7 @@ function wedstrijdOpslaan(actie){
   //form valideren
   if (actie == "toevoegen") {
     formToSubmit = "#wedstrijdToevoegen #form-wedstrijd";
-    if(!form_validatie(formToSubmit) || typeof wedstrijdAfstanden == "undefined" || wedstrijdAfstanden == null || wedstrijdAfstanden.length == null || wedstrijdAfstanden.length <= 0){
+    if(!form_validatie(formToSubmit, true) || typeof wedstrijdAfstanden == "undefined" || wedstrijdAfstanden == null || wedstrijdAfstanden.length == null || wedstrijdAfstanden.length <= 0){
       alert("Velden of reeksen zijn niet volledig!");
       ok = false;
     }
@@ -52,6 +71,7 @@ function wedstrijdOpslaan(actie){
     $(formToSubmit).attr('action', site_url+'/Trainer/wedstrijden/opslaanWedstrijd/'+ actie +'?pagina=aanpassen&afstanden='+wedstrijdAfstanden+'&slagen='+wedstrijdSlagen);
     wedstrijdAfstanden = [];
     wedstrijdSlagen = [];
+    $('.modal').modal('hide');
     $(formToSubmit).submit();
   }
 }

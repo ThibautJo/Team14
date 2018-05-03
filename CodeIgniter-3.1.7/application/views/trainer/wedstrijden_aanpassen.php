@@ -127,17 +127,19 @@ $maanden = array(
               </td>
               <td rowspan="4" class="reeksen">
                 <?php echo form_label("Voeg een reeks toe:", 'programma-wedstrijd'); ?>
-                <select class="afstand-wedstrijd">
+                <select class="afstand-wedstrijd" id="afstand-wedstrijd" required='required'>
                   <?php
                   //adding slag en afstand
+                    echo "<option disabled='disabled' selected='selected'> Kies afstand </option>";
                   foreach ($afstanden as $afstand) {
                     echo "<option value='".$afstand->id."'>".$afstand->afstand."</option>";
                   }
                   ?>
                 </select>
-                <select class="slag-wedstrijd">
+                <select class="slag-wedstrijd" id="slag-wedstrijd" required='required'>
                   <?php
                   //adding slag en afstand
+                  echo "<option disabled='disabled' selected='selected'> Kies slag </option>";
                   foreach ($slagen as $slag) {
                     echo "<option value='".$slag->id."'>".$slag->slag."</option>";
                   }
@@ -213,21 +215,24 @@ $maanden = array(
                 <?php
                     echo form_label("Titel", 'titel-wedstrijd');
                     echo form_input(array('name'=>'titel-wedstrijd', 'id'=>'titel-wedstrijd', 'required' => 'required'));
+                    echo form_label("Vak is leeg!", 'titel-wedstrijd', array("id" => "titel-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                 ?>
               </td>
               <td rowspan="4" class="reeksen">
                 <?php echo form_label("Voeg een reeks toe:", 'programma-wedstrijd'); ?>
-                <select class="afstand-wedstrijd">
+                <select class="afstand-wedstrijd" id="afstand-wedstrijd" required='required'>
                   <?php
                   //adding slag en afstand
+                    echo "<option disabled='disabled' selected='selected'> Kies afstand </option>";
                   foreach ($afstanden as $afstand) {
                     echo "<option value='".$afstand->id."'>".$afstand->afstand."</option>";
                   }
                   ?>
                 </select>
-                <select class="slag-wedstrijd">
+                <select class="slag-wedstrijd" id="slag-wedstrijd" required='required'>
                   <?php
                   //adding slag en afstand
+                  echo "<option disabled='disabled' selected='selected'> Kies slag </option>";
                   foreach ($slagen as $slag) {
                     echo "<option value='".$slag->id."'>".$slag->slag."</option>";
                   }
@@ -245,6 +250,7 @@ $maanden = array(
                   echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStart', 'id'=>'datum-wedstrijdStart', 'required'));
                   echo '<p style="display: inline; margin: 0 10px;"> tot </p>';
                   echo form_input(array('type'=> 'date', 'name'=>'datum-wedstrijdStop', 'id'=>'datum-wedstrijdStop', 'required'));
+                  echo form_label("Vak is leeg!", 'datum-wedstrijd', array("id" => "datum-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                  ?>
               </td>
             </tr>
@@ -253,6 +259,7 @@ $maanden = array(
                 <?php
                   echo form_label("Locatie", 'locatie-wedstrijd');
                   echo form_input(array('name'=>'locatie-wedstrijd', 'id'=>'locatie-wedstrijd', 'required'));
+                  echo form_label("Vak is leeg!", 'locatie-wedstrijd', array("id" => "locatie-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                  ?>
               </td>
             </tr>
@@ -261,6 +268,7 @@ $maanden = array(
                 <?php
                   echo form_label("Programma", 'programma-wedstrijd');
                   echo form_input(array('name'=>'programma-wedstrijd', 'id'=>'programma-wedstrijd', 'required'));
+                  echo form_label("Vak is leeg!", 'programma-wedstrijd', array("id" => "programma-wedstrijd-fout", "class" => "fout", "hidden" => "hidden"));
                  ?>
               </td>
             </tr>
