@@ -170,3 +170,16 @@ a.text-darkblue:hover, a.text-darkblue:focus {
     padding-right: 30px;
 }
 
+#account-foto {
+    height: 125px;
+    width: 125px;
+}
+
+table {
+    width: 100%
+}
+
+table td {
+    width: 20%;
+    text-align: center;
+}
