@@ -19,8 +19,8 @@ class Melding extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-        
-           // controleren of bevoegde persoon is aangemeld        
+
+           // controleren of bevoegde persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -30,26 +30,20 @@ class Melding extends CI_Controller {
             }
         }
 
-        // Helpers inladen
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->helper('my_html_helper');
-        $this->load->helper('my_form_helper');
-        
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
     }
 
     public function index() {
-        
+
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
         $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
-        
+
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
             'inhoud' => 'trainer/melding',
@@ -57,20 +51,37 @@ class Melding extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     public function beheren() {
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
+<<<<<<< HEAD
                 
         $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         
+=======
+       // $data['meldingen'] = $this->melding_model->getMeldingen();
+
+        $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
+        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+
+//        $i = 0;
+//        foreach ($data['meldingen'] as $melding) {
+//            $data['meldingen'][$i]->personen = $this->melding_model->getMeldingPerPersoon();
+//            $i++;
+//        }
+//
+//        var_dump($data['meldingen'][0]);
+
+
+>>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
         $this->load->model('trainer/zwemmers_model');
         $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
-        
+
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
             'inhoud' => 'trainer/melding_aanpassen',
@@ -78,7 +89,7 @@ class Melding extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     /**
      * Haalt de id=$id op van het te wijzigen melding-record via Melding_model
      *
@@ -88,12 +99,12 @@ class Melding extends CI_Controller {
         $data = new stdClass();
 
         $this->load->model('trainer/melding_model');
-        
+
         $data = $this->melding_model->get($id);
 
         print json_encode($data);
     }
-    
+
     /**
      * Verwijdert het melding-record met id=$id via Melding_model en toont de aangepaste lijst in de view melding_aanpassen.php
      *
@@ -107,7 +118,7 @@ class Melding extends CI_Controller {
 
         redirect('/trainer/melding/beheren');
     }
-    
+
     /**
      * Slaagt het nieuw/aangepaste melding op via Melding_model en toont de aangepaste lijst in de view melding_aanpassen.php
      *
@@ -147,5 +158,5 @@ class Melding extends CI_Controller {
        redirect('/trainer/melding/beheren');
 
     }
-    
+
 }

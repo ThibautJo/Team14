@@ -86,6 +86,12 @@ Public Members</h2></td></tr>
 <tr class="memitem:ac1e880ea2ab1724f666cdc692f8f78e9"><td class="memItemLeft" align="right" valign="top"><a id="ac1e880ea2ab1724f666cdc692f8f78e9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>beheren</b> ()</td></tr>
 <tr class="separator:ac1e880ea2ab1724f666cdc692f8f78e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab452755fcf2d623b467e95d7d73232ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_melding.html#ab452755fcf2d623b467e95d7d73232ac">wijzigMelding</a> ($id)</td></tr>
+<tr class="separator:ab452755fcf2d623b467e95d7d73232ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18500920da225c5cade43835302a4f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_melding.html#ae18500920da225c5cade43835302a4f1">verwijderMelding</a> ($id)</td></tr>
+<tr class="separator:ae18500920da225c5cade43835302a4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99ee1f019b2486d3a74d224231bc7312"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_melding.html#a99ee1f019b2486d3a74d224231bc7312">opslaanMelding</a> ($actie=&quot;toevoegen&quot;)</td></tr>
+<tr class="separator:a99ee1f019b2486d3a74d224231bc7312"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a149eb92716c1084a935e04a8d95f7347"><td class="memItemLeft" align="right" valign="top"><a id="a149eb92716c1084a935e04a8d95f7347"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>index</b> ()</td></tr>
 <tr class="separator:a149eb92716c1084a935e04a8d95f7347"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,6 +105,82 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
 <tr class="memitem:a8d3cc57e7b6ec94e704712b0f277f5bb inherit pub_static_methods_class_c_i___controller"><td class="memItemLeft" align="right" valign="top">static &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_i___controller.html#a8d3cc57e7b6ec94e704712b0f277f5bb">get_instance</a> ()</td></tr>
 <tr class="separator:a8d3cc57e7b6ec94e704712b0f277f5bb inherit pub_static_methods_class_c_i___controller"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Documentatie van functie members</h2>
+<a id="a99ee1f019b2486d3a74d224231bc7312"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99ee1f019b2486d3a74d224231bc7312">&#9670;&nbsp;</a></span>opslaanMelding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">opslaanMelding </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$actie</em> = <code>&quot;toevoegen&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Slaagt het nieuw/aangepaste melding op via <a class="el" href="class_melding__model.html">Melding_model</a> en toont de aangepaste lijst in de view melding_aanpassen.php</p>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplementfunctie__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Supplementfunctie_model::get()</a>; </dd>
+<dd>
+<a class="el" href="class_melding__model.html#a99bcdc2276aa058e18eb888ec7f7dfb3">Melding_model::insert()</a>; </dd>
+<dd>
+<a class="el" href="class_melding__model.html#a136f00612018561bf1b8c43a7b41837d">Melding_model::update()</a>; </dd></dl>
+
+</div>
+</div>
+<a id="ae18500920da225c5cade43835302a4f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18500920da225c5cade43835302a4f1">&#9670;&nbsp;</a></span>verwijderMelding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">verwijderMelding </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verwijdert het melding-record met id=$id via <a class="el" href="class_melding__model.html">Melding_model</a> en toont de aangepaste lijst in de view melding_aanpassen.php</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$id</td><td>De id van het melding-record dat verwijdert wordt </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_melding__model.html#a2f8258add505482d7f00ea26493a5723">Melding_model::delete()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab452755fcf2d623b467e95d7d73232ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab452755fcf2d623b467e95d7d73232ac">&#9670;&nbsp;</a></span>wijzigMelding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wijzigMelding </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haalt de id=$id op van het te wijzigen melding-record via <a class="el" href="class_melding__model.html">Melding_model</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$id</td><td>De id van het te wijzigen melding </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>De documentatie voor deze klasse is gegenereerd op grond van het volgende bestand:<ul>
 <li>C:/wamp64/www/Team14/CodeIgniter-3.1.7/application/controllers/Trainer/Melding.php</li>
 </ul>

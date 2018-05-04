@@ -34,13 +34,6 @@ class Wedstrijden extends CI_Controller {
       }
     }
 
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->helper('my_html');
-    $this->load->helper('notation');
-
-    $this->load->library('table');
-
     // Auteur inladen in footer
     $this->data = new stdClass();
     $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "true", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");

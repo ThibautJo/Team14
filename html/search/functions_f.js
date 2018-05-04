@@ -3,6 +3,7 @@ var searchData=
   ['offset',['offset',['../class_c_i___d_b__query__builder.html#afd31b65425a2b5cf30711bf29e1b1851',1,'CI_DB_query_builder']]],
   ['open',['open',['../class_c_i___session__database__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_database_driver\open()'],['../class_c_i___session__files__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_files_driver\open()'],['../class_c_i___session__memcached__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_memcached_driver\open()'],['../class_c_i___session__redis__driver.html#a614b5cf3840833913c7a73260ed28e02',1,'CI_Session_redis_driver\open()']]],
   ['open_5ftag',['open_tag',['../class_x_m_l___r_p_c___message.html#a7709ec5b6f0e3769592f8afdc23b9169',1,'XML_RPC_Message']]],
+  ['opslaanmelding',['opslaanMelding',['../class_melding.html#a99ee1f019b2486d3a74d224231bc7312',1,'Melding']]],
   ['opslaansupplement',['opslaanSupplement',['../class_supplement.html#a1147dafd79457c214282b7f8bf9bb95e',1,'Supplement']]],
   ['opslaanwedstrijd',['opslaanWedstrijd',['../class_wedstrijden.html#a17fac637de865ad0a78b0d57f8c4455d',1,'Wedstrijden']]],
   ['opslaanzwemmer',['opslaanZwemmer',['../class_team.html#a045522d640959f7cbb354ee602943829',1,'Team']]],

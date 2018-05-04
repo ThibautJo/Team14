@@ -5,6 +5,7 @@ var searchData=
   ['where',['where',['../class_c_i___d_b__query__builder.html#a2356c4b7b93fb83c62a354a8a0748222',1,'CI_DB_query_builder']]],
   ['where_5fin',['where_in',['../class_c_i___d_b__query__builder.html#ad74b2c2b21b33f4aa54229a323b7ba59',1,'CI_DB_query_builder']]],
   ['where_5fnot_5fin',['where_not_in',['../class_c_i___d_b__query__builder.html#ab9f1b5e0622e0392796c5c9f4cca705a',1,'CI_DB_query_builder']]],
+  ['wijzigmelding',['wijzigMelding',['../class_melding.html#ab452755fcf2d623b467e95d7d73232ac',1,'Melding']]],
   ['wijzigsupplement',['wijzigSupplement',['../class_supplement.html#abed9fbd82aa2dd2fdc07fd82e93221c4',1,'Supplement']]],
   ['wijzigzwemmer',['wijzigZwemmer',['../class_team.html#a81f8c2fd1971e5136f7aa0d1857590d7',1,'Team']]],
   ['word_5fwrap',['word_wrap',['../class_c_i___email.html#aa3a2a5440115b320a0c2fcea542e546a',1,'CI_Email']]],

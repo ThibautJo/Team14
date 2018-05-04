@@ -13,7 +13,8 @@
 
 $attributenFormulier = array('id' => 'form-zwemmer',
     'data-toggle' => 'validator',
-    'role' => 'form');
+    'role' => 'form',
+    'enctype' => 'multipart/form-data');
 
 $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' => 'tooltip', 'title' => 'Zwemmer archiveren');
 ?>
@@ -131,6 +132,18 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     <div class="help-block with-errors"></div>
                 </div>
                 
+                <div class="form-group">
+                    <?php
+                    echo form_label('Upload profielfoto ', 'upload profielfoto ');
+                    echo form_label(' -> "Avatar_Voornaam_Achternaam.jpg"');
+                    echo form_upload(array('name' => 'upload',
+                        'id' => 'upload',
+                        'value' => '',
+                        'class' => 'form-control-file'))
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                
                 <?php echo form_close();?>
             </div>
             <div class="modal-footer">
@@ -220,7 +233,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                         'id' => 'omschrijving',
                         'value' => '',
                         'class' => 'form-control',
-                        'placeholder' => 'Omschrijving',));
+                        'placeholder' => 'Omschrijving'));
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
@@ -238,7 +251,7 @@ $archief="";
 $archief[0]="--Select---";
 
 foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
-    $archief[] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
+    $archief[$zwemmeruitarchief->id] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
 }
 
 ?>
@@ -256,10 +269,11 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
                 <?php
                 echo form_open('', $attributenFormulier);
                 ?>
+                
                 <div class="form-group">
                             <?php
                             echo form_label('Archief', 'archief');
-                            echo form_dropdown('archief', $archief, '0', 'class="form-control"');
+                            echo form_dropdown('archief', $archief, 'id="zwemmeruitarchief"', 'class="form-control"');
 
                             ?>
                             <div class="help-block with-errors"></div>
@@ -268,7 +282,7 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
-                <button type="button" class="btn button-blue" onclick="zwemmerOpslaan('toevoegen')">Opslaan</button>
+                <button type="button" class="btn button-blue" onclick="zwemmerUitArchiefHalen()">Opslaan</button>
             </div>
         </div>
     </div>
