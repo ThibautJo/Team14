@@ -34,12 +34,6 @@ class WedstrijdResultaten extends CI_Controller {
             }
         }
 
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->helper('my_html');
-    $this->load->helper('notation');
-
-    $this->load->library('table');
 
     // Auteur inladen in footer
     $this->data = new stdClass();

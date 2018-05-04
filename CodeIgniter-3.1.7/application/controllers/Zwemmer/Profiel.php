@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Controller-klasse met alle methodes de gebruikt worden om zwemmers profiel te beheren.
- * 
+ *
  * @class Team
  * @brief Controller-klasse voor profiel
  * @author Klaus
@@ -22,19 +22,13 @@ class Profiel extends CI_Controller{
     // +----------------------------------------------------------
     public function __construct() {
         parent::__construct();
-        
-        
-        
+
+
+
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
         redirect('welcome/meldAan');}
-        
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->helper("MY_form_helper");
-        $this->load->helper("MY_html_helper");
-        $this->load->helper("MY_url_helper");
-        
+
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
@@ -44,14 +38,14 @@ class Profiel extends CI_Controller{
         $data['titel'] = 'Profiel zwemmer';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
-        
+
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $persoonId = $persoonAangemeld->id;
-        
+
         $this->load->model("zwemmer/profiel_model");
         $profiel = $this->profiel_model->getProfielByPersoon($persoonId);
         $data['profiel'] = $profiel;
-        
+
         $partials = array('hoofding' => 'main_header',
             'menu' => 'main_menu',
             'inhoud' => 'zwemmer/profiel',
@@ -59,5 +53,5 @@ class Profiel extends CI_Controller{
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
 }
