@@ -47,17 +47,12 @@ class Startpagina extends CI_Controller {
        $data['team'] = $this->data->team;
        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
-<<<<<<< HEAD
        
        $this->load->model('trainer/startpaginaitem_model');
        $data['startpaginateksten'] = $this->startpaginaitem_model->getStartpaginaTekst();
        
        $this->load->model('trainer/wedstrijd_model');
        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
-=======
-       $this->load->model('trainer/startpaginaitem_model');
-       $data['startpaginateksten'] = $this->startpaginaitem_model->getStartpaginaTekst();
->>>>>>> 70b6017f68a0a33617ef87f73b87d219bebd0b01
 
        $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
