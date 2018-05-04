@@ -41,7 +41,7 @@ $attributenFormulier = array('id' => 'form-melding',
         $datum = $melding->datumStop;
         if ($datum >= date("Y-m-d")) {
                 
-                   echo "<tr><td>" . $datum . "</td><td>" . $melding->voornaam . "</td><td>" . $melding->meldingBericht ."</td><td>"
+                   echo "<tr id='" . $melding->meldingPerPersoon . "'><td>" . $datum . "</td><td>" . $melding->voornaam . "</td><td>" . $melding->meldingBericht ."</td><td>"
                     . "<button type='button' class='btn btn-success' id='aanpassen" . $melding->meldingPerPersoon . "' onclick='meldingUpdate(this.id)' value='" . $melding->meldingPerPersoon . "' data-toggle='modal' data-target='#meldingAanpassen'><i class='fas fa-pencil-alt'></i></button></td><td>"
                     . "<button type='button' class='btn btn-danger' id='verwijder" . $melding->meldingPerPersoon . "' onclick='meldingVerwijder(this.id)' value='" . $melding->meldingPerPersoon . "'><i class='fas fa-trash-alt'></i></button></td></tr>\n"; 
                 

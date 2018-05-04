@@ -608,7 +608,6 @@ function meldingUpdate(meldingID) {
 
 }
 function opvullenModalMeldingAanpassen(dataMelding) {
-<<<<<<< HEAD
     $('#meldingAanpassen #id').attr("value", dataMelding["id"]);
     $('#meldingAanpassen #datumStop').val(dataMelding["datumStop"]);
     $('#meldingAanpassen #inhoud').attr("value", dataMelding["meldingBericht"]);
@@ -623,26 +622,7 @@ function opvullenModalMeldingAanpassen(dataMelding) {
             $("option[value=" + $(this).val() + "]").attr("selected", "selected");
         }
     });
-=======
-  $('#meldingAanpassen #id').attr("value", dataMelding["id"]);
-  $('#meldingAanpassen #datumStop').val(dataMelding["datumStop"]);
-  $('#meldingAanpassen #inhoud').attr("value", dataMelding["meldingBericht"]);
-  $('#meldingAanpassen #aan').attr("value", dataMelding["voornaam"]);
-
-  console.log(dataMelding["voornaam"]);
-  $("#aan option").each(function ()
-  {
-    console.log($(this).val());
-
-    if ($(this).val() === dataMelding["voornaam"]) {
-      $("option[value=" + $(this).val() + "]").attr("selected", "selected");
-    }
-  });
-
->>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
-
 }
-
 function meldingVerwijder(elementID) {
   if (!confirm("Zeker dat je dit wilt verwijderen?")) {
     return false;

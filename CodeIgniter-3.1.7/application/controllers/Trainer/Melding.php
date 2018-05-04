@@ -58,12 +58,7 @@ class Melding extends CI_Controller {
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
-<<<<<<< HEAD
-                
-        $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
-        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
-        
-=======
+
        // $data['meldingen'] = $this->melding_model->getMeldingen();
 
         $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
@@ -78,7 +73,6 @@ class Melding extends CI_Controller {
 //        var_dump($data['meldingen'][0]);
 
 
->>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
         $this->load->model('trainer/zwemmers_model');
         $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
 

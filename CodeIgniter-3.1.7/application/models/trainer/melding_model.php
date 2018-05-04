@@ -18,17 +18,13 @@ class Melding_model extends CI_Model {
         parent::__construct();
 
     }
-<<<<<<< HEAD
-    
+
     function getMelding($id){
         $this->db->where('id', $id);
         $query = $this->db->get('melding');
         return $query->row();
     }
-    
-=======
 
->>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
     function get($id) {
 
         $this->db->where('id', $id);
@@ -43,34 +39,18 @@ class Melding_model extends CI_Model {
             $melding = $queryMelding->row();
 
             $obj_merged = (object) array_merge((array)$persoon, (array)$melding);
-
-<<<<<<< HEAD
-=======
-
->>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
         return $obj_merged;
     }
 
     public function getMeldingPerPersoon() {
         $query = $this->db->get('meldingPerPersoon');
         $meldingPerPersoon = $query->result();
-<<<<<<< HEAD
-        
-=======
 
-
-
->>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
         $meldingenPerPersoon = array();
         foreach ($meldingPerPersoon as $item) {
             $meldingpersoon = array();
             $meldingpersoon['meldingPerPersoon'] = $item->id;
-<<<<<<< HEAD
-            
-=======
 
-
->>>>>>> a56abd286e3b60b3a4feffa36a5051cc91deee2c
             $this->db->where('id', $item->persoonId);
             $queryPersoon = $this->db->get('persoon');
             $this->db->where('id', $item->meldingId);
