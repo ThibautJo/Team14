@@ -64,20 +64,10 @@ class Melding extends CI_Controller {
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
 
         $this->load->model('trainer/melding_model');
-       // $data['meldingen'] = $this->melding_model->getMeldingen();
                 
         $data['meldingen'] = $this->melding_model->getMeldingPerPersoon();
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         
-//        $i = 0;
-//        foreach ($data['meldingen'] as $melding) {
-//            $data['meldingen'][$i]->personen = $this->melding_model->getMeldingPerPersoon();
-//            $i++;
-//        }
-//        
-//        var_dump($data['meldingen'][0]);
-
-
         $this->load->model('trainer/zwemmers_model');
         $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
         
@@ -101,9 +91,6 @@ class Melding extends CI_Controller {
         
         $data = $this->melding_model->get($id);
 
-//        $this->load->model('trainer/supplementfunctie_model');
-//        $data['functies'] = $this->supplementfunctie_model->getAllByFunctie();
-
         print json_encode($data);
     }
     
@@ -115,7 +102,8 @@ class Melding extends CI_Controller {
      */
     public function verwijderMelding($id) {
         $this->load->model('trainer/melding_model');
-        $this->melding_model->delete($id);
+       // $this->melding_model->delete($id);
+        $this->melding_model->deleteMeldingPerPersoon($id);
 
         redirect('/trainer/melding/beheren');
     }
@@ -129,24 +117,31 @@ class Melding extends CI_Controller {
      */
     public function opslaanMelding($actie = "toevoegen") {
         $melding = new stdClass();
+        $meldingPerPersoon = new stdClass();
 
-       // $supplement->ID = $this->input->post('id');
         $melding->datumStop = $this->input->post('datumStop');
         $melding->meldingBericht = ucfirst($this->input->post('inhoud'));
-
+        
         $persoonId = $this->input->post('aan');
-        $this->load->model('persoon_model');
-        $persoon = $this->persoon_model->get($persoonId);
-        $melding->persoonId = $persoon->id;
+        $this->load->model('trainer/zwemmers_model');
+        $persoon = $this->zwemmers_model->get($persoonId);
+        $meldingPerPersoon->persoonId = $persoon->id;
 
         $this->load->model('trainer/melding_model');
 
-//        if($supplement->ID == 0) {
         if($actie == "toevoegen") {
-            $this->melding_model->insert($melding);
+            $newMeldingID = $this->melding_model->insertMelding($melding);
+            $this->load->model('trainer/melding_model');
+            $meldingPerPersoon->meldingId = $newMeldingID;
+            $this->melding_model->insertMeldingPerPersoon($meldingPerPersoon);
         } else {
             $melding->id = $this->input->post('id');
-            $this->melding_model->update($melding);
+            $meldingId = $this->input->post('id');
+            $this->load->model('trainer/melding_model');
+            $meldingMelding = $this->melding_model->getMelding($meldingId);
+            $meldingPerPersoon->meldingId = $melding->id;
+            $this->melding_model->updateMelding($melding);
+            $this->melding_model->updateMeldingPerPersoon($meldingPerPersoon);
         }
 
        redirect('/trainer/melding/beheren');

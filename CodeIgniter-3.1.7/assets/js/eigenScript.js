@@ -558,11 +558,10 @@ function opvullenModalMeldingAanpassen(dataMelding) {
     {
             console.log($(this).val());
 
-        if ($(this).val() === dataMelding["voornaam"]) {
+        if ($(this).text() === dataMelding["voornaam"]) {
             $("option[value=" + $(this).val() + "]").attr("selected", "selected");
         }
     });
-    
 
 }
 
