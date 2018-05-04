@@ -253,12 +253,5 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::get();
      * @see team.php
      */
-    public function profielTonen($id) {
-        $data = new stdClass();
-
-        $this->load->model('trainer/zwemmers_model');
-        $data = $this->zwemmers_model->get($id);
-
-        print json_encode($data);
-    }
+    
 }

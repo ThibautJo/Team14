@@ -25,7 +25,7 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                 echo "<tr>"
                 . "<td>" . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
-                <td><button type='button' class='btn btn-success' id='tonen" . $zwemmer->id . "' onclick='zwemmerProfielTonen(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer profiel tonen' data-target='#profielTonen'>" . "<i class='far fa-address-card'></i></button></td></tr>\n";
+                <td><button type='button' class='btn btn-success' id='" . $zwemmer->id . "' onclick='zwemmerProfielTonen(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer profiel tonen' data-target='#profielTonen'>" . "<i class='far fa-address-card'></i></button></td></tr>\n";
             }
             ?>
         </tbody>

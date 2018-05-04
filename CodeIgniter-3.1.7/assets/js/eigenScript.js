@@ -250,7 +250,7 @@ function zwemmerUpdate(persoonID) {
 function opvullenModalZwemmerAanpassen(dataZwemmer) {
   console.log(dataZwemmer);
   console.log(dataZwemmer["id"]);
-  // console.log(dataZwemmer[0]["Voornaam"]);
+    
   $('#zwemmerAanpassen #id').attr("value", dataZwemmer["id"]);
   $('#zwemmerAanpassen #voornaam').val(dataZwemmer["voornaam"]);
   $('#zwemmerAanpassen #achternaam').val(dataZwemmer["achternaam"]);
@@ -265,7 +265,7 @@ function zwemmerProfielTonen(persoonID) {
   console.log("id =" + persoonID);
   var id = $("#" + persoonID).val();
 
-  $.post(site_url + '/Trainer/team/wijzigZwemmer/' + id, function (data) {
+  $.post(site_url + '/Zwemmer/team/profielTonen/' + id, function (data) {
     //data = object van supplement
     data = JSON.parse(data);
     // console.log(data[0]["Naam"]);
@@ -277,19 +277,18 @@ function zwemmerProfielTonen(persoonID) {
     alert("Er is iets misgelopen, neem contact op met de administrator.");
   });
   // modal openen met ingevulde gegevans van dit object
-  $("#zwemmerAanpassen").modal();
+  $("#profielTonen").modal();
 
 }
 function opvullenModalZwemmerProfielTonen(dataProfiel) {
   console.log(dataProfiel);
   console.log(dataProfiel["id"]);
-  // console.log(dataZwemmer[0]["Voornaam"]);
   $('#profielTonen #id').attr("value", dataProfiel["id"]);
   $('#profielTonen #voornaam').val(dataProfiel["voornaam"]);
   $('#profielTonen #achternaam').val(dataProfiel["achternaam"]);
   $('#profielTonen #straat').val(dataProfiel["straat"]);
   $('#profielTonen #huisnummer').val(dataProfiel["huisnummer"]);
-  $('#profielTonen #poastcode').val(dataProfiel["poastcode"]);
+  $('#profielTonen #postcode').val(dataProfiel["postcode"]);
   $('#profielTonen #gemeente').val(dataProfiel["gemeente"]);
   $('#profielTonen #telefoonnummer').val(dataProfiel["telefoonnummer"]);
   $('#profielTonen #email').val(dataProfiel["email"]);
