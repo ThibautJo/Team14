@@ -34,9 +34,20 @@ class StartpaginaItem_model extends CI_Model {
      */
 
     function get($id) {
+        
         $this->db->where('id', $id);
         $query = $this->db->get('startpaginaItem');
         return $query->row();
+    }
+    
+    // doxygen
+    
+    public function getStartpaginaTekst() {
+        
+        $this->db->where('soort', "tekst");
+        $query = $this->db->get('startpaginaItem');
+        
+        return $query->result();
     }
 
     /**

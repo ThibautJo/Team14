@@ -4,7 +4,7 @@
 <div id="account-foto" class="d-flex align-items-center flex-column justify-content-center">
     <div>
         <?php
-        echo toonAfbeelding('Profiel/Avatar_' . $persoonAangemeld->voornaam . '_' . $persoonAangemeld->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"');
+        echo toonAfbeelding('Profiel/Avatar_' . $persoonAangemeld->voornaam . '_' . $persoonAangemeld->achternaam . '.jpg', 'class="shadow img-circle"');
         ?>
     </div>
     <p class="text-white pt-2 mb-0"><?php echo $persoonAangemeld->voornaam . ' ' . $persoonAangemeld->achternaam ?></p>
