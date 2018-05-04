@@ -248,7 +248,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
 </div>
 <?php
 $archief="";
-$archief[0]="--Select---";
+$archief[0]="--Select--";
 
 foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
     $archief[$zwemmeruitarchief->id] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;

@@ -333,7 +333,7 @@ function zwemmerUitArchiefHalen(){
   var ok = true;
   var formToSubmit = '';
   $('#zwemmerToevoegenUitArchief #form-zwemmer *').filter('select').each(function (){
-    if ($(this).val() !== "--Select--") {
+    if ($(this).val() === "--select--") {
       alert("Er is geen persoon aangeduid");
       ok = false;
       return false;
