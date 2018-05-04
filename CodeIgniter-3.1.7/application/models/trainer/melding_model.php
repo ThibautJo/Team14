@@ -19,6 +19,12 @@ class Melding_model extends CI_Model {
 
     }
 
+    function getMelding($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('melding');
+        return $query->row();
+    }
+
     function get($id) {
 
         $this->db->where('id', $id);
@@ -33,8 +39,6 @@ class Melding_model extends CI_Model {
             $melding = $queryMelding->row();
 
             $obj_merged = (object) array_merge((array)$persoon, (array)$melding);
-
-
         return $obj_merged;
     }
 
@@ -42,13 +46,10 @@ class Melding_model extends CI_Model {
         $query = $this->db->get('meldingPerPersoon');
         $meldingPerPersoon = $query->result();
 
-
-
         $meldingenPerPersoon = array();
         foreach ($meldingPerPersoon as $item) {
             $meldingpersoon = array();
             $meldingpersoon['meldingPerPersoon'] = $item->id;
-
 
             $this->db->where('id', $item->persoonId);
             $queryPersoon = $this->db->get('persoon');
@@ -80,8 +81,9 @@ class Melding_model extends CI_Model {
      *
      * @param $melding Het meldingen object waar de ingevulde data in zit
      */
-    function insert($melding) {
+    function insertMelding($melding) {
         $this->db->insert('melding', $melding);
+        return $this->db->insert_id();
     }
 
     /**
@@ -89,8 +91,23 @@ class Melding_model extends CI_Model {
      *
      * @param $melding Het meldingen object waar de aangepaste data in zit
      */
-    function update($melding) {
+    function updateMelding($melding) {
         $this->db->where('id', $melding->id);
         $this->db->update('melding', $melding);
+    }
+    
+    
+    function insertMeldingPerPersoon($meldingPerPersoon) {
+        $this->db->insert('meldingperpersoon', $meldingPerPersoon);
+    }
+    
+    function updateMeldingPerPersoon($meldingPerPersoon) {
+        $this->db->where('meldingId', $meldingPerPersoon->meldingId);
+        $this->db->update('meldingperpersoon', $meldingPerPersoon);
+    }
+    
+    function deleteMeldingPerPersoon($id){
+        $this->db->where('id', $id);
+        $this->db->delete('meldingperpersoon');
     }
 }

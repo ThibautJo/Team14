@@ -84,6 +84,7 @@ class Team extends CI_Controller {
      * @return type $zwemmers
      */
     public function ladenTeam(){
+        
         $this->load->model("trainer/zwemmers_model");
         $zwemmers = $this->zwemmers_model->getTeam();
 

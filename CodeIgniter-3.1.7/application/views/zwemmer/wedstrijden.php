@@ -57,9 +57,9 @@ $maanden = array(
       ?>
     </select>
     <label>Jaar:</label>
-    <a href="<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand='.$maandKey.'&jaar='.$jaar.'&actie=vorige'); ?>" style="font-weight: bold;"> < </a>
+    <a href="<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand='.$maandKey.'&jaar='.$jaar.'&actie=vorige'); ?>" style="font-weight: bold;"> < </a>
     <?php echo $jaar; ?>
-    <a href="<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand='.$maandKey.'&jaar='.$jaar.'&actie=volgende'); ?>" style="font-weight: bold;"> > </a>
+    <a href="<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand='.$maandKey.'&jaar='.$jaar.'&actie=volgende'); ?>" style="font-weight: bold;"> > </a>
   </form>
 
   <?php
@@ -102,43 +102,43 @@ $('#datumSelected').on('change', function() {
 function datumSelect(){
   switch($("#datumSelected").val()) {
     case "0":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=0&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=0&jaar='.$jaar); ?>';
     break;
     case "1":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=1&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=1&jaar='.$jaar); ?>';
     break;
     case "2":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=2&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=2&jaar='.$jaar); ?>';
     break;
     case "3":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=3&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=3&jaar='.$jaar); ?>';
     break;
     case "4":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=4&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=4&jaar='.$jaar); ?>';
     break;
     case "5":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=5&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=5&jaar='.$jaar); ?>';
     break;
     case "6":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=6&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=6&jaar='.$jaar); ?>';
     break;
     case "7":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=7&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=7&jaar='.$jaar); ?>';
     break;
     case "8":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=8&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=8&jaar='.$jaar); ?>';
     break;
     case "9":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=9&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=9&jaar='.$jaar); ?>';
     break;
     case "10":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=10&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=10&jaar='.$jaar); ?>';
     break;
     case "11":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=11&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=11&jaar='.$jaar); ?>';
     break;
     case "12":
-    window.location.href = '<?php echo site_url('/Trainer/Wedstrijden/index?pagina=weergaven&maand=12&jaar='.$jaar); ?>';
+    window.location.href = '<?php echo site_url('/Zwemmer/Wedstrijden/index?pagina=weergaven&maand=12&jaar='.$jaar); ?>';
     break;
     default:
     break;

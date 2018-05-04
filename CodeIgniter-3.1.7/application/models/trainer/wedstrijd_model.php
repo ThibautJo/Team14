@@ -50,11 +50,13 @@ class wedstrijd_model extends CI_Model {
    * @param $id De id van het gevraagde wedstrijd
    * @return Het gevraagde wedstrijd
    */
+  
   public function getWedstrijdenWithId($id) {
     $this->db->where('id', $id);
     $query = $this->db->get('wedstrijd');
     return $query->row();
   }
+  
   /**
    * Retourneert de ingeschrevenen bij het bijhorenede wedstrijd
    *

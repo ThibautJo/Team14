@@ -44,11 +44,19 @@ class Startpagina extends CI_Controller {
     public function index() {
 
        $data['titel'] = 'Startpagina beheren';
+       $data['team'] = $this->data->team;
        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+
+       
+       $this->load->model('trainer/startpaginaitem_model');
+       $data['startpaginateksten'] = $this->startpaginaitem_model->getStartpaginaTekst();
+       
+       $this->load->model('trainer/wedstrijd_model');
+       $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
 
        $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
-            'inhoud' => 'trainer/NOGAANMAKEN',
+            'inhoud' => 'trainer/startpagina_beheren',
             'voetnoot' => 'main_footer');
 
        $this->template->load('main_master', $partials, $data);

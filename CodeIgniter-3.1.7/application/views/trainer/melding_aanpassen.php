@@ -15,7 +15,7 @@
 $personen="";
 
 foreach ($zwemmers as $zwemmer) {
-    $personen[$zwemmer->voornaam] = ucfirst($zwemmer->voornaam);
+    $personen[$zwemmer->id] = ucfirst($zwemmer->voornaam);
 }
 
 $attributenFormulier = array('id' => 'form-melding',
@@ -41,9 +41,9 @@ $attributenFormulier = array('id' => 'form-melding',
         $datum = $melding->datumStop;
         if ($datum >= date("Y-m-d")) {
                 
-                   echo "<tr><td>" . $datum . "</td><td>" . $melding->voornaam . "</td><td>" . $melding->meldingBericht ."</td><td>"
+                   echo "<tr id='" . $melding->meldingPerPersoon . "'><td>" . $datum . "</td><td>" . $melding->voornaam . "</td><td>" . $melding->meldingBericht ."</td><td>"
                     . "<button type='button' class='btn btn-success' id='aanpassen" . $melding->meldingPerPersoon . "' onclick='meldingUpdate(this.id)' value='" . $melding->meldingPerPersoon . "' data-toggle='modal' data-target='#meldingAanpassen'><i class='fas fa-pencil-alt'></i></button></td><td>"
-                    . "<button type='button' class='btn btn-danger' id='verwijder" . $melding->id . "' onclick='meldingVerwijder(this.id)' value='" . $melding->id . "'><i class='fas fa-trash-alt'></i></button></td></tr>\n"; 
+                    . "<button type='button' class='btn btn-danger' id='verwijder" . $melding->meldingPerPersoon . "' onclick='meldingVerwijder(this.id)' value='" . $melding->meldingPerPersoon . "'><i class='fas fa-trash-alt'></i></button></td></tr>\n"; 
                 
             
         }
@@ -67,41 +67,41 @@ $attributenFormulier = array('id' => 'form-melding',
                 <?php
                     echo form_open('', $attributenFormulier);
                 ?>
-                        <div class="form-group">
-                            <?php
-                            echo form_label('Aan', 'aan');
-                            echo form_dropdown('zwemmer', $personen, '', "class='form-control'");
-                            ?>
-                        </div>
-                        <div class="form-group">
-                            <?php
-                            echo form_label('Vervaldatum', 'datumStop');
-                            echo form_input(array('type' => 'date',
-                                'name' => 'datumStop',
-                                'id' => 'datumStop',
-                                'value' => date("Y-m-d"),
-                                'class' => 'form-control',
-                                'required' => 'required'));
-                            ?>
-                            <div class="invalid-feedback">
-                                Kies een datum.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <?php
-                            echo form_label('Inhoud', 'inhoud');
-                            echo form_input(array('name' => 'inhoud',
-                                'id' => 'inhoud',
-                                'value' => '',
-                                'class' => 'form-control',
-                                'placeholder' => 'Inhoud',
-                                'required' => 'required'));
-                            ?>
-                            <div class="invalid-feedback">
-                                Vul dit veld in.
-                            </div>
-                        </div>
-                      <?php echo form_close();?>
+                <div class="form-group">
+                    <?php
+                    echo form_label('Aan', 'aan');
+                    echo form_dropdown('aan', $personen, '', "id='aan' class='form-control'");
+                    ?>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_label('Vervaldatum', 'datumStop');
+                    echo form_input(array('type' => 'date',
+                        'name' => 'datumStop',
+                        'id' => 'datumStop',
+                        'value' => date("Y-m-d"),
+                        'class' => 'form-control',
+                        'required' => 'required'));
+                    ?>
+                    <div class="invalid-feedback">
+                        Kies een datum.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <?php
+                    echo form_label('Inhoud', 'inhoud');
+                    echo form_input(array('name' => 'inhoud',
+                        'id' => 'inhoud',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Inhoud',
+                        'required' => 'required'));
+                    ?>
+                    <div class="invalid-feedback">
+                        Vul dit veld in.
+                    </div>
+                </div>
+              <?php echo form_close();?>
                 
             </div>
             <div class="modal-footer">
@@ -134,7 +134,7 @@ $attributenFormulier = array('id' => 'form-melding',
                 <div class="form-group">
                     <?php
                     echo form_label('Aan', 'aan');
-                    echo form_dropdown('zwemmer', $personen, '', "id='aan' class='form-control'" );
+                    echo form_dropdown('aan', $personen, '', "id='aan' class='form-control'" );
                     ?>
                 </div>
                 <div class="form-group">
@@ -170,7 +170,7 @@ $attributenFormulier = array('id' => 'form-melding',
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-primary" data-dismiss="modal">Annuleren</button>
-                <button type="button" class="btn button-blue" onclick="MeldingOpslaan('aanpassen')">Opslaan</button>
+                <button type="button" class="btn button-blue" onclick="meldingOpslaan('aanpassen')">Opslaan</button>
             </div>
         </div>
     </div>
