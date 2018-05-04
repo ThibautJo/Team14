@@ -79,12 +79,12 @@
             <!-- Team sectie -->
 
             <div id="Team">
-                <table class="table" border="2px">
+                <table class="table">
                     <tbody>
                     <tr>
                         <?php
                             foreach ($zwemmers as $zwemmer)
-                                echo '<td>' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="rounded-circle" id="account-foto"') 
+                                echo '<td>' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="rounded-circle" id="team-foto"') 
                                          . "</td>"
                         ?>    
                     </tr>
@@ -104,7 +104,7 @@
             <!-- Wedstrijden sectie -->
 
             <div id="Wedstrijden">
-                <img src=""
+                
             </div>
 
             <!-- Nieuws sectie -->
