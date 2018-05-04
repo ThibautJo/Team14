@@ -218,11 +218,12 @@ class wedstrijd_model extends CI_Model {
   }
 
 
-  public function getResultatenTabel(){
+  public function getResultatenTabel($wedID = null){
 
     $resultaten = new stdClass();
 
     $query = $this->db->get('resultaat');
+
     $resultaten->resultaten = $query->result();
     $i = 0;
     foreach ($resultaten->resultaten as $resultaat) {
@@ -234,10 +235,24 @@ class wedstrijd_model extends CI_Model {
       $afstand = $this->getAfstandWithID($reeks->afstandId);
       $wedstrijd = $this->getWedstrijdenWithId($reeks->wedstrijdId);
 
-      $resultaten->resultaten[$i]->ronde = $ronde->ronde;
-      $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
-      $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
-      $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+      if ($wedID != null) {
+        if ($wedstrijd->id === $wedID) {
+          $resultaten->resultaten[$i]->ronde = $ronde->ronde;
+          $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
+          $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
+          $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+        }
+        else{
+          unset($resultaten->resultaten[$i]);
+        }
+      }
+      else {
+        $resultaten->resultaten[$i]->ronde = $ronde->ronde;
+        $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
+        $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
+        $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+      }
+
 
       $i++;
     }

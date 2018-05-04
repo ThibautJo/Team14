@@ -34,12 +34,6 @@ class WedstrijdResultaten extends CI_Controller {
             }
         }
 
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->helper('my_html');
-    $this->load->helper('notation');
-
-    $this->load->library('table');
 
     // Auteur inladen in footer
     $this->data = new stdClass();
@@ -68,18 +62,33 @@ class WedstrijdResultaten extends CI_Controller {
 
     $this->load->model('trainer/wedstrijd_model');
     $this->load->model('trainer/zwemmers_model');
-    // gegevens ophalen om tabel te vullen
-    $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel();
+
 
     // var_dump($data['resultaten']);
+    if ($this->input->get('wedstrijdid') != "" && $this->input->get('wedstrijdid') != null) {
+      if ($this->input->get('wedstrijdid') == 0) {
+        // gegevens ophalen om tabel te vullen
+        $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel();
+      }
+      else {
+        // gegevens ophalen om tabel te vullen
+        $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel($this->input->get('wedstrijdid'));
+      }
+    }
+    else {
+      // gegevens ophalen om tabel te vullen
+      $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel();
+    }
 
+    // wedstrijden voor comboboxes
+    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden();
     if ($this->input->get('pagina') == "aanpassen") {
       $inhoud = "trainer/wedstrijd_resultaten_aanpassen";
       // variabel benodigdheden voor comboboxen op te vullen
       // 1. Zwemmers
       $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
       // 2. wedstrijden
-      $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden();
+
       // 3. Rondes
       $data['rondes'] = $this->wedstrijd_model->getRondes();
       // 4. reeksen (afstand + slag) (bestaande reeksen) (jquery -> ajax)

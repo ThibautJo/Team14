@@ -30,13 +30,6 @@ class Melding extends CI_Controller {
             }
         }
 
-        // Helpers inladen
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->helper('my_html_helper');
-        $this->load->helper('my_form_helper');
-        $this->load->helper('my_url_helper');
-
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");

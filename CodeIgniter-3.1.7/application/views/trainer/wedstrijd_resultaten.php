@@ -14,7 +14,34 @@
 ?>
 
 <div id="wedstrijd">
-  <h1>Wedstrijd resultaten</h1>
+  <h1 style="display: inline;">Wedstrijd resultaten</h1>
+  <form action="#" id="frmSortWedstrijd" method="post" style="display: inline-block; margin: 10px;">
+    <select id="wedstrijdSelect">
+      <?php
+      foreach ($wedstrijden as $wedstrijd) {
+        if ($wedstrijd->id == 1) {
+          echo "<option value='0' selected>Alle wedstrijden</option>";
+          if(isset($_GET['wedstrijdid']) && $_GET['wedstrijdid'] == $wedstrijd->id ){
+            echo "<option value='".$wedstrijd->id."' selected>".$wedstrijd->naam."</option>";
+          }
+          else {
+            echo "<option value='".$wedstrijd->id."' >".$wedstrijd->naam."</option>";
+          }
+        }
+        else{
+          if(isset($_GET['wedstrijdid']) && $_GET['wedstrijdid'] == $wedstrijd->id ){
+            echo "<option value='".$wedstrijd->id."' selected>".$wedstrijd->naam."</option>";
+          }
+          else {
+            echo "<option value='".$wedstrijd->id."' >".$wedstrijd->naam."</option>";
+          }
+        }
+      }
+      ?>
+    </select>
+  </form>
+
+
 
   <?php
   $template = array(
@@ -36,3 +63,14 @@
 
 
 </div>
+
+<script type="text/javascript">
+
+$('#wedstrijdSelect').on('change', function() {
+  var wedID = $('#wedstrijdSelect').val();
+
+  $('#frmSortWedstrijd').attr("action", site_url+"/Trainer/wedstrijdResultaten/index?pagina=weergaven&wedstrijdid="+wedID);
+  $('#frmSortWedstrijd').submit();
+});
+
+</script>
