@@ -265,7 +265,7 @@ function zwemmerProfielTonen(persoonID) {
   console.log("id =" + persoonID);
   var id = $("#" + persoonID).val();
 
-  $.post(site_url + '/Trainer/team/profielTonen/' + id, function (data) {
+  $.post(site_url + '/Trainer/team/wijzigZwemmer/' + id, function (data) {
     //data = object van supplement
     data = JSON.parse(data);
     // console.log(data[0]["Naam"]);
@@ -277,23 +277,23 @@ function zwemmerProfielTonen(persoonID) {
     alert("Er is iets misgelopen, neem contact op met de administrator.");
   });
   // modal openen met ingevulde gegevans van dit object
-  $("#profielTonen").modal();
+  $("#zwemmerAanpassen").modal();
 
 }
-function opvullenModalZwemmerProfielTonen(dataZwemmer) {
-  console.log(dataZwemmer);
-  console.log(dataZwemmer["id"]);
+function opvullenModalZwemmerProfielTonen(dataProfiel) {
+  console.log(dataProfiel);
+  console.log(dataProfiel["id"]);
   // console.log(dataZwemmer[0]["Voornaam"]);
-  $('#profielTonen #id').attr("value", dataZwemmer["id"]);
-  $('#profielTonen #voornaam').val(dataZwemmer["voornaam"]);
-  $('#profielTonen #achternaam').val(dataZwemmer["achternaam"]);
-  $('#profielTonen #straat').val(dataZwemmer["straat"]);
-  $('#profielTonen #huisnummer').val(dataZwemmer["huisnummer"]);
-  $('#profielTonen #poastcode').val(dataZwemmer["poastcode"]);
-  $('#profielTonen #gemeente').val(dataZwemmer["gemeente"]);
-  $('#profielTonen #telefoonnummer').val(dataZwemmer["telefoonnummer"]);
-  $('#profielTonen #email').val(dataZwemmer["email"]);
-  $('#profielTonen #omschrijving').val(dataZwemmer["omschrijving"]);
+  $('#profielTonen #id').attr("value", dataProfiel["id"]);
+  $('#profielTonen #voornaam').val(dataProfiel["voornaam"]);
+  $('#profielTonen #achternaam').val(dataProfiel["achternaam"]);
+  $('#profielTonen #straat').val(dataProfiel["straat"]);
+  $('#profielTonen #huisnummer').val(dataProfiel["huisnummer"]);
+  $('#profielTonen #poastcode').val(dataProfiel["poastcode"]);
+  $('#profielTonen #gemeente').val(dataProfiel["gemeente"]);
+  $('#profielTonen #telefoonnummer').val(dataProfiel["telefoonnummer"]);
+  $('#profielTonen #email').val(dataProfiel["email"]);
+  $('#profielTonen #omschrijving').val(dataProfiel["omschrijving"]);
 
 }
 

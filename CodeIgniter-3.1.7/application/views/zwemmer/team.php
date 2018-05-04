@@ -1,5 +1,4 @@
 <?php
-
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -26,7 +25,7 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                 echo "<tr>"
                 . "<td>" . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td><td>" . $zwemmer->email . "</td>
-                <td><button type='button' class='btn btn-success' onclick='zwemmerProfielTonen(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer profiel tonen' data-target='#profielTonen'>" . "<i class='far fa-address-card'></i></button></td></tr>\n";
+                <td><button type='button' class='btn btn-success' id='tonen" . $zwemmer->id . "' onclick='zwemmerProfielTonen(this.id)' value='" . $zwemmer->id . "'data-toggle='modal' data-toggle='tooltip' title='Zwemmer profiel tonen' data-target='#profielTonen'>" . "<i class='far fa-address-card'></i></button></td></tr>\n";
             }
             ?>
         </tbody>
@@ -60,11 +59,11 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                         'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Voornaam',
-                        'required' => 'required'));
+                        'readonly' => 'readonly'));
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-
+                
                 <div class="form-group">
                     <?php
                     echo form_label('Achternaam', 'achternaam');
@@ -73,11 +72,55 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                         'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Achternaam',
-                        'required' => 'required'));
+                        'readonly' => 'readonly'));
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
 
+                <div class="form-group">
+                    <?php
+                    echo form_label('Adres', 'Adres');
+                    echo form_input(array('name' => 'straat',
+                        'id' => 'straat',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Straat',
+                        'readonly' => 'readonly'));
+                    echo form_input(array('name' => 'huisnummer',
+                        'id' => 'huisnummer',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Huisnummer',
+                        'readonly' => 'readonly'));
+                    echo form_input(array('name' => 'postcode',
+                        'id' => 'postcode',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Postcode',
+                        'readonly' => 'readonly'));
+                    echo form_input(array('name' => 'gemeente',
+                        'id' => 'gemeente',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Gemeente',
+                        'readonly' => 'readonly'));
+                    ?>                   
+                    <div class="help-block with-errors"></div>
+                </div>
+                
+                <div class="form-group">
+                    <?php
+                    echo form_label('Telefoonnummer', 'telefoonnummer');
+                    echo form_input(array('name' => 'telefoonnummer',
+                        'id' => 'telefoonnummer',
+                        'value' => '',
+                        'class' => 'form-control',
+                        'placeholder' => 'Telefoonnummer',
+                        'readonly' => 'readonly'));
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_label('Email', 'email');
@@ -86,19 +129,6 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                         'value' => '',
                         'class' => 'form-control',
                         'placeholder' => 'Email',
-                        'readonly' => 'readonly'));
-                    ?>
-                    <div class="help-block with-errors"></div>
-                </div>
-
-                <div class="form-group">
-                    <?php
-                    echo form_label('Wachtwoord', 'wachtwoord');
-                    echo form_input(array('name' => 'wachtwoord',
-                        'id' => 'wachtwoord',
-                        'value' => '',
-                        'class' => 'form-control',
-                        'placeholder' => 'Wachtwoord',
                         'readonly' => 'readonly'));
                     ?>
                     <div class="help-block with-errors"></div>
@@ -116,9 +146,10 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                <?php echo form_close();?>
-            <div class="modal-footer form-group">
-                <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                <?php echo form_close(); ?>
+                <div class="modal-footer form-group">
+                    <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                </div>
             </div>
         </div>
     </div>
