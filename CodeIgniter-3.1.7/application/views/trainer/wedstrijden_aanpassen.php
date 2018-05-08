@@ -95,7 +95,7 @@ $maanden = array(
   echo $this->table->generate();
    ?>
 
-  <button type="button" class="btn btn-primary" title="Wedstrijd weergave pagina" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=weergaven'">Weergaven</button>
+  <button type="button" class="btn button-blue justify-content-center" title="Wedstrijd weergave pagina" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=weergaven'">Weergaven</button>
 
 
   <!-- Modal toevoegen -->
