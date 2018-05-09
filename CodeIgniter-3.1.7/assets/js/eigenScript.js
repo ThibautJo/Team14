@@ -343,7 +343,7 @@ function zwemmerUitArchiefHalen(){
 
   //word uitgevoerd als alles ingevuld is
   if (ok) {
-    $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanZwemmerUitArchief');
+    $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanZwemmerUitArchiefHalen');
 
     $(formToSubmit).submit();
   }
