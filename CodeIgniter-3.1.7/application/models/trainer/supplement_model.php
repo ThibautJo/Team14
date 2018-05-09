@@ -12,6 +12,8 @@ class Supplement_model extends CI_Model {
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
+    // |    Auteur: Lise Van Eyck       |       Helper:
+    // +----------------------------------------------------------
     // |
     // |    Supplement model
     // |
@@ -63,26 +65,24 @@ class Supplement_model extends CI_Model {
      * @param $id De id van het record dat opgevraagd wordt
      */
 
-    function delete($id){
+    function deleteSupplement($id){
         $this->db->where('id', $id);
         $this->db->delete('supplement');
     }
 
     /**
      * Voegt een nieuw record toe aan de tabel supplement
-     *
      * @param $supplement Het supplementen object waar de ingevulde data in zit
      */
-    function insert($supplement) {
+    function insertSupplement($supplement) {
         $this->db->insert('supplement', $supplement);
     }
 
     /**
      * Wijzigt een supplement-record uit de tabel supplement
-     *
      * @param $supplement Het supplementen object waar de aangepaste data in zit
      */
-    function update($supplement) {
+    function updateSupplement($supplement) {
         $this->db->where('id', $supplement->id);
         $this->db->update('supplement', $supplement);
     }
