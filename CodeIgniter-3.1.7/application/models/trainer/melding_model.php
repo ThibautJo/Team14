@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @class Melding_model
+ * @brief Model-klasse voor meldingen
+ * 
+ * Model-klasse die alle methodes bevat om te interageren met de database-tabel melding
+ */
+
 class Melding_model extends CI_Model {
 
     // +----------------------------------------------------------
@@ -14,17 +21,32 @@ class Melding_model extends CI_Model {
     // |    Team 14
     // +----------------------------------------------------------
 
+    /**
+     * Constructor
+     */
     function __construct() {
         parent::__construct();
 
     }
 
+    /**
+     * Retourneert het record met id=$id uit de tabel melding
+     * 
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
     function getMelding($id){
         $this->db->where('id', $id);
         $query = $this->db->get('melding');
         return $query->row();
     }
 
+    /**
+     * Retourneert een array met id=$id uit de tabel meldingperpersoon met de bijhorende persoon en melding
+     * 
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return De opgevraagde array
+     */
     function get($id) {
 
         $this->db->where('id', $id);
@@ -42,6 +64,11 @@ class Melding_model extends CI_Model {
         return $obj_merged;
     }
 
+    /**
+     * Retourneert een array van alle meldingen met bijhorende persoon
+     * 
+     * @return De opgevraagde array
+     */
     public function getMeldingPerPersoon() {
         $query = $this->db->get('meldingPerPersoon');
         $meldingPerPersoon = $query->result();
@@ -68,6 +95,7 @@ class Melding_model extends CI_Model {
     
     /**
      * Verwijdert het record met id=$id uit de tabel melding
+     * 
      * @param $id De id van het record dat opgevraagd wordt
      */
 
@@ -77,9 +105,10 @@ class Melding_model extends CI_Model {
     }
 
     /**
-     * Voegt een nieuw record toe aan de tabel melding
-     *
-     * @param $melding Het meldingen object waar de ingevulde data in zit
+     * Voegt een niew record toe aan de tabel melding
+     * 
+     * @param $melding Het melding object waar de ingevulde data in zit
+     * @return Het ingevoegde melding ID
      */
     function insertMelding($melding) {
         $this->db->insert('melding', $melding);
@@ -88,24 +117,38 @@ class Melding_model extends CI_Model {
 
     /**
      * Wijzigt een melding-record uit de tabel melding
-     *
-     * @param $melding Het meldingen object waar de aangepaste data in zit
+     * 
+     * @param $melding Het melding object waar de aangepaste data in zit
      */
     function updateMelding($melding) {
         $this->db->where('id', $melding->id);
         $this->db->update('melding', $melding);
     }
     
-    
+    /**
+     *  Voegt een nieuw record toe aan de tabel meldingperpersoon
+     * 
+     * @param s$meldingPerPersoon Het meldingperpersoon object waar de ingevulde data in zit
+     */
     function insertMeldingPerPersoon($meldingPerPersoon) {
         $this->db->insert('meldingperpersoon', $meldingPerPersoon);
     }
     
+    /**
+     * Wijzigt een meldingperpersoon-record uit de tabel meldingperpersoon
+     * 
+     * @param $meldingPerPersoon Het meldingperpersoon object waar de aangepaste data in zit
+     */
     function updateMeldingPerPersoon($meldingPerPersoon) {
         $this->db->where('meldingId', $meldingPerPersoon->meldingId);
         $this->db->update('meldingperpersoon', $meldingPerPersoon);
     }
     
+    /**
+     * Verwijdert het record met id=$id uit de tabel meldingperpersoon
+     * 
+     * @param $id De id van het record dat opgevraagd wordt
+     */
     function deleteMeldingPerPersoon($id){
         $this->db->where('id', $id);
         $this->db->delete('meldingperpersoon');

@@ -37,6 +37,7 @@ $maanden = array(
   12 => "december"
 );
 
+$reeksen = "";
 ?>
 
 <div id="wedstrijd">
@@ -80,18 +81,61 @@ $maanden = array(
     if ($wedstrijd->personen->namen) {
       foreach ($wedstrijd->personen->namen as $persoon) {
         $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
-        array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon );
+        array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon, '<button type="button" class="btn btn-warning" id="inschrijven' . $wedstrijd->id . '" onclick="inschrijven(this.id)" value="' . $wedstrijd->id . '" data-toggle="modal" data-target="#inschrijvenWedstrijd"><i class="fas fa-plus-square"></i></button>' );
       }
     }
     else {
       $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), $wedstrijd->naam, $wedstrijd->plaats,
-      array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), '...' );
+      array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), '...', '<button type="button" class="btn btn-warning" id="inschrijven' . $wedstrijd->id . '" onclick="inschrijven(this.id)" value="' . $wedstrijd->id . '" data-toggle="modal" data-target="#inschrijvenWedstrijd"><i class="fas fa-plus-square"></i></button>' );
     }
     echo "</tr>";
   }
   echo $this->table->generate();
   ?>
 
+  <!-- Inschrijven wedstrijd -->
+<div class="modal fade" id="inschrijvenWedstrijd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Inschrijven wedstrijd</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php
+                    echo form_open('', $attributenFormulier);
+                ?>                
+                        <div class="form-group">
+                            <?php
+                            if ($reeksen == "") {
+                                echo form_label('Leeg', 'leeg');
+                            } else {
+                                echo form_label('Niet leeg', 'nietleeg');
+                            }
+//                            foreach ($reeksen->resultaten as $reeks) {
+//                                echo form_label($reeks->reeks, 'reeks');
+//                                echo form_checkbox('newsletter', 'accept', FALSE);
+//                            }
+
+                            ?>
+                            <div class="invalid-feedback">
+                                Vul dit veld in.
+                            </div>
+                        </div>
+                          
+                      <?php echo form_close();?>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn button-primary" data-dismiss="modal">Annuleren</button>
+                <button type="button" class="btn button-blue" onclick="inschrijvingOpslaan()">Opslaan</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
 </div>
 <script type="text/javascript">
 
@@ -143,5 +187,22 @@ function datumSelect(){
     default:
     break;
   }
+}
+
+function inschrijven(wedstrijdID) {
+
+  console.log("id =" + wedstrijdID);
+  var id = $("#" + wedstrijdID).val();
+
+  $.post(site_url + '/Zwemmer/wedstrijden/reeksen/' + id, function (data) {
+    $reeksen = JSON.parse(data);
+    console.log($reeksen);
+
+  }).fail(function () {
+    alert("Er is iets misgelopen, neem contact op met de administrator.");
+  });
+
+  $("#inschrijvenWedstrijd").modal();
+
 }
 </script>

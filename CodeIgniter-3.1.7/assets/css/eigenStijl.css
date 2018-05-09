@@ -296,9 +296,7 @@ h2 {
   margin-bottom: 20px;
   color: red;
 }
-label.fout{
-  display: none;
-}
+
 #form-wedstrijd label{
   display: block;
   margin: 0;
