@@ -181,20 +181,13 @@ class Team extends CI_Controller {
         redirect('trainer/team');
     }
 
-    public function uitArchiefHalen($id) {
-        $this->load->model('trainer/zwemmers_model');
-        $this->zwemmers_model->uitArchiefHalen($id);
-
-        redirect('trainer/team');
-    }
-
-    public function opslaanZwemmerArchief() {
+    public function opslaanZwemmerUitArchief() {
         $persoon = new stdClass();
 
         $this->load->model('trainer/zwemmers_model');
 
-        $persoon->id = $this->input->post('id');
-        $this->zwemmers_model->uitArchiefHalen($id);
+        $persoon->id = $this->input->post('archief');
+        $this->zwemmers_model->uitArchiefHalen($persoon);
 
         redirect('trainer/team');
     }

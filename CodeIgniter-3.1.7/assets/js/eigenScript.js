@@ -333,7 +333,7 @@ function zwemmerUitArchiefHalen(){
   var ok = true;
   var formToSubmit = '';
   $('#zwemmerToevoegenUitArchief #form-zwemmer *').filter('select').each(function (){
-    if ($(this).val() === "--select--") {
+    if ($(this).val() === "0") {
       alert("Er is geen persoon aangeduid");
       ok = false;
       return false;
@@ -343,7 +343,7 @@ function zwemmerUitArchiefHalen(){
 
   //word uitgevoerd als alles ingevuld is
   if (ok) {
-    $(formToSubmit).attr('action', site_url + '/Trainer/team/uitArchiefHalen');
+    $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanZwemmerUitArchief');
 
     $(formToSubmit).submit();
   }
