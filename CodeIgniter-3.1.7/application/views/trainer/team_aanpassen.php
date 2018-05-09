@@ -246,6 +246,8 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
         </div>
     </div>
 </div>
+
+    
 <?php
 $archief="";
 $archief[0]="--Select--";

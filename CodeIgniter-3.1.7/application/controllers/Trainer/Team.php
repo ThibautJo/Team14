@@ -181,7 +181,7 @@ class Team extends CI_Controller {
         redirect('trainer/team');
     }
 
-    public function opslaanZwemmerUitArchief() {
+    public function opslaanZwemmerUitArchiefHalen() {
         $persoon = new stdClass();
 
         $this->load->model('trainer/zwemmers_model');

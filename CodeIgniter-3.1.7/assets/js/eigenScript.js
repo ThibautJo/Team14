@@ -308,6 +308,7 @@ function zwemmerOpslaan(actie) {
         ok = false;
         return false;
       }
+
     });
     formToSubmit = "#zwemmerToevoegen #form-zwemmer";
   } else {
@@ -317,6 +318,7 @@ function zwemmerOpslaan(actie) {
         ok = false;
         return false;
       }
+      
     });
     formToSubmit = "#zwemmerAanpassen #form-zwemmer";
   }
@@ -348,6 +350,8 @@ function zwemmerUitArchiefHalen(){
     $(formToSubmit).submit();
   }
 }
+
+
 //zwemmer end
 
 // supplement start
