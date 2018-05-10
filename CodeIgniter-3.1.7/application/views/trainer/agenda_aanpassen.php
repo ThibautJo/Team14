@@ -87,8 +87,6 @@
                 ?>
                 
                 <?php echo form_hidden('id', ''); ?>
-                
-                <?php echo form_hidden('persoon', $persoon); ?>
 
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
@@ -239,7 +237,14 @@
                 <div class="form-group">
                     <?php
                     echo form_label('Toevoegen voor', 'personen');
-                    echo form_dropdown('personen', $voorPersonen, '', 'id="personen" class="form-control"');
+                    echo '<div class="rounded border border-grey p-2">';
+                    foreach ($voorPersonen as $persoon) {
+                        echo '<div class="m-2" >';
+                        echo form_checkbox('personen', $persoon, false, 'id="' . array_search($persoon, $voorPersonen) . '"');
+                        echo $persoon;
+                        echo '</div>';
+                    }
+                    echo '</div>';
                     ?>
                 </div>
             </div>
@@ -318,7 +323,7 @@
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
                                         var site_url = '<?php echo site_url(); ?>';
-                                        aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, $('input[name=persoon]').val(), site_url);
+                                        aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, site_url);
                                         console.log('ok');
                                     }
                                 });

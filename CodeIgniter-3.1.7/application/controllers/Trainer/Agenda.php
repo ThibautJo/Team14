@@ -55,8 +55,9 @@ class Agenda extends CI_Controller {
 
         $this->load->model("zwemmer/agenda_model");
         $data['kleuren'] = json_encode($this->agenda_model->getKleurenActiviteiten());
-        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
         $data['listGroupItems'] = $this->ladenListGroup();
+        $data['voorPersonen'] = $this->ladenZwemmers();
+        $data['soortTraining'] = $this->agenda_model->getAllTypeTraining();
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
@@ -77,6 +78,18 @@ class Agenda extends CI_Controller {
         }
         
         return $zwemmersListGroup;
+    }
+    
+    public function ladenZwemmers() {
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmers = $this->zwemmers_model->getZwemmers();
+        
+        $voorPersonen = [];
+        foreach ($zwemmers as $zwemmer) {
+            $voorPersonen[$zwemmer->id] = $zwemmer->voornaam . ' ' . $zwemmer->achternaam;
+        }
+        
+        return $voorPersonen;
     }
     
     
@@ -276,6 +289,27 @@ class Agenda extends CI_Controller {
     public function wijzigActiviteit($id) {
         $this->load->model("trainer/agenda_model");
         $data = $this->agenda_model->getActiviteit($id);
+
+        print json_encode($data);
+    }
+    
+    public function wijzigWedstrijd($id) {
+        $this->load->model("trainer/agenda_model");
+        $data = $this->agenda_model->getWedstrijd($id);
+
+        print json_encode($data);
+    }
+    
+    public function wijzigOnderzoek($id) {
+        $this->load->model("zwemmer/agenda_model");
+        $data = $this->agenda_model->getOnderzoek($id);
+
+        print json_encode($data);
+    }
+    
+    public function wijzigSupplement($id) {
+        $this->load->model("zwemmer/agenda_model");
+        $data = $this->agenda_model->getSupplement($id);
 
         print json_encode($data);
     }
