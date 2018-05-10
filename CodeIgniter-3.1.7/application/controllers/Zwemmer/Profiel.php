@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Controller-klasse met alle methodes de gebruikt worden om zwemmers profiel te beheren.
  *
- * @class Team
- * @brief Controller-klasse voor profiel
+ * @class Profiel
+ * @brief Controller-klasse voor Profiel
  * @author Klaus
  */
 class Profiel extends CI_Controller{
@@ -15,16 +15,17 @@ class Profiel extends CI_Controller{
     // |    Auteur: Klaus Daems     |       Helper: /
     // +----------------------------------------------------------
     // |
-    // |    Team controller
+    // |    Profiel controller
     // |
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
+    
+    /**
+     * Constructor
+     */
     public function __construct() {
         parent::__construct();
-
-
-
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
         redirect('welcome/meldAan');}
@@ -33,7 +34,14 @@ class Profiel extends CI_Controller{
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
-
+    
+    /**
+     * Haalt de gegevens van de ingelogde persoon op via Profiel_model en
+     * toont de resulterende objecten in de view profiel.php
+     *
+     * @see Profiel_model::getProfielByPersoon()
+     * @see profiel.php
+     */
     public function index(){
         $data['titel'] = 'Profiel zwemmer';
         $data['team'] = $this->data->team;
