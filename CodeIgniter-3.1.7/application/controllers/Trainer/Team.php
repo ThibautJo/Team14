@@ -3,10 +3,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
+ * Controller-klasse met alle methodes die gebruikt worden om zwemmers(personen) te beheren
+ * 
  * @class Team
  * @brief Controller-klasse voor team
- *
- * Controller-klasse met alle methodes die gebruikt worden om zwemmers(personen) te beheren
+ * @author Klaus
  */
 
 class Team extends CI_Controller {
@@ -109,7 +110,7 @@ class Team extends CI_Controller {
     }
     
     /**
-     * Haalt de gegevens op van de zwemmers(personen) die inactief staan -> (actief = 0) via Zwemmers_model en
+     * Haalt de gegevens op van de personen(zwemmers) die inactief staan -> (actief = 0) via Zwemmers_model en
      * stopt de resulterende objecten in een array $zwemmersuitarchief
      *
      * @see Zwemmers_model::getZwemmersArchief()
@@ -187,14 +188,28 @@ class Team extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-
+    
+    /**
+     * Archiveert de persoon met id=$id via het Zwemmers_model en
+     * toont de aangepaste lijst in de vew team.php
+     * 
+     * @see Zwemmers_model::archiveer()
+     * @see team.php
+     */
     public function archiveren($id) {
         $this->load->model('trainer/zwemmers_model');
         $this->zwemmers_model->archiveer($id);
 
         redirect('trainer/team');
     }
-
+    
+    /**
+     * Haalt het gearchiveerde persoon op via Zwemmers_model en
+     * toont de aangepaste lijst in de view team.php
+     *
+     * @see Zwemmers_model::uitArchiefHalen()
+     * @see team.php
+     */
     public function opslaanZwemmerUitArchiefHalen() {
         $persoon = new stdClass();
 
@@ -207,7 +222,8 @@ class Team extends CI_Controller {
     }
 
     /**
-     * Slaagt het nieuw/aangepaste zwemmer op via Zwemmers_model en toont de aangepaste lijst in de view team_lijst.php
+     * Slaagt het nieuw/aangepaste persoon op via Zwemmers_model en 
+     * toont de aangepaste lijst in de view team_lijst.php
      *
      * @see Zwemmers_model::insert($persoon);
      * @see Zwemmers_model::update($persoon);
@@ -251,14 +267,5 @@ class Team extends CI_Controller {
 
         print json_encode($data);
     }
-
-    /**
-     * Haalt de id=$id op van het te tonen persoon-record via Zwemmers_model
-     * en toont de objecten in de view team.php
-     *
-     * @param $id De id van het te tonen zwemmer(persoon)
-     * @see Zwemmers_model::get();
-     * @see team.php
-     */
     
 }
