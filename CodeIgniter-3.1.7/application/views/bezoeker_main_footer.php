@@ -11,20 +11,6 @@
         <!-- Navigatie-links in de voetnoot -->
 
         <div class="d-flex justify-content-center col-12 flex-column align-items-center">
-            <div id="footer-links" class="col-lg-6 col-md-9 col-sm-12 col-12 d-flex justify-content-sm-between text-center flex-sm-row flex-column">
-                <a href="#top">Startpagina</a>
-                <a href="#Wedstrijden">Wedstrijden</a>
-                <a href="#Team">Team</a>
-                <?php
-                if ($persoon == null) {
-                    // niet aangemeld                                    
-                    echo divAnchor('Welcome/meldAan', 'Aanmelden');
-                    // aangemeld
-                } else {
-                    echo divAnchor('Welcome/meldAf', 'Afmelden');
-                }
-                ?>
-            </div>
             <div id="footer-info" class="col-12 d-flex justify-content-md-between text-center flex-lg-row flex-column mt-4">
                 <span class="d-flex flex-sm-row flex-column justify-content-sm-center">
                     <span><b>Oefening voor:</b> Thomas More Geel &nbsp;&nbsp;|&nbsp;&nbsp;</span>

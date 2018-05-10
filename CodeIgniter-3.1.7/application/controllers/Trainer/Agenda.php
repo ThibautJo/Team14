@@ -19,8 +19,8 @@ class Agenda extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-        
-        // controleren of bevoegde persoon is aangemeld        
+
+        // controleren of bevoegde persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -52,7 +52,7 @@ class Agenda extends CI_Controller {
         $data['titel'] = 'Agenda\'s zwemmers';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
-        
+
         $this->load->model("zwemmer/agenda_model");
         $data['kleuren'] = json_encode($this->agenda_model->getKleurenActiviteiten());
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
@@ -130,16 +130,16 @@ class Agenda extends CI_Controller {
         
         return $data_activiteiten;
     }
-    
+
     public function ladenWedstrijden($persoonId) {
         // Wedstrijden worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
         $wedstrijden = $this->agenda_model->getWedstrijdenByPersoon($persoonId);
-        
+
         $data_wedstrijden = array();
-        
+
         // Wedstrijden worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
-        foreach ($wedstrijden as $wedstrijd) {                    
+        foreach ($wedstrijden as $wedstrijd) {
             $data_wedstrijden[] = array(
                 "extra" => $wedstrijd->wedstrijd->id,
                 "title" => $wedstrijd->wedstrijd->naam, // Titel van het event in de agenda
@@ -151,19 +151,19 @@ class Agenda extends CI_Controller {
                 "textColor" => '#000' // Tekstkleur van het event in de agenda
             );
         }
-        
+
         return $data_wedstrijden;
     }
-    
+
     public function ladenOnderzoeken($persoonId) {
         // Medische onderzoeken worden opgehaald uit het model en in een lijst gestoken
         $this->load->model("zwemmer/agenda_model");
         $onderzoeken = $this->agenda_model->getOnderzoekenByPersoon($persoonId);
-        
+
         $data_onderzoeken = array();
-        
+
         // Medische onderzoeken worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
-        foreach ($onderzoeken as $onderzoek) {                    
+        foreach ($onderzoeken as $onderzoek) {
             $data_onderzoeken[] = array(
                 "extra" => $onderzoek->id,
                 "title" => $onderzoek->omschrijving,
@@ -175,7 +175,7 @@ class Agenda extends CI_Controller {
                 "textColor" => '#000'
             );
         }
-        
+
         return $data_onderzoeken;
     }
     
@@ -208,14 +208,14 @@ class Agenda extends CI_Controller {
     //////////////////
     ////////////////// INLADEN AGENDA - EXTRA'S
     //////////////////
-    
+
     
     
     
     public function kiesKleurTraining($id) {
         $this->load->model("zwemmer/agenda_model");
         $activiteit = $this->agenda_model->getActiviteit($id);
-        
+
         // Verschillende typen trainingen krijgen allemaal een andere achtergrondkleur
         switch ($activiteit->typeTrainingId) {
             case 1:
@@ -238,14 +238,14 @@ class Agenda extends CI_Controller {
                 $color = $this->agenda_model->getKleurActiviteit(7)->kleur; // Kleur stage
                 break;
         }
-        
+
         return $color;
     }
-    
+
     public function kiesKleurActiviteiten($id) {
         $this->load->model("zwemmer/agenda_model");
         $activiteit = $this->agenda_model->getActiviteit($id);
-        
+
         // Stage en training krijgen beiden een andere achtergrondkleur
         switch ($activiteit->typeActiviteitId) {
             case 1:
@@ -259,7 +259,7 @@ class Agenda extends CI_Controller {
             default:
                 break;
         }
-        
+
         return $color;
     }
     

@@ -1,5 +1,17 @@
 <?php
 
+  // +----------------------------------------------------------
+    // |    Trainingscentrum Wezenberg
+    // +----------------------------------------------------------
+    // |    Auteur: Jolien Lauwers  |       Helper: 
+    // +----------------------------------------------------------
+    // |
+    // |    Welcome controller
+    // |
+    // +----------------------------------------------------------
+    // |    Team 14
+    // +----------------------------------------------------------
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
@@ -21,6 +33,9 @@ class Welcome extends CI_Controller {
         $data['titel'] = 'Home';
         $data['team'] = $this->data->team;
         $data['persoon'] = $this->authex->getPersoonInfo();
+        
+        $zwemmers = $this->ladenTeam();        
+        $data['zwemmers'] = $zwemmers;
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
@@ -88,6 +103,31 @@ class Welcome extends CI_Controller {
     {
         $this->authex->meldAf();
         redirect('Welcome');
+    }
+    
+    public function ladenTeam(){
+        
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmers = $this->zwemmers_model->getTeam();
+        
+        $data_zwemmers = array();
+        foreach ($zwemmers as $zwemmer) {                    
+            $data_zwemmers[] = array(
+                "voornaam" => $zwemmer->voornaam,
+                "achternaam" => $zwemmer->achternaam,
+                "straat" => $zwemmer->straat,
+                "huisnummer" => $zwemmer->huisnummer,
+                "postcode" => $zwemmer->postcode,
+                "gemeente" => $zwemmer->gemeente,
+                "telefoonnummer" => $zwemmer->telefoonnummer,
+                "email" => $zwemmer->email,
+                "wachtwoord" => $zwemmer->wachtwoord,
+                "omschrijving" => $zwemmer->omschrijving,
+                "foto" => $zwemmer->foto,
+                "color" => '#FF7534',"textColor" => '#000'
+            );
+        }
+        return $zwemmers;
     }
 
 }

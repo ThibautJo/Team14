@@ -56,8 +56,8 @@ class Zwemmers_model extends CI_Model {
         $this->db->update('persoon', $persoon);
     }
     
-    function uitArchiefHalen($id){
-        $this->db->where('id', $id);
+    function uitArchiefHalen($persoon){
+        $this->db->where('id', $persoon->id);
         $this->db->set('actief', 1 );
         $this->db->update('persoon', $persoon);
     }

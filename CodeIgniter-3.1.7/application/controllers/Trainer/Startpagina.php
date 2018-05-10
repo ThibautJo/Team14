@@ -19,8 +19,8 @@ class Startpagina extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-        
-        // controleren of bevoegde persoon is aangemeld        
+
+        // controleren of bevoegde persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -30,13 +30,6 @@ class Startpagina extends CI_Controller {
             }
         }
 
-        // Helpers inladen
-        $this->load->helper("url");
-        $this->load->helper('form');
-        $this->load->helper("my_form_helper");
-        $this->load->helper("my_html_helper");
-        $this->load->helper("notation_helper");
-        
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "true", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
@@ -49,18 +42,26 @@ class Startpagina extends CI_Controller {
     // +----------------------------------------------------------
 
     public function index() {
-        
+
        $data['titel'] = 'Startpagina beheren';
+       $data['team'] = $this->data->team;
        $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+
        
+       $this->load->model('trainer/startpaginaitem_model');
+       $data['startpaginateksten'] = $this->startpaginaitem_model->getStartpaginaTekst();
+       
+       $this->load->model('trainer/wedstrijd_model');
+       $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
+
        $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
-            'inhoud' => 'trainer/NOGAANMAKEN',
+            'inhoud' => 'trainer/startpagina_beheren',
             'voetnoot' => 'main_footer');
 
        $this->template->load('main_master', $partials, $data);
-       
+
     }
-    
-    
+
+
 }

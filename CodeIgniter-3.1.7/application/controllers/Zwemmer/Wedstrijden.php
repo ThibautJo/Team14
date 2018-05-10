@@ -29,17 +29,9 @@ class Wedstrijden extends CI_Controller {
       redirect('welcome/meldAan');
     }
 
-
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->helper('my_html');
-    $this->load->helper('notation');
-
-    $this->load->library('table');
-
     // Auteur inladen in footer
     $this->data = new stdClass();
-    $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "true", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
+    $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "true", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
 
   }
 
@@ -122,5 +114,15 @@ class Wedstrijden extends CI_Controller {
 
     $this->template->load('main_master', $partials, $data);
   }
+  
+  public function reeksen($id) {
+        $data = new stdClass();
+
+        $this->load->model('trainer/wedstrijd_model');
+
+        $data = $this->wedstrijd_model->getResultatenTabel($id);
+
+        print json_encode($data);
+    }
 
 }

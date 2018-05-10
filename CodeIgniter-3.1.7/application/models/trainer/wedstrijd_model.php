@@ -3,11 +3,11 @@
 
 class wedstrijd_model extends CI_Model {
   /**
-   * @class Wedstrijd_model
-   * @brief Model-klasse voor wedstrijden
-   *
-   * Model-klasse met alle methodes die gebruikt worden om wedstrijden te beheren
-   */
+  * @class Wedstrijd_model
+  * @brief Model-klasse voor wedstrijden
+  *
+  * Model-klasse met alle methodes die gebruikt worden om wedstrijden te beheren
+  */
 
   // +----------------------------------------------------------
   // |    Trainingscentrum Wezenberg
@@ -29,38 +29,70 @@ class wedstrijd_model extends CI_Model {
     $this->load->helper('url');
   }
   /**
-   * \brief Retourneert de opgevraagde wedstrijden
-   *
-   * @param $start Is de startperiode van de wedstrijden
-   * @param $end Is de einPeriode van de wedstrijden
-   * @return De gevraagde wedstrijd(en)
-   */
+  * \brief Retourneert de opgevraagde wedstrijden
+  *
+  * @param $start Is de startperiode van de wedstrijden
+  * @param $end Is de einPeriode van de wedstrijden
+  * @return De gevraagde wedstrijd(en)
+  */
+  //toekomstige wedstrijden
   public function getWedstrijden($start = null, $end = null) {
-    if($start != null && $end != null){
-      $this->db->where('datumStart >=', $start);
+    if (date("Y-m-d") < $start) {
+        $this->db->where('datumStart >=', $start);
+    }
+    else {
+      $this->db->where('datumStart >=', date("Y-m-d"));
+    }
+
+    if($end != null){
       $this->db->where('datumStop <=', $end);
     }
 
     $query = $this->db->get('wedstrijd');
     return $query->result();
+
+  }
+  //verleden wedstrijden
+  public function getWedstrijden2($start = null, $end = null) {
+    if (date("Y-m-d") > $start) {
+      if($start != null){
+        $this->db->where('datumStart >=', $start);
+      }
+      if ($end <= date("Y-m-d")) {
+        $this->db->where('datumStop <=', $end);
+      }
+      else {
+        $this->db->where('datumStop <=', date("Y-m-d"));
+      }
+
+      $query = $this->db->get('wedstrijd');
+
+      return $query->result();
+    }
+    else {
+      return array();
+    }
+
   }
   /**
-   * Retourneert
-   *
-   * @param $id De id van het gevraagde wedstrijd
-   * @return Het gevraagde wedstrijd
-   */
+  * Retourneert
+  *
+  * @param $id De id van het gevraagde wedstrijd
+  * @return Het gevraagde wedstrijd
+  */
+
   public function getWedstrijdenWithId($id) {
     $this->db->where('id', $id);
     $query = $this->db->get('wedstrijd');
     return $query->row();
   }
+
   /**
-   * Retourneert de ingeschrevenen bij het bijhorenede wedstrijd
-   *
-   * @param $wedstrijdID wedstrijd waar men in wilt zoeken
-   * @return De ingeschrevenen bij het opgegeven wedstrijd
-   */
+  * Retourneert de ingeschrevenen bij het bijhorenede wedstrijd
+  *
+  * @param $wedstrijdID wedstrijd waar men in wilt zoeken
+  * @return De ingeschrevenen bij het opgegeven wedstrijd
+  */
   public function getIngeschrevenen($wedstrijdID) {
     // eerst reeksenperwedstrijd ophalen
     $this->db->where('wedstrijdId', $wedstrijdID);
@@ -95,28 +127,28 @@ class wedstrijd_model extends CI_Model {
     return $personen;
   }
   /**
-   * Retourneert de afstanden van het wedstrijd
-   *
-   * @return Het opgevraagde record
-   */
+  * Retourneert de afstanden van het wedstrijd
+  *
+  * @return Het opgevraagde record
+  */
   public function getAfstanden() {
     $query = $this->db->get('afstand');
     return $query->result();
   }
   /**
-   * Retourneert de slagen van het wedstrijd
-   *
-   * @return Het opgevraagde record
-   */
+  * Retourneert de slagen van het wedstrijd
+  *
+  * @return Het opgevraagde record
+  */
   public function getSlagen() {
     $query = $this->db->get('slag');
     return $query->result();
   }
   /**
-   * \brief Verwijderd de wedstrijd en bijhorende reeksen
-   *
-   * @param $id is het opgegeven wedstrijdID
-   */
+  * \brief Verwijderd de wedstrijd en bijhorende reeksen
+  *
+  * @param $id is het opgegeven wedstrijdID
+  */
   public function deleteWedstrijd($id) {
     $this->db->where('id', $id);
     $this->db->delete('wedstrijd');
@@ -125,30 +157,30 @@ class wedstrijd_model extends CI_Model {
     $this->db->delete('reeksPerWedstrijd');
   }
   /**
-   * Slaagt nieuw wedstrijd op
-   *
-   * @param $data is het wedstrijd object dat opgeslagen word
-   * @return Het ingevoegde wedstrijd ID
-   */
+  * Slaagt nieuw wedstrijd op
+  *
+  * @param $data is het wedstrijd object dat opgeslagen word
+  * @return Het ingevoegde wedstrijd ID
+  */
   public function insertWedstrijd($data) {
     $this->db->insert('wedstrijd', $data);
     return $this->db->insert_id();
   }
   /**
-   * Update bestaand wedstrijd
-   *
-   * @param $data is het wedstrijd object dat geüpdate moet worden
-   */
+  * Update bestaand wedstrijd
+  *
+  * @param $data is het wedstrijd object dat geüpdate moet worden
+  */
   public function updateWedstrijd($data) {
     $this->db->where('id', $data->id);
     $this->db->update('wedstrijd', $data);
   }
   /**
-   * Slaagt nieuw wedstrijd op
-   *
-   * @param $wedID is het gegeven weddstrijd id
-   * @param $reeksen zijn de reeksen die opgeslagen moeten worden
-   */
+  * Slaagt nieuw wedstrijd op
+  *
+  * @param $wedID is het gegeven weddstrijd id
+  * @param $reeksen zijn de reeksen die opgeslagen moeten worden
+  */
   public function insertReeksen($wedID, $reeksen) {
     $data = array();
     $i = 0;
@@ -166,11 +198,11 @@ class wedstrijd_model extends CI_Model {
 
   }
   /**
-   * Haalt reeksen op die bij het opgegeven wedstrijd horen
-   *
-   * @param $id is het wedstrijd id
-   * @return de reeksen van het gegeven wedstrijd
-   */
+  * Haalt reeksen op die bij het opgegeven wedstrijd horen
+  *
+  * @param $id is het wedstrijd id
+  * @return de reeksen van het gegeven wedstrijd
+  */
   public function getReeksenWithWedstrijdID($id) {
     $this->db->where('wedstrijdId', $id);
     $query = $this->db->get('reeksPerWedstrijd');
@@ -178,34 +210,34 @@ class wedstrijd_model extends CI_Model {
     return $query->result();
   }
   /**
-   * Slaagt nieuw wedstrijd op
-   *
-   * @param $id
-   * @return de slag van opgegeven wedstrijd
-   */
+  * Slaagt nieuw wedstrijd op
+  *
+  * @param $id
+  * @return de slag van opgegeven wedstrijd
+  */
   public function getSlagWithID($id) {
     $this->db->where('id', $id);
     $query = $this->db->get('slag');
     return $query->row();
   }
   /**
-   * Slaagt nieuw wedstrijd op
-   *
-   * @param $data is het wedstrijd object dat opgeslagen word
-   * @return Het ingevoegde wedstrijd ID
-   */
+  * Slaagt nieuw wedstrijd op
+  *
+  * @param $data is het wedstrijd object dat opgeslagen word
+  * @return Het ingevoegde wedstrijd ID
+  */
   public function getAfstandWithID($id) {
     $this->db->where('id', $id);
     $query = $this->db->get('afstand');
     return $query->row();
   }
   /**
-   * update bestaande reeksen bijhorend bij opgegeven wedstrijd
-   *
-   * @param $wedID is het wedstrijd ID
-   * @param $reeksen zijn de nieuwe reeksen die opgeslagen moeten worden
-   * @see Wedstrijd_model::insertReeksen()
-   */
+  * update bestaande reeksen bijhorend bij opgegeven wedstrijd
+  *
+  * @param $wedID is het wedstrijd ID
+  * @param $reeksen zijn de nieuwe reeksen die opgeslagen moeten worden
+  * @see Wedstrijd_model::insertReeksen()
+  */
   public function updateReeksen($wedID,$reeksen) {
     //delete alle reekesen
     $this->db->where('wedstrijdId', $wedID);
@@ -216,11 +248,12 @@ class wedstrijd_model extends CI_Model {
   }
 
 
-  public function getResultatenTabel(){
+  public function getResultatenTabel($wedID = null){
 
     $resultaten = new stdClass();
 
     $query = $this->db->get('resultaat');
+
     $resultaten->resultaten = $query->result();
     $i = 0;
     foreach ($resultaten->resultaten as $resultaat) {
@@ -232,10 +265,24 @@ class wedstrijd_model extends CI_Model {
       $afstand = $this->getAfstandWithID($reeks->afstandId);
       $wedstrijd = $this->getWedstrijdenWithId($reeks->wedstrijdId);
 
-      $resultaten->resultaten[$i]->ronde = $ronde->ronde;
-      $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
-      $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
-      $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+      if ($wedID != null) {
+        if ($wedstrijd->id === $wedID) {
+          $resultaten->resultaten[$i]->ronde = $ronde->ronde;
+          $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
+          $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
+          $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+        }
+        else{
+          unset($resultaten->resultaten[$i]);
+        }
+      }
+      else {
+        $resultaten->resultaten[$i]->ronde = $ronde->ronde;
+        $resultaten->resultaten[$i]->reeks = $afstand->afstand .' '. $slag->slag;
+        $resultaten->resultaten[$i]->persoonNaam = $persoon->voornaam .' '.$persoon->achternaam;
+        $resultaten->resultaten[$i]->wedstrijdNaam = $wedstrijd->naam;
+      }
+
 
       $i++;
     }

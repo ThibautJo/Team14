@@ -92,7 +92,7 @@ $maanden = array(
   echo $this->table->generate();
   ?>
 
-  <button type="button" class="btn btn-primary" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=aanpassen'">Aanpassen</button>
+  <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/wedstrijden/index?pagina=aanpassen'">Aanpassen</button>
 
 </div>
 <script type="text/javascript">

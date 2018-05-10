@@ -79,13 +79,32 @@
             <!-- Team sectie -->
 
             <div id="Team">
-                
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <?php
+                            foreach ($zwemmers as $zwemmer)
+                                echo '<td>' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="rounded-circle" id="team-foto"') 
+                                         . "</td>"
+                        ?>    
+                    </tr>
+                    <tr>
+                        <?php
+                            foreach ($zwemmers as $zwemmer)
+                                echo "<td class='text-align-center'>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td>"
+                        ?>  
+                    </tr>
+         
+            <!-- echo '<span class="col-sm-5">' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="rounded-circle img-responsive"') 
+                                . " " . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</span>" -->
+                <table>
+                </tbody>
             </div>
 
             <!-- Wedstrijden sectie -->
 
             <div id="Wedstrijden">
-
+                
             </div>
 
             <!-- Nieuws sectie -->

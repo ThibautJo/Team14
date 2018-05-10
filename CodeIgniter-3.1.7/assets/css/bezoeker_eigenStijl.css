@@ -170,3 +170,17 @@ a.text-darkblue:hover, a.text-darkblue:focus {
     padding-right: 30px;
 }
 
+#team-foto {
+    height: 250px;
+    width: 250px;
+}
+
+table {
+    width: 100%;
+    border: none;
+}
+
+table td {
+    width: 20%;
+    text-align: center;
+}
