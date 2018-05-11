@@ -269,7 +269,7 @@ function zwemmerProfielTonen(persoonID) {
     // console.log(data[0]["Naam"]);
 
     //modal opvullen met object wedstrijd
-    opvullenModalPersoonProfielTonen(data);
+    opvullenModalZwemmerProfielTonen(data);
 
   }).fail(function () {
     alert("Er is iets misgelopen, neem contact op met de administrator.");
