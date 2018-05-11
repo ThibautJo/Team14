@@ -49,10 +49,8 @@ class Startpagina extends CI_Controller {
 
        
        $this->load->model('trainer/startpaginaitem_model');
-       $data['startpaginateksten'] = $this->startpaginaitem_model->getStartpaginaTekst();
-       
-       $this->load->model('trainer/wedstrijd_model');
-       $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
+       $data['startpaginaitems'] = $this->startpaginaitem_model->getStartpaginaItem();
+         
 
        $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',

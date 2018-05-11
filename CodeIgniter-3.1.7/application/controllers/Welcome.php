@@ -36,6 +36,10 @@ class Welcome extends CI_Controller {
         
         $zwemmers = $this->ladenTeam();        
         $data['zwemmers'] = $zwemmers;
+        
+        $this->load->model('trainer/startpaginaitem_model');
+        $data['startpaginaitems'] = $this->startpaginaitem_model->getStartpaginaItem();
+         
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
