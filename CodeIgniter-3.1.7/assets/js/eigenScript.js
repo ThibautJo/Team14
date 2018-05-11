@@ -669,3 +669,28 @@ function meldingOpslaan(actie) {
 }
 
 // melding end
+
+// inschrijven start
+
+function inschrijvingOpslaan() {
+
+    var ok = true;
+    var formToSubmit = '';
+    //form valideren
+
+        formToSubmit = "#inschrijvenWedstrijd #mijnFormulier";
+        if (!form_validatie(formToSubmit)) {
+            //alert("Niet alle velden zijn ingevuld");
+            ok = false;
+            return false;
+        }
+
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Zwemmer/wedstrijden/opslaanInschrijving/');
+        $(formToSubmit).submit();
+        alert("Inschrijving gelukt!");
+    }
+}
+
+// inschrijven end
