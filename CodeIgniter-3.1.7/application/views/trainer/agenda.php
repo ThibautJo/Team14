@@ -31,6 +31,7 @@
     <div class="col-12 col-sm-4 col-md-3 col-xl-2 order-0 order-sm-1 mb-4">
         <p class="font-weight-bold header-list-group pt-1">Agenda van:</p>
         <div class="list-group">
+            <a href="" onclick="agendaInladen(2)" class="list-group-item list-group-item-action active">Tom Nuyts</a>
             <?php
             foreach ($listGroupItems as $listGroupItem) {
                 echo $listGroupItem;
@@ -38,7 +39,7 @@
             ?>
         </div>
         <p class="mt-4">
-            <?php echo divAnchor("/Trainer/Agenda/aanpassen/" . $_GET['persoonId'] . "?persoonId=" . $_GET['persoonId'], 'Aanpassen', 'class="btn button-blue d-flex justify-content-center"') ?>
+            <?php echo divAnchor("/Trainer/Agenda", 'Aanpassen', 'class="btn button-blue d-flex justify-content-center"') ?>
         </p>
     </div>
 </div>

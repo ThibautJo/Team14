@@ -42,7 +42,7 @@
 
 <div class="d-flex row" id="container-agenda">
     <div id="agenda" class="col-12 col-sm-8 col-md-9 col-xl-10 order-1 order-sm-0">
-
+        
     </div>
 
     <div class="col-12 col-sm-4 col-md-3 col-xl-2 order-0 order-sm-1 mb-4">
@@ -58,7 +58,7 @@
             <button type="button" class="btn btn-warning" data-toggle="modal" data-toggle="tooltip" title="Activiteit toevoegen" data-target="#activiteitToevoegen"><i class="fas fa-plus"></i></button>
             <button type="button" class="btn btn-success" data-toggle="modal" data-toggle="tooltip" title="Activiteit wijzigen" data-target="#activiteitWijzigen"><i class="fas fa-pencil-alt"></i></button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" data-target="#activiteitVerwijderen"><i class="fas fa-trash-alt"></i></button>
-            <p><?php echo divAnchor("/Trainer/Agenda/index/" . $_GET['persoonId'] . "?persoonId=" . $_GET['persoonId'], 'Weergaven', 'class="btn button-blue d-flex justify-content-center"') ?></p>
+
             <p><div><a class="btn btn-light d-flex justify-content-center text-dark" id="help" data-toggle="modal" data-target="#helpModal"><i class="material-icons">help</i> &nbsp;Hulp</a></div></p>
         </p>
     </div>
@@ -84,12 +84,9 @@
                 echo form_open('Trainer/Agenda/registreerActiviteit', $attributenFormulier);
                 
                 $uren = array('06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00');
-                $persoon = $_GET['persoonId'];
                 ?>
                 
                 <?php echo form_hidden('id', ''); ?>
-                
-                <?php echo form_hidden('persoon', $persoon); ?>
 
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
@@ -102,9 +99,6 @@
                             'placeholder' => 'Gebeurtenisnaam', 
                             'required' => 'required'));
                         ?>
-                        <div class="invalid-feedback">
-                            Vul dit veld in.
-                        </div>
                     </div>
                 </div>
 
@@ -114,9 +108,6 @@
                         echo form_label('Soort training', 'soort');
                         echo form_dropdown('soort', $soortTraining, '', 'id="soort" class="form-control"');
                         ?>
-                        <div class="invalid-feedback">
-                            Maak een keuze uit de lijst.
-                        </div>
                     </div>
                 </div>
                 
@@ -131,9 +122,6 @@
                             'placeholder' => 'Plaats', 
                             'required' => 'required'));
                         ?>
-                        <div class="invalid-feedback">
-                            Vul dit veld in.
-                        </div>
                     </div>
                     
                     <div class="form-group">
@@ -146,9 +134,6 @@
                             'placeholder' => 'http://www.programma.be', 
                             'required' => 'required'));
                         ?>
-                        <div class="invalid-feedback">
-                            Vul dit veld in.
-                        </div>
                     </div>
                 </div>
                 
@@ -166,9 +151,6 @@
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
                             ?>
-                            <div class="invalid-feedback">
-                                Kies een datum.
-                            </div>
                         </div>
 
                         <div class="form-group col-4">
@@ -177,9 +159,6 @@
                             
                             echo form_dropdown('beginuur', $uren, '', 'id="beginuur" class="form-control"');
                             ?>
-                            <div class="invalid-feedback">
-                                Kies een uur.
-                            </div>
                         </div>
                     </div>
 
@@ -196,9 +175,6 @@
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
                             ?>
-                            <div class="invalid-feedback">
-                                Kies een datum.
-                            </div>
                         </div>
 
                         <div class="form-group col-4">
@@ -206,9 +182,6 @@
                             echo form_label('Einduur', 'einduur');
                             echo form_dropdown('einduur', $uren, '', 'id="einduur" class="form-control"');
                             ?>
-                            <div class="invalid-feedback">
-                                Kies een uur.
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -219,9 +192,18 @@
                         echo form_label('Supplementnaam', 'supplementnaam');
                         echo form_dropdown('supplementnaam', $supplementennamen, '', 'id="supplementnaam" class="form-control"');
                         ?>
-                        <div class="invalid-feedback">
-                            Maak een keuze uit de lijst.
-                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <?php
+                        echo form_label('Hoeveelheid', 'hoeveelheid');
+                        echo form_input(array('name' => 'hoeveelheid',
+                            'id' => 'hoeveelheid',
+                            'value' => '', 
+                            'class' => 'form-control',
+                            'placeholder' => 'bv. 2', 
+                            'required' => 'required'));
+                        ?>
                     </div>
                                         
                     <div class="form-group">
@@ -236,9 +218,6 @@
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
                         ?>
-                        <div class="invalid-feedback">
-                            Kies een datum.
-                        </div>
                     </div>
                 </div>
                 
@@ -258,11 +237,15 @@
                 <div class="form-group">
                     <?php
                     echo form_label('Toevoegen voor', 'personen');
-                    echo form_dropdown('personen', $voorPersonen, '', 'id="personen" class="form-control"');
+                    echo '<div class="rounded border border-grey p-2">';
+                    foreach ($voorPersonen as $persoon) {
+                        echo '<div class="m-2" >';
+                        echo form_checkbox('personen', $persoon, false, 'id="' . array_search($persoon, $voorPersonen) . '"');
+                        echo $persoon;
+                        echo '</div>';
+                    }
+                    echo '</div>';
                     ?>
-                    <div class="invalid-feedback">
-                        Maak een keuze uit de lijst.
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -304,98 +287,121 @@
 <!-- Script om agenda aan te passen -->
 
 <script type="text/javascript">
-    $(document).ready(function () {        
+    $('.runFunction').on('click', function agendaInladen() {
+        var persoonId = 0;
+        persoonId = $(this).data('id');
+        $('.runFunction').removeClass('active');
+        $(this).addClass('active');
+        $('#agenda').fullCalendar('removeEvents');
+
+        // Breedte van het scherm opslaan in een variabele
+        var width = $(window).width();
+        
+        $.ajax({
+            method: "POST",
+            url: site_url + "/Trainer/Agenda/ladenAgendaPersoon",
+            data: {persoonId: persoonId},
+            dataType: "json",
+            success: function (result) {
+                $('#agenda').fullCalendar('addEventSource', result);
+                
+                // Filteren op schermbreedte (d.m.v. switch)
+                switch (true) {
+                    // Bij groot scherm volledige agenda
+                    case (width > 992):
+                        $('#agenda').fullCalendar({
+                            defaultView: 'agendaWeek', // Week agenda
+                            titleFormat: 'D MMMM YYYY', // Titel van agenda [1 - 7 januari 0000]
+                            allDaySlot: true,
+                            allDayText: 'Suppl.',
+                            height: 'parent', // Hoogte zelfde als zijn parent
+                            minTime: "06:00:00", // Begintijd kalender
+                            // EventClick functie zorgt ervoor dat je het event kan aanklikken en meer informatie kan bekijken in het modal dat opent
+                            eventClick: function(calEvent) {
+                                var kleuren = <?php echo $kleuren ?>;
+                                $.each(kleuren, function(index) {
+                                    if (calEvent.color == kleuren[index].kleur) {
+                                        $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
+                                        var site_url = '<?php echo site_url(); ?>';
+                                        aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, site_url);
+                                        console.log('ok');
+                                    }
+                                });
+                            },
+                            selectable: true,
+                            select: function(startDate, endDate) {
+                                $('#toevoegenActiviteit').modal('show');
+        //                        $('.modal-title').html('Activiteit toevoegen');
+        //                        $('.modal-body').html('');
+                            },
+                            events: result
+                        });
+                        break;
+
+                    // Bij middelmatig scherm 3-dagen agenda
+                    case (width < 992) && (width > 576):
+                        $('#agenda').fullCalendar({
+                            defaultView: 'agendaThreeDay', // 3-dagen agenda
+                            views: {
+                                agendaThreeDay: {
+                                    type: 'agenda',
+                                    duration: {days: 3}
+                                }
+                            },
+                            titleFormat: 'D MMMM YYYY',
+                            allDayText: 'Suppl.',
+                            height: 'parent',
+                            minTime: "06:00:00",
+                            eventClick: function(calEvent) {
+                                $('#aanpassenActiviteit').modal('show');
+                                $('.modal-body').html(calEvent.title);
+                                var kleuren = <?php echo $kleuren ?>;
+                                $.each(kleuren, function(index) {
+                                    if (calEvent.color === kleuren[index].kleur) {
+                                        $('.modal-title').html(kleuren[index].activiteit);
+                                    }
+                                });
+                            },
+                            events: result
+                        });
+                        break;
+
+                    // Bij klein scherm dag agenda
+                    case (width < 576):
+                        $('#agenda').fullCalendar({
+                            defaultView: 'agendaDay', // Dag agenda
+                            titleFormat: 'D/M/Y',
+                            allDayText: 'Suppl.',
+                            height: 'auto', // Geen scrollbar bij hoogte
+                            minTime: "06:00:00",
+                            eventClick: function(calEvent) {
+                                $('#aanpassenActiviteit').modal('show');
+                                $('.modal-body').html(calEvent.title);
+                                var kleuren = <?php echo $kleuren ?>;
+                                $.each(kleuren, function(index) {
+                                    if (calEvent.color === kleuren[index].kleur) {
+                                        $('.modal-title').html(kleuren[index].activiteit);
+                                    }
+                                });
+                            },
+                            events: result
+                        });
+                        break;
+                };
+            },
+            error: function (xhr, status, error) {
+                alert("-- ERROR IN AJAX --\n\n" + xhr.responseText);
+            }
+        });
+        
+        $('#agenda').fullCalendar('rerenderEvents');
+    });
+    
+    $(document).ready(function () {
+        $('.runFunction:first').click();
         $('.datepicker2').datepicker({
             autoclose: true,
             orientation: 'auto'
         });
-        
-        // Breedte van het scherm opslaan in een variabele
-        var width = $(window).width();
-
-        // Filteren op schermbreedte (d.m.v. switch)
-        switch (true) {
-
-            // Bij groot scherm volledige agenda
-            case (width > 992):
-                $('#agenda').fullCalendar({
-                    defaultView: 'agendaWeek', // Week agenda
-                    titleFormat: 'D MMMM YYYY', // Titel van agenda [1 - 7 januari 0000]
-                    allDaySlot: true,
-                    allDayText: 'Suppl.',
-                    height: 'parent', // Hoogte zelfde als zijn parent
-                    minTime: "06:00:00", // Begintijd kalender
-                    // EventClick functie zorgt ervoor dat je het event kan aanklikken en meer informatie kan bekijken in het modal dat opent
-                    eventClick: function(calEvent) {
-                        var kleuren = <?php echo $kleuren ?>;
-                        $.each(kleuren, function(index) {
-                            if (calEvent.color == kleuren[index].kleur) {
-                                $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
-                                var site_url = '<?php echo site_url(); ?>';
-                                aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, $('input[name=persoon]').val(), site_url);
-                                console.log('ok');
-                            }
-                        });
-                    },
-                    selectable: true,
-                    select: function(startDate, endDate) {
-                        $('#toevoegenActiviteit').modal('show');
-//                        $('.modal-title').html('Activiteit toevoegen');
-//                        $('.modal-body').html('');
-                    },
-                    events: <?php echo $activiteiten?>
-                });
-                break;
-            
-            // Bij middelmatig scherm 3-dagen agenda
-            case (width < 992) && (width > 576):
-                $('#agenda').fullCalendar({
-                    defaultView: 'agendaThreeDay', // 3-dagen agenda
-                    views: {
-                        agendaThreeDay: {
-                            type: 'agenda',
-                            duration: {days: 3}
-                        }
-                    },
-                    titleFormat: 'D MMMM YYYY',
-                    allDayText: 'Suppl.',
-                    height: 'parent',
-                    minTime: "06:00:00",
-                    eventClick: function(calEvent) {
-                        $('#aanpassenActiviteit').modal('show');
-                        $('.modal-body').html(calEvent.title);
-                        var kleuren = <?php echo $kleuren ?>;
-                        $.each(kleuren, function(index) {
-                            if (calEvent.color === kleuren[index].kleur) {
-                                $('.modal-title').html(kleuren[index].activiteit);
-                            }
-                        });
-                    },
-                    events: <?php echo $activiteiten?>
-                });
-                break;
-            
-            // Bij klein scherm dag agenda
-            case (width < 576):
-                $('#agenda').fullCalendar({
-                    defaultView: 'agendaDay', // Dag agenda
-                    titleFormat: 'D/M/Y',
-                    allDayText: 'Suppl.',
-                    height: 'auto', // Geen scrollbar bij hoogte
-                    minTime: "06:00:00",
-                    eventClick: function(calEvent) {
-                        $('#aanpassenActiviteit').modal('show');
-                        $('.modal-body').html(calEvent.title);
-                        var kleuren = <?php echo $kleuren ?>;
-                        $.each(kleuren, function(index) {
-                            if (calEvent.color === kleuren[index].kleur) {
-                                $('.modal-title').html(kleuren[index].activiteit);
-                            }
-                        });
-                    },
-                    events: <?php echo $activiteiten ?>
-                });
-                break;
-        };
     });
 </script>

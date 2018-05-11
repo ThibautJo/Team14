@@ -4,7 +4,7 @@
  * @file supplement_lijst.php
  * 
  * View waarin een lijst van supplement gegevens worden weergegeven
- * - krijgt $supplementen binnen
+ * - krijgt een $supplementen-object binnen
  */
 
 
@@ -81,6 +81,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                                 'class' => 'form-control',
                                 'placeholder' => 'Naam',
                                 'required' => 'required'));
+                            echo form_label("Vak is leeg!", 'naam', array("id" => "naam-fout", "class" => "fout", "hidden" => "hidden"));
                             ?>
                             <div class="invalid-feedback">
                                 Vul dit veld in.
@@ -102,6 +103,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                                 'class' => 'form-control',
                                 'placeholder' => 'Omschrijving',
                                 'required' => 'required'));
+                            echo form_label("Vak is leeg!", 'omschrijving', array("id" => "omschrijving-fout", "class" => "fout", "hidden" => "hidden"));
                             ?>
                             <div class="invalid-feedback">
                                 Vul dit veld in.
@@ -148,6 +150,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                         'class' => 'form-control',
                         'placeholder' => 'Naam',
                         'required' => 'required'));
+                    echo form_label("Vak is leeg!", 'naam', array("id" => "naam-fout", "class" => "fout", "hidden" => "hidden"));
                     ?>
                     <div class="invalid-feedback">
                         Vul dit veld in.
@@ -170,6 +173,7 @@ $attributenFormulier = array('id' => 'form-supplement',
                         'class' => 'form-control',
                         'placeholder' => 'Omschrijving',
                         'required' => 'required'));
+                    echo form_label("Vak is leeg!", 'naam', array("id" => "naam-fout", "class" => "fout", "hidden" => "hidden"));
                     ?>
                     <div class="invalid-feedback">
                         Vul dit veld in.

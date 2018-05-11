@@ -1,18 +1,29 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Description of Team
+ * Controller-klasse met alle methodes de gebruikt worden om zwemmers team te beheren.
  *
- * @author Klied
+ * @class Team
+ * @brief Controller-klasse voor Team
+ * @author Klaus
  */
 class Team extends CI_Controller {
-
+    // +----------------------------------------------------------
+    // |    Trainingscentrum Wezenberg
+    // +----------------------------------------------------------
+    // |    Auteur: Klaus Daems     |       Helper: /
+    // +----------------------------------------------------------
+    // |
+    // |    Team controller
+    // |
+    // +----------------------------------------------------------
+    // |    Team 14
+    // +----------------------------------------------------------
+    
+    /**
+     * Constructor
+     */
     public function __construct() {
 
         parent::__construct();
@@ -25,7 +36,14 @@ class Team extends CI_Controller {
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
-
+    
+    /**
+     * Haalt de gegevens van de zwemmers op via de methode ladenTeam() en
+     * toont de resulterende objecten in de view team.php
+     *
+     * @see ladenTeam()
+     * @see team.php
+     */
     public function index() {
 
         $data['titel'] = 'Team';
@@ -74,6 +92,13 @@ class Team extends CI_Controller {
         return $zwemmers;
     }
     
+    /**
+     * Haalt de gegevens op van de zwemmer id=$id via Zwemmers_model en
+     * returned de resulterende objecten via $data
+     * 
+     * $see Zwemmers_model::get()
+     * $return type $data
+     */
     public function profielTonen($id) {
         $data = new stdClass();
 

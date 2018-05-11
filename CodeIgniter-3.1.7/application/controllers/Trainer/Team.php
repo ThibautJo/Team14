@@ -3,10 +3,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
+ * Controller-klasse met alle methodes die gebruikt worden om zwemmers(personen) te beheren
+ * 
  * @class Team
  * @brief Controller-klasse voor team
- *
- * Controller-klasse met alle methodes die gebruikt worden om zwemmers(personen) te beheren
+ * @author Klaus
  */
 
 class Team extends CI_Controller {
@@ -77,37 +78,44 @@ class Team extends CI_Controller {
     }
 
     /**
-     * Haalt de gegevens op van de zwemmers(personen) via Zwemmers_model en
+     * Haalt de gegevens op van de personen via Zwemmers_model en
      * stopt de resulterende objecten in een array $zwemmers
      *
-     * @see Zwemmers_model::getZwemmers()
+     * @see Zwemmers_model::getTeam()
      * @return type $zwemmers
      */
     public function ladenTeam(){
         
         $this->load->model("trainer/zwemmers_model");
-        $zwemmers = $this->zwemmers_model->getTeam();
+        $personen = $this->zwemmers_model->getTeam();
 
-        $data_zwemmers = array();
-        foreach ($zwemmers as $zwemmer) {
-            $data_zwemmers[] = array(
-                "voornaam" => $zwemmer->voornaam,
-                "achternaam" => $zwemmer->achternaam,
-                "straat" => $zwemmer->straat,
-                "huisnummer" => $zwemmer->huisnummer,
-                "postcode" => $zwemmer->postcode,
-                "gemeente" => $zwemmer->gemeente,
-                "telefoonnummer" => $zwemmer->telefoonnummer,
-                "email" => $zwemmer->email,
-                "wachtwoord" => $zwemmer->wachtwoord,
-                "omschrijving" => $zwemmer->omschrijving,
-                "foto" => $zwemmer->foto,
+        $data_personen = array();
+        foreach ($personen as $persoon) {
+            $data_personen[] = array(
+                "voornaam" => $persoon->voornaam,
+                "achternaam" => $persoon->achternaam,
+                "straat" => $persoon->straat,
+                "huisnummer" => $persoon->huisnummer,
+                "postcode" => $persoon->postcode,
+                "gemeente" => $persoon->gemeente,
+                "telefoonnummer" => $persoon->telefoonnummer,
+                "email" => $persoon->email,
+                "wachtwoord" => $persoon->wachtwoord,
+                "omschrijving" => $persoon->omschrijving,
+                "foto" => $persoon->foto,
                 "color" => '#FF7534',"textColor" => '#000'
             );
         }
-        return $zwemmers;
+        return $personen;
     }
-
+    
+    /**
+     * Haalt de gegevens op van de personen(zwemmers) die inactief staan -> (actief = 0) via Zwemmers_model en
+     * stopt de resulterende objecten in een array $zwemmersuitarchief
+     *
+     * @see Zwemmers_model::getZwemmersArchief()
+     * @return type $zwemmersuitarchief
+     */
     public function ladenArchief(){
 
         $this->load->model("trainer/zwemmers_model");
@@ -133,10 +141,11 @@ class Team extends CI_Controller {
         return $zwemmersuitarchief;
     }
     /**
-     * Haalt alle personen op via Zwemmers_model en
-     * toont de resulterende objecten in de view team_lijst.php
+     * Haalt alle personen op via de methode ladenTeam() en ladenArchief() deze
+     * resulterende objecten kan men in de view team_lijst.php gebruiken
      *
-     * @see Zwemmers_model::getZwemmers()
+     * @see Zwemmers_model::getTeam()
+     * @see Zwemmers_model::getZwemmersArchief()
      * @see team_aanpassen.php
      */
     public function aanpassen() {
@@ -144,8 +153,8 @@ class Team extends CI_Controller {
         $data['titel'] = 'Team beheren';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
-        $zwemmers = $this->ladenTeam();
-        $data['zwemmers'] = $zwemmers;
+        $personen = $this->ladenTeam();
+        $data['personen'] = $personen;
 
         $zwemmersuitarchief = $this->ladenArchief();
         $data['zwemmersuitarchief'] = $zwemmersuitarchief;
@@ -158,13 +167,19 @@ class Team extends CI_Controller {
         $this->template->load('main_master', $partials, $data);
     }
 
-
+    /**
+     * Haalt alle personen op via Zwemmers_model en
+     * toont de resulterende objecten in de view team_lijst.php
+     *
+     * @see Zwemmers_model::getZwemmers()
+     * @see team_aanpassen.php
+     */
     public function wijzig() {
         $data['titel'] = 'Team wijzigen';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
-        $zwemmers = $this->ladenTeam();
-        $data['zwemmers'] = $zwemmers;
+        $personen = $this->ladenTeam();
+        $data['personen'] = $personen;
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
@@ -173,39 +188,47 @@ class Team extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-
+    
+    /**
+     * Archiveert de persoon met id=$id via het Zwemmers_model en
+     * toont de aangepaste lijst in de vew team.php
+     * 
+     * @see Zwemmers_model::archiveer()
+     * @see team.php
+     */
     public function archiveren($id) {
         $this->load->model('trainer/zwemmers_model');
         $this->zwemmers_model->archiveer($id);
 
         redirect('trainer/team');
     }
-
-    public function uitArchiefHalen($id) {
-        $this->load->model('trainer/zwemmers_model');
-        $this->zwemmers_model->uitArchiefHalen($id);
-
-        redirect('trainer/team');
-    }
-
-    public function opslaanZwemmerArchief() {
+    
+    /**
+     * Haalt het gearchiveerde persoon op via Zwemmers_model en
+     * toont de aangepaste lijst in de view team.php
+     *
+     * @see Zwemmers_model::uitArchiefHalen()
+     * @see team.php
+     */
+    public function opslaanZwemmerUitArchiefHalen() {
         $persoon = new stdClass();
 
         $this->load->model('trainer/zwemmers_model');
 
-        $persoon->id = $this->input->post('id');
-        $this->zwemmers_model->uitArchiefHalen($id);
+        $persoon->id = $this->input->post('archief');
+        $this->zwemmers_model->uitArchiefHalen($persoon);
 
         redirect('trainer/team');
     }
 
     /**
-     * Slaagt het nieuw/aangepaste zwemmer op via Zwemmers_model en toont de aangepaste lijst in de view team_lijst.php
+     * Slaagt het nieuw/aangepaste persoon op via Zwemmers_model en 
+     * toont de aangepaste lijst in de view team_lijst.php
      *
      * @see Zwemmers_model::insert($persoon);
      * @see Zwemmers_model::update($persoon);
      */
-    public function opslaanZwemmer($actie = "toevoegen")
+    public function opslaanPersoon($actie = "toevoegen")
     {
         $persoon = new stdClass();
 
@@ -236,7 +259,7 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::get();
      * @see team_aanpassen.php
      */
-    public function wijzigZwemmer($id) {
+    public function wijzigPersoon($id) {
         $data = new stdClass();
 
         $this->load->model('trainer/zwemmers_model');
@@ -244,14 +267,5 @@ class Team extends CI_Controller {
 
         print json_encode($data);
     }
-
-    /**
-     * Haalt de id=$id op van het te tonen persoon-record via Zwemmers_model
-     * en toont de objecten in de view team.php
-     *
-     * @param $id De id van het te tonen zwemmer(persoon)
-     * @see Zwemmers_model::get();
-     * @see team.php
-     */
     
 }

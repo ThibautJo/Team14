@@ -39,4 +39,87 @@ class Agenda_model extends CI_Model {
         $this->db->insert('activiteitPerPersoon', $activiteitPerPersoon);
         return $this->db->insert_id();
     }
+    
+    public function getPersoon($persoonId) {
+        // Type activiteit ophalen uit de databank (training of stage)
+        $this->db->where('id', $persoonId);
+        $query = $this->db->get('persoon');
+        return $query->row();
+    }
+    
+    public function getTypeActiviteit($typeActiviteitId) {
+        // Type activiteit ophalen uit de databank (training of stage)
+        $this->db->where('id', $typeActiviteitId);
+        $query = $this->db->get('typeActiviteit');
+        return $query->row();
+    }
+
+    public function getTypeTraining($typeTrainingId) {
+        // Type training ophalen uit de databank
+        $this->db->where('id', $typeTrainingId);
+        $query = $this->db->get('typeTraining');
+        return $query->row();
+    }
+    
+    public function getPersonenFromActiviteit($activiteitId) {
+        $this->db->where('activiteitId', $activiteitId);
+        $query = $this->db->get('activiteitperpersoon');
+        $activiteitenPerPersoon = $query->result();
+        $personen = [];
+        
+        foreach ($activiteitenPerPersoon as $activiteitPerPersoon) {
+            $personen[] = $activiteitPerPersoon->persoonId;
+        }
+        
+        return $personen;
+    }
+    
+    public function getActiviteit($activiteitId) {
+        $this->db->where('id', $activiteitId);
+        $query = $this->db->get('activiteit');
+        
+        $activiteit = $query->row();
+        
+        $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->typeActiviteitId);
+        $activiteit->typeTraining = $this->getTypeTraining($activiteit->typeTrainingId);
+        $activiteit->personen = $this->getPersonenFromActiviteit($activiteitId);
+        
+        return $activiteit;
+    }
+    
+    public function getReeksenPerWedstrijd($wedstrijdId) {
+        // Wedstrijdreeks ophalen uit de databank
+        $this->db->where('wedstrijdId', $wedstrijdId);
+        $query = $this->db->get('reeksPerWedstrijd');
+        return $query->result();
+    }
+    
+    public function getInschrijving($reeksPerWedstrijdId) {
+        $this->db->where('reeksPerWedstrijdId', $reeksPerWedstrijdId);
+        $query = $this->db->get('inschrijving');
+        return $query->row();
+    }
+    
+    public function getPersonenFromWedstrijd($wedstrijdId) {
+        $reeksen = $this->getReeksenPerWedstrijd($wedstrijdId);
+        $personen = [];
+        foreach ($reeksen as $reeks) {
+            $inschrijving = $this->getInschrijving($reeks->id);
+            $personen[] = $inschrijving->persoonId;
+        }
+        
+        return $personen;
+    }
+    
+    public function getWedstrijd($wedstrijdId) {
+        $this->db->where('id', $wedstrijdId);
+        $query = $this->db->get('wedstrijd');
+        
+        $wedstrijd = $query->row();
+        
+        $wedstrijd->reeksenPerWedstrijd = $this->getReeksenPerWedstrijd($wedstrijd->id);
+        $wedstrijd->personen = $this->getPersonenFromWedstrijd($wedstrijd->id);
+        
+        return $wedstrijd;
+    }
 }

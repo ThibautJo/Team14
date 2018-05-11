@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * @file melding_aanpassen.php
+ * 
+ * View waarin alle meldingen met bijhorende persoon worden weergegeven
+ */
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
 // |    Auteur: Lise Van Eyck       |       Helper:
 // +----------------------------------------------------------
 // |
-// |    Melding view
+// |    Melding aanpassen view
 // |
 // +----------------------------------------------------------
 // |    Team 14
@@ -96,6 +102,7 @@ $attributenFormulier = array('id' => 'form-melding',
                         'class' => 'form-control',
                         'placeholder' => 'Inhoud',
                         'required' => 'required'));
+                    echo form_label("Vak is leeg!", 'inhoud', array("id" => "inhoud-fout", "class" => "fout", "hidden" => "hidden"));
                     ?>
                     <div class="invalid-feedback">
                         Vul dit veld in.
@@ -160,6 +167,7 @@ $attributenFormulier = array('id' => 'form-melding',
                         'class' => 'form-control',
                         'placeholder' => 'Inhoud',
                         'required' => 'required'));
+                    echo form_label("Vak is leeg!", 'inhoud', array("id" => "inhoud-fout", "class" => "fout", "hidden" => "hidden"));
                     ?>
                     <div class="invalid-feedback">
                         Vul dit veld in.

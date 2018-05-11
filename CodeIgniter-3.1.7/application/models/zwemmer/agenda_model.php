@@ -79,8 +79,8 @@ class Agenda_model extends CI_Model {
 
         foreach ($activiteiten as $activiteit) {
             // Tabel activiteitperpersoon joinen met de tabel activiteit, typeactiviteit en typetraining
-            $activiteit->activiteit = $this->getActiviteit($activiteit->id);
-
+            $activiteit->activiteit = $this->getActiviteit($activiteit->activiteitId);
+            
             $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->activiteit->typeActiviteitId);
 
             $activiteit->typeTraining = $this->getTypeTraining($activiteit->activiteit->typeTrainingId);
@@ -95,13 +95,37 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('reeksPerWedstrijd');
         return $query->row();
     }
-
+    
+    public function getReeksenPerWedstrijd($wedstrijdId) {
+        // Wedstrijdreeks ophalen uit de databank
+        $this->db->where('wedstrijdId', $wedstrijdId);
+        $query = $this->db->get('reeksPerWedstrijd');
+        return $query->result();
+    }
+    
     public function getWedstrijd($wedstrijdId) {
         // Wedstrijd ophalen uit de databank
         $this->db->where('id', $wedstrijdId);
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
+    
+//    public function getPersonenFromWedstrijd($wedstrijdId) {
+//        // Personen die deelnemen aan een wedstrijd ophalen uit de databank
+//        $query = $this->getReeksenPerWedstrijd($this->getWedstrijd($wedstrijdId));
+//        $reeksenPerWedstrijd = $query->result();
+//        $personen = [];
+//        
+//        foreach ($reeksenPerWedstrijd as $reeksPerWedstrijd) {
+//            $this->db->where('reeksPerWedstrijdId', $reeksPerWedstrijd->id);
+//            $query = $this->db->get('inschrijving');
+//            $inschrijving = $query->row();
+//            
+//            $personen = $inschrijving->persoonId;
+//        }
+//        
+//        return $personen;
+//    }
 
     public function getWedstrijdenByPersoon($persoonId) {
         // Alle wedstrijden van een bepaalde persoon ophalen uit de databank
