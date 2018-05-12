@@ -58,6 +58,7 @@ class Agenda extends CI_Controller {
         $data['listGroupItems'] = $this->ladenListGroup();
         $data['voorPersonen'] = $this->ladenZwemmers();
         $data['soortTraining'] = $this->agenda_model->getAllTypeTraining();
+        $data['supplementennamen'] = $this->agenda_model->getAllSupplementen();
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'trainer_main_menu',
@@ -312,5 +313,81 @@ class Agenda extends CI_Controller {
         $data = $this->agenda_model->getSupplement($id);
 
         print json_encode($data);
+    }
+    
+    
+    
+    
+    //////////////////
+    ////////////////// UPDATEN, INSERTEN AGENDA 
+    //////////////////
+    
+    
+    
+    
+    public function registreerActiviteit() {
+        $this->load->model('trainer/agenda_model');
+        $this->load->model('trainer/zwemmers_model');
+        $uren = array('06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00');
+        $activiteit = new stdClass();
+        $activiteitPerPersoon = new stdClass();
+        
+        // Tabel activiteit
+        $id = $this->input->post('id');
+        $activiteit->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $uren[$this->input->post('beginuur')] . ':00';
+        $activiteit->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $uren[$this->input->post('einduur')] . ':00';
+        
+        if ($this->input->post('soort') !== '') {
+            $activiteit->typeTrainingId = $this->input->post('soort')+1;
+            $activiteit->typeActiviteitId = 1;
+        }
+        else {
+            $activiteit->typeTrainingId = null;
+            $activiteit->typeActiviteitId = 2;
+        }
+        $activiteit->stageTitel = $this->input->post('gebeurtenisnaam');
+        
+        // Tabel activiteitPerPersoon
+        $personenChecked = $this->input->post('personen');
+        $personenActiviteit = $this->agenda_model->getPersonenFromActiviteit($id);
+        
+        if ($personenChecked !== null) {
+            foreach ($personenActiviteit as $persoonActiviteit) {
+                if (!in_array($persoonActiviteit, $personenChecked)) {
+                    $activiteitPerPersoonDelete = $this->agenda_model->getActiviteitPerPersoon($persoonActiviteit, $id);
+                    $this->agenda_model->deleteActiviteitPerPersoon($activiteitPerPersoonDelete->id);
+                }
+            }
+        
+            if ($id === 0) {
+                foreach ($personenChecked as $persoonChecked) {
+                    $activiteitPerPersoon->persoonId = $persoonChecked;
+                    $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                }
+            }
+            else {
+                foreach ($personenChecked as $persoonChecked) {
+                    $activiteitPerPersoon->persoonId = $persoonChecked;                  
+                    
+                    if ($this->agenda_model->getActiviteitPerPersoon($persoonChecked, $id) !== null) {
+                        $activiteitPerPersoon->activiteitId = $id;
+                        $this->agenda_model->updateActiviteitPerPersoon($activiteitPerPersoon);
+                    }
+                    else {
+                        $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                    }
+                }
+            }
+        }
+        
+        if ($id === 0) {
+            $this->agenda_model->insertActiviteit($activiteit);
+        }
+        else {
+            $activiteit->id = $id;
+            $this->agenda_model->updateActiviteit($activiteit);
+        }
+        
+        redirect('/Trainer/Agenda');
     }
 }

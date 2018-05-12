@@ -36,16 +36,43 @@ class Agenda_model extends CI_Model {
     }
 
     public function insertActiviteitPerPersoon($activiteitPerPersoon) {
+        // ActiviteitPerPersoon toevoegen
         $this->db->insert('activiteitPerPersoon', $activiteitPerPersoon);
         return $this->db->insert_id();
     }
     
+    public function updateActiviteitPerPersoon($activiteitPerPersoon) {
+        // ActiviteitPerPersoon wijzigen
+        $this->db->where('id', $activiteitPerPersoon->id);
+        $this->db->update('activiteitPerPersoon', $activiteitPerPersoon);
+    }
+    
+    public function deleteActiviteitPerPersoon($id){
+        $this->db->where('id', $id);
+        $this->db->delete('activiteitPerPersoon');
+    }
+    
     public function getPersoon($persoonId) {
-        // Type activiteit ophalen uit de databank (training of stage)
+        // Persoon ophalen uit databank
         $this->db->where('id', $persoonId);
         $query = $this->db->get('persoon');
         return $query->row();
     }
+    
+    public function getActiviteitPerPersoon($persoonId, $activiteitId) {
+        // ActiviteitPerPersoon ophalen uit de databank ==> checken op persoonId & activiteitId
+        $this->db->where('persoonId', $persoonId);
+        $this->db->where('activiteitId', $activiteitId);
+        $query = $this->db->get('activiteitPerPersoon');
+        return $query->row();
+    }
+//    
+//    public function getActiviteitPerPersoonWhereActiviteitId($activiteitId) {
+//        // ActiviteitPerPersoon ophalen uit de databank ==> checken op activiteitId
+//        $this->db->where('activiteitId', $activiteitId);
+//        $query = $this->db->get('activiteitPerPersoon');
+//        return $query->result();
+//    }
     
     public function getTypeActiviteit($typeActiviteitId) {
         // Type activiteit ophalen uit de databank (training of stage)
@@ -74,11 +101,25 @@ class Agenda_model extends CI_Model {
         return $personen;
     }
     
+    public function getReeksActiviteiten($reeksId) {
+        $this->db->where('reeksId', $reeksId);
+        $query = $this->db->get('activiteit');
+        return $query->result();
+    }
+    
     public function getActiviteit($activiteitId) {
         $this->db->where('id', $activiteitId);
         $query = $this->db->get('activiteit');
         
         $activiteit = $query->row();
+        
+        if ($activiteit->reeksId !== null) {
+            $activiteit->reeks = $this->getReeksActiviteiten($activiteit->reeksId);
+//            $eersteActiviteit = reset($reeks);
+//            $laatsteActiviteit = end($reeks);
+//            $activiteit->tijdstipStart = $eersteActiviteit->tijdstipStart;
+//            $activiteit->tijdstipStop = $laatsteActiviteit->tijdstipStop;
+        }
         
         $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->typeActiviteitId);
         $activiteit->typeTraining = $this->getTypeTraining($activiteit->typeTrainingId);
