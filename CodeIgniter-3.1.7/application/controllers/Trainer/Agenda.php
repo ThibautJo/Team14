@@ -291,6 +291,8 @@ class Agenda extends CI_Controller {
         $this->load->model("trainer/agenda_model");
         $data = $this->agenda_model->getActiviteit($id);
 
+        //reeksid zetten op forumier
+        
         print json_encode($data);
     }
     
@@ -331,11 +333,10 @@ class Agenda extends CI_Controller {
         $uren = array('06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00');
         $activiteit = new stdClass();
         $activiteitPerPersoon = new stdClass();
+        $datums[] = '';
         
         // Tabel activiteit
         $id = $this->input->post('id');
-        $activiteit->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $uren[$this->input->post('beginuur')] . ':00';
-        $activiteit->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $uren[$this->input->post('einduur')] . ':00';
         
         if ($this->input->post('soort') !== '') {
             $activiteit->typeTrainingId = $this->input->post('soort')+1;
@@ -347,11 +348,134 @@ class Agenda extends CI_Controller {
         }
         $activiteit->stageTitel = $this->input->post('gebeurtenisnaam');
         
+        $checkIfReeks = $this->agenda_model->getActiviteit($id);
+        
+        if ($checkIfReeks->reeksId !== null) {
+            $reeksId = $checkIfReeks->reeksId;
+            $activiteiten = $this->agenda_model->getReeksActiviteiten($reeksId);
+            
+            $begindatumReeks = zetOmNaarYYYYMMDD($this->input->post('begindatumReeks'));
+            $einddatumReeks = zetOmNaarYYYYMMDD($this->input->post('einddatumReeks'));
+            $beginuur = $uren[$this->input->post('beginuurReeks')];
+            $einduur = $uren[$this->input->post('einduurReeks')];
+            
+            $datums = $this->maakReeksen($begindatumReeks, $einddatumReeks, $beginuur, $einduur);
+            
+            $activiteitenDatums = [];
+            $datumDatums = [];
+
+            foreach ($activiteiten as $activiteit1) {
+                $activiteitenDatums[] = $activiteit1->tijdstipStart;
+            }
+
+            foreach ($datums as $datum) {
+                $datumDatums[] = $datum[0];
+            }
+
+//            var_dump($activiteitenDatums);
+//            var_dump($datumDatums);
+
+            $verschillenUitReeks = array_diff($activiteitenDatums, $datumDatums);
+            
+            if ($verschillenUitReeks !== null) {
+//                var_dump($verschillenUitReeks);
+                foreach ($activiteiten as $activiteit1) {
+                    foreach ($verschillenUitReeks as $verschilUitReeks) {
+                        if ($activiteit1->tijdstipStart === $verschilUitReeks) {
+                            $this->agenda_model->deleteActiviteit($activiteit1->id);
+                            $this->agenda_model->deleteActiviteitPerPersoonWithActiviteitId($activiteit1->id);
+                        }
+                    }
+                }
+                
+                
+            }
+                        
+            for ($i = 0; $i < count($datums); $i++) { 
+                $activiteit->tijdstipStart = $datums[$i][0];
+                $activiteit->tijdstipStop = $datums[$i][1];
+                
+                if ($id === 0) {
+                    $this->agenda_model->insertActiviteit($activiteit);
+                }
+                else {
+                    if (array_search(end($activiteiten), $activiteiten) < $i) {
+                        print('inserting...');
+                        $activiteit->id = 0;
+                        $activiteit->reeksId = $reeksId;
+                        $this->agenda_model->insertActiviteit($activiteit);
+                    }
+                    else {
+                        $activiteit->id = $activiteiten[$i]->id;
+                        $this->agenda_model->updateActiviteit($activiteit);
+                    }
+                }
+            }            
+        }
+        else {
+            $activiteit->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $uren[$this->input->post('beginuur')] . ':00';
+            $activiteit->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $uren[$this->input->post('einduur')] . ':00';
+            
+            if ($id === 0) {
+                $this->agenda_model->insertActiviteit($activiteit);
+            }
+            else {
+                $activiteit->id = $id;
+                $this->agenda_model->updateActiviteit($activiteit);
+            }
+        }
+        
         // Tabel activiteitPerPersoon
         $personenChecked = $this->input->post('personen');
-        $personenActiviteit = $this->agenda_model->getPersonenFromActiviteit($id);
         
-        if ($personenChecked !== null) {
+        if ($checkIfReeks->reeksId !== null) {
+            $reeksId = $checkIfReeks->reeksId;
+            $activiteiten = $this->agenda_model->getReeksActiviteiten($reeksId);
+            
+            $personenActiviteit = $this->agenda_model->getPersonenFromActiviteit($activiteiten[0]->id);
+            
+            for ($i = 0; $i < count($datums); $i++) {
+                $activiteitPerPersoon->activiteitId = $activiteiten[$i]->id;
+                
+                foreach ($personenActiviteit as $persoonActiviteit) {
+                    if (!in_array($persoonActiviteit, $personenChecked)) {
+                        $activiteitPerPersoonDelete = $this->agenda_model->getActiviteitPerPersoon($persoonActiviteit, $activiteiten[$i]->id);
+                        $this->agenda_model->deleteActiviteitPerPersoon($activiteitPerPersoonDelete->id);
+                    }
+                }
+                
+                if ($id === 0) {
+                    foreach ($personenChecked as $persoonChecked) {
+                        $activiteitPerPersoon->persoonId = $persoonChecked;
+                        $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                    }
+                }
+                else {
+                    if (array_search(end($activiteiten), $activiteiten) < $i) {
+                        print('inserting...');
+                        $activiteitPerPersoon->persoonId = $persoonChecked;
+                        $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                    }
+                    else {
+                        foreach ($personenChecked as $persoonChecked) {
+                            $activiteitPerPersoon->persoonId = $persoonChecked;
+
+                            if ($this->agenda_model->getActiviteitPerPersoon($persoonChecked, $activiteiten[$i]->id) !== null) {
+                                $activiteitPerPersoon->activiteitId = $activiteiten[$i]->id;
+                                $this->agenda_model->updateActiviteitPerPersoon($activiteitPerPersoon);
+                            }
+                            else {
+                                $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            $personenActiviteit = $this->agenda_model->getPersonenFromActiviteit($id);
+            $activiteitPerPersoon->activiteitId = $id;
+                    
             foreach ($personenActiviteit as $persoonActiviteit) {
                 if (!in_array($persoonActiviteit, $personenChecked)) {
                     $activiteitPerPersoonDelete = $this->agenda_model->getActiviteitPerPersoon($persoonActiviteit, $id);
@@ -380,14 +504,29 @@ class Agenda extends CI_Controller {
             }
         }
         
-        if ($id === 0) {
-            $this->agenda_model->insertActiviteit($activiteit);
+        redirect('/Trainer/Agenda');
+    }
+    
+    public function maakReeksen($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
+        $datums = [];
+        $datumStart = new \DateTime($begindatumReeks);
+        $datumStop = new \DateTime($einddatumReeks);
+
+        if ($datumStart > $datumStop) {
+            return $datums;
         }
-        else {
-            $activiteit->id = $id;
-            $this->agenda_model->updateActiviteit($activiteit);
+
+        while ($datumStart <= $datumStop) {
+            $dataMetUur = [];
+            $dataMetUur[] = $datumStart->format('Y-m-d') . ' ' . $beginuur . ':00';
+            $dataMetUur[] = $datumStart->format('Y-m-d') . ' ' . $einduur . ':00';
+            
+            $datums[] = $dataMetUur;
+            $datumStart->modify('+1 week');
         }
         
-        redirect('/Trainer/Agenda');
+//        var_dump($datums);
+        
+        return $datums;
     }
 }

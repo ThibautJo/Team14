@@ -26,13 +26,17 @@ class Agenda_model extends CI_Model {
     public function insertActiviteit($activiteit) {
         // Activiteit toevoegen
         $this->db->insert('activiteit', $activiteit);
-        return $this->db->insert_id();
     }
 
     public function updateActiviteit($activiteit) {
         // Activiteit wijzigen
         $this->db->where('id', $activiteit->id);
         $this->db->update('activiteit', $activiteit);
+    }
+    
+    public function deleteActiviteit($id){
+        $this->db->where('id', $id);
+        $this->db->delete('activiteit');
     }
 
     public function insertActiviteitPerPersoon($activiteitPerPersoon) {
@@ -43,12 +47,18 @@ class Agenda_model extends CI_Model {
     
     public function updateActiviteitPerPersoon($activiteitPerPersoon) {
         // ActiviteitPerPersoon wijzigen
-        $this->db->where('id', $activiteitPerPersoon->id);
+        $this->db->where('persoonId', $activiteitPerPersoon->persoonId);
+        $this->db->where('activiteitId', $activiteitPerPersoon->activiteitId);
         $this->db->update('activiteitPerPersoon', $activiteitPerPersoon);
     }
     
     public function deleteActiviteitPerPersoon($id){
         $this->db->where('id', $id);
+        $this->db->delete('activiteitPerPersoon');
+    }
+    
+    public function deleteActiviteitPerPersoonWithActiviteitId($activiteitId){
+        $this->db->where('activiteitId', $activiteitId);
         $this->db->delete('activiteitPerPersoon');
     }
     

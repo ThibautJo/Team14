@@ -539,7 +539,6 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
             $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
             $('#aanpassenActiviteit #tijdstipReeks-form').removeClass('d-none');
             $('#aanpassenActiviteit #opmerking-form').removeClass('d-none');
-            $('#aanpassenActiviteit #tabDatum').removeClass('d-none');
             break;
         case activiteit === "Supplement":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerSupplement');
