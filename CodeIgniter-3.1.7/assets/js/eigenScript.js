@@ -248,7 +248,7 @@ function persoonUpdate(persoonID) {
 function opvullenModalPersoonWijzigen(dataPersoon) {
   console.log(dataPersoon);
   console.log(dataPersoon["id"]);
-    
+
   $('#persoonWijzigen #id').attr("value", dataPersoon["id"]);
   $('#persoonWijzigen #voornaam').val(dataPersoon["voornaam"]);
   $('#persoonWijzigen #achternaam').val(dataPersoon["achternaam"]);
@@ -316,7 +316,7 @@ function persoonOpslaan(actie) {
         ok = false;
         return false;
       }
-      
+
     });
     formToSubmit = "#persoonWijzigen #form-persoon";
   }
@@ -506,7 +506,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
     $('#aanpassenActiviteit #opmerking').html('');
     $('#aanpassenActiviteit .datepicker2').datepicker('update', '');
     $("#aanpassenActiviteit input[name=personen]").attr("checked", false);
-    
+
     switch (true) {
         case activiteit === "Wedstrijd":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerWedstrijd');
