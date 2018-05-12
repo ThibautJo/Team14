@@ -19,11 +19,11 @@
         <?php echo pasStylesheetAan("bezoeker_eigenStijl.css"); ?>
         <?php echo pasStylesheetAan("scroll.css"); ?>
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        
+
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-               
+
         <script type="text/javascript">
             var site_url = '<?php echo site_url(); ?>';
             var base_url = '<?php echo base_url(); ?>';
@@ -66,50 +66,46 @@
         </div>
 
         <!-- Aanmeld formulier -->
-        
+
         <?php echo $aanmeldFormulier; ?>
 
         <!-- Inhoud -->
 
         <main id="inhoud">
-            
+
             <div class="text-center"><h1>Dit is een testproject van Thomas More Hogeschool Geel.</h1></div>
             <br>
 
             <!-- Team sectie -->
 
-            <div id="Team">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <?php
-                            foreach ($zwemmers as $zwemmer)
-                                echo '<td>' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="rounded-circle" id="team-foto"') 
-                                         . "</td>"
-                        ?>    
-                    </tr>
-                    <tr>
-                        <?php
-                            foreach ($zwemmers as $zwemmer)
-                                echo "<td class='text-align-center'>" . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</td>"
-                        ?>  
-                    </tr>
-         
-            <!-- echo '<span class="col-sm-5">' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="rounded-circle img-responsive"') 
-                                . " " . $zwemmer->voornaam . " " . $zwemmer->achternaam . "</span>" -->
-                <table>
-                </tbody>
+            <div class="container" id="Team">
+                
+                <div class="row mx-auto">
+                    <?php
+                    foreach ($zwemmers as $zwemmer)
+                        echo '<figure class="col text-center figure"><a class="mijnKlik" href="#' . $zwemmer->id . '">' . toonAfbeelding('Profiel/Avatar_' . $zwemmer->voornaam . "_" . $zwemmer->achternaam . '.jpg', 'class="figure-img rounded-circle" id="team-foto"')
+                        . '</a><figcaption class="figure-caption">' . $zwemmer->voornaam . " " . $zwemmer->achternaam . '</figcaption></figure>'
+                        ?> 
+                </div>
+
             </div>
 
             <!-- Wedstrijden sectie -->
 
             <div id="Wedstrijden">
-                
+
             </div>
 
             <!-- Nieuws sectie -->
 
             <div id="Nieuws">
+
+                <?php
+                foreach ($startpaginaitems as $startpaginaitem) {
+                    echo "<div id='" . $startpaginaitem->id . "'><div>" .
+                    ucfirst($startpaginaitem->inhoud) . "</div></div>\n";
+                }
+                ?>
 
             </div>
         </main>
@@ -120,7 +116,7 @@
 
         <!-- Javascript scriptjes -->
 
-         <script>
+        <script>
 
             $(document).ready(function () {
 
@@ -153,9 +149,18 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 500);
                 });
-                
+
                 $('#submit-login').click(function () {
                     $('#aanmeldFormulier').modal('show');
+                });
+                
+                //Script om verschillende zwemmeromschrijvingen te tonen
+                   
+                $("mijnKlik").on("click", function(e) { 
+                    e.PreventDefault; 
+                    var grabID = $(this).attr( "href" );                                
+                    $('div' + grabID).toggleClass("hide");
+                    $("div").not('div' + grabID).addClass("hide"); //hide all div except clicked one.
                 });
 
             });

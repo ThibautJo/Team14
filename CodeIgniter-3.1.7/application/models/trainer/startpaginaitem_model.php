@@ -33,7 +33,7 @@ class StartpaginaItem_model extends CI_Model {
      * @return Het opgevraagde record.
      */
 
-    function get($id) {
+    function getgetStartpaginaItemMetId($id) {
         
         $this->db->where('id', $id);
         $query = $this->db->get('startpaginaItem');
@@ -42,11 +42,9 @@ class StartpaginaItem_model extends CI_Model {
     
     // doxygen
     
-    public function getStartpaginaTekst() {
+    public function getStartpaginaItem() {
         
-        $this->db->where('soort', "tekst");
-        $query = $this->db->get('startpaginaItem');
-        
+        $query = $this->db->get('startpaginaItem');        
         return $query->result();
     }
 
@@ -55,7 +53,7 @@ class StartpaginaItem_model extends CI_Model {
      * @param $id De id van het record dat opgevraagd wordt.
      */
 
-    function delete($id){
+    function deletegetStartpaginaItem($id){
         $this->db->where('id', $id);
         $this->db->delete('startpaginaItem');
     }
@@ -65,7 +63,7 @@ class StartpaginaItem_model extends CI_Model {
      * @param $startpaginaitem Het startpaginaItem waar de ingevulde data in wordt bewaard.
      */
 
-    function insert($startpaginaitem) {
+    function insertgetStartpaginaItem($startpaginaitem) {
         $this->db->insert('startpaginaItem', $startpaginaitem);
     }
 
@@ -74,7 +72,7 @@ class StartpaginaItem_model extends CI_Model {
      * @param $startpaginaitem Het supplementen object waar de aangepaste data in zit.
      */
 
-    function update($startpaginaitem) {
+    function updategetStartpaginaItem($startpaginaitem) {
         $this->db->where('id', $startpaginaitem->id);
         $this->db->update('startpaginaItem', $startpaginaitem);
     }

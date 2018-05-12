@@ -22,7 +22,8 @@ class Melding extends CI_Controller {
 
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
-        redirect('welcome/meldAan');}
+            redirect('welcome/meldAan');
+        }
 
         // Auteur inladen in footer
         $this->data = new stdClass();
@@ -33,8 +34,6 @@ class Melding extends CI_Controller {
 
         $data['titel'] = 'Meldingen';
         $data['team'] = $this->data->team;
-
-        $persoonId = 5;
 
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $data['persoonAangemeld'] = $persoonAangemeld;
@@ -52,4 +51,5 @@ class Melding extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
+
 }

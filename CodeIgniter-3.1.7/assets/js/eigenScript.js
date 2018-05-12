@@ -248,7 +248,7 @@ function persoonUpdate(persoonID) {
 function opvullenModalPersoonWijzigen(dataPersoon) {
   console.log(dataPersoon);
   console.log(dataPersoon["id"]);
-    
+
   $('#persoonWijzigen #id').attr("value", dataPersoon["id"]);
   $('#persoonWijzigen #voornaam').val(dataPersoon["voornaam"]);
   $('#persoonWijzigen #achternaam').val(dataPersoon["achternaam"]);
@@ -269,7 +269,7 @@ function zwemmerProfielTonen(persoonID) {
     // console.log(data[0]["Naam"]);
 
     //modal opvullen met object wedstrijd
-    opvullenModalPersoonProfielTonen(data);
+    opvullenModalZwemmerProfielTonen(data);
 
   }).fail(function () {
     alert("Er is iets misgelopen, neem contact op met de administrator.");
@@ -316,7 +316,7 @@ function persoonOpslaan(actie) {
         ok = false;
         return false;
       }
-      
+
     });
     formToSubmit = "#persoonWijzigen #form-persoon";
   }
@@ -510,9 +510,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
     $('#aanpassenActiviteit #personen-form').addClass('d-none');
     $('#aanpassenActiviteit #tabDatum').addClass('d-none');
     $('#aanpassenActiviteit .supplementDatum').addClass('d-none');
-//    $('#aanpassenActiviteit #tijdstipReeks-form').addClass('d-none');
     $('#aanpassenActiviteit #tabDatum a').removeClass('disabled');
-//    $('#aanpassenActiviteit #tabDatum a').removeClass('active');
     
     switch (true) {
         case activiteit === "Wedstrijd":
@@ -698,3 +696,28 @@ function meldingOpslaan(actie) {
 }
 
 // melding end
+
+// inschrijven start
+
+function inschrijvingOpslaan() {
+
+    var ok = true;
+    var formToSubmit = '';
+    //form valideren
+
+        formToSubmit = "#inschrijvenWedstrijd #mijnFormulier";
+        if (!form_validatie(formToSubmit)) {
+            //alert("Niet alle velden zijn ingevuld");
+            ok = false;
+            return false;
+        }
+
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Zwemmer/wedstrijden/opslaanInschrijving/');
+        $(formToSubmit).submit();
+        alert("Inschrijving gelukt!");
+    }
+}
+
+// inschrijven end
