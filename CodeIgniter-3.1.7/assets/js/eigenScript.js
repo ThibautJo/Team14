@@ -186,38 +186,37 @@ var tijdelijk1 = [];
 var tijdelijk2 = [];
 
 
-function reeksToevoegen(actie){
-  var modalToUse = '';
-  if (actie == "toevoegen") {
-    modalToUse = "#wedstrijdToevoegen";
-  }
-  else {
-    modalToUse = "#wedstrijdAanpassen";
-  }
+function reeksToevoegen(actie) {
+    var modalToUse = '';
+    if (actie == "toevoegen") {
+        modalToUse = "#wedstrijdToevoegen";
+    } else {
+        modalToUse = "#wedstrijdAanpassen";
+    }
 
-  var ok = true;
+    var ok = true;
 
-  //checken of de combinatie al bestaat (zodat we geen dezelfde reeksen hebben)
-  tijdelijk1.forEach((s,index) => {
-    [$(modalToUse+' .afstand-wedstrijd').val(), $(modalToUse+' .slag-wedstrijd').val()].forEach((m,index2,array) => {
-      console.log($(modalToUse+' .afstand-wedstrijd').val() + "-" + $(modalToUse+' .slag-wedstrijd').val());
-      if (tijdelijk1[index] == m && tijdelijk2[index] == array[index2+1] ) {
-        //zit de combinatie al in de reeks?
-        ok = false;
-      }
+    //checken of de combinatie al bestaat (zodat we geen dezelfde reeksen hebben)
+    tijdelijk1.forEach((s, index) => {
+        [$(modalToUse + ' .afstand-wedstrijd').val(), $(modalToUse + ' .slag-wedstrijd').val()].forEach((m, index2, array) => {
+            console.log($(modalToUse + ' .afstand-wedstrijd').val() + "-" + $(modalToUse + ' .slag-wedstrijd').val());
+            if (tijdelijk1[index] == m && tijdelijk2[index] == array[index2 + 1]) {
+                //zit de combinatie al in de reeks?
+                ok = false;
+            }
 
+        });
     });
-  });
 
-  if (ok) {
-    tijdelijk1.push($(modalToUse+' .afstand-wedstrijd').val());
-    tijdelijk2.push($(modalToUse+' .slag-wedstrijd').val());
-    // $("#wedstrijdToevoegen .reeksen").append("<p>"+$('.afstand-wedstrijd option:selected').text()+" "+$('#slag-wedstrijd option:selected').text()+"</p>");
-    $(modalToUse+" .reeksen").append("<tr id='rowAdd"+$(modalToUse+' .afstand-wedstrijd option:selected').val()+$(modalToUse+' .slag-wedstrijd option:selected').val()+"'><td style='padding:10px 0;'>" + $(modalToUse+' .afstand-wedstrijd option:selected').text() + " " + $(modalToUse+' .slag-wedstrijd option:selected').text() + "</td><td style='padding:10px 0;'>" +
-    "<button type='button' class='btn-xs btn-danger btn-circle' id='' onclick='verwijderReeksArrays("+"rowAdd"+$(modalToUse+' .afstand-wedstrijd option:selected').val()+$(modalToUse+' .slag-wedstrijd option:selected').val()+","+$(modalToUse+' .slag-wedstrijd option:selected').val()+","+$(modalToUse+' .afstand-wedstrijd option:selected').val()+")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
-    wedstrijdAfstanden.push($(modalToUse+' .afstand-wedstrijd').val());
-    wedstrijdSlagen.push($(modalToUse+' .slag-wedstrijd').val());
-  }
+    if (ok) {
+        tijdelijk1.push($(modalToUse + ' .afstand-wedstrijd').val());
+        tijdelijk2.push($(modalToUse + ' .slag-wedstrijd').val());
+        // $("#wedstrijdToevoegen .reeksen").append("<p>"+$('.afstand-wedstrijd option:selected').text()+" "+$('#slag-wedstrijd option:selected').text()+"</p>");
+        $(modalToUse + " .reeksen").append("<tr id='rowAdd" + $(modalToUse + ' .afstand-wedstrijd option:selected').val() + $(modalToUse + ' .slag-wedstrijd option:selected').val() + "'><td style='padding:10px 0;'>" + $(modalToUse + ' .afstand-wedstrijd option:selected').text() + " " + $(modalToUse + ' .slag-wedstrijd option:selected').text() + "</td><td style='padding:10px 0;'>" +
+                "<button type='button' class='btn-xs btn-danger btn-circle' id='' onclick='verwijderReeksArrays(" + "rowAdd" + $(modalToUse + ' .afstand-wedstrijd option:selected').val() + $(modalToUse + ' .slag-wedstrijd option:selected').val() + "," + $(modalToUse + ' .slag-wedstrijd option:selected').val() + "," + $(modalToUse + ' .afstand-wedstrijd option:selected').val() + ")' style='margin-left: 15px;'><i class='fas fa-trash-alt'></i></button></td></tr>");
+        wedstrijdAfstanden.push($(modalToUse + ' .afstand-wedstrijd').val());
+        wedstrijdSlagen.push($(modalToUse + ' .slag-wedstrijd').val());
+    }
 }
 
 //wedstrijden end
@@ -226,22 +225,22 @@ function reeksToevoegen(actie){
 
 function persoonUpdate(persoonID) {
 
-  console.log("id =" + persoonID);
-  var id = $("#" + persoonID).val();
+    console.log("id =" + persoonID);
+    var id = $("#" + persoonID).val();
 
-  $.post(site_url + '/Trainer/team/wijzigPersoon/' + id, function (data) {
-    //data = object van supplement
-    data = JSON.parse(data);
-    // console.log(data[0]["Naam"]);
+    $.post(site_url + '/Trainer/team/wijzigPersoon/' + id, function (data) {
+        //data = object van supplement
+        data = JSON.parse(data);
+        // console.log(data[0]["Naam"]);
 
-    //modal opvullen met object wedstrijd
-    opvullenModalPersoonWijzigen(data);
+        //modal opvullen met object wedstrijd
+        opvullenModalPersoonWijzigen(data);
 
-  }).fail(function () {
-    alert("Er is iets misgelopen, neem contact op met de administrator.");
-  });
-  // modal openen met ingevulde gegevans van dit object
-  $("#persoonWijzigen").modal();
+    }).fail(function () {
+        alert("Er is iets misgelopen, neem contact op met de administrator.");
+    });
+    // modal openen met ingevulde gegevans van dit object
+    $("#persoonWijzigen").modal();
 
 }
 
@@ -260,52 +259,53 @@ function opvullenModalPersoonWijzigen(dataPersoon) {
 
 function zwemmerProfielTonen(persoonID) {
 
-  console.log("id =" + persoonID);
-  var id = $("#" + persoonID).val();
+    console.log("id =" + persoonID);
+    var id = $("#" + persoonID).val();
 
-  $.post(site_url + '/Zwemmer/team/profielTonen/' + id, function (data) {
-    //data = object van supplement
-    data = JSON.parse(data);
-    // console.log(data[0]["Naam"]);
+    $.post(site_url + '/Zwemmer/team/profielTonen/' + id, function (data) {
+        //data = object van supplement
+        data = JSON.parse(data);
+        // console.log(data[0]["Naam"]);
 
-    //modal opvullen met object wedstrijd
-    opvullenModalZwemmerProfielTonen(data);
+        //modal opvullen met object wedstrijd
+        opvullenModalZwemmerProfielTonen(data);
 
-  }).fail(function () {
-    alert("Er is iets misgelopen, neem contact op met de administrator.");
-  });
-  // modal openen met ingevulde gegevans van dit object
-  $("#profielTonen").modal();
+    }).fail(function () {
+        alert("Er is iets misgelopen, neem contact op met de administrator.");
+    });
+    // modal openen met ingevulde gegevans van dit object
+    $("#profielTonen").modal();
 
 }
 function opvullenModalZwemmerProfielTonen(dataProfiel) {
-  console.log(dataProfiel);
-  console.log(dataProfiel["id"]);
-  $('#profielTonen #id').attr("value", dataProfiel["id"]);
-  $('#profielTonen #voornaam').val(dataProfiel["voornaam"]);
-  $('#profielTonen #achternaam').val(dataProfiel["achternaam"]);
-  $('#profielTonen #straat').val(dataProfiel["straat"]);
-  $('#profielTonen #huisnummer').val(dataProfiel["huisnummer"]);
-  $('#profielTonen #postcode').val(dataProfiel["postcode"]);
-  $('#profielTonen #gemeente').val(dataProfiel["gemeente"]);
-  $('#profielTonen #telefoonnummer').val(dataProfiel["telefoonnummer"]);
-  $('#profielTonen #email').val(dataProfiel["email"]);
-  $('#profielTonen #omschrijving').val(dataProfiel["omschrijving"]);
+    console.log(dataProfiel);
+    console.log(dataProfiel["id"]);
+    $('#profielTonen #id').attr("value", dataProfiel["id"]);
+    $('#profielTonen #voornaam').val(dataProfiel["voornaam"]);
+    $('#profielTonen #achternaam').val(dataProfiel["achternaam"]);
+    $('#profielTonen #straat').val(dataProfiel["straat"]);
+    $('#profielTonen #huisnummer').val(dataProfiel["huisnummer"]);
+    $('#profielTonen #postcode').val(dataProfiel["postcode"]);
+    $('#profielTonen #gemeente').val(dataProfiel["gemeente"]);
+    $('#profielTonen #telefoonnummer').val(dataProfiel["telefoonnummer"]);
+    $('#profielTonen #email').val(dataProfiel["email"]);
+    $('#profielTonen #omschrijving').val(dataProfiel["omschrijving"]);
 
 }
 
 function persoonOpslaan(actie) {
 
-  var ok = true;
-  var formToSubmit = '';
-  //form valideren
-  if (actie == "toevoegen") {
-    $('#persoonToevoegen #form-persoon *').filter('input').each(function () {
-      if ($(this).attr("required") && $(this).val() == "") {
-        alert("Niet alle velden zijn ingevuld");
-        ok = false;
-        return false;
-      }
+    var ok = true;
+    var formToSubmit = '';
+    //form valideren
+    if (actie == "toevoegen") {
+        $('#persoonToevoegen #form-persoon *').filter('input').each(function () {
+            if ($(this).attr("required") && $(this).val() == "") {
+                alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
+
 
     });
     formToSubmit = "#persoonToevoegen #form-persoon";
@@ -321,32 +321,32 @@ function persoonOpslaan(actie) {
     formToSubmit = "#persoonWijzigen #form-persoon";
   }
 
-  //word uitgevoerd als alles ingevuld is
-  if (ok) {
-    $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanPersoon/' + actie);
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanPersoon/' + actie);
 
-    $(formToSubmit).submit();
-  }
+        $(formToSubmit).submit();
+    }
 }
 
-function zwemmerUitArchiefHalen(){
-  var ok = true;
-  var formToSubmit = '';
-  $('#zwemmerToevoegenUitArchief #form-persoon *').filter('select').each(function (){
-    if ($(this).val() === "0") {
-      alert("Er is geen persoon aangeduid");
-      ok = false;
-      return false;
+function zwemmerUitArchiefHalen() {
+    var ok = true;
+    var formToSubmit = '';
+    $('#zwemmerToevoegenUitArchief #form-persoon *').filter('select').each(function () {
+        if ($(this).val() === "0") {
+            alert("Er is geen persoon aangeduid");
+            ok = false;
+            return false;
+        }
+    });
+    formToSubmit = "#zwemmerToevoegenUitArchief #form-persoon";
+
+    //word uitgevoerd als alles ingevuld is
+    if (ok) {
+        $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanZwemmerUitArchiefHalen');
+
+        $(formToSubmit).submit();
     }
-  });
-  formToSubmit = "#zwemmerToevoegenUitArchief #form-persoon";
-
-  //word uitgevoerd als alles ingevuld is
-  if (ok) {
-    $(formToSubmit).attr('action', site_url + '/Trainer/team/opslaanZwemmerUitArchiefHalen');
-
-    $(formToSubmit).submit();
-  }
 }
 
 
@@ -460,13 +460,13 @@ function aanpassenActiviteit(activiteit, id, site_url) {
             break;
     }
     $.post(site_url + '/trainer/agenda/' + linkActiviteit + '/' + id,
-        function (data) {
-            //data = object van activiteit
-            data = JSON.parse(data);
+            function (data) {
+                //data = object van activiteit
+                data = JSON.parse(data);
 
-            //modal opvullen met object activiteit
-            opvullenModalActiviteitAanpassen(data, id, activiteit, site_url);
-        }).fail(function () {
+                //modal opvullen met object activiteit
+                opvullenModalActiviteitAanpassen(data, id, activiteit, site_url);
+            }).fail(function () {
         alert("Er is iets misgelopen, neem contact op met de administrator.");
     });
 
@@ -505,6 +505,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
     $("#aanpassenActiviteit #soort option").attr("selected", false);
     $('#aanpassenActiviteit #opmerking').html('');
     $('#aanpassenActiviteit .datepicker2').datepicker('update', '');
+
     $("#aanpassenActiviteit input[name='personen[]']").attr("checked", false);
     $('#aanpassenActiviteit #opmerking-form').addClass('d-none');
     $('#aanpassenActiviteit #personen-form').addClass('d-none');
@@ -524,6 +525,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
             $('#aanpassenActiviteit #programma').attr('value', data['programma']);
             $('#aanpassenActiviteit .begindatum .datepicker2').datepicker('update', dateHelper_getDate(data['datumStart']));
             $('#aanpassenActiviteit .einddatum .datepicker2').datepicker('update', dateHelper_getDate(data['datumStop']));
+
             $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['datumStart'])) + "']").attr("selected","selected");
             $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['datumStop'])) + "']").attr("selected","selected");
             $("#aanpassenActiviteit #einduur option[value='" + data['persoonId'] + "']").attr("selected","selected");
@@ -543,7 +545,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
         case activiteit === "Supplement":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerSupplement');
             $('#aanpassenActiviteit #supplement-form').removeClass('d-none');
-            $("#aanpassenActiviteit #supplementnaam option[value='" + (data['supplement']['id']-1) + "']").attr("selected","selected");
+            $("#aanpassenActiviteit #supplementnaam option[value='" + (data['supplement']['id'] - 1) + "']").attr("selected", "selected");
             $('#aanpassenActiviteit #hoeveelheid').attr('value', data['hoeveelheid']);
             $('#aanpassenActiviteit #datum').datepicker('update', dateHelper_getDate(data['datum']));
             $('#aanpassenActiviteit #opmerking').html(data['supplement']['omschrijving']);
@@ -577,6 +579,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['stageTitel']);
             $("#aanpassenActiviteit #soort option[value='" + typeTraininId + "']").attr("selected", "selected");
+
             if (data['reeksId'] === null) {
                 $('#aanpassenActiviteit #tabDatum #reeks-tab').addClass('disabled');
 //                $('#aanpassenActiviteit #tabDatum ').addClass('active');
@@ -696,7 +699,7 @@ function meldingOpslaan(actie) {
 
 // melding end
 
-// inschrijven start
+// inschrijven zwemmer start
 
 function inschrijvingOpslaan() {
 
@@ -704,12 +707,12 @@ function inschrijvingOpslaan() {
     var formToSubmit = '';
     //form valideren
 
-        formToSubmit = "#inschrijvenWedstrijd #mijnFormulier";
-        if (!form_validatie(formToSubmit)) {
-            //alert("Niet alle velden zijn ingevuld");
-            ok = false;
-            return false;
-        }
+    formToSubmit = "#inschrijvenWedstrijd #mijnFormulier";
+    if (!form_validatie(formToSubmit)) {
+        //alert("Niet alle velden zijn ingevuld");
+        ok = false;
+        return false;
+    }
 
     //word uitgevoerd als alles ingevuld is
     if (ok) {
@@ -719,4 +722,43 @@ function inschrijvingOpslaan() {
     }
 }
 
-// inschrijven end
+// inschrijven zwemmer end
+
+// inschrijven trainer start
+
+function inschrijvingGoedkeuren(elementID) {
+    if (!confirm("Zeker dat je dit wilt goedkeuren?")) {
+        return false;
+    } else {
+        // var formToSubmit = '';
+        var id = $("#" + elementID).val();
+
+        // formToSubmit = "#form-hidden";
+
+        // $(formToSubmit).attr('action', site_url + '/Trainer/inschrijving/goedkeurenInschrijving/' + id);
+        // $(formToSubmit).submit();
+        $.post(site_url + '/Trainer/inschrijving/goedkeurenInschrijving/' + id, function (data) {
+            alert("Inschrijving is goedgekeurd!");
+            $("tr#" + id).remove();
+        }).fail(function () {
+            alert("Er is iets misgelopen, neem contact op met de administrator.");
+        });
+        
+    }
+}
+
+function inschrijvingAfkeuren(elementID) {
+    if (!confirm("Zeker dat je dit wilt afkeuren?")) {
+        return false;
+    } else {
+        var id = $("#" + elementID).val();
+        $.post(site_url + '/Trainer/inschrijving/afkeurenInschrijving/' + id, function (data) {
+            alert("Inschrijving is afgekeurd!");
+            $("tr#" + id).remove();
+        }).fail(function () {
+            alert("Er is iets misgelopen, neem contact op met de administrator.");
+        });
+    }
+}
+
+// inschrijving trainer end
