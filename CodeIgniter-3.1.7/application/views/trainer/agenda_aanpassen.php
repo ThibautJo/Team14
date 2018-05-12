@@ -110,7 +110,7 @@
                         ?>
                     </div>
                 </div>
-                
+
                 <div id="wedstrijd-form" class="d-none">
                     <div class="form-group">
                         <?php
@@ -123,7 +123,7 @@
                             'required' => 'required'));
                         ?>
                     </div>
-                    
+
                     <div class="form-group">
                         <?php
                         echo form_label('Programma (link)', 'programma');
@@ -136,56 +136,7 @@
                         ?>
                     </div>
                 </div>
-                
-                <div id="tijdstip-form" class="d-none">
-                    <div class="row begindatum">
-                        <div id="container-begindatum" class="form-group col-8">
-                            <?php
-                            echo form_label('Begindatum', 'begindatum');
-                            echo form_input(array('name' => 'begindatum',
-                                'id' => 'begindatum', 
-                                'value' => '',
-                                'class' => 'form-control datepicker2',
-                                'required' => 'required',
-                                'data-provide' => 'datepicker',
-                                'data-date-format' => 'dd/mm/yyyy',
-                                'data-date-language' => 'nl-BE'));
-                            ?>
-                        </div>
 
-                        <div class="form-group col-4">
-                            <?php
-                            echo form_label('Beginuur', 'beginuur');
-                            
-                            echo form_dropdown('beginuur', $uren, '', 'id="beginuur" class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-
-                    <div class="row einddatum">
-                        <div id="container-einddatum" class="form-group col-8">
-                            <?php
-                            echo form_label('Einddatum', 'einddatum');
-                            echo form_input(array('name' => 'einddatum',
-                                'id' => 'einddatum', 
-                                'value' => '',
-                                'class' => 'form-control datepicker2',
-                                'required' => 'required',
-                                'data-provide' => 'datepicker',
-                                'data-date-format' => 'dd/mm/yyyy',
-                                'data-date-language' => 'nl-BE'));
-                            ?>
-                        </div>
-
-                        <div class="form-group col-4">
-                            <?php
-                            echo form_label('Einduur', 'einduur');
-                            echo form_dropdown('einduur', $uren, '', 'id="einduur" class="form-control"');
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                
                 <div id="supplement-form" class="d-none">
                     <div class="form-group">
                         <?php
@@ -193,7 +144,7 @@
                         echo form_dropdown('supplementnaam', $supplementennamen, '', 'id="supplementnaam" class="form-control"');
                         ?>
                     </div>
-                    
+
                     <div class="form-group">
                         <?php
                         echo form_label('Hoeveelheid', 'hoeveelheid');
@@ -201,30 +152,17 @@
                             'id' => 'hoeveelheid',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'bv. 2', 
+                            'placeholder' => 'bv. 2',
+                            'type' => 'number',
                             'required' => 'required'));
                         ?>
                     </div>
-                                        
-                    <div class="form-group">
-                        <?php
-                        echo form_label('Datum', 'datum');
-                        echo form_input(array('name' => 'datum',
-                            'id' => 'datum', 
-                            'value' => '',
-                            'class' => 'form-control datepicker2',
-                                'required' => 'required',
-                                'data-provide' => 'datepicker',
-                                'data-date-format' => 'dd/mm/yyyy',
-                                'data-date-language' => 'nl-BE'));
-                        ?>
-                    </div>
                 </div>
-                
-                <div class="form-group">
+
+                <div id="opmerking-form" class="form-group d-none">
                     <?php
                     echo form_label('Extra opmerkingen', 'opmerking');
-                    
+
                     echo form_textarea(array('name' => 'opmerking',
                         'id' => 'opmerking',
                         'value' => '', 
@@ -233,19 +171,178 @@
                         'rows' => '3'));
                     ?>
                 </div>
-                
-                <div class="form-group">
+
+                <div id="personen-form" class="form-group d-none">
                     <?php
                     echo form_label('Toevoegen voor', 'personen');
                     echo '<div class="rounded border border-grey p-2">';
                     foreach ($voorPersonen as $persoon) {
                         echo '<div class="m-2" >';
-                        echo form_checkbox('personen', $persoon, false, 'id="' . array_search($persoon, $voorPersonen) . '"');
+                        echo form_checkbox('personen[]', array_search($persoon, $voorPersonen), false, 'id="' . array_search($persoon, $voorPersonen) . '"');
                         echo $persoon;
                         echo '</div>';
                     }
                     echo '</div>';
                     ?>
+                </div>
+
+                <ul class="nav nav-tabs mt-4 mb-4 d-none" id="tabDatum" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active pr-4 pl-4" id="dag-tab" data-toggle="tab" href="#dag" role="tab" aria-controls="home" aria-selected="true">Enkele dag</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pr-4 pl-4" id="reeks-tab" data-toggle="tab" href="#reeks" role="tab" aria-controls="profile" aria-selected="false">Reeks</a>
+                    </li>
+                </ul>
+                <div class="tab-content mt-2" id="tabDatumContent">
+                    <div class="tab-pane fade show active" id="dag" role="tabpanel" aria-labelledby="dag-tab">
+                        <div id="tijdstip-form" class="d-none">
+                            <div class="row begindatum">
+                                <div id="container-begindatum" class="form-group col-8">
+                                    <?php
+                                    echo form_label('Begindatum', 'begindatum');
+                                    echo form_input(array('name' => 'begindatum',
+                                        'id' => 'begindatum',
+                                        'value' => '',
+                                        'class' => 'form-control datepicker2',
+                                        'required' => 'required',
+                                        'data-provide' => 'datepicker',
+                                        'data-date-format' => 'dd/mm/yyyy',
+                                        'data-date-language' => 'nl-BE'));
+                                    ?>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <?php
+                                    echo form_label('Beginuur', 'beginuur');
+
+                                    echo form_dropdown('beginuur', $uren, '', 'id="beginuur" class="form-control"');
+                                    ?>
+                                </div>
+                            </div>
+
+                            <div class="row einddatum">
+                                <div id="container-einddatum" class="form-group col-8">
+                                    <?php
+                                    echo form_label('Einddatum', 'einddatum');
+                                    echo form_input(array('name' => 'einddatum',
+                                        'id' => 'einddatum',
+                                        'value' => '',
+                                        'class' => 'form-control datepicker2',
+                                        'required' => 'required',
+                                        'data-provide' => 'datepicker',
+                                        'data-date-format' => 'dd/mm/yyyy',
+                                        'data-date-language' => 'nl-BE'));
+                                    ?>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <?php
+                                    echo form_label('Einduur', 'einduur');
+                                    echo form_dropdown('einduur', $uren, '', 'id="einduur" class="form-control"');
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group supplementDatum d-none">
+                            <?php
+                            echo form_label('Datum', 'datum');
+                            echo form_input(array('name' => 'datum',
+                                'id' => 'datum', 
+                                'value' => '',
+                                'class' => 'form-control datepicker2',
+                                'required' => 'required',
+                                'data-provide' => 'datepicker',
+                                'data-date-format' => 'dd/mm/yyyy',
+                                'data-date-language' => 'nl-BE'));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reeks" role="tabpanel" aria-labelledby="reeks-tab">
+                        <div id="tijdstipReeks-form" class="d-none">
+                            <p id="" class="d-flex align-items-center">Elke&nbsp; <b class="dagReeks"></b> &nbsp;voor de volgende tijdspanne:</p>
+                            <div class="row begindatum">
+                                <div id="container-begindatum" class="form-group col-8">
+                                    <?php
+                                    echo form_label('Begindatum', 'begindatumReeks');
+                                    echo form_input(array('name' => 'begindatumReeks',
+                                        'id' => 'begindatumReeks',
+                                        'value' => '',
+                                        'class' => 'form-control datepicker2',
+                                        'required' => 'required',
+                                        'data-provide' => 'datepicker',
+                                        'data-date-format' => 'dd/mm/yyyy',
+                                        'data-date-language' => 'nl-BE'));
+                                    ?>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <?php
+                                    echo form_label('Beginuur', 'beginuurReeks');
+
+                                    echo form_dropdown('beginuurReeks', $uren, '', 'id="beginuurReeks" class="form-control"');
+                                    ?>
+                                </div>
+                            </div>
+
+                            <div class="row einddatum">
+                                <div id="container-einddatum" class="form-group col-8">
+                                    <?php
+                                    echo form_label('Einddatum', 'einddatumReeks');
+                                    echo form_input(array('name' => 'einddatumReeks',
+                                        'id' => 'einddatumReeks',
+                                        'value' => '',
+                                        'class' => 'form-control datepicker2',
+                                        'required' => 'required',
+                                        'data-provide' => 'datepicker',
+                                        'data-date-format' => 'dd/mm/yyyy',
+                                        'data-date-language' => 'nl-BE'));
+                                    ?>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <?php
+                                    echo form_label('Einduur', 'einduurReeks');
+                                    echo form_dropdown('einduurReeks', $uren, '', 'id="einduurReeks" class="form-control"');
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group supplementDatum d-none">
+                            <p class="d-flex align-items-center">Elke&nbsp; <b class="dagReeks"></b> &nbsp;voor de volgende tijdspanne:</p>
+                            <div class="row">
+                                <div id="container-begindatum" class="form-group col-6">
+                                    <?php
+                                    echo form_label('Begindatum', 'begindatumSupplement');
+                                    echo form_input(array('name' => 'begindatumSupplement',
+                                        'id' => 'datum',
+                                        'value' => '',
+                                        'class' => 'form-control datepicker2',
+                                        'required' => 'required',
+                                        'data-provide' => 'datepicker',
+                                        'data-date-format' => 'dd/mm/yyyy',
+                                        'data-date-language' => 'nl-BE'));
+                                    ?>
+                                </div>
+
+                                <div id="container-einddatum" class="form-group col-6">
+                                    <?php
+                                    echo form_label('Einddatum', 'einddatumSupplement');
+                                    echo form_input(array('name' => 'einddatumSupplement',
+                                        'id' => 'einddatumSupplement',
+                                        'value' => '',
+                                        'class' => 'form-control datepicker2',
+                                        'required' => 'required',
+                                        'data-provide' => 'datepicker',
+                                        'data-date-format' => 'dd/mm/yyyy',
+                                        'data-date-language' => 'nl-BE'));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -287,6 +384,18 @@
 <!-- Script om agenda aan te passen -->
 
 <script type="text/javascript">
+    $('#tabDatum a').on('click', function (e) {
+        e.preventDefault();
+
+        if ($(this).hasClass('disabled')) {
+            $(this).tab('hide');
+        }
+        else {
+            $(this).tab('show');
+        }
+        
+    });
+    
     $('.runFunction').on('click', function agendaInladen() {
         var persoonId = 0;
         persoonId = $(this).data('id');
@@ -319,9 +428,17 @@
                             // EventClick functie zorgt ervoor dat je het event kan aanklikken en meer informatie kan bekijken in het modal dat opent
                             eventClick: function(calEvent) {
                                 var kleuren = <?php echo $kleuren ?>;
+                                var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
+                                var datumGeklikt = new Date(calEvent.start);
+                                var dagnaam = datumGeklikt.getDay();
+                                var day = datumGeklikt.getDate();
+                                var month = datumGeklikt.getMonth() + 1;
+                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
+                                        $('.dagReeks').html(weekdag[dagnaam]);
+                                        
                                         var site_url = '<?php echo site_url(); ?>';
                                         aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, site_url);
                                         console.log('ok');

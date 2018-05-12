@@ -280,6 +280,14 @@ h2 {
     position: absolute;
 }
 
+#tabDatum a.disabled {
+    color: #cbcbcb;
+}
+
+#tabDatum a {
+    color: #636363;
+}
+
 
 /* EIND PAGINA agenda*/
 
