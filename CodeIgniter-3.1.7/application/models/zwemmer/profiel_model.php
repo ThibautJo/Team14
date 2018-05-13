@@ -19,10 +19,19 @@ class profiel_model extends CI_Model{
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
+    
+    /**
+     * Constructor
+     */
     function __construct() {
-        
+        parent::__construct();
     }
     
+    /**
+     * Retourneert het record met id=$persoonId uit de tabel persoon
+     * @param $persoonId De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
     public function getProfielByPersoon($persoonId){
         $this->db->where('id', $persoonId);
         $query = $this->db->get('persoon');
@@ -31,6 +40,11 @@ class profiel_model extends CI_Model{
         return $profiel;
     }
     
+    /**
+     * Retourneert het record met id=$id uit de tabel persoon
+     * @param $id De id van het record dat opgevraagd wordt
+     * @return Het opgevraagde record
+     */
     function get($id) {
         
         // geef persoon-object met opgegeven $id   
