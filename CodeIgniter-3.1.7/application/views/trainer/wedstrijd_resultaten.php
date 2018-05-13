@@ -1,9 +1,9 @@
 <?php
 /**
- * @file wedstrijden_weergaven.php
- *
- * View waarin de gegevens van een wedstrijden worden weergegeven
- */
+* @file wedstrijden_weergaven.php
+*
+* View waarin de gegevens van een wedstrijden worden weergegeven
+*/
 
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
@@ -42,7 +42,7 @@ $maanden = array(
 <div id="wedstrijd">
   <h1 style="display: inline;"><?php if($maand == 0){ echo "Alle wedstrijden";}else{echo $maanden[$maand]; }?></h1>
   <form action="#" method="post" style="display: inline-block; margin: 10px;">
-    <select id="datumSelected">
+    <select id="datumSelected" style="border-radius: 20px; padding: 3px;">
       <?php
 
       foreach ($maanden as $key => $value) {
@@ -74,25 +74,45 @@ $maanden = array(
   $this->table->add_row();
 
   // var_dump($wedstrijden);
-
-  foreach ($wedstrijden as $wedstrijd) {
-    echo "<tr scope='row' id='". $wedstrijd->id ."'>";
-    if ($wedstrijd->personen->namen) {
-      foreach ($wedstrijd->personen->namen as $persoon) {
-        $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), "<a href='".site_url('/Trainer/WedstrijdResultaten/resultatenWedstrijd?wedstrijdid='.$wedstrijd->id)."'>".$wedstrijd->naam."</a>", $wedstrijd->plaats,
-        array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon );
-      }
-    }
-    else {
-      $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)),  "<a href='".site_url('/Trainer/WedstrijdResultaten/resultatenWedstrijd?wedstrijdid='.$wedstrijd->id)."'>".$wedstrijd->naam."</a>", $wedstrijd->plaats,
-      array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), '...' );
-    }
-    echo "</tr>";
+  if ($wedstrijden == null || $wedstrijden == "") {
+    $this->table->add_row("Geen resultaten gevonden");
   }
+  else {
+    foreach ($wedstrijden as $wedstrijd) {
+      echo "<tr scope='row' id='". $wedstrijd->id ."'>";
+      if ($wedstrijd->personen->namen) {
+        foreach ($wedstrijd->personen->namen as $persoon) {
+          $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)), "<a href='".site_url('/Trainer/WedstrijdResultaten/resultatenWedstrijd?pagina=weergaven&wedstrijdid='.$wedstrijd->id)."'>".$wedstrijd->naam."</a>", $wedstrijd->plaats,
+          array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), $persoon );
+        }
+      }
+      else {
+        $this->table->add_row(date("d-m-Y", strtotime($wedstrijd->datumStart)),  "<a href='".site_url('/Trainer/WedstrijdResultaten/resultatenWedstrijd?pagina=weergaven&wedstrijdid='.$wedstrijd->id)."'>".$wedstrijd->naam."</a>", $wedstrijd->plaats,
+        array('data' => "Open Programma", 'href' => 'http://'.$wedstrijd->programma.'' ), '...' );
+      }
+      echo "</tr>";
+    }
+  }
+
   echo $this->table->generate();
+
+
+
+
+
+  if (isset($_GET['maand'])) {
+    ?>
+    <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/index?pagina=aanpassen&maand=<?php echo $_GET['maand']."&jaar=".$_GET['jaar'] ?>'">Aanpassen</button>
+    <?php
+  }
+  else {
+    ?>
+    <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/index?pagina=aanpassen'">Aanpassen</button>
+    <?php
+  }
+
   ?>
 
-  <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/index?pagina=aanpassen'">Aanpassen</button>
 
 
 

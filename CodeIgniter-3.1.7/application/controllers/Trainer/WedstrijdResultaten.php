@@ -95,7 +95,7 @@ class WedstrijdResultaten extends CI_Controller {
     }
 
     $this->load->model('trainer/wedstrijd_model');
-    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden2($firstDay, $lastDay);
+    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdenVerleden($firstDay, $lastDay);
 
     $i = 0;
     foreach ($data['wedstrijden'] as $wedstrijd) {
@@ -139,7 +139,7 @@ class WedstrijdResultaten extends CI_Controller {
 
     // wedstrijden voor comboboxes
     if ($this->input->get('pagina') == "aanpassen") {
-      $inhoud = "trainer/wedstrijd_resultaten_result";
+      $inhoud = "trainer/wedstrijd_resultaten_result_aanpassen";
       // variabel benodigdheden voor comboboxen op te vullen
       // 1. Zwemmers
       $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
@@ -148,6 +148,8 @@ class WedstrijdResultaten extends CI_Controller {
       // 3. Rondes
       $data['rondes'] = $this->wedstrijd_model->getRondes();
       // 4. reeksen (afstand + slag) (bestaande reeksen) (jquery -> ajax)
+      $wedId = $this->input->get('wedstrijdid');
+      $data['reeksen'] = $this->wedstrijd_model->getSlagEnAfstandWithWedstrijdId($wedId);
       // Tijd word zelf ingevuld met een formaat
 
     }
@@ -163,9 +165,22 @@ class WedstrijdResultaten extends CI_Controller {
 
     $this->template->load('main_master', $partials, $data);
   }
-  
-  public function toevoegen(){
 
+  public function resultaatOpvragen($resultID){
+    $this->load->model('trainer/wedstrijd_model');
+    $data = new stdClass();
+    $data = $this->wedstrijd_model->getResultatenWithId($resultID);
+    $data->ronde = $this->wedstrijd_model->getRondeWithId($data->rondeId);
+    //verschillende reeksen ophalen horend bij wedstrijd
+    $data->reeksen = $this->wedstrijd_model->getReeksenWithInschrijvingId($data->inschrijvingId);
+
+
+    //gegevens in object steken
+    print json_encode($data);
+  }
+  public function verwijderResultaat($resultID){
+    $this->load->model('trainer/wedstrijd_model');
+    // $this->wedstrijd_model->verwijderResultaatViaId($resultID);
   }
 
 

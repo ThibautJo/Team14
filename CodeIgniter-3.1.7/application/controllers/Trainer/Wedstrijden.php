@@ -100,7 +100,7 @@ class Wedstrijden extends CI_Controller {
     }
 
     $this->load->model('trainer/wedstrijd_model');
-    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
+    $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdenToekomst($firstDay, $lastDay);
 
     $i = 0;
     foreach ($data['wedstrijden'] as $wedstrijd) {
@@ -231,6 +231,7 @@ class Wedstrijden extends CI_Controller {
     * @see Wedstrijd_model::deleteWedstrijd()
     * @see wedstrijden_aanpassen.php
     */
+
     $this->load->model('trainer/wedstrijd_model');
     $this->wedstrijd_model->deleteWedstrijd($id);
   }

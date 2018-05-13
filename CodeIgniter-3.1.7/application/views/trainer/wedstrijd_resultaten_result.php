@@ -38,8 +38,7 @@ else {
   echo $this->table->generate();
   ?>
   <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/index?pagina=weergaven'">Terug</button>
-  <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/index?pagina=aanpassen'">Aanpassen</button>
-  <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/toevoegen'">Toevoegen</button>
+  <button type="button" class="btn button-blue justify-content-center" onclick="document.location.href= site_url + '/Trainer/WedstrijdResultaten/resultatenWedstrijd?pagina=aanpassen&wedstrijdid=' + <?php echo $_GET['wedstrijdid'] ?>">Aanpassen</button>
 
 
 </div>
