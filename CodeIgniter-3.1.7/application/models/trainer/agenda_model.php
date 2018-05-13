@@ -125,10 +125,6 @@ class Agenda_model extends CI_Model {
         
         if ($activiteit->reeksId !== null) {
             $activiteit->reeks = $this->getReeksActiviteiten($activiteit->reeksId);
-//            $eersteActiviteit = reset($reeks);
-//            $laatsteActiviteit = end($reeks);
-//            $activiteit->tijdstipStart = $eersteActiviteit->tijdstipStart;
-//            $activiteit->tijdstipStop = $laatsteActiviteit->tijdstipStop;
         }
         
         $activiteit->typeActiviteit = $this->getTypeActiviteit($activiteit->typeActiviteitId);

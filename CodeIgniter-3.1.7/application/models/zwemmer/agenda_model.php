@@ -66,6 +66,7 @@ class Agenda_model extends CI_Model {
             $soortTrainingen[$teller] = ucfirst($training->typeTraining);
             $teller++;
         }
+        $soortTrainingen[$teller] = NULL;
 
         return $soortTrainingen;
     }

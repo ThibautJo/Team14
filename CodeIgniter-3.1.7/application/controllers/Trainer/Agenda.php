@@ -281,7 +281,7 @@ class Agenda extends CI_Controller {
     
     
     //////////////////
-    ////////////////// WIJZIGEN AGENDA 
+    ////////////////// INVULLEN MODAL AGENDA 
     //////////////////
     
     
@@ -292,6 +292,32 @@ class Agenda extends CI_Controller {
         $data = $this->agenda_model->getActiviteit($id);
 
         //reeksid zetten op forumier
+        
+        print json_encode($data);
+    }
+    
+    public function toevoegenActiviteit($startDate, $endDate) {
+        $this->load->model('trainer/agenda_model');
+        
+        $data = new stdClass();
+        
+        $data->id = '0';
+        
+        $startDatum = date('Y-m-d h:i:s', strtotime(str_replace('%20', ' ', $startDate)));
+        $stopDatum = date('Y-m-d h:i:s', strtotime(str_replace('%20', ' ', $endDate)));
+        
+        $data->tijdstipStart = $startDatum;
+        $data->tijdstipStop = $stopDatum;
+
+        $data->typeTrainingId = '1';
+        $data->stageTitel = '';
+        $data->typeActiviteitId = '1';
+        $data->reeksId = 'leeg';
+        
+        $data->typeActiviteit = $this->agenda_model->getTypeActiviteit($data->typeActiviteitId);
+        $data->typeTraining = $this->agenda_model->getTypeTraining($data->typeTrainingId);
+        $data->personen = $this->agenda_model->getPersonenFromActiviteit($data->id);
+
         
         print json_encode($data);
     }
@@ -338,7 +364,7 @@ class Agenda extends CI_Controller {
         // Tabel activiteit
         $id = $this->input->post('id');
         
-        if ($this->input->post('soort') !== '') {
+        if ($this->input->post('soort') !== '4') {
             $activiteit->typeTrainingId = $this->input->post('soort')+1;
             $activiteit->typeActiviteitId = 1;
         }
@@ -348,10 +374,10 @@ class Agenda extends CI_Controller {
         }
         $activiteit->stageTitel = $this->input->post('gebeurtenisnaam');
         
-        $checkIfReeks = $this->agenda_model->getActiviteit($id);
+        $checkIfReeks = $this->input->post('reeksId');
         
-        if ($checkIfReeks->reeksId !== null) {
-            $reeksId = $checkIfReeks->reeksId;
+        if (is_numeric($checkIfReeks)) {
+            $reeksId = $checkIfReeks;
             $activiteiten = $this->agenda_model->getReeksActiviteiten($reeksId);
             
             $begindatumReeks = zetOmNaarYYYYMMDD($this->input->post('begindatumReeks'));
@@ -375,10 +401,10 @@ class Agenda extends CI_Controller {
 //            var_dump($activiteitenDatums);
 //            var_dump($datumDatums);
 
-            $verschillenUitReeks = array_diff($activiteitenDatums, $datumDatums);
+            $verschillenUitReeks = array_diff($datumDatums, $activiteitenDatums);
             
             if ($verschillenUitReeks !== null) {
-//                var_dump($verschillenUitReeks);
+                var_dump($verschillenUitReeks);
                 foreach ($activiteiten as $activiteit1) {
                     foreach ($verschillenUitReeks as $verschilUitReeks) {
                         if ($activiteit1->tijdstipStart === $verschilUitReeks) {
@@ -428,8 +454,8 @@ class Agenda extends CI_Controller {
         // Tabel activiteitPerPersoon
         $personenChecked = $this->input->post('personen');
         
-        if ($checkIfReeks->reeksId !== null) {
-            $reeksId = $checkIfReeks->reeksId;
+        if (is_numeric($checkIfReeks)) {
+            $reeksId = $checkIfReeks;
             $activiteiten = $this->agenda_model->getReeksActiviteiten($reeksId);
             
             $personenActiviteit = $this->agenda_model->getPersonenFromActiviteit($activiteiten[0]->id);
@@ -504,7 +530,7 @@ class Agenda extends CI_Controller {
             }
         }
         
-        redirect('/Trainer/Agenda');
+        redirect('/trainer/agenda');
     }
     
     public function maakReeksen($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
@@ -528,5 +554,47 @@ class Agenda extends CI_Controller {
 //        var_dump($datums);
         
         return $datums;
+    }
+    
+    
+    
+    
+    //////////////////
+    ////////////////// VERWIJDEREN ACTIVITEIT
+    //////////////////
+    
+    
+    
+    
+    public function verwijderActiviteit($id) {
+        $this->load->model('trainer/agenda_model');
+        
+        $activiteit = $this->agenda_model->getActiviteit($id);
+        
+        if ($activiteit->reeksId === null) {
+            $this->agenda_model->deleteActiviteit($id);
+            $this->agenda_model->deleteActiviteitPerPersoonWithActiviteitId($id);
+        }
+        else {
+            $activiteiten = $this->agenda_model->getReeksActiviteiten($activiteit->reeksId);
+            foreach ($activiteiten as $activiteit1) {
+                $this->agenda_model->deleteActiviteit($activiteit1->id);
+                $this->agenda_model->deleteActiviteitPerPersoonWithActiviteitId($activiteit1->id);
+            }
+        }
+        
+        redirect('/trainer/agenda');
+    }
+    
+    public function verwijderWedstrijd($id) {
+        redirect('/trainer/agenda');
+    }
+    
+    public function verwijderOnderzoek($id) {
+        redirect('/trainer/agenda');
+    }
+    
+    public function verwijderSupplement($id) {
+        redirect('/trainer/agenda');
     }
 }

@@ -56,7 +56,7 @@
         </div>
         <p class="mt-4 d-flex justify-content-between">
             <button type="button" class="btn btn-warning" data-toggle="modal" data-toggle="tooltip" title="Activiteit toevoegen" data-target="#activiteitToevoegen"><i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-toggle="tooltip" title="Activiteit wijzigen" data-target="#activiteitWijzigen"><i class="fas fa-pencil-alt"></i></button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-toggle="tooltip" title="Activiteit wijzigen" data-target="#aanpassenActiviteit"><i class="fas fa-pencil-alt"></i></button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" data-target="#activiteitVerwijderen"><i class="fas fa-trash-alt"></i></button>
 
             <p><div><a class="btn btn-light d-flex justify-content-center text-dark" id="help" data-toggle="modal" data-target="#helpModal"><i class="material-icons">help</i> &nbsp;Hulp</a></div></p>
@@ -87,6 +87,7 @@
                 ?>
                 
                 <?php echo form_hidden('id', ''); ?>
+                <?php echo form_hidden('reeksId', ''); ?>
 
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
@@ -345,10 +346,13 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" id="deleteActiviteitButton" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" onclick=""><i class="fas fa-trash-alt"></i></button>
+                <div>
+                    <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
                 <?php
-                echo form_submit('ok', 'Opslaan', 'class="btn button-blue"');
+                    echo form_submit('ok', 'Opslaan', 'class="btn button-blue"');
+                echo '</div>';
                 echo form_close();
                 ?> <!-- Modal sluit knop -->
             </div>
@@ -360,16 +364,37 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5> <!-- Modal titel -->
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <!-- Modal sluit knop ( X ) -->
+                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body"> <!-- Modal inhoud -->
+            <div class="modal-body">
+                Kies de activiteit die u wilt toevoegen, uit onderstaande lijst.
                 
+                <?php
+                $activiteitenKeuzeJSONParse = json_decode($kleuren);
+                $activiteitenKeuze = [];
+                
+                foreach ($activiteitenKeuzeJSONParse as $activiteitKeuzeJSONParse) {
+                    if (strpos($activiteitKeuzeJSONParse->activiteit, 'training') !== false) {
+                        if (!in_array('Training', $activiteitenKeuze)) {
+                            $activiteitenKeuze[] = 'Training';
+                        }
+                    }
+                    else {
+                        $activiteitenKeuze[] = $activiteitKeuzeJSONParse->activiteit;
+                    }
+                }
+                echo form_dropdown('activiteitToevoegen', $activiteitenKeuze, '', 'id="activiteitToevoegen" class="form-control mt-3"');
+                
+                echo form_hidden('startDate', '', 'id="startDate"');
+                echo form_hidden('endDate', '', 'id="endDate"');
+                ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
+                <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
+                <button type="button" class="btn button-blue" data-dismiss="modal" id="gaDoorToevoegen">Ga door</button>
             </div>
         </div>
     </div>
@@ -384,6 +409,13 @@
 <!-- Script om agenda aan te passen -->
 
 <script type="text/javascript">
+    $('#gaDoorToevoegen').on('click', function() {
+//        $('#toevoegenActiviteit').modal('hide');
+        setTimeout(function() {
+            toevoegenActiviteit();
+        }, 350);
+    });
+    
     $('#tabDatum a').on('click', function (e) {
         e.preventDefault();
 
@@ -431,9 +463,9 @@
                                 var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
                                 var datumGeklikt = new Date(calEvent.start);
                                 var dagnaam = datumGeklikt.getDay();
-                                var day = datumGeklikt.getDate();
-                                var month = datumGeklikt.getMonth() + 1;
-                                var year = datumGeklikt.getFullYear();
+//                                var day = datumGeklikt.getDate();
+//                                var month = datumGeklikt.getMonth() + 1;
+//                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
@@ -447,9 +479,11 @@
                             },
                             selectable: true,
                             select: function(startDate, endDate) {
-                                $('#toevoegenActiviteit').modal('show');
-        //                        $('.modal-title').html('Activiteit toevoegen');
-        //                        $('.modal-body').html('');
+                                $('#toevoegenActiviteit').modal();
+                                $('#toevoegenActiviteit .modal-title').html('Activiteit toevoegen');
+                                var site_url = '<?php echo site_url(); ?>';
+                                $('#toevoegenActiviteit input[name=startDate]').attr('value', startDate.toString());
+                                $('#toevoegenActiviteit input[name=endDate]').attr('value', endDate.toString());
                             },
                             events: result
                         });
