@@ -121,7 +121,7 @@ class WedstrijdResultaten extends CI_Controller {
     $this->template->load('main_master', $partials, $data);
   }
 
-  public function resultatenWedstrijd() {
+  public function resultatenWedstrijd($actie = null) {
 
     $data['titel'] = 'Wedstrijd resultaten';
     $data['team'] = $this->data->team;
@@ -138,7 +138,7 @@ class WedstrijdResultaten extends CI_Controller {
     // var_dump($data['resultaten']);
 
     // wedstrijden voor comboboxes
-    if ($this->input->get('pagina') == "aanpassen") {
+    if ($this->input->get('pagina') == "aanpassen" || $actie == "aanpassen") {
       $inhoud = "trainer/wedstrijd_resultaten_result_aanpassen";
       // variabel benodigdheden voor comboboxen op te vullen
       // 1. Zwemmers
@@ -178,6 +178,39 @@ class WedstrijdResultaten extends CI_Controller {
     //gegevens in object steken
     print json_encode($data);
   }
+
+  public function opslaanResultaat($actie){
+
+    //gegevens opslaan dmv 2 objecten
+    $resultaat = new stdClass(); //moet inschrijvingsID retourneren
+    $resultaat->id = $this->input->post('resultaatId');
+    $resultaat->tijd = $this->input->post('naam-datum'). ' ' . $this->input->post('naam-tijd');
+    $resultaat->rondeId = $this->input->post('rondeToevoegen'); //id
+
+    $inschrijving = new stdClass(); //zodat deze het ID weet dat aangepast moet worden + reeksperwedstr retourneren
+    $inschrijving->zwemmer = $this->input->post('zwemmersToevoegen'); //id
+
+    $reeksperwedstrijd = new stdClass(); //zodat deze weet welk reeksperwedstrijd aangepast moet worden
+    $reeksperwedstrijd->wedstrijdId = $this->input->post('wedstrijdId');
+    $reeks = explode('-', $this->input->post('reeksenToevoegen')); //id's
+    $reeksperwedstrijd->afstandId = $reeks[0]; //id
+    $reeksperwedstrijd->slagId = $reeks[1]; //id
+
+    $this->load->model('trainer/wedstrijd_model');
+
+
+
+    if ($actie == "toevoegen") {
+      $this->resultatenWedstrijd('toevoegen');
+    }
+    else {
+      //aanpassen
+
+      $this->resultatenWedstrijd('aanpassen');
+    }
+
+  }
+
   public function verwijderResultaat($resultID){
     $this->load->model('trainer/wedstrijd_model');
     // $this->wedstrijd_model->verwijderResultaatViaId($resultID);

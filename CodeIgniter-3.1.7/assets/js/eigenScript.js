@@ -227,6 +227,8 @@ function resultaatOpvragen(resultaatID){
   $.post(site_url + '/Trainer/WedstrijdResultaten/resultaatOpvragen/' + id, function (data) {
     data = JSON.parse(data);
     console.log(data);
+    // resultaat id opvullen in hidden text input in form aanpassen
+    $('#resultaatAanpassen #resultaatId').attr('value', id);
     resultaatModalOpvullen(data);
 
   }).fail(function () {
@@ -248,6 +250,8 @@ function resultaatModalOpvullen(data){
       $(this).prop('selected', true);
     }
   });
+
+  $('#resultaatAanpassen #reeksenToevoegen').empty();
   $.each(data['reeksen'], function(val, text) {
             $('#resultaatAanpassen #reeksenToevoegen').append(
              $('<option></option>').val(val).html(text)
@@ -255,6 +259,28 @@ function resultaatModalOpvullen(data){
   });
   $('#resultaatAanpassen #naam-datum').attr("value", data["tijd"].split(' ')[0]);
   $('#resultaatAanpassen #naam-tijd').attr("value", data["tijd"].split(' ')[1]);
+
+}
+
+function resultaatOpslaan(actie){
+
+  var formToSubmit = '';
+
+  //form valideren
+  if (actie == "toevoegen") {
+    formToSubmit = "#resultaatToeveoegen #form-wedstrijd";
+
+  } else {
+    formToSubmit = "#resultaatAanpassen #form-wedstrijd";
+
+  }
+
+  var wedstrijdID = $('#wedstrijdId').val();
+
+  $(formToSubmit).attr('action', site_url + '/Trainer/WedstrijdResultaten/opslaanResultaat/' + actie + '?pagina=aanpassen&wedstrijdid=' + wedstrijdID);
+
+  $('.modal').modal('hide');
+  $(formToSubmit).submit();
 
 }
 
