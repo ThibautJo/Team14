@@ -361,6 +361,7 @@ class Agenda extends CI_Controller {
         $activiteitPerPersoon = new stdClass();
         $activiteitId = 0;
         $datums[] = '';
+        $activiteitenIDs = [];
         
         // Tabel activiteit
         $id = $this->input->post('id');
@@ -426,14 +427,14 @@ class Agenda extends CI_Controller {
                 $activiteit->tijdstipStop = $datums[$i][1];
                 
                 if ($id === 0) {
-                    $activiteitId = $this->agenda_model->insertActiviteit($activiteit);
+                    $activiteitenIDs[] = $this->agenda_model->insertActiviteit($activiteit);
                 }
                 else {
                     if (array_search(end($activiteiten), $activiteiten) < $i) {
                         print('inserting...');
 //                        $activiteit->id = 0;
                         $activiteit->reeksId = $reeksId;
-                        $activiteitId = $this->agenda_model->insertActiviteit($activiteit);
+                        $this->agenda_model->insertActiviteit($activiteit);
                     }
                     else {
                         $activiteit->id = $activiteiten[$i]->id;
@@ -480,9 +481,11 @@ class Agenda extends CI_Controller {
                 
                 if ($id === 0) {
                     foreach ($personenChecked as $persoonChecked) {
-                        $activiteitPerPersoon->persoonId = $persoonChecked;
-                        $activiteitPerPersoon->activiteitId = $activiteitId;
-                        $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                        foreach ($activiteitenIDs as $activiteitenID) {
+                            $activiteitPerPersoon->persoonId = $persoonChecked;
+                            $activiteitPerPersoon->activiteitId = $activiteitenID;
+                            $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
+                        }
                     }
                 }
                 else {
@@ -534,6 +537,7 @@ class Agenda extends CI_Controller {
                         $this->agenda_model->updateActiviteitPerPersoon($activiteitPerPersoon);
                     }
                     else {
+//                        $activiteitPerPersoon->activiteitId = $activiteitId;
                         $this->agenda_model->insertActiviteitPerPersoon($activiteitPerPersoon);
                     }
                 }
