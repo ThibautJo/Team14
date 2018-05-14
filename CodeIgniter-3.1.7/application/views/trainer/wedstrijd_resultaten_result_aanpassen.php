@@ -16,7 +16,6 @@
 <div id="wedstrijd">
   <h1 style="display: inline;">Wedstrijd resultaten</h1>
 
-
   <table class="table table-hover">
       <thead>
         <tr>
@@ -31,7 +30,6 @@
       </thead>
       <tbody>
         <?php
-
         if ($resultaten->resultaten == "" || $resultaten->resultaten == null) {
           echo "<td>Geen resultaten gevonden!</td>";
         }
@@ -76,6 +74,8 @@
           echo form_open('#', $attributenFormulier);
 
           ?>
+          <input type="text" id="wedstrijdId" name="wedstrijdId" value="<?php echo $_GET['wedstrijdid']; ?>" hidden>
+
           <table>
             <tr>
               <td>
@@ -136,7 +136,7 @@
           <?php echo form_close(); ?>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="">Opslaan</button>
+          <button type="button" class="btn btn-primary" onclick="resultaatOpslaan('toevoegen')">Opslaan</button>
         </div>
       </div>
     </div>
@@ -160,13 +160,16 @@
           echo form_open('#', $attributenFormulier);
 
           ?>
+          <input type="text" id="wedstrijdId" name="wedstrijdId" value="<?php echo $_GET['wedstrijdid']; ?>" hidden>
+          <input type="text" id="resultaatId" name="resultaatId" value="" hidden>
+
           <table>
             <tr>
               <td>
                 <?php
                 echo form_label("Naam", 'naam-persoon');
                 ?>
-                <select class="form-control" name="" id="zwemmersToevoegen">
+                <select class="form-control" name="zwemmersToevoegen" id="zwemmersToevoegen">
                   <?php
                       foreach ($zwemmers as $zwemmer) {
                         echo "<option value='".$zwemmer->id."'>".$zwemmer->voornaam." ".$zwemmer->achternaam."</option>";
@@ -180,7 +183,7 @@
                 <?php
                 echo form_label("Ronde", 'naam-ronde');
                 ?>
-                <select class="form-control" name="" id="rondeToevoegen">
+                <select class="form-control" name="rondeToevoegen" id="rondeToevoegen">
                   <?php
                       foreach ($rondes as $ronde) {
                         echo "<option value='".$ronde->id."'>".$ronde->ronde."</option>";
@@ -192,7 +195,7 @@
                 <?php
                 echo form_label("Reeks", 'naam-reeks');
                 ?>
-                <select class="form-control" name="" id="reeksenToevoegen">
+                <select class="form-control" name="reeksenToevoegen" id="reeksenToevoegen">
                 </select>
               </td>
             </tr>
@@ -215,7 +218,7 @@
           <?php echo form_close(); ?>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="">Opslaan</button>
+          <button type="button" class="btn btn-primary" onclick="resultaatOpslaan('aanpassen')">Opslaan</button>
         </div>
       </div>
     </div>
