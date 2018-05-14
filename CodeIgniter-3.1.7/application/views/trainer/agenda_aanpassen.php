@@ -189,7 +189,7 @@
 
                 <ul class="nav nav-tabs mt-4 mb-4 d-none" id="tabDatum" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active pr-4 pl-4" id="dag-tab" data-toggle="tab" href="#dag" role="tab" aria-controls="home" aria-selected="true">Enkele dag</a>
+                        <a class="nav-link active pr-4 pl-4" id="dag-tab" data-toggle="tab" href="#dag" role="tab" aria-controls="home" aria-selected="true">Enkel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link pr-4 pl-4" id="reeks-tab" data-toggle="tab" href="#reeks" role="tab" aria-controls="profile" aria-selected="false">Reeks</a>
@@ -373,19 +373,8 @@
                 Kies de activiteit die u wilt toevoegen, uit onderstaande lijst.
                 
                 <?php
-                $activiteitenKeuzeJSONParse = json_decode($kleuren);
-                $activiteitenKeuze = [];
+                $activiteitenKeuze = array('Wedstrijd', 'Medische afspraak', 'Training (enkel)', 'Training (reeks)', 'Stage', 'Supplement');
                 
-                foreach ($activiteitenKeuzeJSONParse as $activiteitKeuzeJSONParse) {
-                    if (strpos($activiteitKeuzeJSONParse->activiteit, 'training') !== false) {
-                        if (!in_array('Training', $activiteitenKeuze)) {
-                            $activiteitenKeuze[] = 'Training';
-                        }
-                    }
-                    else {
-                        $activiteitenKeuze[] = $activiteitKeuzeJSONParse->activiteit;
-                    }
-                }
                 echo form_dropdown('activiteitToevoegen', $activiteitenKeuze, '', 'id="activiteitToevoegen" class="form-control mt-3"');
                 
                 echo form_hidden('startDate', '', 'id="startDate"');

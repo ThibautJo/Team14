@@ -681,30 +681,25 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
                 $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
             }
             else {
+                $('#aanpassenActiviteit #tabDatum #dag-tab').addClass('disabled');
+                $('#aanpassenActiviteit #tabDatum #reeks-tab').tab('show');
                 $('#aanpassenActiviteit #tijdstipReeks-form').removeClass('d-none');
-                if (data['reeksId'] === '-1') {
-                    $('#aanpassenActiviteit #tabDatum #reeks-tab').removeClass('disabled');
-                    $('#aanpassenActiviteit #tabDatum #dag-tab').removeClass('disabled');
-                    $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
-                    $('#aanpassenActiviteit #tabDatum #dag-tab').tab('show');
-                    $('#aanpassenActiviteit #begindatum, #begindatumReeks').datepicker('update', dateHelper_getDate(data['tijdstipStart']));
-                    $('#aanpassenActiviteit #einddatum, #einddatumReeks').datepicker('update', dateHelper_getDate(data['tijdstipStop']));
-                    $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "'], #beginuurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "']").attr("selected", "selected");
-                    $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "'], #einduurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
+                if (parseInt(data['reeksId']) < 0) {
+                    $('#aanpassenActiviteit #begindatumReeks').datepicker('update', dateHelper_getDate(data['tijdstipStart']));
+                    $('#aanpassenActiviteit #einddatumReeks').datepicker('update', dateHelper_getDate(data['tijdstipStop']));
+                    $("#aanpassenActiviteit #beginuurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "']").attr("selected", "selected");
+                    $("#aanpassenActiviteit #einduurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
+                    $('#aanpassenActiviteit input[name=reeksId]').attr('value', (data['reeksId'] * -1));
                     var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
                     var dagnaam = new Date(data['tijdstipStart']);
                     var dag = dagnaam.getDay();
-                    alert(dag.getDay());
-                    
-                    $('.dagReeks').html();
+                    $('.dagReeks').html(weekdag[dag]);
                 }
                 else {
-                    $('#aanpassenActiviteit #tabDatum #dag-tab').addClass('disabled');
-                    $('#aanpassenActiviteit #tabDatum #reeks-tab').tab('show');
                     $('#aanpassenActiviteit #begindatumReeks').datepicker('update', dateHelper_getDate(data['reeks'][0]['tijdstipStop']));
                     $('#aanpassenActiviteit #einddatumReeks').datepicker('update', dateHelper_getDate(data['reeks'][data.reeks.length-1]['tijdstipStop']));
-                    $("#aanpassenActiviteit #beginuurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "']").attr("selected", "selected");
-                    $("#aanpassenActiviteit #einduurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
+                    $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "'], #beginuurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "']").attr("selected", "selected");
+                    $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "'], #einduurReeks option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
                 }
             }
             break;
@@ -719,9 +714,9 @@ function toevoegenActiviteit() {
     var startDate2 = new Date(startDate);
     var endDate2 = new Date(endDate);
     
-    var startDatum = startDate2.getFullYear() + '-' + (startDate2.getMonth() + 1) + '-' + startDate2.getDate() + '%20' + (startDate2.getHours() - 2) + ':' + startDate2.getMinutes() + ':' + startDate2.getMilliseconds();
-    var stopDatum = endDate2.getFullYear() + '-' + (endDate2.getMonth() + 1) + '-' + endDate2.getDate() + '%20' + (endDate2.getHours() - 2) + ':' + endDate2.getMinutes() + ':' + endDate2.getMilliseconds();
-    
+    var startDatum = startDate2.getFullYear() + '-' + (startDate2.getMonth() + 1) + '-' + startDate2.getDate() + '%20' + (startDate2.getHours() - 2) + ':' + startDate2.getMinutes() + ':' + startDate2.getSeconds();
+    var stopDatum = endDate2.getFullYear() + '-' + (endDate2.getMonth() + 1) + '-' + endDate2.getDate() + '%20' + (endDate2.getHours() - 2) + ':' + endDate2.getMinutes() + ':' + endDate2.getSeconds();
+        
     var linkActiviteit = '';
     switch (true) {
         case activiteit === "Wedstrijd":
@@ -733,8 +728,11 @@ function toevoegenActiviteit() {
         case activiteit === "Supplement":
             linkActiviteit = 'toevoegenSupplement';
             break;
+        case activiteit === "Training (reeks)":
+            linkActiviteit = 'toevoegenActiviteit/true';
+            break;
         default:
-            linkActiviteit = 'toevoegenActiviteit';
+            linkActiviteit = 'toevoegenActiviteit/false';
             break;
     }
     $.post(site_url + '/trainer/agenda/' + linkActiviteit + '/' + startDatum + '/' + stopDatum,
@@ -782,7 +780,7 @@ function verwijderActiviteit(opgehaaldeId, activiteit) {
         $.post(site_url + '/Trainer/agenda/' + linkActiviteit + '/' + id, 
         function (data) {
             alert("Activiteit is verwijderd!");
-            $("tr#" + id).remove();
+            location.reload();
         }).fail(function () {
             alert("Er is iets misgelopen, neem contact op met de administrator.");
         });

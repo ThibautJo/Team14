@@ -170,4 +170,19 @@ class Agenda_model extends CI_Model {
         
         return $wedstrijd;
     }
+    
+    public function getAllReeksen() {
+        $query = $this->db->get('activiteit');
+        $records = $query->result();
+        
+        $reeksen = [];
+        
+        foreach ($records as $record) {
+            if (!in_array($record->reeksId, $reeksen)) {
+                $reeksen[] = $record->reeksId;
+            }
+        }
+        
+        return $reeksen;
+    }
 }
