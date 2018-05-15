@@ -94,7 +94,7 @@ class Wedstrijden extends CI_Controller {
         }
 
         $this->load->model('trainer/wedstrijd_model');
-        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijden($firstDay, $lastDay);
+        $data['wedstrijden'] = $this->wedstrijd_model->getWedstrijdenToekomst($firstDay, $lastDay);
 
         $i = 0;
         foreach ($data['wedstrijden'] as $wedstrijd) {
