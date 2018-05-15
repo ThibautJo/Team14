@@ -21,7 +21,7 @@
                     <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Profiel') ?>">Profiel</a>
                 </li>
                 <li class="pb-2">
-                    <a class="nav-link1" href="<?php // echo site_url('/Zwemmer/Profiel/Aanpassen') ?>">Profiel aanpassen</a>
+                    <a class="nav-link1" href="<?php // echo site_url('/Zwemmer/Profiel/Aanpassen')  ?>">Profiel aanpassen</a>
                 </li>
             </ul>
         </div>
@@ -38,9 +38,6 @@
                 </li>
                 <li>
                     <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Wedstrijdresultaten') ?>">Wedstrijdresultaten</a>
-                </li>
-                <li class="pb-2">
-                    <a class="nav-link1" href="<?php // echo site_url('/Zwemmer/Inschrijven') ?>">Inschrijven</a>
                 </li>
             </ul>
         </div>
