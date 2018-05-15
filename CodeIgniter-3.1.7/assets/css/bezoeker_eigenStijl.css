@@ -188,3 +188,8 @@ a.text-darkblue:hover, a.text-darkblue:focus {
 .hide {
     display: none;
 }
+
+div.nieuwstitel, div.wedstrijdtitel {
+    font-size: 20px;
+    font-weight: bold;
+}

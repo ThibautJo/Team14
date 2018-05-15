@@ -52,7 +52,9 @@ class Welcome extends CI_Controller {
         
         $this->load->model('trainer/startpaginaitem_model');
         $data['startpaginaitems'] = $this->startpaginaitem_model->getStartpaginaItem();
-         
+                       
+        $this->load->model('trainer/wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAlleWedstrijden();         
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
@@ -132,16 +134,8 @@ class Welcome extends CI_Controller {
             $data_zwemmers[] = array(
                 "voornaam" => $zwemmer->voornaam,
                 "achternaam" => $zwemmer->achternaam,
-                "straat" => $zwemmer->straat,
-                "huisnummer" => $zwemmer->huisnummer,
-                "postcode" => $zwemmer->postcode,
-                "gemeente" => $zwemmer->gemeente,
-                "telefoonnummer" => $zwemmer->telefoonnummer,
-                "email" => $zwemmer->email,
-                "wachtwoord" => $zwemmer->wachtwoord,
                 "omschrijving" => $zwemmer->omschrijving,
                 "foto" => $zwemmer->foto,
-                "color" => '#FF7534',"textColor" => '#000'
             );
         }
         return $zwemmers;

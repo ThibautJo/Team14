@@ -17,7 +17,7 @@
  * View waarin een lijst van huidige startpaginaitems worden weergegeven
  * - krijgt $startpaginatekst binnen
  */
-$attributenFormulier = array('id' => 'form-supplement',
+$attributenFormulier = array('id' => 'form-startpaginaitem',
     'class' => 'needs-validation',
     'novalidate' => '',
     'role' => 'form');
@@ -164,17 +164,18 @@ $attributenFormulier = array('id' => 'form-supplement',
 
     // startpaginaItem start
 
-    function meldingUpdate(meldingID) {
+    function startpaginaItemUpdate(startpaginaItemID) {
 
-        console.log("id =" + meldingID);
-        var id = $("#" + meldingID).val();
+        console.log("id =" + startpaginaItemID);
+        var id = $("#" + startpaginaItemID).val();
 
-        $.post(site_url + '/Trainer/melding/wijzigMelding/' + id, function (data) {
-            //data = object van melding
+        $.post(site_url + '/Trainer/startpagina/wijzigStartpaginaItem/' + id, function (data) {
+            //data = object van supplement
             data = JSON.parse(data);
+            // console.log(data[0]["Naam"]);
 
-            //modal opvullen met object melding
-            opvullenModalMeldingAanpassen(data);
+            //modal opvullen met object wedstrijd
+            opvullenModalstartpaginaItemAanpassen(data);
 
         }).fail(function () {
             alert("Er is iets misgelopen, neem contact op met de administrator.");
@@ -182,35 +183,31 @@ $attributenFormulier = array('id' => 'form-supplement',
 
 
         // modal openen met ingevulde gegevans van dit object
-        $("#meldingAanpassen").modal();
+        $("#startpaginaItemAanpassen").modal();
 
     }
-    function opvullenModalMeldingAanpassen(dataMelding) {
-        $('#meldingAanpassen #id').attr("value", dataMelding["id"]);
-        $('#meldingAanpassen #datumStop').val(dataMelding["datumStop"]);
-        $('#meldingAanpassen #inhoud').attr("value", dataMelding["meldingBericht"]);
-        $('#meldingAanpassen #aan').attr("value", dataMelding["voornaam"]);
+    function opvullenModalstartpaginaItemAanpassen(dataStartpaginaItem) {
+        
+        console.log(dataStartpaginaItem);
+        console.log(dataStartpaginaItem["id"]);
+        
+        // console.log(dataSupplement[0]["Naam"]);
+        $('#startpaginaItemAanpassen #id').attr("value", dataStartpaginaItem["id"]);
+        $('#startpaginaItemAanpassen #titel').val(dataStartpaginaItem["titel"]);
+        $('#startpaginaItemAanpassen #inhoud').attr("value", dataStartpaginaItem["inhoud"]);
 
-        console.log(dataMelding["voornaam"]);
-        $("#aan option").each(function ()
-        {
-            console.log($(this).val());
-
-            if ($(this).text() === dataMelding["voornaam"]) {
-                $("option[value=" + $(this).val() + "]").attr("selected", "selected");
-            }
-        });
     }
-    function meldingVerwijder(elementID) {
-        if (!confirm("Zeker dat je dit wilt verwijderen?")) {
+
+    function startpaginaItemVerwijder(startpaginaItemID) {
+        if (!confirm("Weet je zeker dat je dit wilt verwijderen?")) {
             return false;
         } else {
-            //id van melding
-            var id = $("#" + elementID).val();
+            //id van startpaginaItem
+            var id = $("#" + startpaginaItemID).val();
             // alert(id);
             //verwijderen
-            $.post(site_url + '/Trainer/melding/verwijderMelding/' + id, function (data) {
-                alert("Melding is verwijderd!");
+            $.post(site_url + '/Trainer/startpagina/verwijderStartpaginaItem/' + id, function (data) {
+                alert("Dit nieuwtje is verwijderd!");
                 $("tr#" + id).remove();
             }).fail(function () {
                 alert("Er is iets misgelopen, neem contact op met de administrator.");
@@ -218,38 +215,35 @@ $attributenFormulier = array('id' => 'form-supplement',
         }
     }
 
-    function meldingOpslaan(actie) {
+    function startpaginaItemOpslaan(actie) {
 
         var ok = true;
         var formToSubmit = '';
         //form valideren
-        if (actie == "toevoegen") {
-            $('#meldingToevoegen #form-melding *').filter('input').each(function () {
-                if ($(this).attr("required") && $(this).val() == "") {
-                    alert("Niet alle velden zijn ingevuld");
-                    ok = false;
-                    return false;
-                }
-            });
-            formToSubmit = "#meldingToevoegen #form-melding";
+        if (actie === "toevoegen") {
+            formToSubmit = "#startpaginaItemToevoegen #form-startpaginaitem";
+            if (!form_validatie(formToSubmit)) {
+                //alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
         } else {
-            $('#meldingAanpassen #form-melding *').filter('input').each(function () {
-                if ($(this).attr("required") && $(this).val() == "") {
-                    alert("Niet alle velden zijn ingevuld");
-                    ok = false;
-                    return false;
-                }
-            });
-            formToSubmit = "#meldingAanpassen #form-melding";
+            formToSubmit = "#startpaginaItemAanpassen #form-startpaginaitem";
+            if (!form_validatie(formToSubmit)) {
+                //alert("Niet alle velden zijn ingevuld");
+                ok = false;
+                return false;
+            }
         }
 
         //word uitgevoerd als alles ingevuld is
         if (ok) {
-            $(formToSubmit).attr('action', site_url + '/Trainer/melding/opslaanMelding/' + actie);
+            $(formToSubmit).attr('action', site_url + '/Trainer/startpagina/opslaanStartpaginaItem/' + actie);
 
             $(formToSubmit).submit();
         }
     }
+
 
 // startpaginaItem end
 
