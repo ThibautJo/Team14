@@ -12,24 +12,37 @@
     // |    Team 14
     // +----------------------------------------------------------
 
+/**
+ * @class Welcome
+ * @brief Controller-klasse voor aanmelden en homepagina
+ * 
+ * Controller-klasse met alle methodes die gebruikt worden voor aanmelden van gebruikers
+ */
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
     public function __construct() {
+        
         parent::__construct();
-
-        $this->load->helper("my_html_helper");
-        $this->load->helper("my_url_helper");
-        $this->load->helper('url');
-        $this->load->helper('form');
-
-        // Auteur inladen in footer
+        
+        /**
+        * Laadt de auteur van deze code in de footer.
+        */
+        
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "true", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
 
     public function index() {
+        
+       /**
+       * Haalt verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php
+       * 
+       * @see Zwemmers_model::getLadenTeam ?? ()
+       */
+        
         $data['titel'] = 'Home';
         $data['team'] = $this->data->team;
         $data['persoon'] = $this->authex->getPersoonInfo();

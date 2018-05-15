@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['persoon_5fmodel',['Persoon_model',['../class_persoon__model.html',1,'']]]
+  ['inschrijving',['Inschrijving',['../class_inschrijving.html',1,'']]],
+  ['inschrijving_5fmodel',['Inschrijving_model',['../class_inschrijving__model.html',1,'']]]
 ];

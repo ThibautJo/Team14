@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>project14_1718: Supplement Class Referentie</title>
+<title>Team14: Supplement Class Referentie</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">project14_1718
+   <div id="projectname">Team14
    </div>
   </td>
  </tr>
@@ -139,10 +139,10 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt alle supplementen namen op via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en haalt alle functies op via <a class="el" href="class_supplementfunctie__model.html" title="Model-klasse voor supplementfunctie. ">Supplementfunctie_model</a> en toont de resulterende objecten in de view supplementen_lijst.php</p>
+<p>Haalt alle supplementen namen op via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en haalt alle functies op via <a class="el" href="class_supplementfunctie__model.html" title="Model-klasse voor supplementfunctie. ">Supplementfunctie_model</a> en toont de resulterende objecten in de view <a class="el" href="supplement__lijst_8php.html">supplement_lijst.php</a></p>
 <dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#a837af28b118aa64bed916afc83772a7e">Supplement_model::getAllByNaamSupplementWithFunctie()</a> </dd>
 <dd>
-Supplement_model::getAllByFunctie() </dd>
+<a class="el" href="class_supplementfunctie__model.html#a96b11cfa722233bd1724fb43c395aaa3">Supplementfunctie_model::getAllByFunctie()</a> </dd>
 <dd>
 <a class="el" href="supplement__lijst_8php.html">supplement_lijst.php</a> </dd></dl>
 
@@ -164,11 +164,11 @@ Supplement_model::getAllByFunctie() </dd>
       </table>
 </div><div class="memdoc">
 <p>Slaagt het nieuw/aangepaste supplement op via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en toont de aangepaste lijst in de view <a class="el" href="supplement__lijst_8php.html">supplement_lijst.php</a></p>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplementfunctie__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Supplementfunctie_model::get()</a>; </dd>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplementfunctie__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Supplementfunctie_model::get()</a> </dd>
 <dd>
-<a class="el" href="class_supplement__model.html#ade1e8d1c832358fcbcfe37f94223404e">Supplement_model::insert()</a>; </dd>
+<a class="el" href="class_supplement__model.html#ac838aa6e75e0df40e691727f896c66c8">Supplement_model::insertSupplement()</a> </dd>
 <dd>
-<a class="el" href="class_supplement__model.html#ab8a94aa2d6d80c4fe3439b23bee8479b">Supplement_model::update()</a>; </dd></dl>
+<a class="el" href="class_supplement__model.html#a7ead38f3e382e28aff2044febdd768ad">Supplement_model::updateSupplement()</a> </dd></dl>
 
 </div>
 </div>
@@ -194,7 +194,7 @@ Supplement_model::getAllByFunctie() </dd>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#a2f8258add505482d7f00ea26493a5723">Supplement_model::delete()</a> </dd></dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#ad4658b3e00e1e4c25966111afc6e38cd">Supplement_model::deleteSupplement()</a> </dd></dl>
 
 </div>
 </div>
@@ -213,23 +213,19 @@ Supplement_model::getAllByFunctie() </dd>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt de id=$id op van het te wijzigen supplement-record via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en alle supplementfuncties via <a class="el" href="class_supplementfunctie__model.html" title="Model-klasse voor supplementfunctie. ">Supplementfunctie_model</a> en toont de objecten in de view <a class="el" href="supplement__form_8php.html">supplement_form.php</a></p>
+<p>Haalt de id=$id op van het te wijzigen supplement-record via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en toont dit in het formulier in view <a class="el" href="supplement__lijst_8php.html">supplement_lijst.php</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">$id</td><td>De id van het te wijzigen supplement </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Supplement_model::get()</a>; </dd>
-<dd>
-<a class="el" href="class_supplementfunctie__model.html#a96b11cfa722233bd1724fb43c395aaa3">Supplementfunctie_model::getAllByFunctie()</a>; </dd>
-<dd>
-<a class="el" href="supplement__form_8php.html">supplement_form.php</a> </dd></dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Supplement_model::get()</a> </dd></dl>
 
 </div>
 </div>
 <hr/>De documentatie voor deze klasse is gegenereerd op grond van het volgende bestand:<ul>
-<li>C:/wamp64/www/Team14/CodeIgniter-3.1.7/application/controllers/Trainer/Supplement.php</li>
+<li>CodeIgniter-3.1.7/application/controllers/Trainer/Supplement.php</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

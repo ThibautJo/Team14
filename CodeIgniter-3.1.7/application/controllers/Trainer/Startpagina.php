@@ -2,8 +2,6 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Startpagina extends CI_Controller {
-
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
@@ -16,11 +14,24 @@ class Startpagina extends CI_Controller {
     // |    Team 14
     // +----------------------------------------------------------
 
+/**
+ * @class Startpagina
+ * @brief Controller-klasse voor startpaginaitem
+ * 
+ * Controller-klasse met alle methodes die gebruikt worden voor startpaginaitems
+ */
+
+class Startpagina extends CI_Controller {
+
     public function __construct() {
 
         parent::__construct();
-
-        // controleren of bevoegde persoon is aangemeld
+        
+        /**
+        * Controleert of bevoegde persoon is aangemeld.
+        * Indien deze niet aangemeld of bevoegd is, wordt hij doorverwezen naar de loginpagina.
+        */
+        
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -30,18 +41,23 @@ class Startpagina extends CI_Controller {
             }
         }
 
-        // Auteur inladen in footer
+        /**
+        * Laadt de auteur van deze code in de footer.
+        */
+        
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "true", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
 
-    // +----------------------------------------------------------
-    // |
-    // |    Startpagina beheren
-    // |
-    // +----------------------------------------------------------
 
     public function index() {
+        
+       /**
+       * Haalt alle startpaginaitems op via startpaginaitem_model en toont de resulterende objecten in de view startpagina_beheren.php
+       * 
+       * @see StartpaginaItem_model::getStartpaginaItem()
+       * @see startpagina_beheren.php
+       */
 
        $data['titel'] = 'Startpagina beheren';
        $data['team'] = $this->data->team;

@@ -6,6 +6,8 @@ var searchData=
   ['ready',['ready',['../class_c_i___javascript.html#a00997e6137ed7dc0de0159ed143a107b',1,'CI_Javascript']]],
   ['receive',['receive',['../class_c_i___trackback.html#ac805eb3a4eb25b19c1ab093023da4d35',1,'CI_Trackback']]],
   ['reconnect',['reconnect',['../class_c_i___d_b__driver.html#a57c19c642ab3023e28d10c50f86ff0a8',1,'CI_DB_driver\reconnect()'],['../class_c_i___d_b__cubrid__driver.html#a57c19c642ab3023e28d10c50f86ff0a8',1,'CI_DB_cubrid_driver\reconnect()'],['../class_c_i___d_b__mysql__driver.html#a57c19c642ab3023e28d10c50f86ff0a8',1,'CI_DB_mysql_driver\reconnect()'],['../class_c_i___d_b__mysqli__driver.html#a57c19c642ab3023e28d10c50f86ff0a8',1,'CI_DB_mysqli_driver\reconnect()'],['../class_c_i___d_b__postgre__driver.html#a57c19c642ab3023e28d10c50f86ff0a8',1,'CI_DB_postgre_driver\reconnect()']]],
+  ['reeksen',['reeksen',['../class_wedstrijden.html#ae165841f05c66204878ff42147c5126e',1,'Wedstrijden']]],
+  ['reeksenopvragen',['reeksenOpvragen',['../class_wedstrijden.html#a4fd2550630619d6c7ad341618ab3820c',1,'Wedstrijden']]],
   ['referrer',['referrer',['../class_c_i___user__agent.html#a3a7bdecfe4516d7ce790734ae1449d29',1,'CI_User_agent']]],
   ['regex_5fmatch',['regex_match',['../class_c_i___form__validation.html#acef19e29276dbdd2c69dffd5ec635600',1,'CI_Form_validation']]],
   ['remove',['remove',['../class_c_i___cart.html#acb40031fae650e22e4a32878c02dfbf7',1,'CI_Cart']]],

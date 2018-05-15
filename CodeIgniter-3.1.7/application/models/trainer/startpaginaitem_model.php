@@ -1,16 +1,9 @@
 <?php
-/**
- * @class StartpaginaItem_model.
- * @brief Model-klasse voor startpaginaItems.
- *
- * Model-klasse die alle methodes bevat om te interacteren met de database-table startpaginaItem.
- */
-
-
-class StartpaginaItem_model extends CI_Model {
-
+    
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
+    // +----------------------------------------------------------
+    // |    Auteur: Jolien Lauwers       |       Helper:
     // +----------------------------------------------------------
     // |
     // |    StartpaginaItem model
@@ -18,61 +11,77 @@ class StartpaginaItem_model extends CI_Model {
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
+    
+/**
+ * @class StartpaginaItem_model.
+ * @brief Model-klasse voor startpaginaItems.
+ *
+ * Model-klasse die alle methodes bevat om te interacteren met de database-table startpaginaItem.
+ */
 
-    /**
-     * Constructor
-     */
+class StartpaginaItem_model extends CI_Model {
 
     function __construct() {
+        
+        /**
+        * Constructor
+        */
+        
         parent::__construct();
     }
 
-    /**
-     * Retourneert het record met id=$id uit de tabel startpaginaItem.
-     * @param $id De id van het record dat opgevraagd wordt.
-     * @return Het opgevraagde record.
-     */
+    function getStartpaginaItemMetId($id) {
 
-    function getgetStartpaginaItemMetId($id) {
+        /**
+         * Retourneert het record met id=$id uit de tabel startpaginaItem.
+         * @param $id De id van het record dat opgevraagd wordt.
+         * @return Het opgevraagde record.
+         */
         
         $this->db->where('id', $id);
         $query = $this->db->get('startpaginaItem');
         return $query->row();
     }
-    
-    // doxygen
-    
-    public function getStartpaginaItem() {
+
+    function getStartpaginaItem() {
+
+        /**
+         * Retourneert alle startpaginaItems uit de tabel startpaginaItem.
+         * @return Alle startpaginaItems.
+         */
         
-        $query = $this->db->get('startpaginaItem');        
+        $query = $this->db->get('startpaginaItem');
         return $query->result();
     }
 
-    /**
-     * Verwijdert het record met id=$id uit de tabel startpaginaItem.
-     * @param $id De id van het record dat opgevraagd wordt.
-     */
+    function deletegetStartpaginaItem($id) {
 
-    function deletegetStartpaginaItem($id){
+        /**
+         * Verwijdert het record met id=$id uit de tabel startpaginaItem.
+         * @param $id De id van het record dat opgevraagd wordt.
+         */
+        
         $this->db->where('id', $id);
         $this->db->delete('startpaginaItem');
     }
 
-    /**
-     * Voegt een nieuw record toe aan de tabel startpaginaItem.
-     * @param $startpaginaitem Het startpaginaItem waar de ingevulde data in wordt bewaard.
-     */
-
     function insertgetStartpaginaItem($startpaginaitem) {
+
+        /**
+         * Voegt een nieuw record toe aan de tabel startpaginaItem.
+         * @param $startpaginaitem Het startpaginaItem waar de ingevulde data in wordt bewaard.
+         */
+        
         $this->db->insert('startpaginaItem', $startpaginaitem);
     }
 
-    /**
-     * Wijzigt een startpaginaItem-object uit de tabel startpaginaItem.
-     * @param $startpaginaitem Het supplementen object waar de aangepaste data in zit.
-     */
-
     function updategetStartpaginaItem($startpaginaitem) {
+
+        /**
+         * Wijzigt een startpaginaItem-object uit de tabel startpaginaItem.
+         * @param $startpaginaitem Het supplementen object waar de aangepaste data in zit.
+         */
+        
         $this->db->where('id', $startpaginaitem->id);
         $this->db->update('startpaginaItem', $startpaginaitem);
     }
