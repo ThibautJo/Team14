@@ -112,7 +112,7 @@
 
                 foreach ($wedstrijden as $wedstrijd) {
 
-                    echo "\n<div class='row'><div class='col-2'>" . ucfirst(date("d-m-Y", strtotime($wedstrijd->datumStart))) . "</div><div class='col-sm'><a href='" . $wedstrijd->programma . "'>" .
+                    echo "\n<div class='row'><div class='col-2'>" . ucfirst(date("d-m-Y", strtotime($wedstrijd->datumStart))) . "</div><div class='col-sm'><a href='http://" . $wedstrijd->programma . "'>" .
                     ucfirst($wedstrijd->naam) . "</a></div><div class='col-2'>" . ucfirst($wedstrijd->plaats) . "</div></div>\n";
                     $teller++;
 
