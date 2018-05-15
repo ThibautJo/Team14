@@ -73,13 +73,64 @@
 
         <main id="inhoud">
 
-            <div class="text-center"><h1>Dit is een testproject van Thomas More Hogeschool Geel.</h1></div>
-            <br>
+            <div class="container">
+                <div class="text-center"><h3>Dit is een testproject van Thomas More Hogeschool Geel.</h3></div>
+                <hr>
+            </div>
+
+            <!-- Nieuws sectie -->
+
+            <div class="container" id="Nieuws">
+                <h4>Nieuws</h4>
+
+                <div class="row">
+                    <?php
+                    foreach ($startpaginaitems as $startpaginaitem) {
+                        echo "\n<div id='" . $startpaginaitem->id . "'><div class='col-sm nieuwstitel'>" . ucfirst($startpaginaitem->titel) . "</div><div class='col-sm'>" .
+                        ucfirst($startpaginaitem->inhoud) . "</div><br>\n";
+                    }
+                    ?>
+                </div>
+
+            </div>
+            <hr>
+
+            <!-- Wedstrijden sectie -->
+
+            <div class="container" id="Wedstrijden">
+                <h4>Wedstrijden</h4>
+
+                <div class="row">
+                    <div class="col-2 wedstrijdtitel">Datum</div>
+                    <div class="col-sm wedstrijdtitel">Wedstrijd</div>
+                    <div class="col-2 wedstrijdtitel">Locatie</div>
+                </div>
+
+                <?php
+                // Geeft de laatste 5 wedstrijden weer
+                $teller = 0;
+
+                foreach ($wedstrijden as $wedstrijd) {
+
+                    echo "\n<div class='row'><div class='col-2'>" . ucfirst(date("d-m-Y", strtotime($wedstrijd->datumStart))) . "</div><div class='col-sm'><a href='" . $wedstrijd->programma . "'>" .
+                    ucfirst($wedstrijd->naam) . "</a></div><div class='col-2'>" . ucfirst($wedstrijd->plaats) . "</div></div>\n";
+                    $teller++;
+
+                    if ($teller == 5) {
+                        break;
+                    }
+                }
+                ?>
+
+            </div>
+            <hr>
 
             <!-- Team sectie -->
 
             <div class="container" id="Team">
-                
+                <h4>Ons team</h4>
+                <br>
+
                 <div class="row mx-auto">
                     <?php
                     foreach ($zwemmers as $zwemmer)
@@ -89,25 +140,9 @@
                 </div>
 
             </div>
+            <br>
 
-            <!-- Wedstrijden sectie -->
 
-            <div id="Wedstrijden">
-
-            </div>
-
-            <!-- Nieuws sectie -->
-
-            <div id="Nieuws">
-
-                <?php
-                foreach ($startpaginaitems as $startpaginaitem) {
-                    echo "<div id='" . $startpaginaitem->id . "'><div>" .
-                    ucfirst($startpaginaitem->inhoud) . "</div></div>\n";
-                }
-                ?>
-
-            </div>
         </main>
 
         <!-- Voetnoot -->
@@ -153,12 +188,12 @@
                 $('#submit-login').click(function () {
                     $('#aanmeldFormulier').modal('show');
                 });
-                
+
                 //Script om verschillende zwemmeromschrijvingen te tonen
-                   
-                $("mijnKlik").on("click", function(e) { 
-                    e.PreventDefault; 
-                    var grabID = $(this).attr( "href" );                                
+
+                $("mijnKlik").on("click", function (e) {
+                    e.PreventDefault;
+                    var grabID = $(this).attr("href");
                     $('div' + grabID).toggleClass("hide");
                     $("div").not('div' + grabID).addClass("hide"); //hide all div except clicked one.
                 });

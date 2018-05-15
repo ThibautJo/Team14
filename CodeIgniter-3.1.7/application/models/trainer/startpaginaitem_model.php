@@ -46,26 +46,15 @@ class StartpaginaItem_model extends CI_Model {
     function getStartpaginaItem() {
 
         /**
-         * Retourneert alle startpaginaItems uit de tabel startpaginaItem.
-         * @return Alle startpaginaItems.
-         */
+        * Retourneert alle startpaginaItems uit de tabel startpaginaItem.
+        * @return Alle startpaginaItems.
+        */
         
         $query = $this->db->get('startpaginaItem');
         return $query->result();
-    }
+    }   
 
-    function deletegetStartpaginaItem($id) {
-
-        /**
-         * Verwijdert het record met id=$id uit de tabel startpaginaItem.
-         * @param $id De id van het record dat opgevraagd wordt.
-         */
-        
-        $this->db->where('id', $id);
-        $this->db->delete('startpaginaItem');
-    }
-
-    function insertgetStartpaginaItem($startpaginaitem) {
+    function insertStartpaginaItem($startpaginaitem) {
 
         /**
          * Voegt een nieuw record toe aan de tabel startpaginaItem.
@@ -75,15 +64,26 @@ class StartpaginaItem_model extends CI_Model {
         $this->db->insert('startpaginaItem', $startpaginaitem);
     }
 
-    function updategetStartpaginaItem($startpaginaitem) {
+    function updateStartpaginaItem($startpaginaitem) {
 
         /**
          * Wijzigt een startpaginaItem-object uit de tabel startpaginaItem.
-         * @param $startpaginaitem Het supplementen object waar de aangepaste data in zit.
+         * @param $startpaginaitem Het startpaginaItem-object waar de aangepaste data in zit.
          */
         
         $this->db->where('id', $startpaginaitem->id);
         $this->db->update('startpaginaItem', $startpaginaitem);
+    }
+    
+    function deleteStartpaginaItem($id) {
+
+        /**
+         * Verwijdert het record met id=$id uit de tabel startpaginaItem.
+         * @param $id De id van het record dat opgevraagd wordt.
+         */
+        
+        $this->db->where('id', $id);
+        $this->db->delete('startpaginaItem');
     }
 
 }
