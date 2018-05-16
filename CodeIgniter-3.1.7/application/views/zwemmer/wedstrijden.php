@@ -8,7 +8,7 @@
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
-// |    Auteur: Thibaut Joukes       |       Helper:
+// |    Auteur: Thibaut Joukes, Lise Van Eyck      |       Helper:
 // +----------------------------------------------------------
 // |
 // |    Wedstrijden
@@ -97,14 +97,14 @@ $maanden = array(
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Inschrijven wedstrijd</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <?php
                     echo form_open('', $attributenFormulier);
-                    ?>                
+                    ?>
                     <div class="form-group">
                         <p><div id="reeksen"></div></p>
                         <div class="invalid-feedback">
