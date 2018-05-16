@@ -71,7 +71,7 @@ class Profiel extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     /**
      * Slaagt het aangepaste profiel op via Profiel_model en 
      * toont de aangepaste lijst in de view profiel.php

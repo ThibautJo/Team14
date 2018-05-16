@@ -63,7 +63,7 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Achternaam', 'achternaam');
@@ -107,7 +107,7 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                     ?>                   
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Telefoonnummer', 'telefoonnummer');
@@ -120,7 +120,7 @@ $profielTonen = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Email', 'email');
