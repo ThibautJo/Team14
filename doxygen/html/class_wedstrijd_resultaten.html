@@ -86,17 +86,17 @@ Public Members</h2></td></tr>
 <tr class="memitem:a149eb92716c1084a935e04a8d95f7347"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd_resultaten.html#a149eb92716c1084a935e04a8d95f7347">index</a> ()</td></tr>
 <tr class="memdesc:a149eb92716c1084a935e04a8d95f7347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Haalt alle wedstrijden op.  <a href="#a149eb92716c1084a935e04a8d95f7347">Meer...</a><br /></td></tr>
 <tr class="separator:a149eb92716c1084a935e04a8d95f7347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b8a21e9caf13308f000038f609f4402"><td class="memItemLeft" align="right" valign="top"><a id="a2b8a21e9caf13308f000038f609f4402"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>resultatenWedstrijd</b> ($actie=null)</td></tr>
+<tr class="memitem:a2b8a21e9caf13308f000038f609f4402"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd_resultaten.html#a2b8a21e9caf13308f000038f609f4402">resultatenWedstrijd</a> ($actie=null)</td></tr>
+<tr class="memdesc:a2b8a21e9caf13308f000038f609f4402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Haalt alle wedstrijd resultaten op van bijhorende wedstrijd.  <a href="#a2b8a21e9caf13308f000038f609f4402">Meer...</a><br /></td></tr>
 <tr class="separator:a2b8a21e9caf13308f000038f609f4402"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a628de704973034f80d95c086693720e9"><td class="memItemLeft" align="right" valign="top"><a id="a628de704973034f80d95c086693720e9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>resultaatOpvragen</b> ($resultID)</td></tr>
+<tr class="memitem:a628de704973034f80d95c086693720e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd_resultaten.html#a628de704973034f80d95c086693720e9">resultaatOpvragen</a> ($resultID)</td></tr>
+<tr class="memdesc:a628de704973034f80d95c086693720e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Haalt het opgevraagde resultaat van de zwemmer op.  <a href="#a628de704973034f80d95c086693720e9">Meer...</a><br /></td></tr>
 <tr class="separator:a628de704973034f80d95c086693720e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc06a066996f530f5a8b36a56cb13154"><td class="memItemLeft" align="right" valign="top"><a id="acc06a066996f530f5a8b36a56cb13154"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>opslaanResultaat</b> ($actie)</td></tr>
 <tr class="separator:acc06a066996f530f5a8b36a56cb13154"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad55fb930edf3bba639b26ba949e7430d"><td class="memItemLeft" align="right" valign="top"><a id="ad55fb930edf3bba639b26ba949e7430d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>verwijderResultaat</b> ($resultID)</td></tr>
+<tr class="memitem:ad55fb930edf3bba639b26ba949e7430d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd_resultaten.html#ad55fb930edf3bba639b26ba949e7430d">verwijderResultaat</a> ($resultID)</td></tr>
+<tr class="memdesc:ad55fb930edf3bba639b26ba949e7430d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verwijderd het gevraagde resultaat adhv resultaat id.  <a href="#ad55fb930edf3bba639b26ba949e7430d">Meer...</a><br /></td></tr>
 <tr class="separator:ad55fb930edf3bba639b26ba949e7430d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a149eb92716c1084a935e04a8d95f7347"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wedstrijd_resultaten.html#a149eb92716c1084a935e04a8d95f7347">index</a> ()</td></tr>
 <tr class="memdesc:a149eb92716c1084a935e04a8d95f7347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Haalt alle wedstrijden op.  <a href="#a149eb92716c1084a935e04a8d95f7347">Meer...</a><br /></td></tr>
@@ -154,10 +154,114 @@ wedstrijd_resultaten.php </dd></dl>
 </div><div class="memdoc">
 
 <p>Haalt alle wedstrijden op. </p>
-<p>toont de resulterende objecten in de view wedstrijden.php en <a class="el" href="wedstrijden__aanpassen_8php.html">wedstrijden_aanpassen.php</a>.</p>
-<dl class="section see"><dt>Zie ook</dt><dd>Wedstrijd_model::getWedstrijden() </dd>
+<p>toont de resulterende objecten in de view wedstrijd_resultaten.php en wedstrijd_resultaten_aanpassen.php.</p>
+<dl class="section see"><dt>Zie ook</dt><dd>Wedstrijd_model::getWedstrijdenVerleden() </dd>
 <dd>
-wedstrijd_resultaten.php </dd></dl>
+Wedstrijd_model::getIngeschrevenen() </dd>
+<dd>
+Wedstrijd_model::getAfstanden() </dd>
+<dd>
+Wedstrijd_model::getSlagen() </dd>
+<dd>
+wedstrijd_resultaten.php </dd>
+<dd>
+wedstrijd_resultaten_aanpassen.php </dd></dl>
+
+</div>
+</div>
+<a id="a628de704973034f80d95c086693720e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a628de704973034f80d95c086693720e9">&#9670;&nbsp;</a></span>resultaatOpvragen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">resultaatOpvragen </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$resultID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Haalt het opgevraagde resultaat van de zwemmer op. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$resultID</td><td>duid het resultaat id aan dat opgevraagd moet worden </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>Wedstrijd_model::getResultatenWithId() </dd>
+<dd>
+Wedstrijd_model::getRondeWithId() </dd>
+<dd>
+Wedstrijd_model::getReeksenWithInschrijvingId() </dd></dl>
+
+</div>
+</div>
+<a id="a2b8a21e9caf13308f000038f609f4402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b8a21e9caf13308f000038f609f4402">&#9670;&nbsp;</a></span>resultatenWedstrijd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">resultatenWedstrijd </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$actie</em> = <code>null</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Haalt alle wedstrijd resultaten op van bijhorende wedstrijd. </p>
+<p>toont de resulterende objecten in de view wedstrijd_resultaten_result.php en <a class="el" href="wedstrijd__resultaten__result__aanpassen_8php.html">wedstrijd_resultaten_result_aanpassen.php</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$actie</td><td>duid aan op welke pagina men terecht komt </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>Wedstrijd_model::getResultatenTabel() </dd>
+<dd>
+Wedstrijd_model::getRondes() </dd>
+<dd>
+Wedstrijd_model::getSlagEnAfstandWithWedstrijdId() </dd>
+<dd>
+zwemmers_model::getZwemmers() </dd>
+<dd>
+wedstrijd_resultaten_result.php </dd>
+<dd>
+<a class="el" href="wedstrijd__resultaten__result__aanpassen_8php.html">wedstrijd_resultaten_result_aanpassen.php</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad55fb930edf3bba639b26ba949e7430d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad55fb930edf3bba639b26ba949e7430d">&#9670;&nbsp;</a></span>verwijderResultaat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">verwijderResultaat </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$resultID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verwijderd het gevraagde resultaat adhv resultaat id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$resultID</td><td>duid het resultaat id aan dat opgevraagd moet worden </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>Wedstrijd_model::verwijderResultaatViaId() </dd></dl>
 
 </div>
 </div>

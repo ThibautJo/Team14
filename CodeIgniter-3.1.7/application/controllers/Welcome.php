@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @class Welcome
  * @brief Controller-klasse voor aanmelden en homepagina.
  * 
- * Controller-klasse met alle methodes die gebruikt worden voor aanmelden van gebruikers
+ * Controller-klasse met methodes die gebruikt worden voor aanmelden van gebruikers en het weergeven van de homepagina.
  */
 
 class Welcome extends CI_Controller {
@@ -70,8 +70,7 @@ class Welcome extends CI_Controller {
     public function ladenTeam() {
         
         /**
-        * Haalt alle startpaginaItems op via startpaginaItem_model, alle verschillende wedstrijden op via wedstrijd_model,  
-        * alle verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php
+        * Haalt alle verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php
         * 
         * @see startpaginaItem_model::getStartpaginaItem()
         * @see zwemmers_model::getLadenTeam()

@@ -2,6 +2,7 @@ var searchData=
 [
   ['watermark',['watermark',['../class_c_i___image__lib.html#a4732a76680e7c0b28f98f6634b567cc9',1,'CI_Image_lib']]],
   ['wedstrijd_5fmodel',['Wedstrijd_model',['../class_wedstrijd__model.html',1,'Wedstrijd_model'],['../classwedstrijd__model.html',1,'wedstrijd_model']]],
+  ['wedstrijd_5fresultaten_5fresult_5faanpassen_2ephp',['wedstrijd_resultaten_result_aanpassen.php',['../wedstrijd__resultaten__result__aanpassen_8php.html',1,'']]],
   ['wedstrijden',['Wedstrijden',['../class_wedstrijden.html',1,'']]],
   ['wedstrijden_5faanpassen_2ephp',['wedstrijden_aanpassen.php',['../wedstrijden__aanpassen_8php.html',1,'']]],
   ['wedstrijdopvragen',['wedstrijdOpvragen',['../class_wedstrijden.html#acac0328d6221e684991f2f7ff8e6b570',1,'Wedstrijden']]],

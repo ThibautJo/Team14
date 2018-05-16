@@ -28,6 +28,8 @@ var searchData=
   ['result',['result',['../class_c_i___d_b__result.html#a86bc3a5f1694241cf86a6fd754553884',1,'CI_DB_result\result()'],['../class_c_i___unit__test.html#adcfdd404b2f2610e0690b4beb7786ce5',1,'CI_Unit_test\result()']]],
   ['result_5farray',['result_array',['../class_c_i___d_b__result.html#a444f7dd61bfbe3931a7188adad61feae',1,'CI_DB_result']]],
   ['result_5fobject',['result_object',['../class_c_i___d_b__result.html#a266a17f340dab35b8f2858931ff772a2',1,'CI_DB_result']]],
+  ['resultaatopvragen',['resultaatOpvragen',['../class_wedstrijd_resultaten.html#a628de704973034f80d95c086693720e9',1,'WedstrijdResultaten']]],
+  ['resultatenwedstrijd',['resultatenWedstrijd',['../class_wedstrijd_resultaten.html#a2b8a21e9caf13308f000038f609f4402',1,'WedstrijdResultaten']]],
   ['robot',['robot',['../class_c_i___user__agent.html#a4d6a9230d82ec6fc2fdd6bc57f4da5e5',1,'CI_User_agent']]],
   ['rotate',['rotate',['../class_c_i___image__lib.html#a74e94d71195d9cbb9c9e3bca3353d912',1,'CI_Image_lib']]],
   ['row',['row',['../class_c_i___d_b__result.html#a43764449dacaf9b61bbd1efee9cdb256',1,'CI_DB_result']]],
