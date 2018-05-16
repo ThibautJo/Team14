@@ -126,7 +126,7 @@ class Melding extends CI_Controller {
         $this->load->model('trainer/melding_model');
         $this->melding_model->deleteMeldingPerPersoon($id);
 
-        redirect('/trainer/melding/beheren');
+        redirect('/Trainer/melding/beheren');
     }
 
     /**
@@ -169,7 +169,7 @@ class Melding extends CI_Controller {
             $this->melding_model->updateMeldingPerPersoon($meldingPerPersoon);
         }
 
-       redirect('/trainer/melding/beheren');
+       redirect('/Trainer/melding/beheren');
 
     }
 

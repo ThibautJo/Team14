@@ -1,7 +1,15 @@
 var searchData=
 [
+  ['ladenactiviteiten',['ladenActiviteiten',['../class_agenda.html#af33a1f7ec02864c194dbd59b548ce683',1,'Agenda\ladenActiviteiten($persoonId)'],['../class_agenda.html#af33a1f7ec02864c194dbd59b548ce683',1,'Agenda\ladenActiviteiten($persoonId)']]],
+  ['ladenagendapersoon',['ladenAgendaPersoon',['../class_agenda.html#a5e85d60591c8931290eb2126aa679e5a',1,'Agenda']]],
   ['ladenarchief',['ladenArchief',['../class_team.html#ac139d7df113ab0560698bfcb50372577',1,'Team']]],
+  ['ladenkleuren',['ladenKleuren',['../class_agenda.html#ac46520962a2728eb2c457b33c890731a',1,'Agenda']]],
+  ['ladenlistgroup',['ladenListGroup',['../class_agenda.html#ab8fe32e8d70c7b8e5bf3e2d28f4f7861',1,'Agenda']]],
+  ['ladenonderzoeken',['ladenOnderzoeken',['../class_agenda.html#a607ed554384f4f32d667eda5f245be0b',1,'Agenda\ladenOnderzoeken($persoonId)'],['../class_agenda.html#a607ed554384f4f32d667eda5f245be0b',1,'Agenda\ladenOnderzoeken($persoonId)']]],
+  ['ladensupplementen',['ladenSupplementen',['../class_agenda.html#a3fd2c90c5495c41dbaf9cefe37c2e6d7',1,'Agenda\ladenSupplementen($persoonId)'],['../class_agenda.html#a3fd2c90c5495c41dbaf9cefe37c2e6d7',1,'Agenda\ladenSupplementen($persoonId)']]],
   ['ladenteam',['ladenTeam',['../class_team.html#a7d329c2e40162829a8feb20be505c83a',1,'Team\ladenTeam()'],['../class_welcome.html#a7d329c2e40162829a8feb20be505c83a',1,'Welcome\ladenTeam()'],['../class_team.html#a7d329c2e40162829a8feb20be505c83a',1,'Team\ladenTeam()']]],
+  ['ladenwedstrijden',['ladenWedstrijden',['../class_agenda.html#a30020e3ba3874e0319cab60e7ffaf636',1,'Agenda\ladenWedstrijden($persoonId)'],['../class_agenda.html#a30020e3ba3874e0319cab60e7ffaf636',1,'Agenda\ladenWedstrijden($persoonId)']]],
+  ['ladenzwemmers',['ladenZwemmers',['../class_agenda.html#a127d552fae6401d3ad40add065a81112',1,'Agenda']]],
   ['language',['language',['../class_c_i___loader.html#ae3e44c33f5f085ad8d6c556ede1385d8',1,'CI_Loader']]],
   ['languages',['languages',['../class_c_i___user__agent.html#adda8fc15b6fe0efc05a50d2645189c77',1,'CI_User_agent']]],
   ['last_5fquery',['last_query',['../class_c_i___d_b__driver.html#a8117354f1fa0b2873f0ad2792dc21389',1,'CI_DB_driver']]],

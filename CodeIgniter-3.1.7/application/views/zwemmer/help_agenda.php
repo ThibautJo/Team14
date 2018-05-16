@@ -11,6 +11,13 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
+
+/**
+ * @file help_agenda.php
+ * 
+ * View waarin de gebruikersondersteuning wordt weergegeven.
+ */
+
 ?>
 <div class="d-flex flex-column">
     

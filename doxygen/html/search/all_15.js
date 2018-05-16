@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['team14',['Team14',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['team14',['Team14',['../md__d_1_wamp64_www__team14__r_e_a_d_m_e.html',1,'']]],
   ['table_5fexists',['table_exists',['../class_c_i___d_b__driver.html#af148cb2cd5d490d2a480c0c741ceed03',1,'CI_DB_driver']]],
   ['tablesorter',['tablesorter',['../class_c_i___jquery.html#a088079669b8389ceb97efea5381caf62',1,'CI_Jquery']]],
   ['team',['Team',['../class_team.html',1,'']]],
@@ -10,6 +10,9 @@ var searchData=
   ['timeout',['timeout',['../class_c_i___xmlrpc.html#ada3149e6290a7991c7dfc88c6c90f2db',1,'CI_Xmlrpc']]],
   ['to',['to',['../class_c_i___email.html#a453e853778ae341e4fb165551d1ba1aa',1,'CI_Email']]],
   ['todo_20lijst',['Todo Lijst',['../todo.html',1,'']]],
+  ['toevoegenactiviteit',['toevoegenActiviteit',['../class_agenda.html#a608ff5abea397b8a178fa5592c39da2b',1,'Agenda']]],
+  ['toevoegenonderzoek',['toevoegenOnderzoek',['../class_agenda.html#a4b4d27c43f8e1fd975fc0e3a113a51f1',1,'Agenda']]],
+  ['toevoegensupplement',['toevoegenSupplement',['../class_agenda.html#a21431c2cbb42e35a24b55ee3110c41cc',1,'Agenda']]],
   ['toggle',['toggle',['../class_c_i___javascript.html#aea72ca9a9b57e1cae194f84dbcb30d70',1,'CI_Javascript']]],
   ['toggleclass',['toggleClass',['../class_c_i___javascript.html#ab3f471c0411b110bc11f62fa26e9a9e3',1,'CI_Javascript']]],
   ['toonfout',['toonFout',['../class_welcome.html#ad05d8b352157e3ce6d608c6862fbe699',1,'Welcome']]],

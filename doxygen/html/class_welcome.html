@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team14: Welcome Class Referentie</title>
+<title>project14_1718: Welcome Class Referentie</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Team14
+   <div id="projectname">project14_1718
    </div>
   </td>
  </tr>
@@ -94,8 +94,7 @@ Public Members</h2></td></tr>
 <tr class="separator:ad05d8b352157e3ce6d608c6862fbe699"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a346d8fb0ef2d1f58b2e61e5cf73b5c92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_welcome.html#a346d8fb0ef2d1f58b2e61e5cf73b5c92">controleerAanmelden</a> ()</td></tr>
 <tr class="separator:a346d8fb0ef2d1f58b2e61e5cf73b5c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa954cce013935041d0def3a057c40676"><td class="memItemLeft" align="right" valign="top"><a id="aa954cce013935041d0def3a057c40676"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>meldAf</b> ()</td></tr>
+<tr class="memitem:aa954cce013935041d0def3a057c40676"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_welcome.html#aa954cce013935041d0def3a057c40676">meldAf</a> ()</td></tr>
 <tr class="separator:aa954cce013935041d0def3a057c40676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_c_i___controller"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_c_i___controller')"><img src="closed.png" alt="-"/>&#160;Public Members overge&euml;rfd van <a class="el" href="class_c_i___controller.html">CI_Controller</a></td></tr>
 <tr class="memitem:a095c5d389db211932136b53f25f39685 inherit pub_methods_class_c_i___controller"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_i___controller.html#a095c5d389db211932136b53f25f39685">__construct</a> ()</td></tr>
@@ -109,7 +108,7 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
 <div class="textblock"><p>Controller-klasse voor aanmelden en homepagina. </p>
-<p>Controller-klasse met alle methodes die gebruikt worden voor aanmelden van gebruikers </p>
+<p>Controller-klasse met methodes die gebruikt worden voor aanmelden van gebruikers en het weergeven van de homepagina. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentatie</h2>
 <a id="a095c5d389db211932136b53f25f39685"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a095c5d389db211932136b53f25f39685">&#9670;&nbsp;</a></span>__construct()</h2>
@@ -144,8 +143,10 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Controleert of de ingevoerde gebruikersgegevens overeenstemmen met een</p>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="home__aanmelden_8php.html">home_aanmelden.php</a></dd></dl>
+<p>Gebruikt de Authex-library om te controleren of de ingevoerde gebruikersgegevens overeenstemmen met een bestaande persoon in de database en controleert welke soort persoon zich aanmeldt.</p>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="home__aanmelden_8php.html">home_aanmelden.php</a> </dd>
+<dd>
+Authex.php</dd></dl>
 
 </div>
 </div>
@@ -187,8 +188,7 @@ zwemmers_model::getLadenTeam() </dd>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt alle startpaginaItems op via startpaginaItem_model, alle verschillende wedstrijden op via <a class="el" href="classwedstrijd__model.html">wedstrijd_model</a>, <br />
-alle verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php</p>
+<p>Haalt alle verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php</p>
 <dl class="section see"><dt>Zie ook</dt><dd>startpaginaItem_model::getStartpaginaItem() </dd>
 <dd>
 zwemmers_model::getLadenTeam() </dd>
@@ -216,6 +216,25 @@ zwemmers_model::getLadenTeam() </dd>
 
 </div>
 </div>
+<a id="aa954cce013935041d0def3a057c40676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa954cce013935041d0def3a057c40676">&#9670;&nbsp;</a></span>meldAf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">meldAf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Gebruikt de Authex-library om de gebruiker af te melden en de homepagina opnieuw weer te geven.</p>
+<dl class="section see"><dt>Zie ook</dt><dd>Authex.php</dd></dl>
+
+</div>
+</div>
 <a id="ad05d8b352157e3ce6d608c6862fbe699"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad05d8b352157e3ce6d608c6862fbe699">&#9670;&nbsp;</a></span>toonFout()</h2>
 
@@ -236,7 +255,7 @@ zwemmers_model::getLadenTeam() </dd>
 </div>
 </div>
 <hr/>De documentatie voor deze klasse is gegenereerd op grond van het volgende bestand:<ul>
-<li>CodeIgniter-3.1.7/application/controllers/Welcome.php</li>
+<li>D:/wamp64/www/Team14/CodeIgniter-3.1.7/application/controllers/Welcome.php</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

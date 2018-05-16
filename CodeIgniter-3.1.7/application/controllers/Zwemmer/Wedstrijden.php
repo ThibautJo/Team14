@@ -157,7 +157,7 @@ class Wedstrijden extends CI_Controller {
         $this->load->model('trainer/inschrijving_model');
         $this->inschrijving_model->insertInschrijving($inschrijving);
 
-        redirect('/zwemmer/wedstrijden/index');
+        redirect('/Zwemmer/wedstrijden/index');
     }
 
 }

@@ -1,5 +1,4 @@
 <?php
-
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -12,19 +11,25 @@
 // |    Team 14
 // +----------------------------------------------------------
 
+/**
+ * @file profiel.php
+ * 
+ * View waarin profiel van de aangemelde zwemmer wordt weergegeven.
+ */
+
 $attributenFormulier = array('id' => 'form-profiel',
     'data-toggle' => 'validator',
     'role' => 'form',
     'enctype' => 'multipart/form-data');
 ?>
 <div>
-    <p>Naam: <?php echo $profiel->voornaam . " " . $profiel->achternaam?></p>
+    <p>Naam: <?php echo $profiel->voornaam . " " . $profiel->achternaam ?></p>
     <p>Adres: <?php echo $profiel->straat . " " . $profiel->huisnummer ?></p>
     <p>Gemeente: <?php echo $profiel->postcode . " " . $profiel->gemeente ?></p>
-    <p>Telefoonnummer: <?php echo $profiel->telefoonnummer?></p>
-    <p>Email: <?php echo $profiel->email?></p>
+    <p>Telefoonnummer: <?php echo $profiel->telefoonnummer ?></p>
+    <p>Email: <?php echo $profiel->email ?></p>
     <p>Over jezelf</p>
-    <p><textarea rows="2" cols="25"><?php echo $profiel->omschrijving . " " . $profiel->id?></textarea></p>
+    <p><textarea rows="2" cols="25"><?php echo $profiel->omschrijving ?></textarea></p>
     <button type="button" class="btn button-blue justify-content-center" id="<?php echo $profiel->id ?>" onclick='profielGegevensTonen(this.id)' value="<?php echo $profiel->id ?>" data-toggle='modal' data-toggle='tooltip' title='Profiel wijzigen' data-target="#profielWijzigen">Aanpassen</button>
 </div>
 
@@ -82,7 +87,7 @@ $attributenFormulier = array('id' => 'form-profiel',
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Gemeente', 'gemeente');
@@ -99,7 +104,7 @@ $attributenFormulier = array('id' => 'form-profiel',
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Telefoonnummer', 'telefoonnummer');
@@ -111,7 +116,7 @@ $attributenFormulier = array('id' => 'form-profiel',
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Email', 'email');
@@ -136,7 +141,7 @@ $attributenFormulier = array('id' => 'form-profiel',
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                <?php echo form_close();?>
+                <?php echo form_close(); ?>
             </div>
             <div class="modal-footer form-group">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Annuleren</button> <!-- Modal sluit knop -->
@@ -145,7 +150,7 @@ $attributenFormulier = array('id' => 'form-profiel',
         </div>
     </div>
 </div>
-            
+
 
 
 

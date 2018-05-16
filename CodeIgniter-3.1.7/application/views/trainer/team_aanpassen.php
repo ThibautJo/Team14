@@ -34,14 +34,14 @@ $archiveren = array('class' => 'btn btn-danger btn-xs btn-round', 'data-toggle' 
                 . "<td>" . toonAfbeelding('Profiel/Avatar_' . $persoon->voornaam . "_" . $persoon->achternaam . '.jpg', 'id="avatar" class="shadow img-circle"') . "</td>"
                 . "<td>" . $persoon->voornaam . " " . $persoon->achternaam . "</td><td>" . $persoon->email . "</td>
                 <td><button type='button' class='btn btn-success' id='aanpassen" . $persoon->id . "' onclick='persoonUpdate(this.id)' value='" . $persoon->id . "'data-toggle='modal' data-toggle='tooltip' title='Persoon wijzigen' data-target='#persoonWijzigen'>" . "<i class='fas fa-pencil-alt'></i></button>"
-                        . anchor('Trainer/Team/archiveren/' . $persoon->id, form_button("knopArchiveer", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
+                . anchor('Trainer/Team/archiveren/' . $persoon->id, form_button("knopArchiveer", "<i class='fas fa-archive'></i>", $archiveren)) . "</td></tr>\n";
             }
             ?>
         </tbody>
     </table>
 </div>
 
-<?php 
+<?php
 $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
 ?>
 <!-- Modal Toevoegen -->
@@ -58,7 +58,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                 <?php
                 echo form_open('', $attributenFormulier);
                 ?>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Soort', 'soort');
@@ -66,7 +66,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Voornaam', 'voornaam');
@@ -79,7 +79,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Achternaam', 'achternaam');
@@ -92,7 +92,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Email', 'email');
@@ -105,7 +105,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Wachtwoord', 'wachtwoord');
@@ -118,7 +118,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <?php
                     echo form_label('Over jezelf', 'over jezelf');
@@ -131,20 +131,8 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                
-                <div class="form-group">
-                    <?php
-                    echo form_label('Upload profielfoto ', 'upload profielfoto ');
-                    echo form_label(' -> "Avatar_Voornaam_Achternaam.jpg"');
-                    echo form_upload(array('name' => 'upload',
-                        'id' => 'upload',
-                        'value' => '',
-                        'class' => 'form-control-file'))
-                    ?>
-                    <div class="help-block with-errors"></div>
-                </div>
-                
-                <?php echo form_close();?>
+
+                <?php echo form_close(); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
@@ -173,7 +161,15 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     echo form_input(array('type' => 'hidden', 'name' => 'id', 'id' => 'id', 'value' => ''));
                     ?>
                 </div>
-
+                
+                <div class="form-group">
+                    <?php
+                    echo form_label('Soort', 'soort');
+                    echo form_dropdown('soort', $opties, '', 'class="form-control"')
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_label('Voornaam', 'voornaam');
@@ -224,7 +220,7 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>
-                <?php echo form_close();?>
+                <?php echo form_close(); ?>
             </div>
             <div class="modal-footer form-group">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->
@@ -234,15 +230,14 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
     </div>
 </div>
 
-    
+
 <?php
-$archief="";
-$archief[0]="--Select--";
+$archief = "";
+$archief[0] = "--Select--";
 
 foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
     $archief[$zwemmeruitarchief->id] = $zwemmeruitarchief->voornaam . " " . $zwemmeruitarchief->achternaam;
 }
-
 ?>
 <!-- Zwemmer uit archief halen -->
 <div class="modal fade" id="zwemmerToevoegenUitArchief" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -258,16 +253,15 @@ foreach ($zwemmersuitarchief as $zwemmeruitarchief) {
                 <?php
                 echo form_open('', $attributenFormulier);
                 ?>
-                
-                <div class="form-group">
-                            <?php
-                            echo form_label('Archief', 'archief');
-                            echo form_dropdown('archief', $archief, 'id="zwemmeruitarchief"', 'class="form-control"');
 
-                            ?>
-                            <div class="help-block with-errors"></div>
-                        </div>
-                <?php echo form_close();?>
+                <div class="form-group">
+                    <?php
+                    echo form_label('Archief', 'archief');
+                    echo form_dropdown('archief', $archief, 'id="zwemmeruitarchief"', 'class="form-control"');
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+<?php echo form_close(); ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn button-blue" data-dismiss="modal">Sluiten</button> <!-- Modal sluit knop -->

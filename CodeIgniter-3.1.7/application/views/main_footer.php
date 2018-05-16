@@ -1,3 +1,11 @@
+<?php
+
+ /**
+ * @file main_footer.php
+ * View waarmee de footer van de applicatie wordt weergegeven.
+ */
+?>
+
 <span class="d-flex flex-sm-row flex-column justify-content-sm-center">
     <span><b>Oefening voor:</b> Thomas More Geel &nbsp;&nbsp;|&nbsp;&nbsp;</span> 
     <span><b>Opdrachtgever:</b> Kristine Mangelschots</span>

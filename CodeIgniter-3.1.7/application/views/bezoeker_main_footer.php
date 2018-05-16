@@ -1,3 +1,9 @@
+<?php
+    /**
+     * @file bezoeker_main_footer.php
+     * View waarmee de footer op de homepagina wordt weergegeven.
+     */
+?>
 <!-- footer -->
 
 <footer>
@@ -19,26 +25,23 @@
                 <span class="d-flex justify-content-sm-center">
                     <span>Team 14: 
                         <?php
-
                         // Zorgt ervoor dat de auteur in de voetnoot wit is gedrukt
 
                         $i = 0;
                         foreach ($team as $value => $key) {
                             if ($key == 'true') {
                                 echo '<span class="text-white">' . $value . '</span>';
-                            }
-                            else {
+                            } else {
                                 echo $value;
                             }
 
                             if ($i == count($team) - 1) {
-                            }
-                            else {
+                                
+                            } else {
                                 echo ', ';
                             }
                             $i++;
                         }
-
                         ?>
                     </span>
                 </span>

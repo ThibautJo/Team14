@@ -78,8 +78,11 @@ class Authex {
     }
 
     function meldAf() {
+        
+        /**
+        * Verwijdert de sessievariabele en meldt de gebruiker af.
+        */
 
-        // afmelden, dus sessievariabele wegdoen
         $CI = & get_instance();
         $CI->session->unset_userdata('Id');
     }

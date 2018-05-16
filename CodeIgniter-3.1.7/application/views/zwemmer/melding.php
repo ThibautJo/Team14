@@ -10,6 +10,13 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
+
+/**
+ * @file melding.php
+ * 
+ * View waarin alle meldingen van aangemelde persoon worden weergegeven.
+ */
+
 ?>
 
 <table class="table">

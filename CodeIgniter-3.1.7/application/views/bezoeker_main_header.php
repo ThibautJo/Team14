@@ -1,3 +1,10 @@
+<?php
+    /**
+     * @file bezoeker_main_header.php
+     * View waarmee de header en navigatiebalk op de homepagina worden weergegeven.
+     */
+?>
+
 <!-- navigatie -->
 
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top">

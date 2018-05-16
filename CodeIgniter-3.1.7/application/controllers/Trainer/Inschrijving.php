@@ -147,7 +147,7 @@ class Inschrijving extends CI_Controller {
         $meldingPerPersoon->persoonId = $inschrijvingTabel->persoonId;
         $this->melding_model->insertMeldingPerPersoon($meldingPerPersoon);
 
-        redirect('/trainer/inschrijving/aanpassen');
+        redirect('/Trainer/inschrijving/aanpassen');
     }
 
     /**
@@ -166,7 +166,7 @@ class Inschrijving extends CI_Controller {
         $this->load->model('trainer/inschrijving_model');
         $this->inschrijving_model->updateInschrijving($inschrijving);
 
-        redirect('/trainer/inschrijving/aanpassen');
+        redirect('/Trainer/inschrijving/aanpassen');
     }
 
 }

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['xml_5frpc_5fclient',['XML_RPC_Client',['../class_x_m_l___r_p_c___client.html',1,'']]],
-  ['xml_5frpc_5fmessage',['XML_RPC_Message',['../class_x_m_l___r_p_c___message.html',1,'']]],
-  ['xml_5frpc_5fresponse',['XML_RPC_Response',['../class_x_m_l___r_p_c___response.html',1,'']]],
-  ['xml_5frpc_5fvalues',['XML_RPC_Values',['../class_x_m_l___r_p_c___values.html',1,'']]]
+  ['wedstrijd_5fmodel',['Wedstrijd_model',['../class_wedstrijd__model.html',1,'Wedstrijd_model'],['../classwedstrijd__model.html',1,'wedstrijd_model']]],
+  ['wedstrijden',['Wedstrijden',['../class_wedstrijden.html',1,'']]],
+  ['wedstrijdresultaten',['WedstrijdResultaten',['../class_wedstrijd_resultaten.html',1,'']]],
+  ['welcome',['Welcome',['../class_welcome.html',1,'']]]
 ];

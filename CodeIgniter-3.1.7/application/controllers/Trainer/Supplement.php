@@ -101,7 +101,7 @@ class Supplement extends CI_Controller {
         $this->load->model('trainer/supplement_model');
         $this->supplement_model->deleteSupplement($id);
 
-        redirect('/trainer/supplement/index');
+        redirect('/Trainer/supplement/index');
     }
 
     /**
@@ -133,7 +133,7 @@ class Supplement extends CI_Controller {
             $this->supplement_model->updateSupplement($supplement);
         }
 
-       redirect('/trainer/supplement/index');
+       redirect('/Trainer/supplement/index');
 
     }
 
