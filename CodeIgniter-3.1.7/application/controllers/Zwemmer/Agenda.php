@@ -17,7 +17,7 @@ class Agenda extends CI_Controller {
     // +----------------------------------------------------------
     
     /**
-    * @class Zwemmer/Agenda
+    * @class Agenda
     * @brief Controller-klasse voor het weergeven van de agenda.
     * 
     * Controller-klasse voor het weergeven van de agenda van de gebruiker die is ingelogd.
@@ -26,6 +26,11 @@ class Agenda extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
+        
+        /**
+        * Laadt de auteur van de geschreven code van deze pagina in de footer en laat het aantal meldingen zien.
+         * @see melding_model::getMeldingByPersoon($persoonId)
+        */
 
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
@@ -49,6 +54,19 @@ class Agenda extends CI_Controller {
     // |
     // +----------------------------------------------------------
 
+    /**
+     * Haalt alle activiteiten van de aangemelde zwemmer op en toont deze op het scherm in een agenda.
+     * 
+     * De verschillende soorten activiteiten worden via aparte methoden ingeladen en omgevormd tot één grote array.
+     * Deze array wordt omgezet in een JSON object dat wordt ingeladen in de agenda.
+     *
+     * @see ladenWedstrijden($persoonId)
+     * @see ladenOnderzoeken($persoonId)
+     * @see ladenSupplementen($persoonId)
+     * @see ladenActiviteiten($persoonId)
+     * @see agenda_model::getKleurenActiviteiten()
+     */
+    
     public function index() {
 
         $data['titel'] = 'Agenda';
@@ -83,6 +101,13 @@ class Agenda extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
+    
+    /**
+     * Haalt alle wedstrijden van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     *
+     * @see agenda_model::getWedstrijdenByPersoon($persoonId)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenWedstrijden($persoonId) {
 
@@ -106,6 +131,13 @@ class Agenda extends CI_Controller {
 
         return $data_wedstrijden;
     }
+    
+    /**
+     * Haalt alle medische afspraken van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     *
+     * @see agenda_model::getOnderzoekenByPersoon($persoonId)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenOnderzoeken($persoonId) {
         // Medische onderzoeken worden opgehaald uit het model en in een lijst gestoken
@@ -128,6 +160,13 @@ class Agenda extends CI_Controller {
 
         return $data_onderzoeken;
     }
+    
+    /**
+     * Geeft elke soort training een verschillende kleur.
+     *
+     * @see agenda_model::getActiviteit($id)
+     * @param int $id De id van de activiteit.
+     */
 
     public function kiesKleurTraining($id) {
         $this->load->model("zwemmer/agenda_model");
@@ -158,6 +197,13 @@ class Agenda extends CI_Controller {
 
         return $color;
     }
+    
+    /**
+     * Onderscheidt de twee soorten activiteiten in stages en trainingen. Stages krijgen een kleur en elke soort training krijgt een kleur (via een andere functie).
+     *
+     * @see kiesKleurTraining($id)
+     * @param int $id De id van de activiteit.
+     */
 
     public function kiesKleurActiviteiten($id) {
         $this->load->model("zwemmer/agenda_model");
@@ -179,6 +225,17 @@ class Agenda extends CI_Controller {
 
         return $color;
     }
+    
+    /**
+     * Haalt alle activiteiten (trainingen en stages) van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     * 
+     * @see agenda_model::getActiviteitenByPersoon($persoonId)
+     * 
+     * De verschillende trainingen krijgen allemaal een verschillende kleur toegewezen. Dit wordt gedaan met de volgende functie
+     * 
+     * @see kiesKleurActiviteiten($id)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenActiviteiten($persoonId) {
         // Trainingen en stages worden opgehaald uit het model en in een lijst gestoken
@@ -203,6 +260,13 @@ class Agenda extends CI_Controller {
 
         return $data_activiteiten;
     }
+    
+    /**
+     * Haalt alle supplementen van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     *
+     * @see agenda_model::getSupplementenByPersoon($persoonId)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenSupplementen($persoonId) {
         // Supplementen worden opgehaald uit het model en in een lijst gestoken
@@ -240,6 +304,12 @@ class Agenda extends CI_Controller {
 
         return $data_supplementen;
     }
+    
+    /**
+     * Laadt alle verschillende kleuren, die zijn toegewezen aan activiteiten, in.
+     *
+     * @see agenda_model::getKleuren()
+     */
 
     public function ladenKleuren() {
         // Kleuren worden opgehaald uit het model en in een lijst gestoken

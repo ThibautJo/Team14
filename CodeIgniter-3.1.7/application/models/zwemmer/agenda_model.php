@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @class Agenda_model
+ * @brief Model-klasse voor agenda
+ *
+ * Model-klasse die alle methodes bevat om de agenda te laten zien
+ */
+
 class Agenda_model extends CI_Model {
 
     // +----------------------------------------------------------
@@ -14,6 +21,10 @@ class Agenda_model extends CI_Model {
     // |    Team 14
     // +----------------------------------------------------------
 
+    /**
+     * Constructor
+     */
+    
     function __construct() {
         parent::__construct();
 
@@ -22,6 +33,12 @@ class Agenda_model extends CI_Model {
         $this->load->helper("my_url_helper");
         $this->load->helper('url');
     }
+    
+    /**
+     * Retourneert een activiteit
+     * @param $activiteitId De id van de activiteit
+     * @return Het opgevraagde record
+     */
 
     public function getActiviteit($activiteitId) {
         // Activiteit ophalen uit de databank
@@ -29,6 +46,12 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('activiteit');
         return $query->row();
     }
+    
+    /**
+     * Retourneert een typeActiviteit
+     * @param $activiteitId De id van de activiteit waarvan je een typeActiviteit opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getTypeActiviteit($activiteitId) {
         // Type activiteit ophalen uit de databank (training of stage)
@@ -36,6 +59,12 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('typeActiviteit');
         return $query->row();
     }
+    
+    /**
+     * Retourneert een typeTraining
+     * @param $trainingId De id van de soort training waarvan je een typeTraining opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getTypeTraining($trainingId) {
         // Type training ophalen uit de databank
@@ -43,6 +72,14 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('typeTraining');
         return $query->row();
     }
+    
+    /**
+     * Retourneert een volledig activiteiten object inclusief al zijn relatietabellen
+     * @param $activiteitId De id van de activiteit die wordt opgevraagd
+     * @see getTypeTraining($typeTrainingId)
+     * @see getTypeActiviteit($typeActiviteitId)
+     * @return Het opgevraagde record
+     */
 
     public function getVolledigeActiviteit($activiteitId) {
         $this->db->where('id', $activiteitId);
@@ -54,6 +91,11 @@ class Agenda_model extends CI_Model {
 
         return $activiteit;
     }
+    
+    /**
+     * Retourneert een alle training types
+     * @return Het opgevraagde record
+     */
 
     public function getAllTypeTraining() {
         // Type trainingen ophalen uit de databank
@@ -70,6 +112,15 @@ class Agenda_model extends CI_Model {
 
         return $soortTrainingen;
     }
+    
+    /**
+     * Retourneert alle activiteiten van een bepaalde persoon
+     * @param $persoonId De id van de persoon waarvan je de activiteiten opvraagt
+     * @see getActiviteit($activiteitId)
+     * @see getTypeActiviteit($typeActiviteitId)
+     * @see getTypeTraining($typeTrainingId)
+     * @return Het opgevraagde record
+     */
 
     public function getActiviteitenByPersoon($persoonId) {
         // Alle activiteiten (trainingen en stages) van een bepaalde persoon ophalen uit de databank
@@ -89,6 +140,12 @@ class Agenda_model extends CI_Model {
 
         return $activiteiten;
     }
+    
+     /**
+     * Retourneert een reeksPerWedstrijd
+     * @param $reeksPerWedstrijdId De id van de reeksPerWedstrijd die je opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getReeksPerWedstrijd($reeksPerWedstrijdId) {
         // Wedstrijdreeks ophalen uit de databank
@@ -97,6 +154,12 @@ class Agenda_model extends CI_Model {
         return $query->row();
     }
     
+    /**
+     * Retourneert alle reeksPerWedstrijd objecten van een bepaalde wedstrijd
+     * @param $wedstrijdId De id van de wedstrijd die je opvraagt
+     * @return Het opgevraagde record
+     */
+    
     public function getReeksenPerWedstrijd($wedstrijdId) {
         // Wedstrijdreeks ophalen uit de databank
         $this->db->where('wedstrijdId', $wedstrijdId);
@@ -104,12 +167,26 @@ class Agenda_model extends CI_Model {
         return $query->result();
     }
     
+    /**
+     * Retourneert een wedstrijd
+     * @param $wedstrijdId De id van de wedstrijd die je opvraagt
+     * @return Het opgevraagde record
+     */
+    
     public function getWedstrijd($wedstrijdId) {
         // Wedstrijd ophalen uit de databank
         $this->db->where('id', $wedstrijdId);
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
+    
+    /**
+     * Retourneert alle wedstrijden waar een bepaalde persoon aan deelneemt
+     * @param $persoonId De id van de persoon waarvan je de wedstrijden opvraagt
+     * @see getReeksPerWedstrijd($reeksPerWedstrijdId)
+     * @see getWedstrijd($wedstrijdId)
+     * @return Het opgevraagde record
+     */
 
     public function getWedstrijdenByPersoon($persoonId) {
         // Alle wedstrijden van een bepaalde persoon ophalen uit de databank (inschrijving moet geaccepteerd zijn ==> status = 2)
@@ -128,6 +205,12 @@ class Agenda_model extends CI_Model {
 
         return $wedstrijden;
     }
+    
+    /**
+     * Retourneert alle medische afspraken waar een bepaalde persoon aan deelneemt
+     * @param $persoonId De id van de persoon waarvan je de medische afspraken opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getOnderzoekenByPersoon($persoonId) {
         // Alle medische onderzoeken van een bepaalde persoon ophalen uit de databank
@@ -135,6 +218,12 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('medischeAfspraak');
         return $query->result();
     }
+    
+    /**
+     * Retourneert een medische afspraak
+     * @param $onderzoekId De id van de medische afspraak die je opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getOnderzoek($onderzoekId) {
         // Alle medische onderzoeken van een bepaalde persoon ophalen uit de databank
@@ -142,6 +231,14 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('medischeAfspraak');
         return $query->row();
     }
+    
+    /**
+     * Retourneert een volledig supplementen object inclusief al zijn relatietabellen
+     * @param $supplementId De id van het supplementPerPersoon dat je opvraagt
+     * @see getSupplementPersoon($supplementId)
+     * @see getSupplementFunctie($supplementFunctieId)
+     * @return Het opgevraagde record
+     */
 
     public function getSupplement($supplementId) {
         // Supplement ophalen uit de databank
@@ -154,6 +251,12 @@ class Agenda_model extends CI_Model {
 
         return $supplement;
     }
+    
+    /**
+     * Retourneert een supplement
+     * @param $supplementId De id van het supplement dat je opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getSupplementPersoon($supplementId) {
         // Supplement ophalen uit de databank
@@ -161,6 +264,11 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('supplement');
         return $query->row();
     }
+    
+    /**
+     * Retourneert alle supplementennamen
+     * @return Het opgevraagde record
+     */
 
     public function getAllSupplementen() {
         // Supplementen ophalen uit de databank
@@ -176,6 +284,12 @@ class Agenda_model extends CI_Model {
 
         return $supplementenNamen;
     }
+    
+    /**
+     * Retourneert een supplementenFunctie
+     * @param $functieId De id van de supplementenFunctie die je opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getSupplementFunctie($functieId) {
         // Functie van een supplement ophalen uit de databank
@@ -183,6 +297,15 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('supplementFunctie');
         return $query->row();
     }
+    
+    /**
+     * Retourneert alle supplementen, inclusief zijn relatietabellen, van een bepaalde persoon
+     * @param $persoonId De id van de persoon waarvan je de supplementen opvraagt
+     * @see getSupplementPersoon($supplementId)
+     * @see getSupplementFunctie($supplementFunctieId)
+     * @return Het opgevraagde record
+     */
+
 
     public function getSupplementenByPersoon($persoonId) {
         // Alle supplementen van een bepaalde persoon ophalen uit de databank
@@ -200,12 +323,23 @@ class Agenda_model extends CI_Model {
 
         return $supplementen;
     }
+    
+    /**
+     * Retourneert alle kleuren van de verschillende activiteiten uit de databank
+     * @return Het opgevraagde record
+     */
 
     public function getKleurenActiviteiten() {
         // De kleuren van de verschillende activiteiten ophalen uit de databank
         $query = $this->db->get('kleur');
         return $query->result();
     }
+    
+    /**
+     * Retourneert een kleur van een activiteit
+     * @param $kleurId De id van een kleur die je opvraagt
+     * @return Het opgevraagde record
+     */
 
     public function getKleurActiviteit($kleurId) {
         // De kleur van een activiteit ophalen uit de databank

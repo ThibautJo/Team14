@@ -15,10 +15,21 @@ class Agenda extends CI_Controller {
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
+    
+    /**
+    * @class Agenda
+    * @brief Controller-klasse voor het aanpassen van de agenda's van de zwemmers.
+    * 
+    * Controller-klasse voor het aanpassen van de agenda's van alle zwemmers.
+    */
 
     public function __construct() {
 
         parent::__construct();
+        
+        /**
+        * Laadt de auteur van de geschreven code van deze pagina in de footer.
+        */
 
         // controleren of bevoegde persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
@@ -48,6 +59,17 @@ class Agenda extends CI_Controller {
     // |
     // +----------------------------------------------------------
 
+    /**
+     * Laat de index pagina zien.
+     * 
+     * @see ladenListGroup()
+     * @see ladenZwemmers()
+     * @see agenda_model::getAllTypeTraining()
+     * @see agenda_model::getAllSupplementen()
+     * @see agenda_model::getKleurenActiviteiten()
+     * @see authex::getPersoonInfo()
+     */
+    
     public function index() {
         $data['titel'] = 'Agenda\'s zwemmers';
         $data['team'] = $this->data->team;
@@ -67,6 +89,12 @@ class Agenda extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
+    
+    /**
+     * Haalt alle zwemmers op en genereert een listGroup. Met deze listgroup kan je wisselen van agenda naar de agende van de persoon waarop je klikt.
+     *
+     * @see zwemmers_model::getZwemmers()
+     */
 
     public function ladenListGroup() {
         $this->load->model("trainer/zwemmers_model");
@@ -80,6 +108,12 @@ class Agenda extends CI_Controller {
 
         return $zwemmersListGroup;
     }
+    
+    /**
+     * Haalt alle zwemmers op en steekt deze in een array.
+     *
+     * @see zwemmers_model::getZwemmers()
+     */
 
     public function ladenZwemmers() {
         $this->load->model("trainer/zwemmers_model");
@@ -101,7 +135,17 @@ class Agenda extends CI_Controller {
     //////////////////
 
 
-
+    /**
+     * Haalt alle activiteiten van de aangeduide zwemmer op en toont deze op het scherm in een agenda.
+     * 
+     * De verschillende soorten activiteiten worden via aparte methoden ingeladen en omgevormd tot één grote array.
+     * Deze array wordt omgezet in een JSON object dat wordt ingeladen in de agenda.
+     *
+     * @see ladenWedstrijden($persoonId)
+     * @see ladenOnderzoeken($persoonId)
+     * @see ladenSupplementen($persoonId)
+     * @see ladenActiviteiten($persoonId)
+     */
 
     public function ladenAgendaPersoon() {
         $persoonId = $this->input->post('persoonId');
@@ -118,6 +162,17 @@ class Agenda extends CI_Controller {
 
         print $activiteiten;
     }
+    
+    /**
+     * Haalt alle activiteiten (trainingen en stages) van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     * 
+     * @see agenda_model::getActiviteitenByPersoon($persoonId)
+     * 
+     * De verschillende trainingen krijgen allemaal een verschillende kleur toegewezen. Dit wordt gedaan met de volgende functie
+     * 
+     * @see kiesKleurActiviteiten($id)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenActiviteiten($persoonId) {
         // Trainingen en stages worden opgehaald uit het model en in een lijst gestoken
@@ -144,6 +199,13 @@ class Agenda extends CI_Controller {
 
         return $data_activiteiten;
     }
+    
+    /**
+     * Haalt alle wedstrijden van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     *
+     * @see agenda_model::getWedstrijdenByPersoon($persoonId)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenWedstrijden($persoonId) {
         // Wedstrijden worden opgehaald uit het model en in een lijst gestoken
@@ -168,6 +230,13 @@ class Agenda extends CI_Controller {
 
         return $data_wedstrijden;
     }
+    
+    /**
+     * Haalt alle medische afspraken van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     *
+     * @see agenda_model::getOnderzoekenByPersoon($persoonId)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenOnderzoeken($persoonId) {
         // Medische onderzoeken worden opgehaald uit het model en in een lijst gestoken
@@ -192,6 +261,13 @@ class Agenda extends CI_Controller {
 
         return $data_onderzoeken;
     }
+    
+     /**
+     * Haalt alle supplementen van de aangemelde persoon op uit de database via het model en zet deze in een array.
+     *
+     * @see agenda_model::getSupplementenByPersoon($persoonId)
+     * @param int $persoonId De id van de persoon die aangemeld is.
+     */
 
     public function ladenSupplementen($persoonId) {
         // Supplementen worden opgehaald uit het model en in een lijst gestoken
@@ -239,6 +315,13 @@ class Agenda extends CI_Controller {
 
 
 
+    
+    /**
+     * Geeft elke soort training een verschillende kleur.
+     *
+     * @see agenda_model::getActiviteit($id)
+     * @param int $id De id van de activiteit.
+     */
 
     public function kiesKleurTraining($id) {
         $this->load->model("zwemmer/agenda_model");
@@ -269,6 +352,13 @@ class Agenda extends CI_Controller {
 
         return $color;
     }
+    
+    /**
+     * Onderscheidt de twee soorten activiteiten in stages en trainingen. Stages krijgen een kleur en elke soort training krijgt een kleur (via een andere functie).
+     *
+     * @see kiesKleurTraining($id)
+     * @param int $id De id van de activiteit.
+     */
 
     public function kiesKleurActiviteiten($id) {
         $this->load->model("zwemmer/agenda_model");
@@ -300,15 +390,31 @@ class Agenda extends CI_Controller {
 
 
 
+    
+     /**
+     * Haalt de activiteit op die gewijzigd moet worden en zet deze om in een JSON object.
+     *
+     * @see agenda_model::getActiviteit($id)
+     * @param int $id De id van de activiteit die gewijzigd dient te worden.
+     */
 
     public function wijzigActiviteit($id) {
         $this->load->model("trainer/agenda_model");
         $data = $this->agenda_model->getActiviteit($id);
 
-        //reeksid zetten op forumier
-
         print json_encode($data);
     }
+    
+    /**
+     * Maakt een nieuwe activiteit aan om toe te voegen en zet deze om in een JSON object
+     *
+     * @see agenda_model::getTypeActiviteit($typeActiviteitId)
+     * @see agenda_model::getTypeTraining($typeTrainingId)
+     * @see agenda_model::getPersonenFromActiviteit($id)
+     * @param bool $isReeks Bepaalt of je een reeks of enkele training/stage toevoegt.
+     * @param Date $startDate De startdatum van je nieuwe activiteit.
+     * @param Date $endDate De stopdatum van je nieuwe activiteit.
+     */
 
     public function toevoegenActiviteit($isReeks, $startDate, $endDate) {
         $this->load->model('trainer/agenda_model');
@@ -342,6 +448,13 @@ class Agenda extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    /**
+     * Haalt de wedstrijd op die gewijzigd moet worden en zet deze om in een JSON object.
+     *
+     * @see agenda_model::getWedstrijd($id)
+     * @param int $id De id van de wedstrijd die gewijzigd dient te worden.
+     */
 
     public function wijzigWedstrijd($id) {
         $this->load->model("trainer/agenda_model");
@@ -349,6 +462,13 @@ class Agenda extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    /**
+     * Haalt de medische afspraak op die gewijzigd moet worden en zet deze om in een JSON object.
+     *
+     * @see agenda_model::getOnderzoek($id)
+     * @param int $id De id van de medische afspraak die gewijzigd dient te worden.
+     */
 
     public function wijzigOnderzoek($id) {
         $this->load->model("zwemmer/agenda_model");
@@ -356,6 +476,14 @@ class Agenda extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    /**
+     * Maakt een nieuwe medische afspraak aan om toe te voegen en zet deze om in een JSON object
+     *
+     * @param bool $persoonId De Id van de persoon waarvoor je een nieuwe medische afspraak toevoegt.
+     * @param Date $startDate De startdatum van je nieuwe medische afspraak.
+     * @param Date $endDate De stopdatum van je nieuwe medische afspraak.
+     */
 
     public function toevoegenOnderzoek($persoonId, $startDate, $endDate) {
         $data = new stdClass();
@@ -368,6 +496,13 @@ class Agenda extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    /**
+     * Haalt het supplement op dat gewijzigd moet worden en zet deze om in een JSON object.
+     *
+     * @see agenda_model::getSupplement($id)
+     * @param int $id De id van het supplement dat gewijzigd dient te worden.
+     */
 
     public function wijzigSupplement($id) {
         $this->load->model("zwemmer/agenda_model");
@@ -375,6 +510,16 @@ class Agenda extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    /**
+     * Maakt een nieuw supplement aan om toe te voegen en zet deze om in een JSON object
+     *
+     * @see agenda_model::getSupplementPersoon($supplementId)
+     * @see agenda_model::getSupplementFunctie($supplementFunctieId)
+     * @param bool $persoonId De Id van de persoon waarvoor je een nieuw supplement toevoegt.
+     * @param Date $startDate De startdatum van je nieuw supplement.
+     * @param Date $endDate De stopdatum van je nieuw supplement.
+     */
 
     public function toevoegenSupplement($persoonId, $startDate, $endDate) {
         $this->load->model('zwemmer/agenda_model');
@@ -413,6 +558,20 @@ class Agenda extends CI_Controller {
 
 
 
+    
+    /**
+     * Haal alle informatie van de activiteit op uit het modal en stuur deze door naar het insert- of updatemodel om deze in de database te zetten.
+     *
+     * @see agenda_model::getReeksActiviteiten($reeksId)
+     * @see agenda_model::deleteActiviteitPerPersoonWithActiviteitId($activiteitId)
+     * @see agenda_model::deleteActiviteit($activiteitId)
+     * @see agenda_model::insertActiviteit($activiteit)
+     * @see agenda_model::updateActiviteit($activiteit)
+     * @see agenda_model::getPersonenFromActiviteit($activiteitId)
+     * @see agenda_model::insertActiviteitPerPersoon($activiteitPerPersoon)
+     * @see agenda_model::updateActiviteitPerPersoon($activiteitPerPersoon)
+     * @see agenda_model::deleteActiviteitPerPersoon($activiteitPerPersoonId)
+     */
 
     public function registreerActiviteit() {
         $this->load->model('trainer/agenda_model');
@@ -582,8 +741,20 @@ class Agenda extends CI_Controller {
             }
         }
 
-        redirect('/trainer/agenda');
+        redirect('/Trainer/agenda');
     }
+    
+    /**
+     * Maakt reeksen aan van de begin- en einddatum.
+     *
+     * @see agenda_model::getReeksActiviteiten($reeksId)
+     * @see agenda_model::deleteActiviteitPerPersoonWithActiviteitId($activiteitId)
+     * 
+     * @param Date $begindatumReeks De startdatum van de reeks.
+     * @param Date $einddatumReeks De stopdatum van de reeks.
+     * @param String $beginuur Het startuur van de reeks.
+     * @param String $einduur Het einduur van de reeks.
+     */
 
     public function maakReeksen($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
         $datums = [];
@@ -605,6 +776,13 @@ class Agenda extends CI_Controller {
 
         return $datums;
     }
+    
+    /**
+     * Haal alle informatie van het supplement op uit het modal en stuur deze door naar het insert- of updatemodel om deze in de database te zetten.
+     *
+     * @see agenda_model::insertSupplement($supplement)
+     * @see agenda_model::updateSupplement($supplement)
+     */
 
     public function registreerSupplement() {
         $this->load->model('trainer/agenda_model');
@@ -644,8 +822,15 @@ class Agenda extends CI_Controller {
             }
         }
 
-        redirect('trainer/agenda');
+        redirect('Trainer/agenda');
     }
+    
+    /**
+     * Haal alle informatie van de medische afspraak op uit het modal en stuur deze door naar het insert- of updatemodel om deze in de database te zetten.
+     *
+     * @see agenda_model::insertOnderzoek($onderzoek)
+     * @see agenda_model::updateOnderzoek($onderzoek)
+     */
 
     public function registreerOnderzoek() {
         $this->load->model('trainer/agenda_model');
@@ -666,7 +851,7 @@ class Agenda extends CI_Controller {
             $this->agenda_model->updateOnderzoek($onderzoek);
         }
 
-        redirect('trainer/agenda');
+        redirect('Trainer/agenda');
     }
 
 
@@ -679,6 +864,17 @@ class Agenda extends CI_Controller {
 
 
 
+    /**
+     * Verwijdert de activiteit.
+     *
+     * @see agenda_model::getActiviteit($activiteitId)
+     * @see agenda_model::getReeksActiviteiten($reeksId)
+     * @see agenda_model::deleteActiviteitPerPersoonWithActiviteitId($activiteitId)
+     * @see agenda_model::deleteActiviteit($activiteitId)
+     * 
+     * @param int $id De id van de activiteit die verwijdert dient te worden.
+     */
+    
     public function verwijderActiviteit($id) {
         $this->load->model('trainer/agenda_model');
 
@@ -696,8 +892,17 @@ class Agenda extends CI_Controller {
             }
         }
 
-        redirect('/trainer/agenda');
+        redirect('/Trainer/agenda');
     }
+    
+    /**
+     * Verwijdert de medische afspraak.
+     *
+     * @see agenda_model::getOnderzoek($onderzoekId)
+     * @see agenda_model::deleteOnderzoek($onderzoekId)
+     * 
+     * @param int $id De id van de medische afspraak die verwijdert dient te worden.
+     */
 
     public function verwijderOnderzoek($id) {
         $this->load->model('trainer/agenda_model');
@@ -705,8 +910,17 @@ class Agenda extends CI_Controller {
 
         $this->agenda_model->deleteOnderzoek($onderzoek->id);
 
-        redirect('/trainer/agenda');
+        redirect('/Trainer/agenda');
     }
+    
+    /**
+     * Verwijdert het supplement.
+     *
+     * @see agenda_model::getSupplementPerPersoon($supplementId)
+     * @see agenda_model::deleteSupplement($supplementId)
+     * 
+     * @param int $id De id van het supplement dat verwijdert dient te worden.
+     */
 
     public function verwijderSupplement($id) {
         $this->load->model('trainer/agenda_model');
@@ -714,6 +928,6 @@ class Agenda extends CI_Controller {
 
         $this->agenda_model->deleteSupplement($supplement->id);
 
-        redirect('/trainer/agenda');
+        redirect('/Trainer/agenda');
     }
 }
