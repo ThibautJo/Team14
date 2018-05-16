@@ -9,9 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @brief Controller-klasse voor team
  * @author Klaus
  */
-
 class Team extends CI_Controller {
-
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
@@ -27,12 +25,11 @@ class Team extends CI_Controller {
     /**
      * Constructor
      */
-
     public function __construct() {
 
         parent::__construct();
 
-              // controleren of bevoegde persoon is aangemeld
+        // controleren of bevoegde persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -84,8 +81,8 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::getTeam()
      * @return type $zwemmers
      */
-    public function ladenTeam(){
-        
+    public function ladenTeam() {
+
         $this->load->model("trainer/zwemmers_model");
         $personen = $this->zwemmers_model->getTeam();
 
@@ -103,12 +100,12 @@ class Team extends CI_Controller {
                 "wachtwoord" => $persoon->wachtwoord,
                 "omschrijving" => $persoon->omschrijving,
                 "foto" => $persoon->foto,
-                "color" => '#FF7534',"textColor" => '#000'
+                "color" => '#FF7534', "textColor" => '#000'
             );
         }
         return $personen;
     }
-    
+
     /**
      * Haalt de gegevens op van de personen(zwemmers) die inactief staan -> (actief = 0) via Zwemmers_model en
      * stopt de resulterende objecten in een array $zwemmersuitarchief
@@ -116,7 +113,7 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::getZwemmersArchief()
      * @return type $zwemmersuitarchief
      */
-    public function ladenArchief(){
+    public function ladenArchief() {
 
         $this->load->model("trainer/zwemmers_model");
         $zwemmersuitarchief = $this->zwemmers_model->getZwemmersArchief();
@@ -140,6 +137,7 @@ class Team extends CI_Controller {
         }
         return $zwemmersuitarchief;
     }
+
     /**
      * Haalt alle personen op via de methode ladenTeam() en ladenArchief() deze
      * resulterende objecten kan men in de view team_lijst.php gebruiken
@@ -188,7 +186,7 @@ class Team extends CI_Controller {
 
         $this->template->load('main_master', $partials, $data);
     }
-    
+
     /**
      * Archiveert de persoon met id=$id via het Zwemmers_model en
      * toont de aangepaste lijst in de vew team.php
@@ -202,7 +200,7 @@ class Team extends CI_Controller {
 
         redirect('trainer/team');
     }
-    
+
     /**
      * Haalt het gearchiveerde persoon op via Zwemmers_model en
      * toont de aangepaste lijst in de view team.php
@@ -228,21 +226,20 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::insert($persoon);
      * @see Zwemmers_model::update($persoon);
      */
-    public function opslaanPersoon($actie = "toevoegen")
-    {
+    public function opslaanPersoon($actie = "toevoegen") {
         $persoon = new stdClass();
 
         // $persoon->id=$this->input->post('id');
-        $persoon->voornaam=$this->input->post('voornaam');
-        $persoon->achternaam=$this->input->post('achternaam');
-        $persoon->email=$this->input->post('email');
-        $persoon->wachtwoord=$this->input->post('wachtwoord');
-        $persoon->omschrijving=$this->input->post('omschrijving');
-        $persoon->soort=$this->input->post('soort');
+        $persoon->voornaam = $this->input->post('voornaam');
+        $persoon->achternaam = $this->input->post('achternaam');
+        $persoon->email = $this->input->post('email');
+        $persoon->wachtwoord = $this->input->post('wachtwoord');
+        $persoon->omschrijving = $this->input->post('omschrijving');
+        $persoon->soort = $this->input->post('soort');
 
         $this->load->model('trainer/zwemmers_model');
         //        if($persoon->ID == 0) {
-        if($actie == "toevoegen") {
+        if ($actie == "toevoegen") {
             $this->zwemmers_model->insert($persoon);
         } else {
             $persoon->id = $this->input->post('id');
@@ -267,5 +264,5 @@ class Team extends CI_Controller {
 
         print json_encode($data);
     }
-    
+
 }

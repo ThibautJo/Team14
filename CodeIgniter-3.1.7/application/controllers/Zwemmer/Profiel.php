@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -8,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @brief Controller-klasse voor Profiel
  * @author Klaus
  */
-class Profiel extends CI_Controller{
+class Profiel extends CI_Controller {
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
@@ -20,7 +21,7 @@ class Profiel extends CI_Controller{
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
-    
+
     /**
      * Constructor
      */
@@ -28,12 +29,13 @@ class Profiel extends CI_Controller{
         parent::__construct();
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
-        redirect('welcome/meldAan');}
+            redirect('welcome/meldAan');
+        }
 
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
-        
+
         // Aantal meldingen laten zien
         $this->load->model('zwemmer/melding_model');
         $persoon = $this->authex->getPersoonInfo();
@@ -41,7 +43,7 @@ class Profiel extends CI_Controller{
         $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
         $this->data->aantalMeldingen = count($meldingen);
     }
-    
+
     /**
      * Haalt de gegevens van de ingelogde persoon op via Profiel_model en
      * toont de resulterende objecten in de view profiel.php
@@ -49,7 +51,7 @@ class Profiel extends CI_Controller{
      * @see Profiel_model::getProfielByPersoon()
      * @see profiel.php
      */
-    public function index(){
+    public function index() {
         $data['titel'] = 'Profiel zwemmer';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
@@ -70,23 +72,30 @@ class Profiel extends CI_Controller{
         $this->template->load('main_master', $partials, $data);
     }
     
-    public function profielOpslaan(){
+    /**
+     * Slaagt het aangepaste profiel op via Profiel_model en 
+     * toont de aangepaste lijst in de view profiel.php
+     *
+     * @see Profiel_model::update($profielGegevens);
+     */
+    public function profielOpslaan() {
         $profielGegevens = new stdClass();
-        
-        $profielGegevens->voornaam=$this->input->post('voornaam');
-        $profielGegevens->achternaam=$this->input->post('achternaam');
-        $profielGegevens->straat=$this->input->post('straat');
-        $profielGegevens->huisnummer=$this->input->post('huisnummer');
-        $profielGegevens->postcode=$this->input->post('postcode');
-        $profielGegevens->gemeente=$this->input->post('gemeente');
-        $profielGegevens->email=$this->input->post('email');
-        $profielGegevens->omschrijving=$this->input->post('omschrijving');
-        
+
+        $profielGegevens->voornaam = $this->input->post('voornaam');
+        $profielGegevens->achternaam = $this->input->post('achternaam');
+        $profielGegevens->straat = $this->input->post('straat');
+        $profielGegevens->huisnummer = $this->input->post('huisnummer');
+        $profielGegevens->postcode = $this->input->post('postcode');
+        $profielGegevens->gemeente = $this->input->post('gemeente');
+        $profielGegevens->email = $this->input->post('email');
+        $profielGegevens->omschrijving = $this->input->post('omschrijving');
+
         $this->load->model('zwemmer/profiel_model');
 
         $profielGegevens->id = $this->input->post('id');
         $this->profiel_model->update($profielGegevens);
-            
+
         redirect('zwemmer/profiel');
     }
+
 }
