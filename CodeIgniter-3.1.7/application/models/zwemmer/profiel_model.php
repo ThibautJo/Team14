@@ -2,7 +2,7 @@
 
 /**
  * @class Profiel_model
- * @brief Model-klasse voor profiel
+ * @brief Model-klasse voor Profiel
  * 
  * Model-klasse die alle methodes bevat om te interageren met de database-table persoon
  * @author Klaus
@@ -55,7 +55,7 @@ class profiel_model extends CI_Model {
 
     /**
      * Wijzigt een persoon-record uit de tabel persoon
-     * @param $profiel Het persoon object waar de aangepaste data in zit
+     * @param $profielGegevens Het profiel object waar de aangepaste data in zit
      */
     function update($profielGegevens) {
         $this->db->where('id', $profielGegevens->id);

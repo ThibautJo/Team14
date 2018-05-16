@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['supplement_5fform_2ephp',['supplement_form.php',['../supplement__form_8php.html',1,'']]],
-  ['supplement_5flijst_2ephp',['supplement_lijst.php',['../supplement__lijst_8php.html',1,'']]]
+  ['home_5faanmelden_2ephp',['home_aanmelden.php',['../home__aanmelden_8php.html',1,'']]],
+  ['home_5ffout_2ephp',['home_fout.php',['../home__fout_8php.html',1,'']]]
 ];

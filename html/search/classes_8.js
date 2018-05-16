@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['wedstrijd_5fmodel',['Wedstrijd_model',['../class_wedstrijd__model.html',1,'']]],
-  ['wedstrijden',['Wedstrijden',['../class_wedstrijden.html',1,'']]],
-  ['wedstrijdresultaten',['WedstrijdResultaten',['../class_wedstrijd_resultaten.html',1,'']]],
-  ['welcome',['Welcome',['../class_welcome.html',1,'']]]
+  ['team',['Team',['../class_team.html',1,'']]],
+  ['template',['Template',['../class_template.html',1,'']]]
 ];
