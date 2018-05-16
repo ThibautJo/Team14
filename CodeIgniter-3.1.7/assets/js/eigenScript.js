@@ -554,23 +554,26 @@ function aanpassenActiviteit(activiteit, id, site_url) {
 
 
   // modal openen met ingevulde gegevans van dit object
-  $("#aanpassenActiviteit").modal();
+    $('#aanpassenActiviteit #deleteActiviteitButton').css('display', 'block');
+    $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').removeClass('justify-content-right');
+    $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').addClass('justify-content-between');
+    $("#aanpassenActiviteit").modal();
 }
 
 function dateHelper_getDate(date) {
-  var datetimeToDate = date.split(' ');
-  var date = datetimeToDate[0].split('-');
-  var date2 = date[2] + '/' + date[1] + '/' + date[0];
+    var datetimeToDate = date.split(' ');
+    var date = datetimeToDate[0].split('-');
+    var date2 = date[2] + '/' + date[1] + '/' + date[0];
 
-  return date2;
+    return date2;
 }
 
 function dateHelper_getTime(date) {
-  var datetimeToDate = date.split(' ');
-  var time = datetimeToDate[1].split(':');
-  var time2 = time[0] + ':' + time[1];
+    var datetimeToDate = date.split(' ');
+    var time = datetimeToDate[1].split(':');
+    var time2 = time[0] + ':' + time[1];
 
-  return time2;
+    return time2;
 }
 
 function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
@@ -612,7 +615,8 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
             $('#aanpassenActiviteit .einddatum .datepicker2').datepicker('update', dateHelper_getDate(data['datumStop']));
             $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['datumStart'])) + "']").attr("selected","selected");
             $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['datumStop'])) + "']").attr("selected","selected");
-            $("#aanpassenActiviteit #einduur option[value='" + data['persoonId'] + "']").attr("selected","selected");
+            $('#aanpassenActiviteit #tabDatum #dag-tab').tab('show');
+            $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             break;
         case activiteit === "Medische afspraak":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerOnderzoek');
@@ -623,35 +627,43 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
             $('#aanpassenActiviteit .einddatum .datepicker2').datepicker('update', dateHelper_getDate(data['tijdstipStop']));
             $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "']").attr("selected", "selected");
             $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
-            $('#aanpassenActiviteit #tijdstipReeks-form').removeClass('d-none');
-            $('#aanpassenActiviteit #opmerking-form').removeClass('d-none');
+            $('#aanpassenActiviteit #tabDatum #dag-tab').tab('show');
+            $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             break;
         case activiteit === "Supplement":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerSupplement');
             $('#aanpassenActiviteit #supplement-form').removeClass('d-none');
             $("#aanpassenActiviteit #supplementnaam option[value='" + (data['supplement']['id'] - 1) + "']").attr("selected", "selected");
             $('#aanpassenActiviteit #hoeveelheid').attr('value', data['hoeveelheid']);
-            $('#aanpassenActiviteit #datum').datepicker('update', dateHelper_getDate(data['datum']));
+            if (data['datumStop'] === null) {
+                $('#aanpassenActiviteit #datum').datepicker('update', dateHelper_getDate(data['datumStart']));
+                $('#aanpassenActiviteit #tabDatum #reeks-tab').addClass('disabled');
+                $('#aanpassenActiviteit #tabDatum #dag-tab').tab('show');
+            }
+            else {
+                $('#aanpassenActiviteit #begindatumSupplement').datepicker('update', dateHelper_getDate(data['datumStart']));
+                $('#aanpassenActiviteit #einddatumSupplement').datepicker('update', dateHelper_getDate(data['datumStop']));
+                $('#aanpassenActiviteit #tabDatum #dag-tab').addClass('disabled');
+                $('#aanpassenActiviteit #tabDatum #reeks-tab').tab('show');
+            }
             $('#aanpassenActiviteit #opmerking').html(data['supplement']['omschrijving']);
-            $('#aanpassenActiviteit .datepicker').datepicker('update', '19-04-2018');
             $('#aanpassenActiviteit #opmerking-form').removeClass('d-none');
             $('#aanpassenActiviteit #tabDatum').removeClass('d-none');
             $('#aanpassenActiviteit .supplementDatum').removeClass('d-none');
+            $('#aanpassenActiviteit input[name=persoonSupplement]').attr('value', data['persoonId']);
             break;
         case activiteit === "Stage":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerActiviteit');
-            alert(data['reeksId']);
             $('#aanpassenActiviteit input[name=reeksId]').attr('value', data['reeksId']);
             $('#aanpassenActiviteit #titel-form').removeClass('d-none');
-            $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['stageTitel']);
             $("#aanpassenActiviteit #soort option[value='4']").attr("selected", "selected");
             $('#aanpassenActiviteit .begindatum .datepicker2').datepicker('update', dateHelper_getDate(data['tijdstipStart']));
             $('#aanpassenActiviteit .einddatum .datepicker2').datepicker('update', dateHelper_getDate(data['tijdstipStop']));
             $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStart'])) + "']").attr("selected", "selected");
             $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['tijdstipStop'])) + "']").attr("selected", "selected");
-            $('#aanpassenActiviteit #tijdstipReeks-form').removeClass('d-none');
-            $('#aanpassenActiviteit #opmerking-form').removeClass('d-none');
+            $('#aanpassenActiviteit #tabDatum #dag-tab').tab('show');
+            $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #personen-form').removeClass('d-none');
             $.each(data['personen'], function(index){
                 $("#aanpassenActiviteit input[name='personen[]'][value=" + data['personen'][index] + "]").attr("checked", true);
@@ -666,7 +678,6 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['stageTitel']);
             $("#aanpassenActiviteit #soort option[value='" + typeTraininId + "']").attr("selected", "selected");
-            $('#aanpassenActiviteit #opmerking-form').removeClass('d-none');
             $('#aanpassenActiviteit #personen-form').removeClass('d-none');
             $.each(data['personen'], function(index){
                 $("#aanpassenActiviteit input[name='personen[]'][value=" + data['personen'][index] + "]").attr("checked", true);
@@ -694,7 +705,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
                     var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
                     var dagnaam = new Date(data['tijdstipStart']);
                     var dag = dagnaam.getDay();
-                    $('.dagReeks').html(weekdag[dag]);
+                    $('.dagReeks').html((weekdag[dag]).toLowerCase());
                 }
                 else {
                     $('#aanpassenActiviteit #begindatumReeks').datepicker('update', dateHelper_getDate(data['reeks'][0]['tijdstipStop']));
@@ -718,16 +729,20 @@ function toevoegenActiviteit() {
     var startDatum = startDate2.getFullYear() + '-' + (startDate2.getMonth() + 1) + '-' + startDate2.getDate() + '%20' + (startDate2.getHours() - 2) + ':' + startDate2.getMinutes() + ':' + startDate2.getSeconds();
     var stopDatum = endDate2.getFullYear() + '-' + (endDate2.getMonth() + 1) + '-' + endDate2.getDate() + '%20' + (endDate2.getHours() - 2) + ':' + endDate2.getMinutes() + ':' + endDate2.getSeconds();
 
+
+    var persoonId = $('#aanpassenActiviteit input[name=persoonSupplement]').attr('value');
+
+
     var linkActiviteit = '';
     switch (true) {
         case activiteit === "Wedstrijd":
             linkActiviteit = 'toevoegenWedstrijd';
             break;
         case activiteit === "Medische afspraak":
-            linkActiviteit = 'toevoegenOnderzoek';
+            linkActiviteit = 'toevoegenOnderzoek/' + persoonId;
             break;
         case activiteit === "Supplement":
-            linkActiviteit = 'toevoegenSupplement';
+            linkActiviteit = 'toevoegenSupplement/' + persoonId;
             break;
         case activiteit === "Training (reeks)":
             linkActiviteit = 'toevoegenActiviteit/true';
@@ -749,6 +764,9 @@ function toevoegenActiviteit() {
 
 
     // modal openen met ingevulde gegevans van dit object
+    $('#aanpassenActiviteit #deleteActiviteitButton').css('display', 'none');
+    $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').removeClass('justify-content-between');
+    $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').addClass('justify-content-right');
     $('#aanpassenActiviteit .modal-title').html(activiteit + ' toevoegen');
     $("#aanpassenActiviteit").modal('show');
 

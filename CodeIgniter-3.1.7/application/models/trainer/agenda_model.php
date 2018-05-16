@@ -63,6 +63,40 @@ class Agenda_model extends CI_Model {
         $this->db->delete('activiteitPerPersoon');
     }
     
+    public function insertSupplement($supplement) {
+        // supplement toevoegen
+        $this->db->insert('supplementperpersoon', $supplement);
+        return $this->db->insert_id();
+    }
+    
+    public function updateSupplement($supplement) {
+        // supplement wijzigen
+        $this->db->where('id', $supplement->id);
+        $this->db->update('supplementperpersoon', $supplement);
+    }
+    
+    public function deleteSupplement($id){
+        $this->db->where('id', $id);
+        $this->db->delete('supplementperpersoon');
+    }
+    
+    public function insertOnderzoek($onderzoek) {
+        // supplement toevoegen
+        $this->db->insert('medischeafspraak', $onderzoek);
+        return $this->db->insert_id();
+    }
+    
+    public function updateOnderzoek($onderzoek) {
+        // supplement wijzigen
+        $this->db->where('id', $onderzoek->id);
+        $this->db->update('medischeafspraak', $onderzoek);
+    }
+    
+    public function deleteOnderzoek($id){
+        $this->db->where('id', $id);
+        $this->db->delete('medischeafspraak');
+    }
+    
     public function getPersoon($persoonId) {
         // Persoon ophalen uit databank
         $this->db->where('id', $persoonId);
@@ -77,13 +111,6 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('activiteitPerPersoon');
         return $query->row();
     }
-//    
-//    public function getActiviteitPerPersoonWhereActiviteitId($activiteitId) {
-//        // ActiviteitPerPersoon ophalen uit de databank ==> checken op activiteitId
-//        $this->db->where('activiteitId', $activiteitId);
-//        $query = $this->db->get('activiteitPerPersoon');
-//        return $query->result();
-//    }
     
     public function getTypeActiviteit($typeActiviteitId) {
         // Type activiteit ophalen uit de databank (training of stage)
@@ -184,5 +211,12 @@ class Agenda_model extends CI_Model {
         }
         
         return $reeksen;
+    }
+
+    public function getSupplementPerPersoon($supplementPerPersoonId) {
+        // SupplementPerPersoon ophalen uit de databank
+        $this->db->where('id', $supplementPerPersoonId);
+        $query = $this->db->get('supplementperpersoon');
+        return $query->row();
     }
 }

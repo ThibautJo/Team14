@@ -110,23 +110,6 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('wedstrijd');
         return $query->row();
     }
-    
-//    public function getPersonenFromWedstrijd($wedstrijdId) {
-//        // Personen die deelnemen aan een wedstrijd ophalen uit de databank
-//        $query = $this->getReeksenPerWedstrijd($this->getWedstrijd($wedstrijdId));
-//        $reeksenPerWedstrijd = $query->result();
-//        $personen = [];
-//        
-//        foreach ($reeksenPerWedstrijd as $reeksPerWedstrijd) {
-//            $this->db->where('reeksPerWedstrijdId', $reeksPerWedstrijd->id);
-//            $query = $this->db->get('inschrijving');
-//            $inschrijving = $query->row();
-//            
-//            $personen = $inschrijving->persoonId;
-//        }
-//        
-//        return $personen;
-//    }
 
     public function getWedstrijdenByPersoon($persoonId) {
         // Alle wedstrijden van een bepaalde persoon ophalen uit de databank

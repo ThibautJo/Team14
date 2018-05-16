@@ -55,10 +55,6 @@
             ?>
         </div>
         <p class="mt-4 d-flex justify-content-between">
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-toggle="tooltip" title="Activiteit toevoegen" data-target="#activiteitToevoegen"><i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-toggle="tooltip" title="Activiteit wijzigen" data-target="#aanpassenActiviteit"><i class="fas fa-pencil-alt"></i></button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" data-target="#activiteitVerwijderen"><i class="fas fa-trash-alt"></i></button>
-
             <p><div><a class="btn btn-light d-flex justify-content-center text-dark" id="help" data-toggle="modal" data-target="#helpModal"><i class="material-icons">help</i> &nbsp;Hulp</a></div></p>
         </p>
     </div>
@@ -88,6 +84,7 @@
                 
                 <?php echo form_hidden('id', ''); ?>
                 <?php echo form_hidden('reeksId', ''); ?>
+                <?php echo form_hidden('persoonSupplement', ''); ?>
 
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
@@ -312,13 +309,13 @@
                         </div>
 
                         <div class="form-group supplementDatum d-none">
-                            <p class="d-flex align-items-center">Elke&nbsp; <b class="dagReeks"></b> &nbsp;voor de volgende tijdspanne:</p>
+                            <p class="d-flex align-items-center">Elke&nbsp;  <b>dag</b> &nbsp;voor de volgende tijdspanne:</p>
                             <div class="row">
                                 <div id="container-begindatum" class="form-group col-6">
                                     <?php
                                     echo form_label('Begindatum', 'begindatumSupplement');
                                     echo form_input(array('name' => 'begindatumSupplement',
-                                        'id' => 'datum',
+                                        'id' => 'begindatumSupplement',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
                                         'required' => 'required',
@@ -346,7 +343,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer d-flex justify-content-between">
+            <div id="toevoegenActiviteitButtonContainer" class="modal-footer d-flex justify-content-between">
                 <button type="button" id="deleteActiviteitButton" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" onclick=""><i class="fas fa-trash-alt"></i></button>
                 <div>
                     <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
@@ -420,6 +417,7 @@
     $('.runFunction').on('click', function agendaInladen() {
         var persoonId = 0;
         persoonId = $(this).data('id');
+        $('#aanpassenActiviteit input[name=persoonSupplement]').attr('value', persoonId);
         $('.runFunction').removeClass('active');
         $(this).addClass('active');
         $('#agenda').fullCalendar('removeEvents');
@@ -458,7 +456,7 @@
                                 $.each(kleuren, function(index) {
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
-                                        $('.dagReeks').html(weekdag[dagnaam]);
+                                        $('.dagReeks').html((weekdag[dagnaam]).toLowerCase());
                                         
                                         var site_url = '<?php echo site_url(); ?>';
                                         aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, site_url);
@@ -493,14 +491,31 @@
                             height: 'parent',
                             minTime: "06:00:00",
                             eventClick: function(calEvent) {
-                                $('#aanpassenActiviteit').modal('show');
-                                $('.modal-body').html(calEvent.title);
                                 var kleuren = <?php echo $kleuren ?>;
+                                var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
+                                var datumGeklikt = new Date(calEvent.start);
+                                var dagnaam = datumGeklikt.getDay();
+//                                var day = datumGeklikt.getDate();
+//                                var month = datumGeklikt.getMonth() + 1;
+//                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
-                                    if (calEvent.color === kleuren[index].kleur) {
-                                        $('.modal-title').html(kleuren[index].activiteit);
+                                    if (calEvent.color == kleuren[index].kleur) {
+                                        $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
+                                        $('.dagReeks').html((weekdag[dagnaam]).toLowerCase());
+                                        
+                                        var site_url = '<?php echo site_url(); ?>';
+                                        aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, site_url);
+                                        console.log('ok');
                                     }
                                 });
+                            },
+                            selectable: true,
+                            select: function(startDate, endDate) {
+                                $('#toevoegenActiviteit').modal();
+                                $('#toevoegenActiviteit .modal-title').html('Activiteit toevoegen');
+                                var site_url = '<?php echo site_url(); ?>';
+                                $('#toevoegenActiviteit input[name=startDate]').attr('value', startDate.toString());
+                                $('#toevoegenActiviteit input[name=endDate]').attr('value', endDate.toString());
                             },
                             events: result
                         });
@@ -515,14 +530,31 @@
                             height: 'auto', // Geen scrollbar bij hoogte
                             minTime: "06:00:00",
                             eventClick: function(calEvent) {
-                                $('#aanpassenActiviteit').modal('show');
-                                $('.modal-body').html(calEvent.title);
                                 var kleuren = <?php echo $kleuren ?>;
+                                var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
+                                var datumGeklikt = new Date(calEvent.start);
+                                var dagnaam = datumGeklikt.getDay();
+//                                var day = datumGeklikt.getDate();
+//                                var month = datumGeklikt.getMonth() + 1;
+//                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
-                                    if (calEvent.color === kleuren[index].kleur) {
-                                        $('.modal-title').html(kleuren[index].activiteit);
+                                    if (calEvent.color == kleuren[index].kleur) {
+                                        $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
+                                        $('.dagReeks').html((weekdag[dagnaam]).toLowerCase());
+                                        
+                                        var site_url = '<?php echo site_url(); ?>';
+                                        aanpassenActiviteit(kleuren[index].activiteit, calEvent.extra, site_url);
+                                        console.log('ok');
                                     }
                                 });
+                            },
+                            selectable: true,
+                            select: function(startDate, endDate) {
+                                $('#toevoegenActiviteit').modal();
+                                $('#toevoegenActiviteit .modal-title').html('Activiteit toevoegen');
+                                var site_url = '<?php echo site_url(); ?>';
+                                $('#toevoegenActiviteit input[name=startDate]').attr('value', startDate.toString());
+                                $('#toevoegenActiviteit input[name=endDate]').attr('value', endDate.toString());
                             },
                             events: result
                         });

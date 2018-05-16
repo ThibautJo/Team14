@@ -201,16 +201,30 @@ class Agenda extends CI_Controller {
         $data_supplementen = array();
         
         // Supplementen worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
-        foreach ($supplementen as $supplement) {                    
-            $data_supplementen[] = array(
-                "extra" => $supplement->id,
-                "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
-                "title" => $supplement->supplement->naam,
-                "start" => $supplement->datum,
-                "persoon" => $supplement->persoonId,
-                "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
-                "textColor" => '#fff'
-            );
+        foreach ($supplementen as $supplement) {
+            if ($supplement->datumStop !== null) {
+                $data_supplementen[] = array(
+                    "extra" => $supplement->id,
+                    "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
+                    "title" => $supplement->supplement->naam,
+                    "start" => $supplement->datumStart,
+                    "end" => $supplement->datumStop,
+                    "persoon" => $supplement->persoonId,
+                    "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
+                    "textColor" => '#fff'
+                );
+            }
+            else {
+                $data_supplementen[] = array(
+                    "extra" => $supplement->id,
+                    "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
+                    "title" => $supplement->supplement->naam,
+                    "start" => $supplement->datumStart,
+                    "persoon" => $supplement->persoonId,
+                    "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
+                    "textColor" => '#fff'
+                );
+            }
         }
         
         return $data_supplementen;
@@ -343,10 +357,50 @@ class Agenda extends CI_Controller {
         print json_encode($data);
     }
     
+    public function toevoegenOnderzoek($persoonId, $startDate, $endDate) {
+        $data = new stdClass();
+        
+        $data->id = 0;
+        $data->persoonId = $persoonId;
+        $data->tijdstipStart = date('Y-m-d H:i:s', strtotime(str_replace('%20', ' ', $startDate)));
+        $data->tijdstipStop = date('Y-m-d H:i:s', strtotime(str_replace('%20', ' ', $endDate)));
+        $data->omschrijving = '';
+        
+        print json_encode($data);
+    }
+    
     public function wijzigSupplement($id) {
         $this->load->model("zwemmer/agenda_model");
         $data = $this->agenda_model->getSupplement($id);
 
+        print json_encode($data);
+    }
+    
+    public function toevoegenSupplement($persoonId, $startDate, $endDate) {
+        $this->load->model('zwemmer/agenda_model');
+        
+        $data = new stdClass();
+        
+        $data->id = 0;
+        $data->supplementId = 1;
+        $data->persoonId = $persoonId;
+        
+        $stopDatum = new DateTime(str_replace('%20', ' ', $endDate));
+        $startDatum = new DateTime(str_replace('%20', ' ', $startDate));
+//        var_dump($stopDatum->modify('-1 day'));
+//        var_dump($startDatum);
+        $data->datumStart = $startDatum->format('Y-m-d');
+
+        if ($startDatum != $stopDatum->modify('-1 day')) {
+            $data->datumStop = $stopDatum->format('Y-m-d');
+        }
+        else {
+            $data->datumStop = null;
+        }
+        $data->hoeveelheid = '';
+        $data->supplement = $this->agenda_model->getSupplementPersoon($data->supplementId);
+        $data->functie = $this->agenda_model->getSupplementFunctie($data->supplement->supplementFunctieId);
+        
         print json_encode($data);
     }
     
@@ -437,6 +491,8 @@ class Agenda extends CI_Controller {
                 $this->agenda_model->updateActiviteit($activiteit);
             }
         }
+        
+        // Tabel activiteitenPerPersoon
         
         $personenChecked = $this->input->post('personen');
         
@@ -529,7 +585,7 @@ class Agenda extends CI_Controller {
         redirect('/trainer/agenda');
     }
     
-    public function maakReeksen($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
+    public function maakReeksenWeek($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
         $datums = [];
         $datumStart = new \DateTime($begindatumReeks);
         $datumStop = new \DateTime($einddatumReeks);
@@ -548,6 +604,69 @@ class Agenda extends CI_Controller {
         }
         
         return $datums;
+    }
+    
+    public function registreerSupplement() {
+        $this->load->model('trainer/agenda_model');
+        $supplement = new stdClass();
+        $id = intval($this->input->post('id'));
+        $supplement->supplementId = $this->input->post('supplementnaam') + 1;
+        $supplement->persoonId = $this->input->post('persoonSupplement');      
+        $supplement->hoeveelheid = $this->input->post('hoeveelheid');
+        
+        // Checken of het enkel of een reeks is
+        if ($this->input->post('einddatumSupplement') === '') {
+            $supplement->datumStart = zetOmNaarYYYYMMDD($this->input->post('datum'));
+            $supplement->datumStop = null;
+            
+
+            // Checken of je iets wijzigt of toevoegt
+            if ($id === 0) {
+                $this->agenda_model->insertSupplement($supplement);
+            }
+            else {
+                $supplement->id = $id;
+                $this->agenda_model->updateSupplement($supplement);
+            }
+        }
+        else {
+            $supplement->datumStart = zetOmNaarYYYYMMDD($this->input->post('begindatumSupplement'));
+            $datumStop = zetOmNaarYYYYMMDD($this->input->post('einddatumSupplement'));
+            $supplement->datumStop = date('Y-m-d', strtotime($datumStop . ' +1 day'));
+
+            // Checken of je iets wijzigt of toevoegt
+            if ($id === 0) {
+                $this->agenda_model->insertSupplement($supplement);
+            }
+            else {
+                $supplement->id = $id;
+                $this->agenda_model->updateSupplement($supplement);
+            }
+        }
+        
+        redirect('trainer/agenda');
+    }
+    
+    public function registreerOnderzoek() {
+        $this->load->model('trainer/agenda_model');
+        $uren = array('06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00');
+        $onderzoek = new stdClass();
+        $id = intval($this->input->post('id'));
+        
+        $onderzoek->persoonId = $this->input->post('persoonSupplement');
+        $onderzoek->tijdstipStart = zetOmNaarYYYYMMDD($this->input->post('begindatum')) . ' ' . $uren[$this->input->post('beginuur')] . ':00';
+        $onderzoek->tijdstipStop = zetOmNaarYYYYMMDD($this->input->post('einddatum')) . ' ' . $uren[$this->input->post('einduur')] . ':00';
+        $onderzoek->omschrijving = $this->input->post('gebeurtenisnaam');
+        
+        if ($id === 0) {
+            $this->agenda_model->insertOnderzoek($onderzoek);
+        }
+        else {
+            $onderzoek->id = $id;
+            $this->agenda_model->updateOnderzoek($onderzoek);
+        }
+        
+        redirect('trainer/agenda');
     }
     
     
@@ -580,15 +699,21 @@ class Agenda extends CI_Controller {
         redirect('/trainer/agenda');
     }
     
-    public function verwijderWedstrijd($id) {
-        redirect('/trainer/agenda');
-    }
-    
     public function verwijderOnderzoek($id) {
+        $this->load->model('zwemmer/agenda_model');
+        $onderzoek = $this->agenda_model->getOnderzoek($id);
+        
+        $this->agenda_model->deleteOnderzoek($onderzoek->id);
+        
         redirect('/trainer/agenda');
     }
     
     public function verwijderSupplement($id) {
+        $this->load->model('trainer/agenda_model');
+        $supplement = $this->agenda_model->getSupplementPerPersoon($id);
+        
+        $this->agenda_model->deleteSupplement($supplement->id);
+        
         redirect('/trainer/agenda');
     }
 }
