@@ -24,7 +24,7 @@ $attributenFormulier = array('id' => 'form-profiel',
     <p>Telefoonnummer: <?php echo $profiel->telefoonnummer?></p>
     <p>Email: <?php echo $profiel->email?></p>
     <p>Over jezelf</p>
-    <p><textarea rows="2" cols="25"><?php echo $profiel->omschrijving . " " . $profiel->id?></textarea></p>
+    <p><textarea rows="2" cols="25"><?php echo $profiel->omschrijving?></textarea></p>
     <button type="button" class="btn button-blue justify-content-center" id="<?php echo $profiel->id ?>" onclick='profielGegevensTonen(this.id)' value="<?php echo $profiel->id ?>" data-toggle='modal' data-toggle='tooltip' title='Profiel wijzigen' data-target="#profielWijzigen">Aanpassen</button>
 </div>
 
