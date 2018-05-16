@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['aanpassen',['aanpassen',['../class_team.html#aa65f555e855b75d2392cbc1cacaae741',1,'Team']]],
+  ['aanpassen',['aanpassen',['../class_inschrijving.html#aa65f555e855b75d2392cbc1cacaae741',1,'Inschrijving\aanpassen()'],['../class_team.html#aa65f555e855b75d2392cbc1cacaae741',1,'Team\aanpassen()']]],
   ['accept_5fcharset',['accept_charset',['../class_c_i___user__agent.html#adc1f6218ec74ef1686ae6cb1218be7b1',1,'CI_User_agent']]],
   ['accept_5flang',['accept_lang',['../class_c_i___user__agent.html#a89add2e480d14b5f755993f4f5e0bd72',1,'CI_User_agent']]],
   ['active',['active',['../class_c_i___unit__test.html#ac7b3030630fc7dd31513c75cf27c1a8a',1,'CI_Unit_test']]],

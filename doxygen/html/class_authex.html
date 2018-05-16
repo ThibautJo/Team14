@@ -67,22 +67,91 @@ $(function() {
 <div class="title">Authex Class Referentie</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Controller-klasse voor het valideren van gebruikers en sessies.  
+ <a href="class_authex.html#details">Meer...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Members</h2></td></tr>
-<tr class="memitem:aee54a4aaf1ac1858534b0e0e696bf4cd"><td class="memItemLeft" align="right" valign="top"><a id="aee54a4aaf1ac1858534b0e0e696bf4cd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>getPersoonInfo</b> ()</td></tr>
-<tr class="separator:aee54a4aaf1ac1858534b0e0e696bf4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2c8bc8f5f6d7f76b4df44a6334f3ef8"><td class="memItemLeft" align="right" valign="top"><a id="ad2c8bc8f5f6d7f76b4df44a6334f3ef8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>isAangemeld</b> ()</td></tr>
-<tr class="separator:ad2c8bc8f5f6d7f76b4df44a6334f3ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99c27bff19a9c6064f318fa6aec5c68d"><td class="memItemLeft" align="right" valign="top"><a id="a99c27bff19a9c6064f318fa6aec5c68d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>meldAan</b> ($email, $wachtwoord)</td></tr>
+<tr class="memitem:a99c27bff19a9c6064f318fa6aec5c68d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_authex.html#a99c27bff19a9c6064f318fa6aec5c68d">meldAan</a> ($email, $wachtwoord)</td></tr>
 <tr class="separator:a99c27bff19a9c6064f318fa6aec5c68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2c8bc8f5f6d7f76b4df44a6334f3ef8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_authex.html#ad2c8bc8f5f6d7f76b4df44a6334f3ef8">isAangemeld</a> ()</td></tr>
+<tr class="separator:ad2c8bc8f5f6d7f76b4df44a6334f3ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee54a4aaf1ac1858534b0e0e696bf4cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_authex.html#aee54a4aaf1ac1858534b0e0e696bf4cd">getPersoonInfo</a> ()</td></tr>
+<tr class="separator:aee54a4aaf1ac1858534b0e0e696bf4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa954cce013935041d0def3a057c40676"><td class="memItemLeft" align="right" valign="top"><a id="aa954cce013935041d0def3a057c40676"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>meldAf</b> ()</td></tr>
 <tr class="separator:aa954cce013935041d0def3a057c40676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
+<div class="textblock"><p>Controller-klasse voor het valideren van gebruikers en sessies. </p>
+<p>Controller-klasse met alle methodes die gebruikt worden voor het valideren van gebruikersrechten, valideren van ingevoerde aanmeldgegevens en sessievariabelen. </p>
+</div><h2 class="groupheader">Documentatie van functie members</h2>
+<a id="aee54a4aaf1ac1858534b0e0e696bf4cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee54a4aaf1ac1858534b0e0e696bf4cd">&#9670;&nbsp;</a></span>getPersoonInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getPersoonInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verifierd de ingevoerde aanmeldgegevens (email en wachtwoord) en logt de overeenstemmende gebruiker in het systeem.</p>
+
+</div>
+</div>
+<a id="ad2c8bc8f5f6d7f76b4df44a6334f3ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2c8bc8f5f6d7f76b4df44a6334f3ef8">&#9670;&nbsp;</a></span>isAangemeld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">isAangemeld </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verifierd dat de gebruiker is aangemeld indien deze beschikt over een id binnen de database.</p>
+
+</div>
+</div>
+<a id="a99c27bff19a9c6064f318fa6aec5c68d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c27bff19a9c6064f318fa6aec5c68d">&#9670;&nbsp;</a></span>meldAan()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">meldAan </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$email</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$wachtwoord</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verifiërd de ingevoerde aanmeldgegevens (email en wachtwoord) en logt de overeenstemmende gebruiker in het systeem.</p>
+
+</div>
+</div>
 <hr/>De documentatie voor deze klasse is gegenereerd op grond van het volgende bestand:<ul>
 <li>CodeIgniter-3.1.7/application/libraries/Authex.php</li>
 </ul>

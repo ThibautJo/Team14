@@ -68,7 +68,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Controller-klasse voor startpaginaitem.  
+<p>Controller-klasse voor startpaginaItems.  
  <a href="class_startpagina.html#details">Meer...</a></p>
 <div class="dynheader">
 Klasse diagram voor Startpagina</div>
@@ -86,6 +86,12 @@ Public Members</h2></td></tr>
 <tr class="separator:a095c5d389db211932136b53f25f39685"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a149eb92716c1084a935e04a8d95f7347"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_startpagina.html#a149eb92716c1084a935e04a8d95f7347">index</a> ()</td></tr>
 <tr class="separator:a149eb92716c1084a935e04a8d95f7347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c3ef5f3d4dcf504bf0bc240f1dd3d1c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_startpagina.html#a4c3ef5f3d4dcf504bf0bc240f1dd3d1c">wijzigStartpaginaItem</a> ($id)</td></tr>
+<tr class="separator:a4c3ef5f3d4dcf504bf0bc240f1dd3d1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ddaab7878fbe311a0919666914a325"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_startpagina.html#ac3ddaab7878fbe311a0919666914a325">opslaanStartpaginaItem</a> ($actie=&quot;toevoegen&quot;)</td></tr>
+<tr class="separator:ac3ddaab7878fbe311a0919666914a325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45effacf7900b2b222086085bd993067"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_startpagina.html#a45effacf7900b2b222086085bd993067">verwijderStartpaginaItem</a> ($id)</td></tr>
+<tr class="separator:a45effacf7900b2b222086085bd993067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_c_i___controller"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_c_i___controller')"><img src="closed.png" alt="-"/>&#160;Public Members overge&euml;rfd van <a class="el" href="class_c_i___controller.html">CI_Controller</a></td></tr>
 <tr class="memitem:a095c5d389db211932136b53f25f39685 inherit pub_methods_class_c_i___controller"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_i___controller.html#a095c5d389db211932136b53f25f39685">__construct</a> ()</td></tr>
 <tr class="separator:a095c5d389db211932136b53f25f39685 inherit pub_methods_class_c_i___controller"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,8 +103,8 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
 <tr class="separator:a8d3cc57e7b6ec94e704712b0f277f5bb inherit pub_static_methods_class_c_i___controller"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Gedetailleerde Beschrijving</h2>
-<div class="textblock"><p>Controller-klasse voor startpaginaitem. </p>
-<p>Controller-klasse met alle methodes die gebruikt worden voor startpaginaitems </p>
+<div class="textblock"><p>Controller-klasse voor startpaginaItems. </p>
+<p>Controller-klasse met alle methodes die gebruikt worden voor startpaginaItems weer te geven. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentatie</h2>
 <a id="a095c5d389db211932136b53f25f39685"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a095c5d389db211932136b53f25f39685">&#9670;&nbsp;</a></span>__construct()</h2>
@@ -115,7 +121,7 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Controleert of bevoegde persoon is aangemeld. Indien deze niet aangemeld of bevoegd is, wordt hij doorverwezen naar de loginpagina.</p>
-<p>Laadt de auteur van deze code in de footer.</p>
+<p>Laadt de auteur van de geschreven code van deze pagina in de footer.</p>
 
 </div>
 </div>
@@ -134,8 +140,92 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt alle startpaginaitems op via startpaginaitem_model en toont de resulterende objecten in de view <a class="el" href="startpagina__beheren_8php.html">startpagina_beheren.php</a></p>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_startpagina_item__model.html#a62e991bda11849465a2b09838cc20614">StartpaginaItem_model::getStartpaginaItem()</a> </dd>
+<p>Haalt alle startpaginaItems op via startpaginaItem_model en toont de resulterende objecten in de view <a class="el" href="startpagina__beheren_8php.html">startpagina_beheren.php</a></p>
+<dl class="section see"><dt>Zie ook</dt><dd>startpaginaItem_model::getStartpaginaItem() </dd>
+<dd>
+<a class="el" href="startpagina__beheren_8php.html">startpagina_beheren.php</a></dd></dl>
+
+</div>
+</div>
+<a id="ac3ddaab7878fbe311a0919666914a325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3ddaab7878fbe311a0919666914a325">&#9670;&nbsp;</a></span>opslaanStartpaginaItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">opslaanStartpaginaItem </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$actie</em> = <code>&quot;toevoegen&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Slaagt het nieuw/aangepaste startpaginaItem op via startpaginaItem_model en toont de aangepaste lijst in de view startpaginaitem_beheren.php</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$actie</td><td>De vereiste actie die moet worden opgevangen voor het opslaan van startpaginaitems </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>startpaginaItem_model::insertStartpaginaItem() </dd>
+<dd>
+startpaginaItem_model::updateStartpaginaItem() </dd>
+<dd>
+<a class="el" href="startpagina__beheren_8php.html">startpagina_beheren.php</a></dd></dl>
+
+</div>
+</div>
+<a id="a45effacf7900b2b222086085bd993067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45effacf7900b2b222086085bd993067">&#9670;&nbsp;</a></span>verwijderStartpaginaItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">verwijderStartpaginaItem </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Verwijdert het startpaginaitem-record met id=$id via startpaginaItem_model en toont de aangepaste lijst in de view startpaginaitem_beheren.php</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$id</td><td>De id van het startpaginaitem-record dat verwijdert wordt </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>startpaginaItem_model::deleteStartpaginaItem()</dd></dl>
+
+</div>
+</div>
+<a id="a4c3ef5f3d4dcf504bf0bc240f1dd3d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c3ef5f3d4dcf504bf0bc240f1dd3d1c">&#9670;&nbsp;</a></span>wijzigStartpaginaItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">wijzigStartpaginaItem </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haalt de id=$id op van het te wijzigen startpaginaitem-record via startpaginaitem_model en toont dit in het formulier in view <a class="el" href="startpagina__beheren_8php.html">startpagina_beheren.php</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$id</td><td>De id van het te wijzigen startpaginaitem </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Zie ook</dt><dd>startpaginaItem_model::getStartpaginaItemMetId($id) </dd>
 <dd>
 <a class="el" href="startpagina__beheren_8php.html">startpagina_beheren.php</a></dd></dl>
 

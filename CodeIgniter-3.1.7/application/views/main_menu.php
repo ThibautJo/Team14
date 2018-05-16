@@ -14,17 +14,7 @@
 
 <ul class="nav nav-pills flex-column" id="sidenav">    
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#profielSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="profielSubMenu"><i class="material-icons md-18 mr-3">person</i><span class="menu-text">Profiel</span></a>
-        <div id="submenu" class="kleur">
-            <ul class="collapse list-unstyled pl-4 submenu-links" id="profielSubMenu" data-parent="#sidenav">
-                <li class="pt-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Zwemmer/Profiel') ?>">Profiel</a>
-                </li>
-                <li class="pb-2">
-                    <a class="nav-link1" href="<?php // echo site_url('/Zwemmer/Profiel/Aanpassen')  ?>">Profiel aanpassen</a>
-                </li>
-            </ul>
-        </div>
+        <a class="nav-link d-flex justify-content-between align-items-center" href="<?php echo site_url('/Zwemmer/Profiel') ?>"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">person</i><span class="menu-text">Profiel</span></span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Zwemmer/Agenda') ?>"><i class="material-icons md-18 mr-3">event_note</i><span class="menu-text">Agenda</span></a>

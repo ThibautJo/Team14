@@ -1,8 +1,8 @@
 <?php
 /**
-* @file wedstrijden_weergaven.php
+* @file wedstrijd_resultaten.php
 *
-* View waarin de gegevens van een wedstrijden worden weergegeven
+* View waarin de gegevens van de afgelopen wedstrijden te zien zijn.
 */
 
 // +----------------------------------------------------------
