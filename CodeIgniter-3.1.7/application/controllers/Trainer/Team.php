@@ -235,10 +235,11 @@ class Team extends CI_Controller {
         $persoon->email = $this->input->post('email');
         $persoon->omschrijving = $this->input->post('omschrijving');
         $persoon->soort = $this->input->post('soort');
-
+        
         $this->load->model('trainer/zwemmers_model');
         //        if($persoon->ID == 0) {
         if ($actie == "toevoegen") {
+            $persoon->wachtwoord = $this->input->post('wachtwoord');
             $this->zwemmers_model->insert($persoon);
         } else {
             $persoon->id = $this->input->post('id');
