@@ -1,8 +1,9 @@
 <?php
-    /**
-     * @file bezoeker_main_header.php
-     * View waarmee de header en navigatiebalk wordt weergegeven.
-     */
+
+ /**
+ * @file main_footer.php
+ * View waarmee de footer van de applicatie wordt weergegeven.
+ */
 ?>
 
 <span class="d-flex flex-sm-row flex-column justify-content-sm-center">

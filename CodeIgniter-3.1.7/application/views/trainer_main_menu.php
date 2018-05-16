@@ -1,4 +1,9 @@
-
+<?php 
+/**
+ * @file trainer_main_menu.php
+ * View waarmee de inhoud van het menu van de trainer wordt weergegeven.
+ */
+?>
 <!-- Profielfoto en naam in de verticale menu -->
 
 <div id="account-foto" class="d-flex align-items-center flex-column justify-content-center">

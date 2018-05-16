@@ -10,6 +10,10 @@
  *
  * # Wie ?
  * Dit project is geschreven en becommentarieerd door de leden van Team14 nl. Jolien Lauwers, Klaus Daems, Lise Van Eyck, Thibaut Joukes & Tom Nuyts.
+ * 
+ * @file bezoeker_main_master.php
+ * View waarmee de inhoud van de homepagina worden weergegeven.
+ * 
  */
 ?>
 <!DOCTYPE html>

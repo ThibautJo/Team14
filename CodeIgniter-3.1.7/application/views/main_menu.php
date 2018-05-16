@@ -1,4 +1,9 @@
-
+<?php 
+/**
+ * @file main_menu.php
+ * View waarmee de inhoud van het menu van de zwemmer wordt weergegeven.
+ */
+?>
 <!-- Profielfoto en naam in de verticale menu -->
 
 <div id="account-foto" class="d-flex align-items-center flex-column justify-content-center">
