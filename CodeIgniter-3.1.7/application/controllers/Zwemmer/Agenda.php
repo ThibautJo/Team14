@@ -27,6 +27,13 @@ class Agenda extends CI_Controller {
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "true", "Lise Van Eyck" => "false");
+        
+        // Aantal meldingen laten zien
+        $this->load->model('zwemmer/melding_model');
+        $persoon = $this->authex->getPersoonInfo();
+        $persoonId = $persoon->id;
+        $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        $this->data->aantalMeldingen = count($meldingen);
     }
 
     // +----------------------------------------------------------
@@ -41,6 +48,7 @@ class Agenda extends CI_Controller {
         $data['team'] = $this->data->team;
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $data['persoonAangemeld'] = $persoonAangemeld;
+        $data['aantalMeldingen'] = $this->data->aantalMeldingen;
 
         $persoonId = $persoonAangemeld->id;
 
@@ -198,14 +206,29 @@ class Agenda extends CI_Controller {
 
         // Supplementen worden in een array gestoken -> dit doen we om later van de array JSON code te kunnen maken
         foreach ($supplementen as $supplement) {
-            $data_supplementen[] = array(
-                "id" => $supplement->id,
-                "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
-                "title" => $supplement->supplement->naam,
-                "start" => $supplement->datum,
-                "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
-                "textColor" => '#fff'
-            );
+            if ($supplement->datumStop !== null) {
+                $data_supplementen[] = array(
+                    "extra" => $supplement->id,
+                    "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
+                    "title" => $supplement->supplement->naam,
+                    "start" => $supplement->datumStart,
+                    "end" => $supplement->datumStop,
+                    "persoon" => $supplement->persoonId,
+                    "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
+                    "textColor" => '#fff'
+                );
+            }
+            else {
+                $data_supplementen[] = array(
+                    "extra" => $supplement->id,
+                    "description" => $supplement->functie->supplementFunctie . ', ' . $supplement->hoeveelheid . ' keer',
+                    "title" => $supplement->supplement->naam,
+                    "start" => $supplement->datumStart,
+                    "persoon" => $supplement->persoonId,
+                    "color" => $this->agenda_model->getKleurActiviteit(8)->kleur,
+                    "textColor" => '#fff'
+                );
+            }
         }
 
         return $data_supplementen;

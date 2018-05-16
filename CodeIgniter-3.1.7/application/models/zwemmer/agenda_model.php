@@ -112,8 +112,9 @@ class Agenda_model extends CI_Model {
     }
 
     public function getWedstrijdenByPersoon($persoonId) {
-        // Alle wedstrijden van een bepaalde persoon ophalen uit de databank
+        // Alle wedstrijden van een bepaalde persoon ophalen uit de databank (inschrijving moet geaccepteerd zijn ==> status = 2)
         $this->db->where('persoonid', $persoonId);
+        $this->db->where('status', 2);
         $query = $this->db->get('inschrijving');
 
         $wedstrijden = $query->result();

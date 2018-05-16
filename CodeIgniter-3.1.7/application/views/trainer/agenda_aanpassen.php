@@ -85,7 +85,11 @@
                 <?php echo form_hidden('id', ''); ?>
                 <?php echo form_hidden('reeksId', ''); ?>
                 <?php echo form_hidden('persoonSupplement', ''); ?>
-
+                
+<!--                <div id="wedstrijdAanpassen-form" class="d-none">
+                    <p><?php echo anchor('Trainer/wedstrijden/index?pagina=aanpassen', 'Klik hier') ?> om de wedstrijd aan te passen.</p>
+                </div>-->
+                
                 <div id="titel-form" class="d-none">
                     <div class="form-group">
                         <?php
@@ -344,11 +348,12 @@
                 </div>
             </div>
             <div id="toevoegenActiviteitButtonContainer" class="modal-footer d-flex justify-content-between">
-                <button type="button" id="deleteActiviteitButton" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" onclick=""><i class="fas fa-trash-alt"></i></button>
-                <div>
-                <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
-                <?php
-                    echo form_submit('ok', 'Opslaan', 'class="btn button-blue"');
+                <p id="wedstrijdAanpassen-form" class="d-none"><?php echo anchor('Trainer/wedstrijden/index?pagina=aanpassen', 'Klik hier') ?> om de wedstrijd aan te passen.</p>
+                    <button type="button" id="deleteActiviteitButton" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" onclick=""><i class="fas fa-trash-alt"></i></button>
+                    <div>
+                    <button type="button" class="btn buttonsActiviteitAanpassenContainer" data-dismiss="modal">Annuleren</button>
+                    <?php
+                        echo form_submit('ok', 'Opslaan', 'class="btn button-blue buttonsActiviteitAanpassenContainer"');
                     echo '</div>';
                     echo form_close();
                 ?> <!-- Modal sluit knop -->

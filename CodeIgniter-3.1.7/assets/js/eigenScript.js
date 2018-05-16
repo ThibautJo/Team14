@@ -599,21 +599,39 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
     $('#aanpassenActiviteit #tijdstip-form').addClass('d-none');
     $('#aanpassenActiviteit #deleteActiviteitButton').attr('onclick', 'verwijderActiviteit(' + id + ', "' + activiteit + '")');
     $('#aanpassenActiviteit #soort option:last').attr('hidden', true);
+    $('#aanpassenActiviteit #wedstrijdAanpassen-form').addClass('d-none');
+    $('#aanpassenActiviteit .buttonsActiviteitAanpassenContainer').removeClass('d-none');
 
     switch (true) {
         case activiteit === "Wedstrijd":
-            $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerWedstrijd');
-            $('#aanpassenActiviteit #aanpassenFormulier').attr('novalidate', '');
+            $('#aanpassenActiviteit #wedstrijdAanpassen-form').removeClass('d-none');
+            $('#aanpassenActiviteit .buttonsActiviteitAanpassenContainer').addClass('d-none');
+            $('#aanpassenActiviteit #deleteActiviteitButton').css('display', 'none');
+//            $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').removeClass('justify-content-between');
+//            $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').addClass('justify-content-right');
             $('#aanpassenActiviteit #titel-form').removeClass('d-none');
             $('#aanpassenActiviteit #wedstrijd-form').removeClass('d-none');
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
-            $('#aanpassenActiviteit #gebeurtenisnaam').attr('value', data['naam']);
-            $('#aanpassenActiviteit #plaats').attr('value', data['plaats']);
-            $('#aanpassenActiviteit #programma').attr('value', data['programma']);
+            $('#aanpassenActiviteit #gebeurtenisnaam').attr({
+                'value': data['naam'],
+                'disabled': true
+            });
+            $('#aanpassenActiviteit #plaats').attr({
+                'value': data['plaats'],
+                'disabled': true
+            });
+            $('#aanpassenActiviteit #programma').attr({
+                'value': data['programma'],
+                'disabled': true
+            });
             $('#aanpassenActiviteit .begindatum .datepicker2').datepicker('update', dateHelper_getDate(data['datumStart']));
+            $('#aanpassenActiviteit #begindatum').attr('disabled', true);
             $('#aanpassenActiviteit .einddatum .datepicker2').datepicker('update', dateHelper_getDate(data['datumStop']));
+            $('#aanpassenActiviteit #einddatum').attr('disabled', true);
             $("#aanpassenActiviteit #beginuur option[value='" + uren.indexOf(dateHelper_getTime(data['datumStart'])) + "']").attr("selected","selected");
+            $('#aanpassenActiviteit #beginuur').attr('disabled', true);
             $("#aanpassenActiviteit #einduur option[value='" + uren.indexOf(dateHelper_getTime(data['datumStop'])) + "']").attr("selected","selected");
+            $('#aanpassenActiviteit #einduur').attr('disabled', true);
             $('#aanpassenActiviteit #tabDatum #dag-tab').tab('show');
             $('#aanpassenActiviteit #tijdstip-form').removeClass('d-none');
             break;
@@ -733,22 +751,23 @@ function toevoegenActiviteit() {
     var linkActiviteit = '';
     switch (true) {
         case activiteit === "Wedstrijd":
-            linkActiviteit = 'toevoegenWedstrijd';
+            window.location.replace(site_url + '/Trainer/wedstrijden/index?pagina=aanpassen');
+            linkActiviteit = 'wedstrijden/index?pagina=aanpassen';
             break;
         case activiteit === "Medische afspraak":
-            linkActiviteit = 'toevoegenOnderzoek/' + persoonId;
+            linkActiviteit = 'agenda/toevoegenOnderzoek/' + persoonId;
             break;
         case activiteit === "Supplement":
-            linkActiviteit = 'toevoegenSupplement/' + persoonId;
+            linkActiviteit = 'agenda/toevoegenSupplement/' + persoonId;
             break;
         case activiteit === "Training (reeks)":
-            linkActiviteit = 'toevoegenActiviteit/true';
+            linkActiviteit = 'agenda/toevoegenActiviteit/true';
             break;
         default:
-            linkActiviteit = 'toevoegenActiviteit/false';
+            linkActiviteit = 'agenda/toevoegenActiviteit/false';
             break;
     }
-    $.post(site_url + '/trainer/agenda/' + linkActiviteit + '/' + startDatum + '/' + stopDatum,
+    $.post(site_url + '/trainer/' + linkActiviteit + '/' + startDatum + '/' + stopDatum,
         function (data) {
             //data = object van activiteit
             data = JSON.parse(data);

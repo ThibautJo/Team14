@@ -82,7 +82,6 @@
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex justify-content-between align-items-center" href="#meldingenSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="meldingenSubMenu"><span class="d-flex align-items-center"><i class="material-icons md-18 mr-3">notifications</i><span class="menu-text">Meldingen</span></span>
-            <span class="menu-text"><div id="melding-menu" class="img-circle d-flex align-items-center justify-content-center">2</div></span>
         </a>
         <div id="submenu" class="kleur">
             <ul class="collapse list-unstyled pl-4 submenu-links" id="meldingenSubMenu" data-parent="#sidenav">
