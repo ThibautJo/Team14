@@ -410,10 +410,10 @@ function persoonOpslaan(actie) {
   }
 }
 
-function profielGegevensTonen(persoonID) {
+function profielGegevensTonen(profielID) {
 
-  console.log("id =" + persoonID);
-  var id = $("#" + persoonID).val();
+  console.log("id =" + profielID);
+  var id = $("#" + profielID).val();
 
   $.post(site_url + '/Zwemmer/team/profielTonen/' + id, function (data) {
     //data = object van supplement
@@ -431,19 +431,19 @@ function profielGegevensTonen(persoonID) {
 
 }
 
-function opvullenModalProfielGegevensTonen(dataProfiel) {
-  console.log(dataProfiel);
-  console.log(dataProfiel["id"]);
-  $('#profielWijzigen #id').attr("value", dataProfiel["id"]);
-  $('#profielWijzigen #voornaam').val(dataProfiel["voornaam"]);
-  $('#profielWijzigen #achternaam').val(dataProfiel["achternaam"]);
-  $('#profielWijzigen #straat').val(dataProfiel["straat"]);
-  $('#profielWijzigen #huisnummer').val(dataProfiel["huisnummer"]);
-  $('#profielWijzigen #postcode').val(dataProfiel["postcode"]);
-  $('#profielWijzigen #gemeente').val(dataProfiel["gemeente"]);
-  $('#profielWijzigen #telefoonnummer').val(dataProfiel["telefoonnummer"]);
-  $('#profielWijzigen #email').val(dataProfiel["email"]);
-  $('#profielWijzigen #omschrijving').val(dataProfiel["omschrijving"]);
+function opvullenModalProfielGegevensTonen(dataProfielGegevens) {
+  console.log(dataProfielGegevens);
+  console.log(dataProfielGegevens["id"]);
+  $('#profielWijzigen #id').attr("value", dataProfielGegevens["id"]);
+  $('#profielWijzigen #voornaam').val(dataProfielGegevens["voornaam"]);
+  $('#profielWijzigen #achternaam').val(dataProfielGegevens["achternaam"]);
+  $('#profielWijzigen #straat').val(dataProfielGegevens["straat"]);
+  $('#profielWijzigen #huisnummer').val(dataProfielGegevens["huisnummer"]);
+  $('#profielWijzigen #postcode').val(dataProfielGegevens["postcode"]);
+  $('#profielWijzigen #gemeente').val(dataProfielGegevens["gemeente"]);
+  $('#profielWijzigen #telefoonnummer').val(dataProfielGegevens["telefoonnummer"]);
+  $('#profielWijzigen #email').val(dataProfielGegevens["email"]);
+  $('#profielWijzigen #omschrijving').val(dataProfielGegevens["omschrijving"]);
 
 }
 
