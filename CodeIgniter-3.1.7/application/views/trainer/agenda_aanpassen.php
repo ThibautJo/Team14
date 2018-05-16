@@ -96,8 +96,7 @@
                             'id' => 'gebeurtenisnaam',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'Gebeurtenisnaam', 
-                            'required' => 'required'));
+                            'placeholder' => 'Gebeurtenisnaam'));
                         ?>
                     </div>
                 </div>
@@ -119,8 +118,7 @@
                             'id' => 'plaats',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'Plaats', 
-                            'required' => 'required'));
+                            'placeholder' => 'Plaats'));
                         ?>
                     </div>
 
@@ -131,8 +129,7 @@
                             'id' => 'programma',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'http://www.programma.be', 
-                            'required' => 'required'));
+                            'placeholder' => 'http://www.programma.be'));
                         ?>
                     </div>
                 </div>
@@ -153,8 +150,7 @@
                             'value' => '', 
                             'class' => 'form-control',
                             'placeholder' => 'bv. 2',
-                            'type' => 'number',
-                            'required' => 'required'));
+                            'type' => 'number'));
                         ?>
                     </div>
                 </div>
@@ -205,7 +201,6 @@
                                         'id' => 'begindatum',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -229,7 +224,6 @@
                                         'id' => 'einddatum',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -252,7 +246,6 @@
                                 'id' => 'datum', 
                                 'value' => '',
                                 'class' => 'form-control datepicker2',
-                                'required' => 'required',
                                 'data-provide' => 'datepicker',
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
@@ -270,7 +263,6 @@
                                         'id' => 'begindatumReeks',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -294,7 +286,6 @@
                                         'id' => 'einddatumReeks',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -320,7 +311,6 @@
                                         'id' => 'begindatumSupplement',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -334,7 +324,6 @@
                                         'id' => 'einddatumSupplement',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
