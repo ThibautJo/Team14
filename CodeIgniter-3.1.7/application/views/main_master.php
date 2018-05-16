@@ -1,3 +1,9 @@
+<?php 
+/**
+ * @file main_master.php
+ * View waarmee de inhoud van de applicatie wordt weergegeven.
+ */
+?>
 <!DOCTYPE html>
 <html lang="nl">
     <head>
