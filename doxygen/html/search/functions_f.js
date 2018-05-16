@@ -6,6 +6,7 @@ var searchData=
   ['opslaaninschrijving',['opslaanInschrijving',['../class_wedstrijden.html#a73e1822477f25f3f09526de003e5767a',1,'Wedstrijden']]],
   ['opslaanmelding',['opslaanMelding',['../class_melding.html#a99ee1f019b2486d3a74d224231bc7312',1,'Melding']]],
   ['opslaanpersoon',['opslaanPersoon',['../class_team.html#ae3e4cc2429c5bd64d0d8dad1385dfa47',1,'Team']]],
+  ['opslaanstartpaginaitem',['opslaanStartpaginaItem',['../class_startpagina.html#ac3ddaab7878fbe311a0919666914a325',1,'Startpagina']]],
   ['opslaansupplement',['opslaanSupplement',['../class_supplement.html#a1147dafd79457c214282b7f8bf9bb95e',1,'Supplement']]],
   ['opslaanwedstrijd',['opslaanWedstrijd',['../class_wedstrijden.html#a17fac637de865ad0a78b0d57f8c4455d',1,'Wedstrijden']]],
   ['opslaanzwemmeruitarchiefhalen',['opslaanZwemmerUitArchiefHalen',['../class_team.html#ac4d654769c0924767cc42a53436cbd58',1,'Team']]],

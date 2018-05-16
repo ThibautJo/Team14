@@ -84,11 +84,9 @@ Klasse diagram voor Inschrijving</div>
 Public Members</h2></td></tr>
 <tr class="memitem:a095c5d389db211932136b53f25f39685"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inschrijving.html#a095c5d389db211932136b53f25f39685">__construct</a> ()</td></tr>
 <tr class="separator:a095c5d389db211932136b53f25f39685"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a149eb92716c1084a935e04a8d95f7347"><td class="memItemLeft" align="right" valign="top"><a id="a149eb92716c1084a935e04a8d95f7347"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>index</b> ()</td></tr>
+<tr class="memitem:a149eb92716c1084a935e04a8d95f7347"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inschrijving.html#a149eb92716c1084a935e04a8d95f7347">index</a> ()</td></tr>
 <tr class="separator:a149eb92716c1084a935e04a8d95f7347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa65f555e855b75d2392cbc1cacaae741"><td class="memItemLeft" align="right" valign="top"><a id="aa65f555e855b75d2392cbc1cacaae741"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>aanpassen</b> ()</td></tr>
+<tr class="memitem:aa65f555e855b75d2392cbc1cacaae741"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inschrijving.html#aa65f555e855b75d2392cbc1cacaae741">aanpassen</a> ()</td></tr>
 <tr class="separator:aa65f555e855b75d2392cbc1cacaae741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa590f2f41fa506cd9aeaed36ebfc95dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_inschrijving.html#aa590f2f41fa506cd9aeaed36ebfc95dc">goedkeurenInschrijving</a> ($id)</td></tr>
 <tr class="separator:aa590f2f41fa506cd9aeaed36ebfc95dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,6 +125,27 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Documentatie van functie members</h2>
+<a id="aa65f555e855b75d2392cbc1cacaae741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa65f555e855b75d2392cbc1cacaae741">&#9670;&nbsp;</a></span>aanpassen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">aanpassen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haalt alle inschrijvingen op via inschrijving_model en toont de resulterende objecten in de view <a class="el" href="inschrijving__aanpassen_8php.html">inschrijving_aanpassen.php</a></p>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_inschrijving__model.html#a323dccc6ffa32a5dbfcfd27d975c2c7f">Inschrijving_model::getInschrijvingen()</a> </dd>
+<dd>
+<a class="el" href="inschrijving__aanpassen_8php.html">inschrijving_aanpassen.php</a> </dd></dl>
+
+</div>
+</div>
 <a id="ad99b17bb213d8521a5fcff1bc30dc593"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad99b17bb213d8521a5fcff1bc30dc593">&#9670;&nbsp;</a></span>afkeurenInschrijving()</h2>
 
@@ -142,14 +161,14 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Verwijdert het supplement-record met id=$id via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en toont de aangepaste lijst in de view <a class="el" href="supplement__lijst_8php.html">supplement_lijst.php</a></p>
+<p>Haalt de id=$id op van het te wijzigen inschrijving-record via inschrijving_model en toont de aangepaste lijst in de view <a class="el" href="inschrijving__aanpassen_8php.html">inschrijving_aanpassen.php</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$id</td><td>De id van het supplement-record dat verwijdert wordt </td></tr>
+    <tr><td class="paramname">$id</td><td>De id van de te wijzigen inschrijving </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#ad4658b3e00e1e4c25966111afc6e38cd">Supplement_model::deleteSupplement()</a> </dd></dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_inschrijving__model.html#a19fc9fac0a1d2c01f8d028819266e1c5">Inschrijving_model::updateInschrijving()</a> </dd></dl>
 
 </div>
 </div>
@@ -168,14 +187,49 @@ Additionele Overge&euml;rfde Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Haalt de id=$id op van het te wijzigen supplement-record via <a class="el" href="class_supplement__model.html" title="Model-klasse voor supplementen. ">Supplement_model</a> en toont dit in het formulier in view <a class="el" href="supplement__lijst_8php.html">supplement_lijst.php</a></p>
+<p>Haalt de id=$id op van het te wijzigen inschrijving-record via inschrijving_model en maakt een melding en toont de aangepaste lijst in de view <a class="el" href="inschrijving__aanpassen_8php.html">inschrijving_aanpassen.php</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$id</td><td>De id van het te wijzigen supplement </td></tr>
+    <tr><td class="paramname">$id</td><td>De id van de te wijzigen inschrijving </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_supplement__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Supplement_model::get()</a> </dd></dl>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_inschrijving__model.html#a19fc9fac0a1d2c01f8d028819266e1c5">Inschrijving_model::updateInschrijving()</a> </dd>
+<dd>
+<a class="el" href="class_inschrijving__model.html#a50e3bfb586b2f42932a6a93f3fbb0828">Inschrijving_model::get()</a> </dd>
+<dd>
+Wedstrijd_model::getReeksWitID() </dd>
+<dd>
+Wedstrijd_model::getAfstandWithID() </dd>
+<dd>
+Wedstrijd_model::getSlagWithID() </dd>
+<dd>
+Wedstrijd_model::get() </dd>
+<dd>
+<a class="el" href="class_melding__model.html#a384b339d281fcd42e3e55c983da7479b">Melding_model::insertMelding()</a> </dd>
+<dd>
+<a class="el" href="class_melding__model.html#ac3f21e4eb3d3d335751c2f17bf010d53">Melding_model::insertMeldingPerPersoon()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a149eb92716c1084a935e04a8d95f7347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a149eb92716c1084a935e04a8d95f7347">&#9670;&nbsp;</a></span>index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">index </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Haalt alle inschrijvingen op via inschrijving_model en toont de resulterende objecten in de view inschrijving.php</p>
+<dl class="section see"><dt>Zie ook</dt><dd><a class="el" href="class_inschrijving__model.html#a323dccc6ffa32a5dbfcfd27d975c2c7f">Inschrijving_model::getInschrijvingen()</a> </dd>
+<dd>
+inschrijving.php </dd></dl>
 
 </div>
 </div>

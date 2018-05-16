@@ -163,6 +163,7 @@ var searchData=
   ['config',['config',['../class_c_i___loader.html#af54799dcb5bf2f7346b5d2a7d824a471',1,'CI_Loader']]],
   ['connect',['connect',['../class_c_i___f_t_p.html#ab2827759611aaaf0c59e69661122c534',1,'CI_FTP']]],
   ['contents',['contents',['../class_c_i___cart.html#a9d7b86f0ac41c6301e6373644011d87f',1,'CI_Cart']]],
+  ['controleeraanmelden',['controleerAanmelden',['../class_welcome.html#a346d8fb0ef2d1f58b2e61e5cf73b5c92',1,'Welcome']]],
   ['convert_5fascii',['convert_ascii',['../class_c_i___trackback.html#a0029bda7d34a222a5bda4ac894c31ac1',1,'CI_Trackback']]],
   ['convert_5fto_5futf8',['convert_to_utf8',['../class_c_i___utf8.html#a7f6a8b9f00d7d11b23abcadfc91e9583',1,'CI_Utf8']]],
   ['convert_5fxml',['convert_xml',['../class_c_i___trackback.html#a1ec67af2037561b65ffe49b59727cb53',1,'CI_Trackback']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['ladenarchief',['ladenArchief',['../class_team.html#ac139d7df113ab0560698bfcb50372577',1,'Team']]],
-  ['ladenteam',['ladenTeam',['../class_team.html#a7d329c2e40162829a8feb20be505c83a',1,'Team\ladenTeam()'],['../class_team.html#a7d329c2e40162829a8feb20be505c83a',1,'Team\ladenTeam()']]],
+  ['ladenteam',['ladenTeam',['../class_team.html#a7d329c2e40162829a8feb20be505c83a',1,'Team\ladenTeam()'],['../class_welcome.html#a7d329c2e40162829a8feb20be505c83a',1,'Welcome\ladenTeam()'],['../class_team.html#a7d329c2e40162829a8feb20be505c83a',1,'Team\ladenTeam()']]],
   ['language',['language',['../class_c_i___loader.html#ae3e44c33f5f085ad8d6c556ede1385d8',1,'CI_Loader']]],
   ['languages',['languages',['../class_c_i___user__agent.html#adda8fc15b6fe0efc05a50d2645189c77',1,'CI_User_agent']]],
   ['last_5fquery',['last_query',['../class_c_i___d_b__driver.html#a8117354f1fa0b2873f0ad2792dc21389',1,'CI_DB_driver']]],
