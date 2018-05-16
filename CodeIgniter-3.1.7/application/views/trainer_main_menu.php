@@ -19,17 +19,7 @@
 
 <ul class="nav nav-pills flex-column" id="sidenav">
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#agendaSubMenu" data-toggle="collapse" aria-expanded="false" aria-controls="agendaSubMenu"><i class="material-icons md-18 mr-3">event_note</i><span class="menu-text">Agenda</span></a>
-        <div id="submenu" class="kleur">
-            <ul class="collapse list-unstyled pl-4 submenu-links" id="agendaSubMenu" data-parent="#sidenav">
-                <li class="pt-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/index') ?>">Agenda</a>
-                </li>
-                <li class="pb-2">
-                    <a class="nav-link1" href="<?php echo site_url('/Trainer/Agenda/index') ?>">Agenda beheren</a>
-                </li>
-            </ul>
-        </div>
+        <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/agenda/index') ?>"><i class="material-icons md-18 mr-3">event_note</i><span class="menu-text">Agenda</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link d-flex align-items-center" href="<?php echo site_url('/Trainer/Supplement') ?>"><i class="fas fa-pills md-18 mr-3"></i><span class="menu-text">Supplementen</span></a>
