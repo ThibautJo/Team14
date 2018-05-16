@@ -335,7 +335,7 @@ function opvullenModalPersoonWijzigen(dataPersoon) {
     $('#persoonWijzigen #achternaam').val(dataPersoon["achternaam"]);
     $('#persoonWijzigen #email').val(dataPersoon["email"]);
     $('#persoonWijzigen #wachtwoord').val(dataPersoon["wachtwoord"]);
-    $('#persoonWijzigen #omschrijving').val(dataPersoon["omschrijving"]);
+    $('#persoonWijzigen #omschrijving').val(dataPersoon["omschrijving"]);g
 
 }
 
