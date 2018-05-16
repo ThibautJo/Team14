@@ -52,4 +52,13 @@ class profiel_model extends CI_Model{
         $query = $this->db->get('persoon');
         return $query->row();
     }
+    
+    /**
+     * Wijzigt een persoon-record uit de tabel persoon
+     * @param $persoon Het persoon object waar de aangepaste data in zit
+     */
+    function update($persoon) {
+        $this->db->where('id', $persoon->id);
+        $this->db->update('persoon', $persoon);
+    }
 }

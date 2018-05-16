@@ -107,4 +107,15 @@ class Team extends CI_Controller {
 
         print json_encode($data);
     }
+    
+    public function profielOpslaan(){
+        $persoon = new stdClass();
+        
+        $this->load->model('zwemmer/profiel_model');
+
+        $persoon->id = $this->input->post('id');
+        $this->zwemmers_model->update($persoon);
+            
+        redirect('zwemmer/profiel');
+    }
 }
