@@ -20,7 +20,7 @@
 <script src="<?php echo base_url() ?>assets/scripts/fullcalendar/gcal.js"></script>
 
 <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Hulp agenda beheren</h5>
@@ -74,8 +74,6 @@
             <div class="modal-body"> <!-- Modal inhoud -->
                 <?php
                 $attributenFormulier = array('id' => 'aanpassenFormulier',
-                                                'class' => 'needs-validation',
-                                                'novalidate' => '',
                                                 'role' => 'form');
                 echo form_open('Trainer/Agenda/registreerActiviteit', $attributenFormulier);
                 
@@ -98,8 +96,7 @@
                             'id' => 'gebeurtenisnaam',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'Gebeurtenisnaam', 
-                            'required' => 'required'));
+                            'placeholder' => 'Gebeurtenisnaam'));
                         ?>
                     </div>
                 </div>
@@ -121,8 +118,7 @@
                             'id' => 'plaats',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'Plaats', 
-                            'required' => 'required'));
+                            'placeholder' => 'Plaats'));
                         ?>
                     </div>
 
@@ -133,8 +129,7 @@
                             'id' => 'programma',
                             'value' => '', 
                             'class' => 'form-control',
-                            'placeholder' => 'http://www.programma.be', 
-                            'required' => 'required'));
+                            'placeholder' => 'http://www.programma.be'));
                         ?>
                     </div>
                 </div>
@@ -155,8 +150,7 @@
                             'value' => '', 
                             'class' => 'form-control',
                             'placeholder' => 'bv. 2',
-                            'type' => 'number',
-                            'required' => 'required'));
+                            'type' => 'number'));
                         ?>
                     </div>
                 </div>
@@ -207,7 +201,6 @@
                                         'id' => 'begindatum',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -231,7 +224,6 @@
                                         'id' => 'einddatum',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -254,7 +246,6 @@
                                 'id' => 'datum', 
                                 'value' => '',
                                 'class' => 'form-control datepicker2',
-                                'required' => 'required',
                                 'data-provide' => 'datepicker',
                                 'data-date-format' => 'dd/mm/yyyy',
                                 'data-date-language' => 'nl-BE'));
@@ -272,7 +263,6 @@
                                         'id' => 'begindatumReeks',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -296,7 +286,6 @@
                                         'id' => 'einddatumReeks',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -322,7 +311,6 @@
                                         'id' => 'begindatumSupplement',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -336,7 +324,6 @@
                                         'id' => 'einddatumSupplement',
                                         'value' => '',
                                         'class' => 'form-control datepicker2',
-                                        'required' => 'required',
                                         'data-provide' => 'datepicker',
                                         'data-date-format' => 'dd/mm/yyyy',
                                         'data-date-language' => 'nl-BE'));
@@ -375,7 +362,7 @@
                 Kies de activiteit die u wilt toevoegen, uit onderstaande lijst.
                 
                 <?php
-                $activiteitenKeuze = array('Wedstrijd', 'Medische afspraak', 'Training (enkel)', 'Training (reeks)', 'Stage', 'Supplement');
+                $activiteitenKeuze = array('Medische afspraak', 'Training (enkel)', 'Training (reeks)', 'Stage', 'Supplement');
                 
                 echo form_dropdown('activiteitToevoegen', $activiteitenKeuze, '', 'id="activiteitToevoegen" class="form-control mt-3"');
                 
@@ -570,7 +557,8 @@
         $('.runFunction:first').click();
         $('.datepicker2').datepicker({
             autoclose: true,
-            orientation: 'auto'
+            orientation: 'auto',
+            startDate: new Date()
         });
     });
 </script>
