@@ -107,6 +107,7 @@ $maanden = array(
                     ?>                
                     <div class="form-group">
                         <p><div id="reeksen"></div></p>
+                        <?php echo form_label("Vak is leeg!", 'naam', array("id" => "reeksen-fout", "class" => "fout", "hidden" => "hidden")); ?>
                         <div class="invalid-feedback">
                             Vul dit veld in.
                         </div>
