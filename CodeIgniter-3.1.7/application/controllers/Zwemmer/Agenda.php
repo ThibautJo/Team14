@@ -15,6 +15,13 @@ class Agenda extends CI_Controller {
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
+    
+    /**
+    * @class Zwemmer/Agenda
+    * @brief Controller-klasse voor het weergeven van de agenda.
+    * 
+    * Controller-klasse voor het weergeven van de agenda van de gebruiker die is ingelogd.
+    */
 
     public function __construct() {
 
