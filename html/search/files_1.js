@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wedstrijden_5faanpassen_2ephp',['wedstrijden_aanpassen.php',['../wedstrijden__aanpassen_8php.html',1,'']]]
+  ['inschrijving_5faanpassen_2ephp',['inschrijving_aanpassen.php',['../inschrijving__aanpassen_8php.html',1,'']]]
 ];

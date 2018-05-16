@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['melding',['Melding',['../class_melding.html',1,'']]],
-  ['melding_5fmodel',['Melding_model',['../class_melding__model.html',1,'']]]
+  ['inschrijving',['Inschrijving',['../class_inschrijving.html',1,'']]],
+  ['inschrijving_5fmodel',['Inschrijving_model',['../class_inschrijving__model.html',1,'']]]
 ];

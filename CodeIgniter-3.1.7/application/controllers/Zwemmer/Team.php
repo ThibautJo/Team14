@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -20,7 +21,7 @@ class Team extends CI_Controller {
     // +----------------------------------------------------------
     // |    Team 14
     // +----------------------------------------------------------
-    
+
     /**
      * Constructor
      */
@@ -30,12 +31,13 @@ class Team extends CI_Controller {
 
         // controleren of persoon is aangemeld
         if (!$this->authex->isAangemeld()) {
-        redirect('welcome/meldAan');}
-        
+            redirect('welcome/meldAan');
+        }
+
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
-        
+
         // Aantal meldingen laten zien
         $this->load->model('zwemmer/melding_model');
         $persoon = $this->authex->getPersoonInfo();
@@ -43,7 +45,7 @@ class Team extends CI_Controller {
         $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
         $this->data->aantalMeldingen = count($meldingen);
     }
-    
+
     /**
      * Haalt de gegevens van de zwemmers op via de methode ladenTeam() en
      * toont de resulterende objecten in de view team.php
@@ -76,7 +78,7 @@ class Team extends CI_Controller {
      * @see Zwemmers_model::getZwemmers()
      * @return type $zwemmers
      */
-    public function ladenTeam(){
+    public function ladenTeam() {
         $this->load->model("trainer/zwemmers_model");
         $zwemmers = $this->zwemmers_model->getZwemmers();
 
@@ -94,12 +96,12 @@ class Team extends CI_Controller {
                 "wachtwoord" => $zwemmer->wachtwoord,
                 "omschrijving" => $zwemmer->omschrijving,
                 "foto" => $zwemmer->foto,
-                "color" => '#FF7534',"textColor" => '#000'
+                "color" => '#FF7534', "textColor" => '#000'
             );
         }
         return $zwemmers;
     }
-    
+
     /**
      * Haalt de gegevens op van de zwemmer id=$id via Zwemmers_model en
      * returned de resulterende objecten via $data
@@ -113,4 +115,5 @@ class Team extends CI_Controller {
 
         print json_encode($data);
     }
+
 }

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['aanpassen',['aanpassen',['../class_team.html#aa65f555e855b75d2392cbc1cacaae741',1,'Team']]],
+  ['aanpassen',['aanpassen',['../class_inschrijving.html#aa65f555e855b75d2392cbc1cacaae741',1,'Inschrijving\aanpassen()'],['../class_team.html#aa65f555e855b75d2392cbc1cacaae741',1,'Team\aanpassen()']]],
   ['accept_5fcharset',['accept_charset',['../class_c_i___user__agent.html#adc1f6218ec74ef1686ae6cb1218be7b1',1,'CI_User_agent']]],
   ['accept_5flang',['accept_lang',['../class_c_i___user__agent.html#a89add2e480d14b5f755993f4f5e0bd72',1,'CI_User_agent']]],
   ['active',['active',['../class_c_i___unit__test.html#ac7b3030630fc7dd31513c75cf27c1a8a',1,'CI_Unit_test']]],
@@ -19,6 +19,7 @@ var searchData=
   ['addstruct',['addStruct',['../class_x_m_l___r_p_c___values.html#a5dbdf0121566791a201cd07a3de15531',1,'XML_RPC_Values']]],
   ['adjust_5fdate',['adjust_date',['../class_c_i___calendar.html#ac216356ab0ff31e8538fd9208a26577a',1,'CI_Calendar']]],
   ['affected_5frows',['affected_rows',['../class_c_i___d_b__cubrid__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_cubrid_driver\affected_rows()'],['../class_c_i___d_b__ibase__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_ibase_driver\affected_rows()'],['../class_c_i___d_b__mssql__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_mssql_driver\affected_rows()'],['../class_c_i___d_b__mysql__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_mysql_driver\affected_rows()'],['../class_c_i___d_b__mysqli__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_mysqli_driver\affected_rows()'],['../class_c_i___d_b__oci8__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_oci8_driver\affected_rows()'],['../class_c_i___d_b__odbc__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_odbc_driver\affected_rows()'],['../class_c_i___d_b__pdo__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_pdo_driver\affected_rows()'],['../class_c_i___d_b__postgre__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_postgre_driver\affected_rows()'],['../class_c_i___d_b__sqlite__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_sqlite_driver\affected_rows()'],['../class_c_i___d_b__sqlite3__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_sqlite3_driver\affected_rows()'],['../class_c_i___d_b__sqlsrv__driver.html#a77248aaad33eb132c04cc4aa3f4bc8cb',1,'CI_DB_sqlsrv_driver\affected_rows()']]],
+  ['afkeureninschrijving',['afkeurenInschrijving',['../class_inschrijving.html#ad99b17bb213d8521a5fcff1bc30dc593',1,'Inschrijving']]],
   ['agent_5fstring',['agent_string',['../class_c_i___user__agent.html#a2a75d1ec3cf3f59cdcae64f6afbc8a1b',1,'CI_User_agent']]],
   ['all_5fuserdata',['all_userdata',['../class_c_i___session.html#a974fa60ddc074b14ffcc78ef9902bc5c',1,'CI_Session']]],
   ['alpha',['alpha',['../class_c_i___form__validation.html#a4784b18b432005bec36cdf437353ec76',1,'CI_Form_validation']]],
@@ -28,6 +29,8 @@ var searchData=
   ['animate',['animate',['../class_c_i___javascript.html#a04c5fa4911b166171608bc2651b1b2df',1,'CI_Javascript']]],
   ['append_5foutput',['append_output',['../class_c_i___output.html#a7c79b8239d6ecbba0c8fdd00bb619651',1,'CI_Output']]],
   ['archive',['archive',['../class_c_i___zip.html#a935879d7074c751a4ac886aebd66cbd4',1,'CI_Zip']]],
+  ['archiveer',['archiveer',['../class_zwemmers__model.html#a518778d908862845c5fba3ce55fd0baa',1,'Zwemmers_model']]],
+  ['archiveren',['archiveren',['../class_team.html#a7417515446ee302d722ab99ac74e41cb',1,'Team']]],
   ['assoc_5fto_5furi',['assoc_to_uri',['../class_c_i___u_r_i.html#a5c17149885c92fef1ed7f191f14a3f4d',1,'CI_URI']]],
   ['attach',['attach',['../class_c_i___email.html#adb1bcf392d6cf38e3f94675a21cab563',1,'CI_Email']]],
   ['attachment_5fcid',['attachment_cid',['../class_c_i___email.html#afd601b1ddbb0fc02f16f2e39d9881299',1,'CI_Email']]],
