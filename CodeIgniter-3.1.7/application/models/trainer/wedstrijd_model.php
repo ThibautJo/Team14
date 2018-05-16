@@ -26,7 +26,7 @@ class wedstrijd_model extends CI_Model {
     }
 
     public function getAlleWedstrijden() {
-        
+
         /**
         * Retourneert alle wedstrijden uit de tabel wedstrijd.
         * @return Alle wedstrijden.
@@ -58,7 +58,13 @@ class wedstrijd_model extends CI_Model {
         $query = $this->db->get('wedstrijd');
         return $query->result();
     }
-
+    /**
+     * \brief Retourneert de opgevraagde wedstrijden van het verleden
+     *
+     * @param $start Is de startperiode van de wedstrijden
+     * @param $end Is de einPeriode van de wedstrijden
+     * @return De gevraagde wedstrijd(en)
+     */
     //verleden wedstrijden
     public function getWedstrijdenVerleden($start = null, $end = null) {
         if (date("Y-m-d") > $start) {
@@ -257,7 +263,18 @@ class wedstrijd_model extends CI_Model {
         //toevoegen van degene die er gekozen waren
         $this->insertReeksen($wedID, $reeksen);
     }
-
+    /**
+     * Retourneert resultaten van opgevraagde wedstrijden
+     *
+     * @param $wedID is het wedstrijd ID
+     * @see Wedstrijd_model::getIngeschrevenenWithId()
+     * @see Wedstrijd_model::getRondeWithId()
+     * @see Wedstrijd_model::getReeksWithID()
+     * @see Wedstrijd_model::getPersoonWithId()
+     * @see Wedstrijd_model::getSlagWithID()
+     * @see Wedstrijd_model::getAfstandWithID()
+     * @see Wedstrijd_model::getWedstrijdenWithId()
+     */
     public function getResultatenTabel($wedID = null) {
 
         $resultaten = new stdClass();
@@ -297,30 +314,53 @@ class wedstrijd_model extends CI_Model {
 
         return $resultaten;
     }
-
+    /**
+     * Retourneert alle ronden
+     *
+     */
     public function getRondes() {
         $query = $this->db->get('ronde');
         return $query->result();
     }
-
+    /**
+     * Retourneert de opgevraagde ronde
+     *
+     * @param $id is de opgevraagde ronde id dat men nodig heeft
+     * @return De opgevraagde array
+     */
     public function getRondeWithId($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('ronde');
         return $query->row();
     }
-
+    /**
+     * Retourneert de opgevraagde inschrijvings
+     *
+     * @param $id is het inschrijvings id dat men nodig heeft
+     * @return De opgevraagde array
+     */
     public function getIngeschrevenenWithId($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('inschrijving');
         return $query->row();
     }
-
+    /**
+     * Retourneert de opgevraagd reeks
+     *
+     * @param $id is het reeksperwedstrijd id dat men nodig heeft
+     * @return De opgevraagde array
+     */
     public function getReeksWithID($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('reeksPerWedstrijd');
         return $query->row();
     }
-
+    /**
+     * Retourneert de opgevraagd persoon
+     *
+     * @param $id is het persoon id dat men nodig heeft
+     * @return De opgevraagde array
+     */
     public function getPersoonWithId($id) {
         $this->db->where('id', $id);
         $query = $this->db->get('persoon');
@@ -419,7 +459,12 @@ class wedstrijd_model extends CI_Model {
 
         return $reeksenGeheel;
     }
-
+    /**
+     * Retourneert een array van de verschillende reeksen van de nodige wedstrijd
+     *
+     * @param $id De id van de nodige wedstrijd
+     * @return De opgevraagde reeksen bijhorend deze wedstrijd
+     */
     public function getSlagEnAfstandWithWedstrijdId($id) {
         // alle reeksen van wedstrijd ophalen zodat verschillende reeksen kunnen opgrslagen worden
         $this->db->where('wedstrijdId', $id);
@@ -456,11 +501,64 @@ class wedstrijd_model extends CI_Model {
 
         return $reeksenGeheel;
     }
-
+    /**
+     * Verwijderd het resultaat
+     *
+     * @param $id De id van het resultaat dat verwijderd word
+     */
     public function verwijderResultaatViaId($id) {
         //delete resultaat
         $this->db->where('id', $id);
         $this->db->delete('resultaat');
+    }
+    /**
+     * Retourneert een array van het gezochte inschrijving
+     *
+     * @param $id De id van een resultaat object
+     * @return De opgevraagde array
+     */
+    public function getInschijvingsIdViaResultaatId($id){
+      $this->db->where('id', $id);
+      $query = $this->db->get('resultaat');
+      return $query->row();
+    }
+    /**
+     * Retourneert een array van het reeksenperwedstrijd
+     *
+     * @param $id De id van een inschrijving object
+     * @return De opgevraagde array
+     */
+    public function getReeksPerWedstrijdViaInschrijvingId($id){
+      $this->db->where('id', $id);
+      $query = $this->db->get('inschrijving');
+      return $query->row();
+    }
+    /**
+     * Update het gevraagde object met nieuwe gegevens
+     *
+     * @param $data is het nieuwe object dat in de plek komt van de oude gegevens
+     */
+    public function updateResultaat($data){
+      $this->db->where('id', $data->id);
+      $this->db->update('resultaat', $data);
+    }
+    /**
+     * Update het gevraagde object met nieuwe gegevens
+     *
+     * @param $data is het nieuwe object dat in de plek komt van de oude gegevens
+     */
+    public function updateInschrijving($data){
+      $this->db->where('id', $data->id);
+      $this->db->update('inschrijving', $data);
+    }
+    /**
+     * Update het gevraagde object met nieuwe gegevens
+     *
+     * @param $data is het nieuwe object dat in de plek komt van de oude gegevens
+     */
+    public function updateReeksPerWedstrijd($data){
+      $this->db->where('id', $data->id);
+      $this->db->update('reeksperwedstrijd', $data);
     }
 
 }
