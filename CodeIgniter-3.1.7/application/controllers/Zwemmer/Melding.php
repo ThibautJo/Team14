@@ -34,6 +34,8 @@ class Melding extends CI_Controller {
         $persoon = $this->authex->getPersoonInfo();
         $persoonId = $persoon->id;
         $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        
+        
         $this->data->aantalMeldingen = count($meldingen);
     }
 
