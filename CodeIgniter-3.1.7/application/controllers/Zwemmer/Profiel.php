@@ -71,12 +71,12 @@ class Profiel extends CI_Controller{
     }
     
     public function profielOpslaan(){
-        $persoon = new stdClass();
+        $profielGegevens = new stdClass();
         
         $this->load->model('zwemmer/profiel_model');
 
-        $persoon->id = $this->input->post('id');
-        $this->profiel_model->update($persoon);
+        $profielGegevens->id = $this->input->post('id');
+        $this->profiel_model->update($profielGegevens);
             
         redirect('zwemmer/profiel');
     }

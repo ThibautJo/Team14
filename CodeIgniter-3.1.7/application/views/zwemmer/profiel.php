@@ -25,7 +25,7 @@ $attributenFormulier = array('id' => 'form-profiel',
     <p>Email: <?php echo $profiel->email?></p>
     <p>Over jezelf</p>
     <p><textarea rows="2" cols="25"><?php echo $profiel->omschrijving . " " . $profiel->id?></textarea></p>
-    <button type="button" class="btn button-blue justify-content-center" onclick='profielGegevensTonen(this.id)' value="<?php echo $profiel->id ?>" data-toggle='modal' data-toggle='tooltip' title='Profiel wijzigen' data-target="#profielWijzigen">Aanpassen</button>
+    <button type="button" class="btn button-blue justify-content-center" id="<?php echo $profiel->id ?>" onclick='profielGegevensTonen(this.id)' value="<?php echo $profiel->id ?>" data-toggle='modal' data-toggle='tooltip' title='Profiel wijzigen' data-target="#profielWijzigen">Aanpassen</button>
 </div>
 
 <div class="modal fade" id="profielWijzigen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -119,7 +119,8 @@ $attributenFormulier = array('id' => 'form-profiel',
                         'id' => 'email',
                         'value' => '',
                         'class' => 'form-control',
-                        'placeholder' => 'Email'));
+                        'placeholder' => 'Email',
+                        'required' => 'required'));
                     ?>
                     <div class="help-block with-errors"></div>
                 </div>

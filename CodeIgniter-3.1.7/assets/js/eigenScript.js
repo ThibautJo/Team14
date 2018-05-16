@@ -452,19 +452,18 @@ function profielOpslaan() {
   var ok = true;
   var formToSubmit = '';
   //form valideren
-  $('#persoonWijzigen #form-persoon *').filter('input').each(function () {
+  $('#profielWijzigen #form-profiel *').filter('input').each(function () {
       if ($(this).attr("required") && $(this).val() == "") {
         alert("Niet alle velden zijn ingevuld");
         ok = false;
         return false;
       }
-
     });
     formToSubmit = "#profielWijzigen #form-profiel";
 
   //word uitgevoerd als alles ingevuld is
   if (ok) {
-    $(formToSubmit).attr('action', site_url + '/Zwemmer/profiel/opslaanProfiel/' + actie);
+    $(formToSubmit).attr('action', site_url + '/Zwemmer/profiel/profielOpslaan/');
 
     $(formToSubmit).submit();
   }
