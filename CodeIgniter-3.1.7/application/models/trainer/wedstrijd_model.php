@@ -12,7 +12,7 @@ class wedstrijd_model extends CI_Model {
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
-    // |    Auteur: Thibaut Joukes       |       Helper:
+    // |    Auteur: Thibaut Joukes, Lise Van Eyck       |       Helper:
     // +----------------------------------------------------------
     // |
     // |    Agenda model
@@ -256,7 +256,6 @@ class wedstrijd_model extends CI_Model {
      * @see Wedstrijd_model::insertReeksen()
      */
     public function updateReeksen($wedID, $reeksen) {
-        //delete alle reekesen
         $this->db->where('wedstrijdId', $wedID);
         $this->db->delete('reeksPerWedstrijd');
 
@@ -523,6 +522,17 @@ class wedstrijd_model extends CI_Model {
       return $query->row();
     }
     /**
+     * Retourneert een array van het gezochte inschrijving
+     *
+     * @param $id De id van een resultaat object
+     * @return De opgevraagde array
+     */
+    public function getInschijvingsIdViaReeksPerWedstrijdId($id){
+      $this->db->where('reeksPerWedstrijdId', $id);
+      $query = $this->db->get('inschrijving');
+      return $query->row();
+    }
+    /**
      * Retourneert een array van het reeksenperwedstrijd
      *
      * @param $id De id van een inschrijving object
@@ -531,6 +541,20 @@ class wedstrijd_model extends CI_Model {
     public function getReeksPerWedstrijdViaInschrijvingId($id){
       $this->db->where('id', $id);
       $query = $this->db->get('inschrijving');
+      return $query->row();
+    }
+    /**
+     * retourneert het gezochte object adhv slag, afstand en wedstrijd
+     *
+     * @param $slag is het id van de slag
+     * @param $afstand is het id van de afstand
+     * @param $wedstrijd is het id van wedstrijd waar gezocht naar word
+     */
+    public function getReeksPerWedstrijdViaSlagAndAfstandAndWedid($slag, $afstand, $wedstrijd){
+      $this->db->where('wedstrijdId', $wedstrijd);
+      $this->db->where('slagId', $slag);
+      $this->db->where('afstandId', $afstand);
+      $query = $this->db->get('reeksperwedstrijd');
       return $query->row();
     }
     /**
@@ -559,6 +583,33 @@ class wedstrijd_model extends CI_Model {
     public function updateReeksPerWedstrijd($data){
       $this->db->where('id', $data->id);
       $this->db->update('reeksperwedstrijd', $data);
+    }
+    /**
+     * Insert het opgegeven object
+     *
+     * @param $data is het nieuwe object dat toegevoegd word
+     */
+    public function insertResultaat($data){
+      $this->db->insert('resultaat', $data);
+      return $this->db->insert_id();
+    }
+    /**
+     * Insert het opgegeven object
+     *
+     * @param $data is het nieuwe object dat toegevoegd word
+     */
+    public function insertInschrijving($data){
+      $this->db->insert('inschrijving', $data);
+      return $this->db->insert_id();
+    }
+    /**
+     * Insert het opgegeven object
+     *
+     * @param $data is het nieuwe object dat toegevoegd word
+     */
+    public function insertReeksPerWedstrijd($data){
+      $this->db->insert('reeksperwedstrijd', $data);
+      return $this->db->insert_id();
     }
 
 }

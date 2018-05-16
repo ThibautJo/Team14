@@ -159,7 +159,7 @@ class WedstrijdResultaten extends CI_Controller {
     if ($this->input->get('pagina') == "aanpassen" || $actie == "aanpassen") {
       $inhoud = "trainer/wedstrijd_resultaten_result_aanpassen";
       // variabel benodigdheden voor comboboxen op te vullen
-      // 1. Zwemmers
+      // 1. Zwemmers die goedgekeurd zijn
       $data['zwemmers'] = $this->zwemmers_model->getZwemmers();
       // 2. wedstrijden
 
@@ -209,35 +209,70 @@ class WedstrijdResultaten extends CI_Controller {
     $this->load->model('trainer/wedstrijd_model');
     //gegevens opslaan dmv 2 objecten
     $resultaat = new stdClass(); //moet inschrijvingsID retourneren
-    $resultaat->id = $this->input->get('resultaatId');
+    if ($actie == "aanpassen") {
+      $resultaat->id = $this->input->get('resultaatId');
+      //inschrijvingid opvragen
+      $data = $this->wedstrijd_model->getInschijvingsIdViaResultaatId($resultaat->id);
+      $resultaat->inschrijvingId = $data->inschrijvingId;
+    }
+    else {
+      // wedid + slagid + afstandID nodig voor reeksPerWedstrijdId
+      $reeks = explode('-', $this->input->post('reeksenToevoegen')); //id's
+      $slagId = $reeks[1]; //id
+      $afstandId = $reeks[0]; //id
+      $wedID = $this->input->get('wedstrijdId');
+      $reeksPerWedstrijdId = $this->wedstrijd_model->getReeksPerWedstrijdViaSlagAndAfstandAndWedid($slagId,$afstandId, $wedID);
+      // gettin inschrijvingsid via reeksperwedstrijdid
+      $inschrijvingsID = $this->wedstrijd_model->getInschijvingsIdViaReeksPerWedstrijdId($reeksPerWedstrijdId->id);
+
+      $resultaat->inschrijvingId = $inschrijvingsID->id;
+    }
     $resultaat->tijd = $this->input->post('naam-datum'). ' ' . $this->input->post('naam-tijd');
     $resultaat->rondeId = $this->input->post('rondeToevoegen'); //id
-    //inschrijvingid opvragen
-    $data = $this->wedstrijd_model->getInschijvingsIdViaResultaatId($resultaat->id);
-    $resultaat->inschrijvingId = $data->inschrijvingId;
 
-    $inschrijving = new stdClass(); //zodat deze het ID weet dat aangepast moet worden + reeksperwedstr retourneren
-    $inschrijving->id = $data->inschrijvingId;
-    $inschrijving->persoonId = $this->input->post('zwemmersToevoegen'); //id
-    //reeksperwedstrijdid ophalen
-    $data = $this->wedstrijd_model->getReeksPerWedstrijdViaInschrijvingId($inschrijving->id);
-    $inschrijving->reeksPerWedstrijdId = $data->reeksPerWedstrijdId;
-    $inschrijving->status = "0";
+    if ($actie == "aanpassen") {
+      $inschrijving = new stdClass(); //zodat deze het ID weet dat aangepast moet worden + reeksperwedstr retourneren
 
-    $reeksperwedstrijd = new stdClass(); //zodat deze weet welk reeksperwedstrijd aangepast moet worden
-    $reeksperwedstrijd->id = $inschrijving->reeksPerWedstrijdId;
-    $reeksperwedstrijd->wedstrijdId = $this->input->get('wedstrijdId');
-    $reeks = explode('-', $this->input->post('reeksenToevoegen')); //id's
-    $reeksperwedstrijd->slagId = $reeks[1]; //id
-    $reeksperwedstrijd->afstandId = $reeks[0]; //id
+      $inschrijving->id = $resultaat->inschrijvingId;
 
-    
-    //update resultaat
-    $this->wedstrijd_model->updateResultaat($resultaat);
-    //update inschrijving
-    $this->wedstrijd_model->updateInschrijving($inschrijving);
-    //update reeksperwedstrijd
-    $this->wedstrijd_model->updateReeksPerWedstrijd($reeksperwedstrijd);
+      $inschrijving->persoonId = $this->input->post('zwemmersToevoegen'); //id
+      //reeksperwedstrijdid ophalen
+      $data = $this->wedstrijd_model->getReeksPerWedstrijdViaInschrijvingId($inschrijving->id);
+      $inschrijving->reeksPerWedstrijdId = $data->reeksPerWedstrijdId;
+      $inschrijving->status = "2";
+    }
+
+
+    if ($actie == "aanpassen") {
+      $reeksperwedstrijd = new stdClass(); //zodat deze weet welk reeksperwedstrijd aangepast moet worden
+
+      $reeksperwedstrijd->id = $inschrijving->reeksPerWedstrijdId;
+      $reeksperwedstrijd->wedstrijdId = $this->input->get('wedstrijdId');
+      $reeks = explode('-', $this->input->post('reeksenToevoegen')); //id's
+      $reeksperwedstrijd->slagId = $reeks[1]; //id
+      $reeksperwedstrijd->afstandId = $reeks[0]; //id
+    }
+
+
+
+
+
+    if ($actie == "toevoegen") {
+      //insert resultaat
+      $this->wedstrijd_model->insertResultaat($resultaat);
+      //update inschrijving
+      // $this->wedstrijd_model->insertInschrijving($inschrijving);
+      // //update reeksperwedstrijd
+      // $this->wedstrijd_model->insertReeksPerWedstrijd($reeksperwedstrijd);
+    }
+    else {
+      //update resultaat
+      $this->wedstrijd_model->updateResultaat($resultaat);
+      //update inschrijving
+      $this->wedstrijd_model->updateInschrijving($inschrijving);
+      //update reeksperwedstrijd
+      $this->wedstrijd_model->updateReeksPerWedstrijd($reeksperwedstrijd);
+    }
 
 
 

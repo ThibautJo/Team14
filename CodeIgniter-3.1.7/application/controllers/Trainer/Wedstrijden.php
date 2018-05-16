@@ -13,7 +13,7 @@ class Wedstrijden extends CI_Controller {
     // +----------------------------------------------------------
     // |    Trainingscentrum Wezenberg
     // +----------------------------------------------------------
-    // |    Auteur: Thibaut Joukes     |       Helper: /
+    // |    Auteur: Thibaut Joukes, Lise Van Eyck     |       Helper: /
     // +----------------------------------------------------------
     // |
     // |    Team controller
@@ -29,7 +29,7 @@ class Wedstrijden extends CI_Controller {
          * Controleert of bevoegde persoon is aangemeld.
          * Indien deze niet aangemeld of bevoegd is, wordt hij doorverwezen naar de loginpagina.
          */
-        
+
         if (!$this->authex->isAangemeld()) {
             redirect('welcome/meldAan');
         } else {
@@ -42,7 +42,7 @@ class Wedstrijden extends CI_Controller {
         /**
          * Laadt de auteur van deze code in de footer.
          */
-        
+
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "true", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
     }
@@ -61,7 +61,7 @@ class Wedstrijden extends CI_Controller {
      * @see wedstrijden.php
      * @see wedstrijden_aanpassen.php
      */
-    
+
     public function index() {
 
         $data['titel'] = 'Wedstrijden';
@@ -141,7 +141,7 @@ class Wedstrijden extends CI_Controller {
          * @see Wedstrijd_model::getWedstrijdenWithId()
          * @see wedstrijden_aanpassen.php
          */
-        
+
         //opvragen van gegevens
         $this->load->model('trainer/wedstrijd_model');
         $data = new stdClass();
@@ -156,7 +156,7 @@ class Wedstrijden extends CI_Controller {
     }
 
     public function reeksenOpvragen($wedstrijdId) {
-        
+
         /**
          * \brief Haalt reeksen op van het opgevraagde wedstrijd.
          *
@@ -166,7 +166,7 @@ class Wedstrijden extends CI_Controller {
          * @see Wedstrijd_model::getWedstrijdenWithId()
          * @see wedstrijden_aanpassen.php
          */
-        
+
         //opvragen van gegevens
         $this->load->model('trainer/wedstrijd_model');
         $reeksen = $this->wedstrijd_model->getReeksenWithWedstrijdID($wedstrijdId);

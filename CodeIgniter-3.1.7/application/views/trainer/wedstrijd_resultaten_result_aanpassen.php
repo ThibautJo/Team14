@@ -88,7 +88,7 @@
                 <?php
                 echo form_label("Naam", 'naam-persoon');
                 ?>
-                <select class="form-control" name="" id="zwemmersToevoegen">
+                <select class="form-control" name="zwemmersToevoegen" id="zwemmersToevoegen">
                   <?php
                       foreach ($zwemmers as $zwemmer) {
                         echo "<option value='".$zwemmer->id."'>".$zwemmer->voornaam." ".$zwemmer->achternaam."</option>";
@@ -102,7 +102,7 @@
                 <?php
                 echo form_label("Ronde", 'naam-ronde');
                 ?>
-                <select class="form-control" name="" id="rondeToevoegen">
+                <select class="form-control" name="rondeToevoegen" id="rondeToevoegen">
                   <?php
                       foreach ($rondes as $ronde) {
                         echo "<option value='".$ronde->id."'>".$ronde->ronde."</option>";
@@ -114,7 +114,7 @@
                 <?php
                 echo form_label("Reeks", 'naam-reeks');
                 ?>
-                <select class="form-control" name="" id="reeksenToevoegen">
+                <select class="form-control" name="reeksenToevoegen" id="reeksenToevoegen">
                   <?php
                       foreach ($reeksen as $key => $value) {
                         echo "<option value='".$key."'>".$value."</option>";
