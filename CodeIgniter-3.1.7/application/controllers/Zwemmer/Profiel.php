@@ -73,6 +73,15 @@ class Profiel extends CI_Controller{
     public function profielOpslaan(){
         $profielGegevens = new stdClass();
         
+        $profielGegevens->voornaam=$this->input->post('voornaam');
+        $profielGegevens->achternaam=$this->input->post('achternaam');
+        $profielGegevens->straat=$this->input->post('straat');
+        $profielGegevens->huisnummer=$this->input->post('huisnummer');
+        $profielGegevens->postcode=$this->input->post('postcode');
+        $profielGegevens->gemeente=$this->input->post('gemeente');
+        $profielGegevens->email=$this->input->post('email');
+        $profielGegevens->omschrijving=$this->input->post('omschrijving');
+        
         $this->load->model('zwemmer/profiel_model');
 
         $profielGegevens->id = $this->input->post('id');
