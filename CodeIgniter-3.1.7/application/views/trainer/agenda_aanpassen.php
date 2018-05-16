@@ -309,7 +309,7 @@
                         </div>
 
                         <div class="form-group supplementDatum d-none">
-                            <p class="d-flex align-items-center">Elke&nbsp;  <b>dag</b> &nbsp;voor de volgende tijdspanne:</p>
+                            <p class="d-flex align-items-center">Elke&nbsp; <b>dag</b> &nbsp;voor de volgende tijdspanne:</p>
                             <div class="row">
                                 <div id="container-begindatum" class="form-group col-6">
                                     <?php
@@ -346,11 +346,11 @@
             <div id="toevoegenActiviteitButtonContainer" class="modal-footer d-flex justify-content-between">
                 <button type="button" id="deleteActiviteitButton" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" title="Activiteit verwijderen" onclick=""><i class="fas fa-trash-alt"></i></button>
                 <div>
-                    <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
+                <button type="button" class="btn" data-dismiss="modal">Annuleren</button>
                 <?php
                     echo form_submit('ok', 'Opslaan', 'class="btn button-blue"');
-                echo '</div>';
-                echo form_close();
+                    echo '</div>';
+                    echo form_close();
                 ?> <!-- Modal sluit knop -->
             </div>
         </div>
@@ -396,7 +396,6 @@
 
 <script type="text/javascript">
     $('#gaDoorToevoegen').on('click', function() {
-//        $('#toevoegenActiviteit').modal('hide');
         setTimeout(function() {
             toevoegenActiviteit();
         }, 350);
@@ -450,9 +449,6 @@
                                 var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
                                 var datumGeklikt = new Date(calEvent.start);
                                 var dagnaam = datumGeklikt.getDay();
-//                                var day = datumGeklikt.getDate();
-//                                var month = datumGeklikt.getMonth() + 1;
-//                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
@@ -464,7 +460,9 @@
                                     }
                                 });
                             },
+                            // Selectable zorgt ervoor dat je in de agenda een gebied kan selecteren
                             selectable: true,
+                            // Op het gebied dat je selecteerd, kan je een activiteit toevoegen.
                             select: function(startDate, endDate) {
                                 $('#toevoegenActiviteit').modal();
                                 $('#toevoegenActiviteit .modal-title').html('Activiteit toevoegen');
@@ -495,9 +493,6 @@
                                 var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
                                 var datumGeklikt = new Date(calEvent.start);
                                 var dagnaam = datumGeklikt.getDay();
-//                                var day = datumGeklikt.getDate();
-//                                var month = datumGeklikt.getMonth() + 1;
-//                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');
@@ -534,9 +529,6 @@
                                 var weekdag = ["Zondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrijdag","Zaterdag"];
                                 var datumGeklikt = new Date(calEvent.start);
                                 var dagnaam = datumGeklikt.getDay();
-//                                var day = datumGeklikt.getDate();
-//                                var month = datumGeklikt.getMonth() + 1;
-//                                var year = datumGeklikt.getFullYear();
                                 $.each(kleuren, function(index) {
                                     if (calEvent.color == kleuren[index].kleur) {
                                         $('.modal-title').html(kleuren[index].activiteit + ' aanpassen');

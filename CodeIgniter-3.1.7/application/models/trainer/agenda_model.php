@@ -219,4 +219,11 @@ class Agenda_model extends CI_Model {
         $query = $this->db->get('supplementperpersoon');
         return $query->row();
     }
+    
+    public function getOnderzoek($onderzoekId) {
+        // Alle medische onderzoeken van een bepaalde persoon ophalen uit de databank
+        $this->db->where('id', $onderzoekId);
+        $query = $this->db->get('medischeAfspraak');
+        return $query->row();
+    }
 }

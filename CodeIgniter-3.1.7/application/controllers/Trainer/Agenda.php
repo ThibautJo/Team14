@@ -585,7 +585,7 @@ class Agenda extends CI_Controller {
         redirect('/trainer/agenda');
     }
 
-    public function maakReeksenWeek($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
+    public function maakReeksen($begindatumReeks, $einddatumReeks, $beginuur, $einduur) {
         $datums = [];
         $datumStart = new \DateTime($begindatumReeks);
         $datumStop = new \DateTime($einddatumReeks);
@@ -700,7 +700,7 @@ class Agenda extends CI_Controller {
     }
 
     public function verwijderOnderzoek($id) {
-        $this->load->model('zwemmer/agenda_model');
+        $this->load->model('trainer/agenda_model');
         $onderzoek = $this->agenda_model->getOnderzoek($id);
 
         $this->agenda_model->deleteOnderzoek($onderzoek->id);
