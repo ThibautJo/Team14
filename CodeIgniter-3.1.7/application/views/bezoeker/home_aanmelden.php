@@ -1,7 +1,26 @@
 <?php
+
+// +----------------------------------------------------------
+// |    Trainingscentrum Wezenberg
+// +----------------------------------------------------------
+// |    Auteur: Jolien Lauwers      |       Helper:
+// +----------------------------------------------------------
+// |
+// |    home_aanmelden: Aanmelden view
+// |
+// +----------------------------------------------------------
+// |    Team 14
+// +----------------------------------------------------------
+
+/**
+ * @file home_aanmelden.php
+ * View waarmee het aanmeldformulier wordt weergegeven.
+ */
+
 $attributes = array('name' => 'mijnFormulier');
 echo form_open('Welcome/controleerAanmelden', $attributes);
 ?>
+
 <div class="modal show fade" id="aanmeldFormulier" tabindex="-1" role="dialog" aria-labelledby="aanmeldFormulier" aria-hidden="false">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -42,6 +61,4 @@ echo form_open('Welcome/controleerAanmelden', $attributes);
         </div>
     </div>
 </div>
-
-<!-- <p>Wachtwoord vergeten? <?php // echo anchor('/gebruiker/wachtwoordVergeten', "Wachtwoord vergeten");  ?></p> -->
 

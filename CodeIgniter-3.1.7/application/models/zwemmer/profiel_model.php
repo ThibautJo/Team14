@@ -43,7 +43,7 @@ class profiel_model extends CI_Model{
     /**
      * Retourneert het record met id=$id uit de tabel persoon
      * @param $id De id van het record dat opgevraagd wordt
-     * @return Het opgevraagde record
+     * @return Het opgevraagde records
      */
     function get($id) {
         
@@ -51,5 +51,14 @@ class profiel_model extends CI_Model{
         $this->db->where('id', $id);
         $query = $this->db->get('persoon');
         return $query->row();
+    }
+    
+    /**
+     * Wijzigt een persoon-record uit de tabel persoon
+     * @param $persoon Het persoon object waar de aangepaste data in zit
+     */
+    function update($persoon) {
+        $this->db->where('id', $persoon->id);
+        $this->db->update('persoon', $persoon);
     }
 }

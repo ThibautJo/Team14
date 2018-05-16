@@ -100,8 +100,6 @@ class Team extends CI_Controller {
      * $return type $data
      */
     public function profielTonen($id) {
-        $data = new stdClass();
-
         $this->load->model('trainer/zwemmers_model');
         $data = $this->zwemmers_model->get($id);
 

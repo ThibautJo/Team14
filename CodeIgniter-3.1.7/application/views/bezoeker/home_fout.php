@@ -4,13 +4,33 @@
         $('#aanmeldFormulier').modal('show');   
     
         $("#aanmeldFormulier").on('hidden.bs.modal', function () {
+        });
     });
-});
+    
 </script>
 <?php
+
+// +----------------------------------------------------------
+// |    Trainingscentrum Wezenberg
+// +----------------------------------------------------------
+// |    Auteur: Jolien Lauwers      |       Helper:
+// +----------------------------------------------------------
+// |
+// |    home_fout: Foutmelding view
+// |
+// +----------------------------------------------------------
+// |    Team 14
+// +----------------------------------------------------------
+
+/**
+ * @file home_fout.php
+ * View waarmee het aanmeldformulier opnieuw wordt weergegeven indien de ingegeven gebruikersgegevens foutief waren.
+ */
+
 $attributes = array('name' => 'mijnFormulier');
 echo form_open('Welcome/controleerAanmelden', $attributes);
 ?>
+
 <div class="modal show fade" id="aanmeldFormulier" tabindex="-1" role="dialog" aria-labelledby="aanmeldFormulier" aria-hidden="false">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
