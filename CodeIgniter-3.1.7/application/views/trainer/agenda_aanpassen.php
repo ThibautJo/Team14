@@ -10,6 +10,12 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
+
+
+/**
+ * @file agenda_aanpassen.php
+ * View waarin de agenda's van alle personen worden weergegevne
+ */
 ?>
 
 <!-- laden scripts en stylesheet agenda -->
