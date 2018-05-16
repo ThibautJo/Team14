@@ -1,10 +1,5 @@
 
 <?php
-/**
- * @file wedstrijd_resultaten_result_aanpassen.php
- *
- * View waarin een lijst van resultaten van gekozen wedstrijd worden gegeven.
- */
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------

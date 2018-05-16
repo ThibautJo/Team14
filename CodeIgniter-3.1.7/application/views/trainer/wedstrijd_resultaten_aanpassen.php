@@ -1,9 +1,9 @@
 
 <?php
 /**
-* @file wedstrijd_resultaten.php
+* @file wedstrijden_aanpassen.php
 *
-* View waarin de afgelopen wedstrijden aangepast kan worden/ nieuwe wedstrijd kan toegevoegd worden.
+* View waarin de gegevens van een wedstrijden worden weergegeven
 */
 
 // +----------------------------------------------------------

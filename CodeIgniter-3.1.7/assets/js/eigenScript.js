@@ -276,9 +276,8 @@ function resultaatOpslaan(actie){
   }
 
   var wedstrijdID = $('#wedstrijdId').val();
-  var resultaatID = $('#resultaatId').val();
 
-  $(formToSubmit).attr('action', site_url + '/Trainer/WedstrijdResultaten/opslaanResultaat/' + actie + '?pagina=aanpassen&wedstrijdId=' + wedstrijdID+"&resultaatId="+resultaatID);
+  $(formToSubmit).attr('action', site_url + '/Trainer/WedstrijdResultaten/opslaanResultaat/' + actie + '?pagina=aanpassen&wedstrijdid=' + wedstrijdID);
 
   $('.modal').modal('hide');
   $(formToSubmit).submit();
@@ -600,7 +599,7 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
     $('#aanpassenActiviteit #tijdstip-form').addClass('d-none');
     $('#aanpassenActiviteit #deleteActiviteitButton').attr('onclick', 'verwijderActiviteit(' + id + ', "' + activiteit + '")');
     $('#aanpassenActiviteit #soort option:last').attr('hidden', true);
-
+    
     switch (true) {
         case activiteit === "Wedstrijd":
             $('#aanpassenActiviteit form').attr('action', site_url + '/Trainer/Agenda/registreerWedstrijd');
@@ -718,21 +717,25 @@ function opvullenModalActiviteitAanpassen(data, id, activiteit, site_url) {
   }
 }
 
-function toevoegenActiviteit() {
+function toevoegenActiviteit() {    
     var activiteit = $('#activiteitToevoegen option:selected').text();
     var startDate = $('#toevoegenActiviteit input[name=startDate]').attr('value');
     var endDate = $('#toevoegenActiviteit input[name=endDate]').attr('value');
-
+    
     var startDate2 = new Date(startDate);
     var endDate2 = new Date(endDate);
-
+    
     var startDatum = startDate2.getFullYear() + '-' + (startDate2.getMonth() + 1) + '-' + startDate2.getDate() + '%20' + (startDate2.getHours() - 2) + ':' + startDate2.getMinutes() + ':' + startDate2.getSeconds();
     var stopDatum = endDate2.getFullYear() + '-' + (endDate2.getMonth() + 1) + '-' + endDate2.getDate() + '%20' + (endDate2.getHours() - 2) + ':' + endDate2.getMinutes() + ':' + endDate2.getSeconds();
+<<<<<<< HEAD
 
 
     var persoonId = $('#aanpassenActiviteit input[name=persoonSupplement]').attr('value');
 
 
+=======
+        
+>>>>>>> parent of 3b151a7... wedstrijd resultaten aanpassen werkt
     var linkActiviteit = '';
     switch (true) {
         case activiteit === "Wedstrijd":
@@ -755,7 +758,7 @@ function toevoegenActiviteit() {
         function (data) {
             //data = object van activiteit
             data = JSON.parse(data);
-
+            
             //modal opvullen met object activiteit
             opvullenModalActiviteitAanpassen(data, 0, activiteit, site_url);
         }).fail(function () {
@@ -769,7 +772,7 @@ function toevoegenActiviteit() {
     $('#aanpassenActiviteit #toevoegenActiviteitButtonContainer').addClass('justify-content-right');
     $('#aanpassenActiviteit .modal-title').html(activiteit + ' toevoegen');
     $("#aanpassenActiviteit").modal('show');
-
+    
 }
 
 function verwijderActiviteit(opgehaaldeId, activiteit) {
@@ -791,12 +794,12 @@ function verwijderActiviteit(opgehaaldeId, activiteit) {
                 linkActiviteit = 'verwijderActiviteit';
                 break;
         }
-
+            
         //id van activiteit
         var id = opgehaaldeId;
         // alert(id);
         //verwijderen
-        $.post(site_url + '/Trainer/agenda/' + linkActiviteit + '/' + id,
+        $.post(site_url + '/Trainer/agenda/' + linkActiviteit + '/' + id, 
         function (data) {
             alert("Activiteit is verwijderd!");
             location.reload();

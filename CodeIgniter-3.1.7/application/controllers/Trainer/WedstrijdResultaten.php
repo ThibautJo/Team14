@@ -49,14 +49,10 @@ class WedstrijdResultaten extends CI_Controller {
 
   /** \brief Haalt alle wedstrijden op.
   *
-  * toont de resulterende objecten in de view wedstrijd_resultaten.php en wedstrijd_resultaten_aanpassen.php.
+  * toont de resulterende objecten in de view wedstrijden.php en wedstrijden_aanpassen.php.
   *
-  * @see Wedstrijd_model::getWedstrijdenVerleden()
-  * @see Wedstrijd_model::getIngeschrevenen()
-  * @see Wedstrijd_model::getAfstanden()
-  * @see Wedstrijd_model::getSlagen()
+  * @see Wedstrijd_model::getWedstrijden()
   * @see wedstrijd_resultaten.php
-  * @see wedstrijd_resultaten_aanpassen.php
   */
   public function index() {
 
@@ -125,18 +121,6 @@ class WedstrijdResultaten extends CI_Controller {
     $this->template->load('main_master', $partials, $data);
   }
 
-  /** \brief Haalt alle wedstrijd resultaten op van bijhorende wedstrijd.
-  *
-  * toont de resulterende objecten in de view wedstrijd_resultaten_result.php en wedstrijd_resultaten_result_aanpassen.php.
-  *
-  * @param $actie duid aan op welke pagina men terecht komt
-  * @see Wedstrijd_model::getResultatenTabel()
-  * @see Wedstrijd_model::getRondes()
-  * @see Wedstrijd_model::getSlagEnAfstandWithWedstrijdId()
-  * @see zwemmers_model::getZwemmers()
-  * @see wedstrijd_resultaten_result.php
-  * @see wedstrijd_resultaten_result_aanpassen.php
-  */
   public function resultatenWedstrijd($actie = null) {
 
     $data['titel'] = 'Wedstrijd resultaten';
@@ -150,9 +134,7 @@ class WedstrijdResultaten extends CI_Controller {
     // var_dump($data['resultaten']);
 
     // gegevens ophalen om tabel te vullen
-
     $data['resultaten'] = $this->wedstrijd_model->getResultatenTabel($this->input->get('wedstrijdid'));
-
     // var_dump($data['resultaten']);
 
     // wedstrijden voor comboboxes
@@ -166,9 +148,8 @@ class WedstrijdResultaten extends CI_Controller {
       // 3. Rondes
       $data['rondes'] = $this->wedstrijd_model->getRondes();
       // 4. reeksen (afstand + slag) (bestaande reeksen) (jquery -> ajax)
-
-      $data['reeksen'] = $this->wedstrijd_model->getSlagEnAfstandWithWedstrijdId($this->input->get('wedstrijdid'));
-
+      $wedId = $this->input->get('wedstrijdid');
+      $data['reeksen'] = $this->wedstrijd_model->getSlagEnAfstandWithWedstrijdId($wedId);
       // Tijd word zelf ingevuld met een formaat
 
     }
@@ -184,13 +165,7 @@ class WedstrijdResultaten extends CI_Controller {
 
     $this->template->load('main_master', $partials, $data);
   }
-  /** \brief Haalt het opgevraagde resultaat van de zwemmer op.
-  *
-  * @param $resultID duid het resultaat id aan dat opgevraagd moet worden
-  * @see Wedstrijd_model::getResultatenWithId()
-  * @see Wedstrijd_model::getRondeWithId()
-  * @see Wedstrijd_model::getReeksenWithInschrijvingId()
-  */
+
   public function resultaatOpvragen($resultID){
     $this->load->model('trainer/wedstrijd_model');
     $data = new stdClass();
@@ -206,49 +181,36 @@ class WedstrijdResultaten extends CI_Controller {
 
   public function opslaanResultaat($actie){
 
-    $this->load->model('trainer/wedstrijd_model');
     //gegevens opslaan dmv 2 objecten
     $resultaat = new stdClass(); //moet inschrijvingsID retourneren
-    $resultaat->id = $this->input->get('resultaatId');
+    $resultaat->id = $this->input->post('resultaatId');
     $resultaat->tijd = $this->input->post('naam-datum'). ' ' . $this->input->post('naam-tijd');
     $resultaat->rondeId = $this->input->post('rondeToevoegen'); //id
-    //inschrijvingid opvragen
-    $data = $this->wedstrijd_model->getInschijvingsIdViaResultaatId($resultaat->id);
-    $resultaat->inschrijvingId = $data->inschrijvingId;
 
     $inschrijving = new stdClass(); //zodat deze het ID weet dat aangepast moet worden + reeksperwedstr retourneren
-    $inschrijving->id = $data->inschrijvingId;
-    $inschrijving->persoonId = $this->input->post('zwemmersToevoegen'); //id
-    //reeksperwedstrijdid ophalen
-    $data = $this->wedstrijd_model->getReeksPerWedstrijdViaInschrijvingId($inschrijving->id);
-    $inschrijving->reeksPerWedstrijdId = $data->reeksPerWedstrijdId;
-    $inschrijving->status = "0";
+    $inschrijving->zwemmer = $this->input->post('zwemmersToevoegen'); //id
 
     $reeksperwedstrijd = new stdClass(); //zodat deze weet welk reeksperwedstrijd aangepast moet worden
-    $reeksperwedstrijd->id = $inschrijving->reeksPerWedstrijdId;
-    $reeksperwedstrijd->wedstrijdId = $this->input->get('wedstrijdId');
+    $reeksperwedstrijd->wedstrijdId = $this->input->post('wedstrijdId');
     $reeks = explode('-', $this->input->post('reeksenToevoegen')); //id's
-    $reeksperwedstrijd->slagId = $reeks[1]; //id
     $reeksperwedstrijd->afstandId = $reeks[0]; //id
+    $reeksperwedstrijd->slagId = $reeks[1]; //id
 
-
-    //update resultaat
-    $this->wedstrijd_model->updateResultaat($resultaat);
-    //update inschrijving
-    $this->wedstrijd_model->updateInschrijving($inschrijving);
-    //update reeksperwedstrijd
-    $this->wedstrijd_model->updateReeksPerWedstrijd($reeksperwedstrijd);
+    $this->load->model('trainer/wedstrijd_model');
 
 
 
-    header("Location: ". site_url().'/Trainer/WedstrijdResultaten/resultatenWedstrijd?pagina=aanpassen&wedstrijdid='.$this->input->get('wedstrijdId'));
+    if ($actie == "toevoegen") {
+      $this->resultatenWedstrijd('toevoegen');
+    }
+    else {
+      //aanpassen
+
+      $this->resultatenWedstrijd('aanpassen');
+    }
 
   }
-  /** \brief Verwijderd het gevraagde resultaat adhv resultaat id.
-  *
-  * @param $resultID duid het resultaat id aan dat opgevraagd moet worden
-  * @see Wedstrijd_model::verwijderResultaatViaId()
-  */
+
   public function verwijderResultaat($resultID){
     $this->load->model('trainer/wedstrijd_model');
     // $this->wedstrijd_model->verwijderResultaatViaId($resultID);
