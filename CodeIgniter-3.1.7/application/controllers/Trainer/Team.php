@@ -239,7 +239,7 @@ class Team extends CI_Controller {
         $this->load->model('trainer/zwemmers_model');
         //        if($persoon->ID == 0) {
         if ($actie == "toevoegen") {
-            $persoon->wachtwoord = $this->input->post('wachtwoord');
+            $persoon->wachtwoord = password_hash($this->input->post('wachtwoord'), PASSWORD_DEFAULT);
             $this->zwemmers_model->insert($persoon);
         } else {
             $persoon->id = $this->input->post('id');

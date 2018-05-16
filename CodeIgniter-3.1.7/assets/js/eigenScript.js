@@ -336,7 +336,6 @@ function opvullenModalPersoonWijzigen(dataPersoon) {
     $('#persoonWijzigen #email').val(dataPersoon["email"]);
     $('#persoonWijzigen #omschrijving').val(dataPersoon["omschrijving"]);
     $('#persoonWijzigen #soort').val(dataPersoon["soort"]);
-
 }
 
 function zwemmerProfielTonen(persoonID) {
