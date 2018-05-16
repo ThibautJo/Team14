@@ -1,4 +1,5 @@
 <?php
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -14,9 +15,10 @@
 /**
  * @file startpagina_beheren.php
  * 
- * View waarin een lijst van huidige startpaginaitems worden weergegeven
- * - krijgt $startpaginatekst binnen
+ * View waarin een lijst van huidige startpaginaitems worden weergegeven.
+ * - krijgt $startpaginaitems binnen
  */
+
 $attributenFormulier = array('id' => 'form-startpaginaitem',
     'class' => 'needs-validation',
     'novalidate' => '',
@@ -170,28 +172,27 @@ $attributenFormulier = array('id' => 'form-startpaginaitem',
         var id = $("#" + startpaginaItemID).val();
 
         $.post(site_url + '/Trainer/startpagina/wijzigStartpaginaItem/' + id, function (data) {
-            //data = object van supplement
+            // data = object van startpaginaItem
             data = JSON.parse(data);
-            // console.log(data[0]["Naam"]);
 
-            //modal opvullen met object wedstrijd
+            // Vult modal op met object startpaginaItem.
             opvullenModalstartpaginaItemAanpassen(data);
 
         }).fail(function () {
             alert("Er is iets misgelopen, neem contact op met de administrator.");
         });
 
-
-        // modal openen met ingevulde gegevans van dit object
+        // Opent modal met ingevulde gegevans van dit object.
         $("#startpaginaItemAanpassen").modal();
 
     }
     function opvullenModalstartpaginaItemAanpassen(dataStartpaginaItem) {
         
+        // Vult velden van modal in wanneer startpaginaItem geselecteerd wordt om aan te passen.
+        
         console.log(dataStartpaginaItem);
         console.log(dataStartpaginaItem["id"]);
         
-        // console.log(dataSupplement[0]["Naam"]);
         $('#startpaginaItemAanpassen #id').attr("value", dataStartpaginaItem["id"]);
         $('#startpaginaItemAanpassen #titel').val(dataStartpaginaItem["titel"]);
         $('#startpaginaItemAanpassen #inhoud').attr("value", dataStartpaginaItem["inhoud"]);
@@ -199,13 +200,13 @@ $attributenFormulier = array('id' => 'form-startpaginaitem',
     }
 
     function startpaginaItemVerwijder(startpaginaItemID) {
+        
         if (!confirm("Weet je zeker dat je dit wilt verwijderen?")) {
             return false;
         } else {
-            //id van startpaginaItem
+            
+            // Id van het geselecteerde startpaginaItem wordt verwijderd.
             var id = $("#" + startpaginaItemID).val();
-            // alert(id);
-            //verwijderen
             $.post(site_url + '/Trainer/startpagina/verwijderStartpaginaItem/' + id, function (data) {
                 alert("Dit nieuwtje is verwijderd!");
                 $("tr#" + id).remove();
@@ -219,24 +220,23 @@ $attributenFormulier = array('id' => 'form-startpaginaitem',
 
         var ok = true;
         var formToSubmit = '';
-        //form valideren
+        
+        // Form valideren.        
         if (actie === "toevoegen") {
             formToSubmit = "#startpaginaItemToevoegen #form-startpaginaitem";
             if (!form_validatie(formToSubmit)) {
-                //alert("Niet alle velden zijn ingevuld");
                 ok = false;
                 return false;
             }
         } else {
             formToSubmit = "#startpaginaItemAanpassen #form-startpaginaitem";
             if (!form_validatie(formToSubmit)) {
-                //alert("Niet alle velden zijn ingevuld");
                 ok = false;
                 return false;
             }
         }
 
-        //word uitgevoerd als alles ingevuld is
+        // Wanneer alle velden ingevuld zijn, wordt dit uitgevoerd.
         if (ok) {
             $(formToSubmit).attr('action', site_url + '/Trainer/startpagina/opslaanStartpaginaItem/' + actie);
 
@@ -245,8 +245,7 @@ $attributenFormulier = array('id' => 'form-startpaginaitem',
     }
 
 
-// startpaginaItem end
-
+    // startpaginaItem end
 
 </script>
 

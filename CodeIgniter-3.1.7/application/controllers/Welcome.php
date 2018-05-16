@@ -1,25 +1,25 @@
 <?php
 
-  // +----------------------------------------------------------
-    // |    Trainingscentrum Wezenberg
-    // +----------------------------------------------------------
-    // |    Auteur: Jolien Lauwers  |       Helper: 
-    // +----------------------------------------------------------
-    // |
-    // |    Welcome controller
-    // |
-    // +----------------------------------------------------------
-    // |    Team 14
-    // +----------------------------------------------------------
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+// +----------------------------------------------------------
+// |    Trainingscentrum Wezenberg
+// +----------------------------------------------------------
+// |    Auteur: Jolien Lauwers  |       Helper: 
+// +----------------------------------------------------------
+// |
+// |    Welcome controller
+// |
+// +----------------------------------------------------------
+// |    Team 14
+// +----------------------------------------------------------
 
 /**
  * @class Welcome
- * @brief Controller-klasse voor aanmelden en homepagina
+ * @brief Controller-klasse voor aanmelden en homepagina.
  * 
  * Controller-klasse met alle methodes die gebruikt worden voor aanmelden van gebruikers
  */
-
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
@@ -28,7 +28,7 @@ class Welcome extends CI_Controller {
         parent::__construct();
         
         /**
-        * Laadt de auteur van deze code in de footer.
+        * Laadt de auteur van de geschreven code van deze pagina in de footer.
         */
         
         $this->data = new stdClass();
@@ -36,12 +36,15 @@ class Welcome extends CI_Controller {
     }
 
     public function index() {
-        
-       /**
-       * Haalt verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php
-       * 
-       * @see Zwemmers_model::getLadenTeam ?? ()
-       */
+
+        /**
+        * Haalt alle startpaginaItems op via startpaginaItem_model, alle verschillende wedstrijden op via wedstrijd_model,  
+        * alle verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php
+        * 
+        * @see startpaginaItem_model::getStartpaginaItem()
+        * @see zwemmers_model::getLadenTeam()
+        * @see wedstrijd_model::getAlleWedstrijden()
+        */
         
         $data['titel'] = 'Home';
         $data['team'] = $this->data->team;
@@ -63,9 +66,41 @@ class Welcome extends CI_Controller {
 
         $this->template->load('bezoeker_main_master', $partials, $data);
     }
+    
+    public function ladenTeam() {
+        
+        /**
+        * Haalt alle startpaginaItems op via startpaginaItem_model, alle verschillende wedstrijden op via wedstrijd_model,  
+        * alle verschillende zwemmers op via zwemmers_model en toont de resulterende objecten in de view bezoeker_main_master.php
+        * 
+        * @see startpaginaItem_model::getStartpaginaItem()
+        * @see zwemmers_model::getLadenTeam()
+        * @see wedstrijd_model::getAlleWedstrijden()
+        */
+        
+        $this->load->model("trainer/zwemmers_model");
+        $zwemmers = $this->zwemmers_model->getTeam();
+        
+        $data_zwemmers = array();
+        foreach ($zwemmers as $zwemmer) {                    
+            $data_zwemmers[] = array(
+                "voornaam" => $zwemmer->voornaam,
+                "achternaam" => $zwemmer->achternaam,
+                "omschrijving" => $zwemmer->omschrijving,
+                "foto" => $zwemmer->foto,
+            );
+        }
+        return $zwemmers;
+    }
 
-    public function meldAan()
-    {
+    public function meldAan() {       
+        
+        /**
+        * Weergeven van de view home_aanmelden.php die de gebruiker de mogelijkheid geeft om aan te melden.
+        * 
+        * @see home_aanmelden.php
+        */
+        
         $data['titel'] = 'Aanmelden';
         $data['team'] = $this->data->team;
         $data['persoon']  = $this->authex->getPersoonInfo();
@@ -78,24 +113,44 @@ class Welcome extends CI_Controller {
         $this->template->load('bezoeker_main_master', $partials, $data);
     }
 
-    public function toonFout()
-    {
+    public function toonFout() {      
+        
+        /**
+        * Weergeven van de view home_fout.php die de gebruiker de mogelijkheid geeft om opnieuw aan te melden.
+        * 
+        * @see home_fout.php
+        */
+        
         $data['titel'] = 'Fout';
         $data['team'] = $this->data->team;
         $data['persoon']  = $this->authex->getPersoonInfo();
         $data['foutBoodschap'] = "De combinatie van het email-adres en wachtwoord is foutief! Probeer opnieuw.";
+        
+        $zwemmers = $this->ladenTeam();        
+        $data['zwemmers'] = $zwemmers;
+        
+        $this->load->model('trainer/startpaginaitem_model');
+        $data['startpaginaitems'] = $this->startpaginaitem_model->getStartpaginaItem();
+                       
+        $this->load->model('trainer/wedstrijd_model');
+        $data['wedstrijden'] = $this->wedstrijd_model->getAlleWedstrijden();   
 
         $partials = array('hoofding' => 'bezoeker_main_header',
             'inhoud' => 'bezoeker/home',
             'aanmeldFormulier' => 'bezoeker/home_fout',
-            'foutMelding' => 'bezoeker/home_fout',
+            'foutMelding' => 'bezoeker/home_aanmelden',
             'voetnoot' => 'bezoeker_main_footer');
 
         $this->template->load('bezoeker_main_master', $partials, $data);
     }
 
-    public function controleerAanmelden()
-    {
+    public function controleerAanmelden() {
+        /**
+        * Controleert of de ingevoerde gebruikersgegevens overeenstemmen met een 
+        * 
+        * @see home_aanmelden.php
+        */
+        
         $email = $this->input->post('email');
         $wachtwoord = $this->input->post('wachtwoord');
 
@@ -118,27 +173,9 @@ class Welcome extends CI_Controller {
         }
     }
 
-    public function meldAf()
-    {
+    public function meldAf() {
+        
         $this->authex->meldAf();
         redirect('Welcome');
-    }
-    
-    public function ladenTeam(){
-        
-        $this->load->model("trainer/zwemmers_model");
-        $zwemmers = $this->zwemmers_model->getTeam();
-        
-        $data_zwemmers = array();
-        foreach ($zwemmers as $zwemmer) {                    
-            $data_zwemmers[] = array(
-                "voornaam" => $zwemmer->voornaam,
-                "achternaam" => $zwemmer->achternaam,
-                "omschrijving" => $zwemmer->omschrijving,
-                "foto" => $zwemmer->foto,
-            );
-        }
-        return $zwemmers;
-    }
-
+    }  
 }
