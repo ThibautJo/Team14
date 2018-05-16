@@ -728,11 +728,15 @@ function toevoegenActiviteit() {
     var startDatum = startDate2.getFullYear() + '-' + (startDate2.getMonth() + 1) + '-' + startDate2.getDate() + '%20' + (startDate2.getHours() - 2) + ':' + startDate2.getMinutes() + ':' + startDate2.getSeconds();
     var stopDatum = endDate2.getFullYear() + '-' + (endDate2.getMonth() + 1) + '-' + endDate2.getDate() + '%20' + (endDate2.getHours() - 2) + ':' + endDate2.getMinutes() + ':' + endDate2.getSeconds();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
     var persoonId = $('#aanpassenActiviteit input[name=persoonSupplement]').attr('value');
 
 
+=======
+        
+>>>>>>> parent of 3b151a7... wedstrijd resultaten aanpassen werkt
 =======
         
 >>>>>>> parent of 3b151a7... wedstrijd resultaten aanpassen werkt
