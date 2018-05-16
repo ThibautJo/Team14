@@ -145,9 +145,10 @@ class Welcome extends CI_Controller {
 
     public function controleerAanmelden() {
         /**
-        * Controleert of de ingevoerde gebruikersgegevens overeenstemmen met een 
+        * Gebruikt de Authex-library om te controleren of de ingevoerde gebruikersgegevens overeenstemmen met een bestaande persoon in de database en controleert welke soort persoon zich aanmeldt.
         * 
         * @see home_aanmelden.php
+        * @see Authex.php
         */
         
         $email = $this->input->post('email');
@@ -157,7 +158,6 @@ class Welcome extends CI_Controller {
 
             $persoon = $this->authex->getPersoonInfo();
 
-            // controleren welk soort gebruiker zich aanmeldt
             switch ($persoon->soort) {
                 case "Trainer":
                     redirect('Trainer/supplement');
@@ -173,6 +173,12 @@ class Welcome extends CI_Controller {
     }
 
     public function meldAf() {
+        
+        /**
+        * Gebruikt de Authex-library om de gebruiker af te melden en de homepagina opnieuw weer te geven.
+        * 
+        * @see Authex.php
+        */
         
         $this->authex->meldAf();
         redirect('Welcome');

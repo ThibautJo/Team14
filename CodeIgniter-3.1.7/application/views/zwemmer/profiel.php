@@ -11,6 +11,12 @@
 // |    Team 14
 // +----------------------------------------------------------
 
+/**
+ * @file profiel.php
+ * 
+ * View waarin profiel van de aangemelde zwemmer wordt weergegeven.
+ */
+
 $attributenFormulier = array('id' => 'form-profiel',
     'data-toggle' => 'validator',
     'role' => 'form',

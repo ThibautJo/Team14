@@ -1,9 +1,5 @@
 <?php
-/**
- * @file melding.php
- * 
- * View waarin alle meldingen met bijhorende persoon worden weergegeven
- */
+
 // +----------------------------------------------------------
 // |    Trainingscentrum Wezenberg
 // +----------------------------------------------------------
@@ -15,6 +11,14 @@
 // +----------------------------------------------------------
 // |    Team 14
 // +----------------------------------------------------------
+
+/**
+ * @file melding.php
+ * 
+ * View waarin alle meldingen worden weergegeven.
+ * - krijgt een $meldingen binnen.
+ */
+
 ?>
 <table class="table">
     <thead>
