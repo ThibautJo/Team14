@@ -35,6 +35,13 @@ class Team extends CI_Controller {
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
+        
+        // Aantal meldingen laten zien
+        $this->load->model('zwemmer/melding_model');
+        $persoon = $this->authex->getPersoonInfo();
+        $persoonId = $persoon->id;
+        $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        $this->data->aantalMeldingen = count($meldingen);
     }
     
     /**
@@ -49,6 +56,7 @@ class Team extends CI_Controller {
         $data['titel'] = 'Team';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+        $data['aantalMeldingen'] = $this->data->aantalMeldingen;
         $zwemmers = $this->ladenTeam();
 
         $data['zwemmers'] = $zwemmers;

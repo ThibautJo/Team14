@@ -27,6 +27,13 @@ class Help extends CI_Controller {
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "true", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
+        
+        // Aantal meldingen laten zien
+        $this->load->model('zwemmer/melding_model');
+        $persoon = $this->authex->getPersoonInfo();
+        $persoonId = $persoon->id;
+        $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        $this->data->aantalMeldingen = count($meldingen);
     }
 
     // +----------------------------------------------------------
@@ -46,6 +53,7 @@ class Help extends CI_Controller {
         $data['titel'] = 'Hoe werkt de Agenda-tool?';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+        $data['aantalMeldingen'] = $this->data->aantalMeldingen;
 
         $partials = array('hoofding' => 'main_header',
             'menu' => 'main_menu',

@@ -33,6 +33,13 @@ class Profiel extends CI_Controller{
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "true", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "false");
+        
+        // Aantal meldingen laten zien
+        $this->load->model('zwemmer/melding_model');
+        $persoon = $this->authex->getPersoonInfo();
+        $persoonId = $persoon->id;
+        $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        $this->data->aantalMeldingen = count($meldingen);
     }
     
     /**
@@ -46,6 +53,7 @@ class Profiel extends CI_Controller{
         $data['titel'] = 'Profiel zwemmer';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+        $data['aantalMeldingen'] = $this->data->aantalMeldingen;
 
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $persoonId = $persoonAangemeld->id;

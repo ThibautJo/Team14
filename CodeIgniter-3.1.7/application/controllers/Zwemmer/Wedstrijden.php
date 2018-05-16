@@ -33,6 +33,13 @@ class Wedstrijden extends CI_Controller {
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "true", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
+        
+        // Aantal meldingen laten zien
+        $this->load->model('zwemmer/melding_model');
+        $persoon = $this->authex->getPersoonInfo();
+        $persoonId = $persoon->id;
+        $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        $this->data->aantalMeldingen = count($meldingen);
     }
 
     // +----------------------------------------------------------
@@ -54,6 +61,7 @@ class Wedstrijden extends CI_Controller {
         $data['titel'] = 'Wedstrijden';
         $data['team'] = $this->data->team;
         $data['persoonAangemeld'] = $this->authex->getPersoonInfo();
+        $data['aantalMeldingen'] = $this->data->aantalMeldingen;
 
         //wedstrijden ophalen van de huidige maand
         $maand = $this->input->get('maand');

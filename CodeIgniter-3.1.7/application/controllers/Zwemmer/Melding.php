@@ -28,6 +28,13 @@ class Melding extends CI_Controller {
         // Auteur inladen in footer
         $this->data = new stdClass();
         $this->data->team = array("Klied Daems" => "false", "Thibaut Joukes" => "false", "Jolien Lauwers" => "false", "Tom Nuyts" => "false", "Lise Van Eyck" => "true");
+        
+        // Aantal meldingen laten zien
+        $this->load->model('zwemmer/melding_model');
+        $persoon = $this->authex->getPersoonInfo();
+        $persoonId = $persoon->id;
+        $meldingen = $this->melding_model->getMeldingByPersoon($persoonId);
+        $this->data->aantalMeldingen = count($meldingen);
     }
 
     public function index() {
@@ -37,7 +44,7 @@ class Melding extends CI_Controller {
 
         $persoonAangemeld = $this->authex->getPersoonInfo();
         $data['persoonAangemeld'] = $persoonAangemeld;
-
+        $data['aantalMeldingen'] = $this->data->aantalMeldingen;
 
         $persoonId = $persoonAangemeld->id;
 
