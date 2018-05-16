@@ -410,6 +410,43 @@ function persoonOpslaan(actie) {
   }
 }
 
+function profielGegevensTonen(persoonID) {
+
+  console.log("id =" + persoonID);
+  var id = $("#" + persoonID).val();
+
+  $.post(site_url + '/Zwemmer/team/profielTonen/' + id, function (data) {
+    //data = object van supplement
+    data = JSON.parse(data);
+    // console.log(data[0]["Naam"]);
+
+    //modal opvullen met object wedstrijd
+    opvullenModalProfielGegevensTonen(data);
+
+  }).fail(function () {
+    alert("Er is iets misgelopen, neem contact op met de administrator.");
+  });
+  // modal openen met ingevulde gegevans van dit object
+  $("#profielWijzigen").modal();
+
+}
+
+function opvullenModalProfielGegevensTonen(dataProfiel) {
+  console.log(dataProfiel);
+  console.log(dataProfiel["id"]);
+  $('#profielWijzigen #id').attr("value", dataProfiel["id"]);
+  $('#profielWijzigen #voornaam').val(dataProfiel["voornaam"]);
+  $('#profielWijzigen #achternaam').val(dataProfiel["achternaam"]);
+  $('#profielWijzigen #straat').val(dataProfiel["straat"]);
+  $('#profielWijzigen #huisnummer').val(dataProfiel["huisnummer"]);
+  $('#profielWijzigen #postcode').val(dataProfiel["postcode"]);
+  $('#profielWijzigen #gemeente').val(dataProfiel["gemeente"]);
+  $('#profielWijzigen #telefoonnummer').val(dataProfiel["telefoonnummer"]);
+  $('#profielWijzigen #email').val(dataProfiel["email"]);
+  $('#profielWijzigen #omschrijving').val(dataProfiel["omschrijving"]);
+
+}
+
 function profielOpslaan() {
 
   var ok = true;

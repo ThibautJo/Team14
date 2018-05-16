@@ -43,7 +43,7 @@ class profiel_model extends CI_Model{
     /**
      * Retourneert het record met id=$id uit de tabel persoon
      * @param $id De id van het record dat opgevraagd wordt
-     * @return Het opgevraagde record
+     * @return Het opgevraagde records
      */
     function get($id) {
         

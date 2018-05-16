@@ -100,22 +100,9 @@ class Team extends CI_Controller {
      * $return type $data
      */
     public function profielTonen($id) {
-        $data = new stdClass();
-
         $this->load->model('trainer/zwemmers_model');
         $data = $this->zwemmers_model->get($id);
 
         print json_encode($data);
-    }
-    
-    public function profielOpslaan(){
-        $persoon = new stdClass();
-        
-        $this->load->model('zwemmer/profiel_model');
-
-        $persoon->id = $this->input->post('id');
-        $this->zwemmers_model->update($persoon);
-            
-        redirect('zwemmer/profiel');
     }
 }
