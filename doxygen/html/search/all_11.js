@@ -19,7 +19,11 @@ var searchData=
   ['process',['process',['../class_c_i___trackback.html#a7244ffd64e186d863812bb300fec8cdc',1,'CI_Trackback']]],
   ['product_5foptions',['product_options',['../class_c_i___cart.html#a461e270ceff8b04d40e14e00b9c74447',1,'CI_Cart']]],
   ['profiel',['Profiel',['../class_profiel.html',1,'']]],
+<<<<<<< HEAD
   ['profiel_5fmodel',['Profiel_model',['../class_profiel__model.html',1,'Profiel_model'],['../classprofiel__model.html',1,'profiel_model']]],
+=======
+  ['profiel_5fmodel',['profiel_model',['../classprofiel__model.html',1,'profiel_model'],['../class_profiel__model.html',1,'Profiel_model']]],
+>>>>>>> 6a75016b26e1fb267c2969d69dbfc64a11bf433d
   ['profielopslaan',['profielOpslaan',['../class_profiel.html#afa32af9c77dca4ffa15d4e34567ab47a',1,'Profiel']]],
   ['profieltonen',['profielTonen',['../class_team.html#ac797939ae8b47bfae4257c1102a172e5',1,'Team']]],
   ['protect_5fidentifiers',['protect_identifiers',['../class_c_i___d_b__driver.html#ade8e28ac268bbe2f985c5359bc949f21',1,'CI_DB_driver']]]

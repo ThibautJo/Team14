@@ -132,18 +132,6 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     <div class="help-block with-errors"></div>
                 </div>
 
-                <div class="form-group">
-                    <?php
-                    echo form_label('Upload profielfoto ', 'upload profielfoto ');
-                    echo form_label(' -> "Avatar_Voornaam_Achternaam.jpg"');
-                    echo form_upload(array('name' => 'upload',
-                        'id' => 'upload',
-                        'value' => '',
-                        'class' => 'form-control-file'))
-                    ?>
-                    <div class="help-block with-errors"></div>
-                </div>
-
                 <?php echo form_close(); ?>
             </div>
             <div class="modal-footer">
@@ -173,7 +161,15 @@ $opties = array('Zwemmer' => 'Zwemmer', 'Trainer' => 'Trainer');
                     echo form_input(array('type' => 'hidden', 'name' => 'id', 'id' => 'id', 'value' => ''));
                     ?>
                 </div>
-
+                
+                <div class="form-group">
+                    <?php
+                    echo form_label('Soort', 'soort');
+                    echo form_dropdown('soort', $opties, '', 'class="form-control"')
+                    ?>
+                    <div class="help-block with-errors"></div>
+                </div>
+                
                 <div class="form-group">
                     <?php
                     echo form_label('Voornaam', 'voornaam');

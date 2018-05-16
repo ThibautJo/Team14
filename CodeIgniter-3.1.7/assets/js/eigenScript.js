@@ -7,7 +7,7 @@ function form_validatie(formID, bool) {
     $(formID + ' *').filter('input').each(function () {
         var foutID = "#" + $(this).attr("id") + "-fout";
 
-        if ($(this).attr("required") && $(this).val() == "") {
+        if ($(this).attr("required") && $(this).val() === "") {
             $(foutID).removeAttr('hidden');
             $(this).css({"margin-bottom": '0px', "border-color": "red"});
             ok = false;
@@ -22,7 +22,7 @@ function form_validatie(formID, bool) {
         $(formID + ' *').filter('select').each(function () {
             var foutID = "#" + $(this).attr("id") + "-fout";
 
-            if ($(this).attr("required") && $('#' + this.id).prop('selectedIndex') == 0) {
+            if ($(this).attr("required") && $('#' + this.id).prop('selectedIndex') === 0) {
                 $(foutID).removeAttr('hidden');
                 $(this).css({"margin-bottom": '0px', "border-color": "red"});
                 ok = false;
@@ -49,7 +49,7 @@ function wedstrijdOpslaan(actie) {
     var ok = true;
     var formToSubmit = '';
     //form valideren
-    if (actie == "toevoegen") {
+    if (actie === "toevoegen") {
         formToSubmit = "#wedstrijdToevoegen #form-wedstrijd";
         if (!form_validatie(formToSubmit, true) || typeof wedstrijdAfstanden == "undefined" || wedstrijdAfstanden == null || wedstrijdAfstanden.length == null || wedstrijdAfstanden.length <= 0) {
             alert("Velden of reeksen zijn niet volledig!");
@@ -334,9 +334,8 @@ function opvullenModalPersoonWijzigen(dataPersoon) {
     $('#persoonWijzigen #voornaam').val(dataPersoon["voornaam"]);
     $('#persoonWijzigen #achternaam').val(dataPersoon["achternaam"]);
     $('#persoonWijzigen #email').val(dataPersoon["email"]);
-    $('#persoonWijzigen #wachtwoord').val(dataPersoon["wachtwoord"]);
     $('#persoonWijzigen #omschrijving').val(dataPersoon["omschrijving"]);
-
+    $('#persoonWijzigen #soort').val(dataPersoon["soort"]);
 }
 
 function zwemmerProfielTonen(persoonID) {

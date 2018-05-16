@@ -1,3 +1,17 @@
+<?php
+/**
+ * @mainpage Commentaar bij project Wezenberg
+ * 
+ * # Wat ?
+ * Hier kan je onze Doxygen-commentaar bij het PHP-project <b>project Wezenberg</b>.
+ * - Commentaar bij onze  model- en controller-klassen vind je onder menu <em>Klassen</em>.
+ * - Commentaar bij onze view-bestanden vind je onder het menu <em>Bestanden</em>.
+ * - Ook de originele commentaar geschreven bij het CodeIgniter-framework is opgenomen.
+ *
+ * # Wie ?
+ * Dit project is geschreven en becommentarieerd door de leden van Team14 nl. Jolien Lauwers, Klaus Daems, Lise Van Eyck, Thibaut Joukes & Tom Nuyts.
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 

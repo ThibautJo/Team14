@@ -32,6 +32,7 @@ class Zwemmers_model extends CI_Model {
      * @return opgevraagde records
      */
     public function getZwemmers() {
+        $this->db->order_by('voornaam', 'asc');
         $this->db->where('soort', "Zwemmer");
         $this->db->where('actief', 1);
         $query = $this->db->get('persoon');
@@ -45,6 +46,7 @@ class Zwemmers_model extends CI_Model {
      * @return opgevraagde records
      */
     public function getTeam() {
+        $this->db->order_by('voornaam', 'asc');
         $this->db->where('actief', 1);
         $query = $this->db->get('persoon');
 
@@ -57,6 +59,7 @@ class Zwemmers_model extends CI_Model {
      * @return opgevraagde records
      */
     public function getZwemmersArchief() {
+        $this->db->order_by('voornaam', 'asc');
         $this->db->where('soort', "Zwemmer");
         $this->db->where('actief', 0);
         $query = $this->db->get('persoon');

@@ -184,5 +184,10 @@ var searchData=
   ['current',['current',['../class_c_i___migration.html#af343507d1926e6ecf964625d41db528c',1,'CI_Migration']]],
   ['custom_5fresult_5fobject',['custom_result_object',['../class_c_i___d_b__result.html#a5ac3523f878efb629fae30a7d9156e77',1,'CI_DB_result']]],
   ['custom_5frow_5fobject',['custom_row_object',['../class_c_i___d_b__result.html#a223538c34395626655fd483f3a55e653',1,'CI_DB_result']]],
+<<<<<<< HEAD
   ['contributing_20to_20codeigniter',['Contributing to CodeIgniter',['../md__d_1_wamp64_www__team14__code_igniter-3_81_87_contributing.html',1,'']]]
+=======
+  ['commentaar_20bij_20project_20wezenberg',['Commentaar bij project Wezenberg',['../index.html',1,'']]],
+  ['contributing_20to_20codeigniter',['Contributing to CodeIgniter',['../md__code_igniter-3_81_87_contributing.html',1,'']]]
+>>>>>>> 6a75016b26e1fb267c2969d69dbfc64a11bf433d
 ];

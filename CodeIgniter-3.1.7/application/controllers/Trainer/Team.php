@@ -198,7 +198,7 @@ class Team extends CI_Controller {
         $this->load->model('trainer/zwemmers_model');
         $this->zwemmers_model->archiveer($id);
 
-        redirect('trainer/team');
+        redirect('Trainer/Team');
     }
 
     /**
@@ -216,7 +216,7 @@ class Team extends CI_Controller {
         $persoon->id = $this->input->post('archief');
         $this->zwemmers_model->uitArchiefHalen($persoon);
 
-        redirect('trainer/team');
+        redirect('Trainer/Team');
     }
 
     /**
@@ -233,19 +233,19 @@ class Team extends CI_Controller {
         $persoon->voornaam = $this->input->post('voornaam');
         $persoon->achternaam = $this->input->post('achternaam');
         $persoon->email = $this->input->post('email');
-        $persoon->wachtwoord = $this->input->post('wachtwoord');
         $persoon->omschrijving = $this->input->post('omschrijving');
         $persoon->soort = $this->input->post('soort');
-
+        
         $this->load->model('trainer/zwemmers_model');
         //        if($persoon->ID == 0) {
         if ($actie == "toevoegen") {
+            $persoon->wachtwoord = password_hash($this->input->post('wachtwoord'), PASSWORD_DEFAULT);
             $this->zwemmers_model->insert($persoon);
         } else {
             $persoon->id = $this->input->post('id');
             $this->zwemmers_model->update($persoon);
         }
-        redirect('trainer/team');
+        redirect('Trainer/Team');
     }
 
     /**
